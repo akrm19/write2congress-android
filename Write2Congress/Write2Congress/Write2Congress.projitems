@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1afe2b8b-1539-4844-a95d-c8184aedbcaf</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Write2Congress</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BusinessLayer\LegislatorManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BusinessLayer\Services\ServiceBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Enum\Gender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Enum\Party.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Enum\State.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Legislator.cs" />
+  </ItemGroup>
+</Project>
