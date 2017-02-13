@@ -7,16 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Write2Congress.Droid", "Wri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Write2Congress.iOS", "Write2Congress\Write2Congress.iOS\Write2Congress.iOS.csproj", "{BFCC11E5-33D8-4B4B-A459-3A59D9B8BCD8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Write2Congress", "Write2Congress\Write2Congress\Write2Congress.shproj", "{1AFE2B8B-1539-4844-A95D-C8184AEDBCAF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Write2Congress.Shared", "Write2Congress.Shared\Write2Congress.Shared.csproj", "{3052162A-ADD7-46EA-A641-EC40D7A89994}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Write2Congress\Write2Congress\Write2Congress.projitems*{1afe2b8b-1539-4844-a95d-c8184aedbcaf}*SharedItemsImports = 13
-		Write2Congress\Write2Congress\Write2Congress.projitems*{af91dff5-8f02-4d16-9769-29bb0b62ec29}*SharedItemsImports = 4
-		Write2Congress\Write2Congress\Write2Congress.projitems*{bfcc11e5-33d8-4b4b-a459-3a59d9b8bcd8}*SharedItemsImports = 4
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU
 		AppStore|iPhone = AppStore|iPhone

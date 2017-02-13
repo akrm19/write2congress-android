@@ -8,12 +8,4 @@
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>Write2Congress</Import_RootNamespace>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)BusinessLayer\LegislatorManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)BusinessLayer\Services\ServiceBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Enum\Gender.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Enum\Party.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Enum\State.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DomainModel\Legislator.cs" />
-  </ItemGroup>
 </Project>

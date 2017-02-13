@@ -9,7 +9,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
     public abstract class ServiceBase
     {
         protected string sunlightApiKey = "";
-        protected string sunlighApiBaseUri = @"https://congress.api.sunlightfoundation.com/";
+        protected string sunlighApiBaseUri = "https://congress.api.sunlightfoundation.com/";
 
         protected HttpClient CreateSunlightHttpClient()
         {
@@ -21,6 +21,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             var client = new HttpClient();
 
             client.BaseAddress = new Uri(baseUri);
+            client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             return client;

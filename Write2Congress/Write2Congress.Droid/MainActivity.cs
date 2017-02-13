@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Write2Congress.Shared.BusinessLayer;
+using Newtonsoft.Json;
+using Write2Congress.Shared.DomainModel;
 
 namespace Write2Congress.Droid
 {
@@ -18,17 +21,36 @@ namespace Write2Congress.Droid
 		{
 			base.OnCreate (bundle);
 
+            var legislatorManager = new LegislatorManager();
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
 			// Get our button from the layout resource,
 			// and attach an event to it
 			Button button = FindViewById<Button> (Resource.Id.myButton);
-			
+            var zipInput = FindViewById<EditText>(Resource.Id.zip);
+            var resultText = FindViewById<TextView>(Resource.Id.result);
+
+
 			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
-			};
+                var zip = zipInput.Text;
+
+                var legislators = legislatorManager.GetLegislatorByZipcode(zip);
+
+                foreach(Legislator legislator in legislators)
+                {
+
+                    var legislatorText = JsonConvert.SerializeObject(legislator);
+                    resultText.Text += legislatorText;
+                }
+
+            };
 		}
+
+        private void Test()
+        {
+
+        }
 	}
 }
 
