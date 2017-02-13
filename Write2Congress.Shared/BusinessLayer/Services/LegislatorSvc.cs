@@ -26,7 +26,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             { 
                 var responseText = await response.Content.ReadAsStringAsync();
                 
-                legislators = JsonConvert.
+                //legislators = JsonConvert.
             }
 
             return legislators;
