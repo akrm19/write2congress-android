@@ -22,12 +22,18 @@ namespace Write2Congress.Droid
 			base.OnCreate (bundle);
 
             var legislatorManager = new LegislatorManager();
-			// Set our view from the "main" layout resource
-			SetContentView (Resource.Layout.Main);
+            SetContentView(Resource.Layout.actv_Main);
 
-			// Get our button from the layout resource,
-			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.myButton);
+
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+
+            // Set our view from the "main" layout resource
+
+
+            // Get our button from the layout resource,
+            // and attach an event to it
+            Button button = FindViewById<Button> (Resource.Id.myButton);
             var zipInput = FindViewById<EditText>(Resource.Id.zip);
             var resultText = FindViewById<TextView>(Resource.Id.result);
 
@@ -47,10 +53,6 @@ namespace Write2Congress.Droid
             };
 		}
 
-        private void Test()
-        {
-
-        }
 	}
 }
 
