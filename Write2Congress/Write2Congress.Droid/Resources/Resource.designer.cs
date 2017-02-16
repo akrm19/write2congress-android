@@ -82,29 +82,47 @@ namespace Write2Congress.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070006
-			public const int button1 = 2131165190;
+			// aapt resource value: 0x7f080004
+			public const int button1 = 2131230724;
 			
-			// aapt resource value: 0x7f070007
-			public const int button2 = 2131165191;
+			// aapt resource value: 0x7f080007
+			public const int mainFrag_myButton = 2131230727;
 			
-			// aapt resource value: 0x7f070005
-			public const int editText1 = 2131165189;
+			// aapt resource value: 0x7f080005
+			public const int mainFrag_parent = 2131230725;
 			
-			// aapt resource value: 0x7f070002
-			public const int myButton = 2131165186;
+			// aapt resource value: 0x7f080008
+			public const int mainFrag_result = 2131230728;
 			
-			// aapt resource value: 0x7f070003
-			public const int result = 2131165187;
+			// aapt resource value: 0x7f080006
+			public const int mainFrag_zip = 2131230726;
 			
-			// aapt resource value: 0x7f070000
-			public const int toolbar = 2131165184;
+			// aapt resource value: 0x7f08000c
+			public const int mainMenu_donate = 2131230732;
 			
-			// aapt resource value: 0x7f070004
-			public const int toolbar1 = 2131165188;
+			// aapt resource value: 0x7f08000d
+			public const int mainMenu_exit = 2131230733;
 			
-			// aapt resource value: 0x7f070001
-			public const int zip = 2131165185;
+			// aapt resource value: 0x7f080009
+			public const int mainMenu_search = 2131230729;
+			
+			// aapt resource value: 0x7f08000b
+			public const int mainMenu_settings = 2131230731;
+			
+			// aapt resource value: 0x7f08000a
+			public const int mainMenu_writeNew = 2131230730;
+			
+			// aapt resource value: 0x7f080002
+			public const int main_fragmentContainer = 2131230722;
+			
+			// aapt resource value: 0x7f080000
+			public const int main_parent = 2131230720;
+			
+			// aapt resource value: 0x7f080001
+			public const int main_toolbar = 2131230721;
+			
+			// aapt resource value: 0x7f080003
+			public const int toolbar1 = 2131230723;
 			
 			static Id()
 			{
@@ -125,6 +143,9 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f030001
 			public const int ctrl_Toolbar = 2130903041;
 			
+			// aapt resource value: 0x7f030002
+			public const int frag_Main = 2130903042;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -135,14 +156,48 @@ namespace Write2Congress.Droid
 			}
 		}
 		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int menu_main = 2131165184;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
+			{
+			}
+		}
+		
 		public partial class String
 		{
+			
+			// aapt resource value: 0x7f050000
+			public const int about = 2131034112;
 			
 			// aapt resource value: 0x7f050001
 			public const int app_name = 2131034113;
 			
-			// aapt resource value: 0x7f050000
-			public const int hello = 2131034112;
+			// aapt resource value: 0x7f050002
+			public const int donate = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int exit = 2131034115;
+			
+			// aapt resource value: 0x7f050007
+			public const int hello = 2131034119;
+			
+			// aapt resource value: 0x7f050004
+			public const int searchLegislators = 2131034116;
+			
+			// aapt resource value: 0x7f050005
+			public const int settings = 2131034117;
+			
+			// aapt resource value: 0x7f050006
+			public const int writeNew = 2131034118;
 			
 			static String()
 			{
@@ -159,6 +214,12 @@ namespace Write2Congress.Droid
 			
 			// aapt resource value: 0x7f060000
 			public const int AppTheme = 2131099648;
+			
+			// aapt resource value: 0x7f060002
+			public const int MainMenuPopupTheme = 2131099650;
+			
+			// aapt resource value: 0x7f060001
+			public const int ToolbarTheme = 2131099649;
 			
 			static Style()
 			{

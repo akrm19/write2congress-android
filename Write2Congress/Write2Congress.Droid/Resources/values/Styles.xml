@@ -1,17 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <style name="AppTheme" parent="@android:style/Theme.Material">
+  <style name="AppTheme" parent="@android:style/Theme.Material.Light">
     <!-- Main app colors -->
     <item name="android:colorPrimary">@color/primary_blue</item>
     <item name="android:colorPrimaryDark">@color/primary_blue_dark</item>
     <item name="android:colorAccent">@color/accent_purple</item>
-
+    
     <item name="android:windowActionBar">false</item>
     <item name="android:windowNoTitle">true</item>
+  </style>
+  
+  <style name="ToolbarTheme">  <!-- parent="ThemeOverlay.AppCompat.Light" >-->
+    <item name="android:textColorPrimary">@android:color/white</item>  
+    <!-- 
+    <item name="android:textColorSecondary"></item>
+    -->
+  </style>
+
+  <style name="MainMenuPopupTheme" >
+    <item name="android:textColorPrimary">@android:color/white</item>
+    <!--
+    <item name="android:background"></item>
+    -->
+  </style>
+
+</resources>  
+
+    <!--
+    <item name="android:colorBackground">@color/theme_devicedefault_background</item>
+   --> 
 
     <!-- Control colors -->
     <!--
-    
       <color name="theme_devicedefault_background">#ffeceff1</color>
   <style name="Theme.Custom" parent="@android:style/Theme.DeviceDefault">
     <item name="android:colorPrimary">#ff2196f3</item>
@@ -29,10 +49,8 @@
     <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
     <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
     <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
-    -->
-  </style>
+    --> 
   <!--
   <color name="ListViewSelected">#96BCE3</color>
   <color name="ListViewHighlighted">#E39696</color>
   -->
-</resources>  

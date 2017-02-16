@@ -2,23 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:id="@+id/main_parent">
     <include
         layout="@layout/ctrl_Toolbar"
-        android:id="@+id/toolbar" />
-    <EditText
-        android:inputType="textPostalAddress"
-        android:layout_width="match_parent"
+        android:id="@+id/main_toolbar" />
+    <FrameLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/zip" />
-    <Button
-        android:id="@+id/myButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
-    <TextView
-        android:text="Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/result" />
+        android:id="@+id/main_fragmentContainer" />
 </LinearLayout>

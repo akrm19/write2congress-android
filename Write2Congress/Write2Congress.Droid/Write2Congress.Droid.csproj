@@ -48,7 +48,14 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Activities\Activity1.cs" />
+    <Compile Include="Activities\BaseActivity.cs" />
+    <Compile Include="Activities\Main.cs" />
+    <Compile Include="BaseApplication.cs" />
+    <Compile Include="DomainModel\Constants\TagsType.cs" />
+    <Compile Include="Fragments\BaseFragment.cs" />
+    <Compile Include="Fragments\MainFragment.cs" />
+    <Compile Include="Helpers\AndroidHelper.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +69,12 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ctrl_Toolbar.axml">
       <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\frag_Main.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\menu\menu_main.axml">
+      <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
@@ -82,9 +95,7 @@
     <AndroidResource Include="Resources\values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Activities\" />
-    <Folder Include="Fragments\" />
-    <Folder Include="Helpers\" />
+    <Folder Include="DomainModel\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Colors.xml" />

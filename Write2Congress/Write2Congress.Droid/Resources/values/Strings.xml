@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
+  <string name="about">About</string>
 	<string name="app_name">Write2Congress.Droid</string>
+  <string name="donate">Donate</string>
+  <string name="exit">Exit</string>
+  <string name="searchLegislators">Search Legislators</string>
+  <string name="settings">Settings</string>
+  <string name="writeNew">Write New</string>
+  <string name="hello">Hello World, Click Me!</string>
 </resources>
