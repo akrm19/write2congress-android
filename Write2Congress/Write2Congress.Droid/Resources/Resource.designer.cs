@@ -67,7 +67,22 @@ namespace Write2Congress.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int ic_create_white_48dp = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int ic_drafts_white_48dp = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int ic_favorite_white_48dp = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int ic_search_white_48dp = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int ic_send_white_48dp = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int Icon = 2130837509;
 			
 			static Drawable()
 			{
@@ -82,8 +97,17 @@ namespace Write2Congress.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080004
-			public const int button1 = 2131230724;
+			// aapt resource value: 0x7f08000a
+			public const int actionMenu_drafts = 2131230730;
+			
+			// aapt resource value: 0x7f08000c
+			public const int actionMenu_search = 2131230732;
+			
+			// aapt resource value: 0x7f08000b
+			public const int actionMenu_sent = 2131230731;
+			
+			// aapt resource value: 0x7f080009
+			public const int actionMenu_writeNew = 2131230729;
 			
 			// aapt resource value: 0x7f080007
 			public const int mainFrag_myButton = 2131230727;
@@ -97,20 +121,23 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f080006
 			public const int mainFrag_zip = 2131230726;
 			
-			// aapt resource value: 0x7f08000c
-			public const int mainMenu_donate = 2131230732;
+			// aapt resource value: 0x7f080010
+			public const int mainMenu_donate = 2131230736;
+			
+			// aapt resource value: 0x7f080011
+			public const int mainMenu_exit = 2131230737;
 			
 			// aapt resource value: 0x7f08000d
-			public const int mainMenu_exit = 2131230733;
+			public const int mainMenu_search = 2131230733;
 			
-			// aapt resource value: 0x7f080009
-			public const int mainMenu_search = 2131230729;
+			// aapt resource value: 0x7f08000f
+			public const int mainMenu_settings = 2131230735;
 			
-			// aapt resource value: 0x7f08000b
-			public const int mainMenu_settings = 2131230731;
+			// aapt resource value: 0x7f08000e
+			public const int mainMenu_writeNew = 2131230734;
 			
-			// aapt resource value: 0x7f08000a
-			public const int mainMenu_writeNew = 2131230730;
+			// aapt resource value: 0x7f080003
+			public const int main_bottomMenu = 2131230723;
 			
 			// aapt resource value: 0x7f080002
 			public const int main_fragmentContainer = 2131230722;
@@ -121,8 +148,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f080001
 			public const int main_toolbar = 2131230721;
 			
-			// aapt resource value: 0x7f080003
-			public const int toolbar1 = 2131230723;
+			// aapt resource value: 0x7f080004
+			public const int toolbar = 2131230724;
 			
 			static Id()
 			{
@@ -160,7 +187,10 @@ namespace Write2Congress.Droid
 		{
 			
 			// aapt resource value: 0x7f070000
-			public const int menu_main = 2131165184;
+			public const int menu_action = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int menu_main = 2131165185;
 			
 			static Menu()
 			{
@@ -185,19 +215,25 @@ namespace Write2Congress.Droid
 			public const int donate = 2131034114;
 			
 			// aapt resource value: 0x7f050003
-			public const int exit = 2131034115;
-			
-			// aapt resource value: 0x7f050007
-			public const int hello = 2131034119;
+			public const int drafts = 2131034115;
 			
 			// aapt resource value: 0x7f050004
-			public const int searchLegislators = 2131034116;
+			public const int exit = 2131034116;
+			
+			// aapt resource value: 0x7f050009
+			public const int hello = 2131034121;
 			
 			// aapt resource value: 0x7f050005
-			public const int settings = 2131034117;
+			public const int searchLegislators = 2131034117;
 			
 			// aapt resource value: 0x7f050006
-			public const int writeNew = 2131034118;
+			public const int sent = 2131034118;
+			
+			// aapt resource value: 0x7f050007
+			public const int settings = 2131034119;
+			
+			// aapt resource value: 0x7f050008
+			public const int writeNew = 2131034120;
 			
 			static String()
 			{

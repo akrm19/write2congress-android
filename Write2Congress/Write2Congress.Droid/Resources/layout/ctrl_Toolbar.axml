@@ -3,13 +3,17 @@
     android:background="?android:attr/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/toolbar1">
-<!-- TOD RM: Use this to apply theme to Toolbar
+    android:minHeight="?android:attr/actionBarSize"
+    android:id="@+id/toolbar"
     android:theme="@style/ToolbarTheme"
-     -->
+    android:popupTheme="@style/MainMenuPopupTheme">
+  
+    <!-- TODO RM: DELETE 
+    Remainder: More can be added here
     <Button
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button1" />
+        -->
 </Toolbar>

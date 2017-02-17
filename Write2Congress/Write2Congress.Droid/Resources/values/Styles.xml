@@ -2,22 +2,26 @@
 <resources>
   <style name="AppTheme" parent="@android:style/Theme.Material.Light">
     <!-- Main app colors -->
+    <!-- colorPrimary is used for the default action bar background -->
     <item name="android:colorPrimary">@color/primary_blue</item>
+    <!-- colorPrimaryDark is used for the status bar -->
     <item name="android:colorPrimaryDark">@color/primary_blue_dark</item>
+    <!-- colorAccent is used as the default value for colorControlActivated which is used to tint widgets -->
     <item name="android:colorAccent">@color/accent_purple</item>
     
+    <!-- Hides ActionBar -->
     <item name="android:windowActionBar">false</item>
     <item name="android:windowNoTitle">true</item>
   </style>
   
-  <style name="ToolbarTheme">  <!-- parent="ThemeOverlay.AppCompat.Light" >-->
+  <style name="ToolbarTheme">  <!-- parent="android:style/ThemeOverlay.Material.Light.ActionBar" >-->
     <item name="android:textColorPrimary">@android:color/white</item>  
     <!-- 
     <item name="android:textColorSecondary"></item>
     -->
   </style>
 
-  <style name="MainMenuPopupTheme" >
+  <style name="MainMenuPopupTheme" > <!-- parent="android:style/ThemeOverlay.Material.Light" -->
     <item name="android:textColorPrimary">@android:color/white</item>
     <!--
     <item name="android:background"></item>

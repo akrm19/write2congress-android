@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/actionMenu_writeNew" 
+		  android:icon="@drawable/ic_search_white_48dp" 
+		  android:showAsAction="always" 
+		  android:title="@string/writeNew" />
+  
+	<item android:id="@+id/actionMenu_drafts" 
+		  android:icon="@drawable/ic_drafts_white_48dp" 
+		  android:showAsAction="always"
+		  android:title="@string/drafts" />
+  
+	<item android:id="@+id/actionMenu_sent" 
+		  android:icon="@drawable/ic_send_white_48dp" 
+		  android:showAsAction="always" 
+		  android:title="@string/sent" />
+  
+  <item android:id="@+id/actionMenu_search"
+      android:icon="@drawable/ic_search_white_48dp"
+      android:showAsAction="always"
+      android:title="@string/searchLegislators"/>
+</menu>

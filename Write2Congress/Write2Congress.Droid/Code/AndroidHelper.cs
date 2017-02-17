@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Write2Congress.Droid.Helpers
+namespace Write2Congress.Droid.Code
 {
     public class AndroidHelper
     {
