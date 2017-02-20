@@ -7,8 +7,7 @@
     android:id="@+id/toolbar"
     android:theme="@style/ToolbarTheme"
     android:popupTheme="@style/MainMenuPopupTheme">
-  
-    <!-- TODO RM: DELETE 
+<!-- TODO RM: DELETE 
     Remainder: More can be added here
     <Button
         android:text="Button"

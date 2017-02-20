@@ -18,23 +18,36 @@ namespace Write2Congress.Shared.DomainModel
         public State State;
         public Gender Gender;
 
-        public string OfficeAddress { get; set; }
-        public string OfficeNumber { get; set; }
-
         public DateTime TermStartDate { get; set; }
         public DateTime TermEndDate { get; set; }
 
-        public string FacebookId { get; set; }
-        public string TwitterId { get; set; }
-        public string YouTubeId { get; set; }
+        public ContactMethod OfficeAddress { get; set; }
+        public ContactMethod OfficeNumber { get; set; }
 
-        public string Website { get; set; }
-        public string ContactSite { get; set; }
+        public ContactMethod Email { get; set; }
+        public ContactMethod FacebookId { get; set; }
+        public ContactMethod TwitterId { get; set; }
+        public ContactMethod YouTubeId { get; set; }
+        public ContactMethod Website { get; set; }
+        public ContactMethod ContactSite { get; set; }
 
         public int TotalVotes { get; set; }
         public int MissedVotesPercent { get; set; }
         public int VotesWithPartyPercent { get; set; }
 
         public string Senority { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}{2}",
+                    FirstName,
+                    string.IsNullOrWhiteSpace(MiddleName)
+                        ? string.Empty
+                        : $"{MiddleName} ",
+                    LastName);
+            }
+        }
     }
 }

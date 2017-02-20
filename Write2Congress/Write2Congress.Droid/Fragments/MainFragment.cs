@@ -13,11 +13,17 @@ using Android.Widget;
 using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Shared.DomainModel;
 using Newtonsoft.Json;
+using Android.Support.V7.Widget;
+using Write2Congress.Droid.Adapters;
 
 namespace Write2Congress.Droid.Fragments
 {
     public class MainFragment : BaseFragment
     {
+        RecyclerView recyclerView;
+        RecyclerView.LayoutManager layoutManager;
+        LegislatorAdapter legislatorAdapter;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,37 +35,26 @@ namespace Write2Congress.Droid.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var legislatorManager = new LegislatorManager();
+            layoutManager = new LinearLayoutManager(Activity, LinearLayoutManager.Vertical, false);
 
-            //return base.OnCreateView(inflater, container, savedInstanceState);
+
             var mainFragment = inflater.Inflate(Resource.Layout.frag_Main, container, false);
 
+            recyclerView = mainFragment.FindViewById<RecyclerView>(Resource.Id.mainFrag_legislatorsParentRecycler);
+            recyclerView.SetLayoutManager(layoutManager);
 
-
-            var legislatorManager = new LegislatorManager();
-
-            // Set our view from the "main" layout resource
-
-
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton);
+            var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton);
             var zipInput = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
-            var resultText = mainFragment.FindViewById<TextView>(Resource.Id.mainFrag_result);
 
 
             button.Click += delegate {
                 var zip = zipInput.Text;
 
                 var legislators = legislatorManager.GetLegislatorByZipcode(zip);
+                var legislatorAdapter = new LegislatorAdapter(this, legislators);
 
-                foreach (Legislator legislator in legislators)
-                {
-
-                    var legislatorText = JsonConvert.SerializeObject(legislator);
-                    resultText.Text += legislatorText;
-                }
-
+                recyclerView.SetAdapter(legislatorAdapter);
             };
 
 

@@ -69,15 +69,32 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                     Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
                     State = (State)Enum.Parse(typeof(State), l.state, true),
                     Gender = Util.GenderFromString(l.gender),
-                    OfficeAddress = l.office ?? string.Empty,
-                    OfficeNumber = l.phone ?? string.Empty,
+                    OfficeAddress = string.IsNullOrWhiteSpace(l.office)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Mail, l.office),
+                    OfficeNumber = string.IsNullOrWhiteSpace(l.phone)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Phone, l.phone),
                     TermStartDate = Util.DateFromSunlightTime(l.term_start),
                     TermEndDate = Util.DateFromSunlightTime(l.term_end),
-                    FacebookId = l.facebook_id ?? string.Empty,
-                    TwitterId = l.twitter_id ?? string.Empty,
-                    YouTubeId = l.youtube_id ?? string.Empty,
-                    Website = l.website ?? string.Empty,
-                    ContactSite = l.contact_form ?? string.Empty,
+                    Email = string.IsNullOrWhiteSpace(l.oc_email)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Email, l.oc_email),
+                    FacebookId = string.IsNullOrWhiteSpace(l.facebook_id)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Facebook, l.facebook_id),
+                    TwitterId = string.IsNullOrWhiteSpace(l.twitter_id) 
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Twitter, l.twitter_id),
+                    YouTubeId = string.IsNullOrWhiteSpace(l.youtube_id) 
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.YouTube, l.youtube_id),
+                    Website = string.IsNullOrWhiteSpace(l.website)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSite, l.website),
+                    ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
                     TotalVotes = 0, //TODO: get rid of the following or populate
                     MissedVotesPercent = 0,
                     VotesWithPartyPercent = 0,

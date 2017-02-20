@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<uses-sdk android:minSdkVersion="21" />
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="24" />
 	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/AppTheme"></application>
-  <!--
+	<!--
   <application android:name="afhcan.mobile.androidapp.BaseApplication" android:label="AFHCAN" android:icon="@drawable/ic_launcher" android:theme="@style/tConsultAppTheme" android:enabled="true" android:largeHeap="true"></application>
   -->
 </manifest>
