@@ -32,21 +32,32 @@
                     android:text="Chamber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
                     android:id="@+id/legislatorCtrl_chamber" />
                 <TextView
                     android:text="Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
                     android:id="@+id/legislatorCtrl_name" />
                 <TextView
                     android:text="TermStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
                     android:id="@+id/legislatorCtrl_termStartDate" />
                 <TextView
                     android:text="TermEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
                     android:id="@+id/legislatorCtrl_termEndDate" />
             </LinearLayout>
             <LinearLayout
@@ -74,14 +85,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/legislatorCtrl_address" />
-                </LinearLayout>
+                    </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
                     <ImageButton
-                        android:src="@drawable/ic_action_social_facebook"
+                        android:src="@drawable/facebook_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/legislatorCtrl_facebook" />
@@ -90,6 +101,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/legislatorCtrl_twitter" />
+                    <ImageButton
+                        android:src="@drawable/ic_action_social_youtube"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/legislatorCtrl_youtube" />
                     <ImageButton
                         android:src="@drawable/ic_action_ios7_world"
                         android:layout_width="wrap_content"

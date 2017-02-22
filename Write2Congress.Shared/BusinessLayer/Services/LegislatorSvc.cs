@@ -12,7 +12,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 {
     public class LegislatorSvc : ServiceBase
     {
-
         public async Task<List<Legislator>> GetLegislatorsByZipCode(string zipCode)
         {
             var legislators =  new List<Legislator>();
@@ -69,17 +68,20 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                     Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
                     State = (State)Enum.Parse(typeof(State), l.state, true),
                     Gender = Util.GenderFromString(l.gender),
+                    TermStartDate = Util.DateFromSunlightTime(l.term_start),
+                    TermEndDate = Util.DateFromSunlightTime(l.term_end),
+                    BioguideId = l.bioguide_id ?? string.Empty,
+
                     OfficeAddress = string.IsNullOrWhiteSpace(l.office)
                         ? new ContactMethod(ContactType.NotSet, string.Empty)
                         : new ContactMethod(ContactType.Mail, l.office),
                     OfficeNumber = string.IsNullOrWhiteSpace(l.phone)
                         ? new ContactMethod(ContactType.NotSet, string.Empty)
                         : new ContactMethod(ContactType.Phone, l.phone),
-                    TermStartDate = Util.DateFromSunlightTime(l.term_start),
-                    TermEndDate = Util.DateFromSunlightTime(l.term_end),
                     Email = string.IsNullOrWhiteSpace(l.oc_email)
                         ? new ContactMethod(ContactType.NotSet, string.Empty)
                         : new ContactMethod(ContactType.Email, l.oc_email),
+
                     FacebookId = string.IsNullOrWhiteSpace(l.facebook_id)
                         ? new ContactMethod(ContactType.NotSet, string.Empty)
                         : new ContactMethod(ContactType.Facebook, l.facebook_id),
@@ -95,6 +97,8 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                     ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
                         ? new ContactMethod(ContactType.NotSet, string.Empty)
                         : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
+
+
                     TotalVotes = 0, //TODO: get rid of the following or populate
                     MissedVotesPercent = 0,
                     VotesWithPartyPercent = 0,

@@ -36,6 +36,7 @@ namespace Write2Congress.Shared.DomainModel
         public int VotesWithPartyPercent { get; set; }
 
         public string Senority { get; set; }
+        public string BioguideId { get; set; }
 
         public string FullName
         {

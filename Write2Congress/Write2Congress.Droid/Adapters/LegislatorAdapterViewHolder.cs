@@ -20,12 +20,14 @@ namespace Write2Congress.Droid.Adapters
         public TextView Name { get; private set; }
         public TextView TermStartDate { get; private set; }
         public TextView TermEndDate { get; private set; }
+
         public ImageButton Email { get; private set; }
         public ImageButton Phone { get; private set; }
-        public ImageButton Facebook { get; private set; }
-        public ImageButton Twitter { get; private set; }
         public ImageButton Address { get; private set; }
 
+        public ImageButton Facebook { get; private set; }
+        public ImageButton Twitter { get; private set; }
+        public ImageButton YouTube { get; private set; }
         public ImageButton Webpage { get; private set; }
 
         public LegislatorAdapterViewHolder(View itemView) :base(itemView)
@@ -35,12 +37,15 @@ namespace Write2Congress.Droid.Adapters
             Name = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_name);
             TermStartDate = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_termStartDate);
             TermEndDate = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_termEndDate);
+
             Email = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_email);
             Phone = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_phone);
+            Address = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_address);
+
             Facebook = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_facebook);
             Twitter = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_twitter);
-            Address = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_address);
             Webpage = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_webpage);
+            YouTube = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_youtube);
         }
     }
 }
