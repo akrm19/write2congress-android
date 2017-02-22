@@ -12,6 +12,7 @@
   <string name="settings">Settings</string>
   <string name="termEnds">Term Ends</string>
   <string name="termStarted">Term Started</string>
+  <string name="unknown">Unknown</string>
   <string name="writeNew">Write New</string>
   <string name="hello">Hello World, Click Me!</string>
 </resources>

@@ -24,17 +24,17 @@ namespace Write2Congress.Droid.Adapters
         private BaseActivity _activity;
         private BaseFragment _fragment;
         private TypedValue _selectableItemBackground = new TypedValue();
-        private string _termStartDateFormat, _termEndDateFormat, _senateFormat, _congressFormat;
+        private string _termStartDate, _termEndDate, _senate, _congress;
 
         public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators)
         {
             _legislators = legislators;
             _fragment = fragment;
 
-            _termStartDateFormat = $"{AndroidHelper.GetString(Resource.String.termStarted)}: ";
-            _termEndDateFormat = $"{AndroidHelper.GetString(Resource.String.termEnds)}: ";
-            _senateFormat = AndroidHelper.GetString(Resource.String.senate);
-            _congressFormat = AndroidHelper.GetString(Resource.String.congress);
+            _termStartDate = AndroidHelper.GetString(Resource.String.termStarted);
+            _termEndDate = AndroidHelper.GetString(Resource.String.termEnds);
+            _senate = AndroidHelper.GetString(Resource.String.senate);
+            _congress = AndroidHelper.GetString(Resource.String.congress);
 
             //TODO RM: Ensure this works with pre 5.0 like 4.4
             try
@@ -74,19 +74,20 @@ namespace Write2Congress.Droid.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var legislator = _legislators[position];
-
             var viewHolder = holder as LegislatorAdapterViewHolder;
 
             //Portrait
-
             SetLegislatorPortrait(legislator, viewHolder.Portrait);
-            //viewHolder.Portrait.SetImageResource(Resource.Drawable.ic_person_black_48dp);// = //legislator.p //TODO RM: Add portrait
 
             //Basic Info
             viewHolder.Chamber.Text = $"{legislator.Chamber} ({legislator.State.ToString()})";
             viewHolder.Name.Text = legislator.FullName;
-            viewHolder.TermStartDate.Text = _termStartDateFormat + legislator.TermStartDate.ToShortDateString() ?? string.Empty;
-            viewHolder.TermEndDate.Text = _termEndDateFormat + legislator.TermEndDate.ToShortDateString() ?? string.Empty;
+            viewHolder.TermStartDate.Text = legislator.TermStartDate.Equals(DateTime.MinValue)
+                ? $"{_termStartDate}: {AndroidHelper.GetString(Resource.String.unknown)}"
+                : $"{_termStartDate}: {legislator.TermStartDate.ToShortDateString()}";
+            viewHolder.TermEndDate.Text = legislator.TermEndDate.Equals(DateTime.MinValue)
+                ? $"{_termEndDate}: {AndroidHelper.GetString(Resource.String.unknown)}"
+                : $"{_termEndDate}: {legislator.TermEndDate.ToShortDateString()}";
 
             //Contact, social media, ect buttons
             SetImageButton(viewHolder.Email, legislator.Email);
@@ -97,11 +98,6 @@ namespace Write2Congress.Droid.Adapters
             SetImageButton(viewHolder.Twitter, legislator.TwitterId);
             SetImageButton(viewHolder.Webpage, legislator.Website);
             SetImageButton(viewHolder.YouTube, legislator.YouTubeId);
-        }
-
-        private void SetLegislatorChamber(TextView chamber, Legislator legislator)
-        {
-            chamber.Text = $"{legislator.Chamber} ({legislator.State.ToString()}";
         }
 
         private void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
@@ -140,17 +136,24 @@ namespace Write2Congress.Droid.Adapters
                     break;
             }
         }
-
-        private void SetImageButton(ImageView imageButton, ContactMethod legislatorcontact)
+        private void SetImageButton(ImageView imageButton, ContactMethod contactMethod)
         {
-            imageButton.Visibility = legislatorcontact.IsEmpty
+            imageButton.Visibility = contactMethod.IsEmpty
                 ? ViewStates.Gone
                 : ViewStates.Visible;
 
             if(_selectableItemBackground != null)
                 imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
 
-            //Todo, set onlick & unbind onclick in not available
+            //TODO RM: Is unsubscribe method needed
+            imageButton.Click -= (sender, e) => ContactMethodAction(contactMethod);
+            imageButton.Click += (sender, e) => ContactMethodAction(contactMethod);
+        }
+
+        protected void ContactMethodAction(ContactMethod contactMethod)
+        {
+            var intent = Intent.CreateChooser(AndroidHelper.GetIntentForContactMethod(contactMethod), "Open with");
+            _fragment.StartActivity(intent);
         }
     }
 }

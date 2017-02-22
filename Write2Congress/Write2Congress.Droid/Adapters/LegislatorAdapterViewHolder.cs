@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Android.App;
+
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -30,6 +31,7 @@ namespace Write2Congress.Droid.Adapters
         public ImageButton YouTube { get; private set; }
         public ImageButton Webpage { get; private set; }
 
+        //public LegislatorAdapterViewHolder(View itemView, Action<int> listener) :base(itemView)
         public LegislatorAdapterViewHolder(View itemView) :base(itemView)
         {
             Portrait = itemView.FindViewById<ImageView>(Resource.Id.legislatorCtrl_portrait);
@@ -46,6 +48,8 @@ namespace Write2Congress.Droid.Adapters
             Twitter = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_twitter);
             Webpage = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_webpage);
             YouTube = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_youtube);
+
+            //Email.Click += (sender, e) => listener(base.AdapterPosition);
         }
     }
 }

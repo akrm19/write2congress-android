@@ -4,22 +4,32 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.DomainModel.Enum;
 
 namespace Write2Congress.Shared.BusinessLayer
 {
     public class Util
     {
-        public static LegislativeBody GetLegislativeBodyFromSunlight(string chamber)
+        #region HelperMethods
+        public static string GetUrlFromSocialContactMethod(ContactMethod contactMethod)
         {
-            switch (chamber.ToLower())
+            switch (contactMethod.Type)
             {
-                case "senate":
-                    return LegislativeBody.Senate;
-                case "house":
-                    return LegislativeBody.House;
+                case ContactType.NotSet:
+                    return string.Empty;
+                case ContactType.Facebook:
+                    return $"http://facebook.com/{contactMethod.ContactInfo}";
+                case ContactType.Twitter:
+                    return $"http://twitter.com/{contactMethod.ContactInfo}";
+                case ContactType.YouTube:
+                    return $"http://youtube.com/{contactMethod.ContactInfo}";
+                case ContactType.WebSite:
+                    return contactMethod.ContactInfo;
+                case ContactType.WebSiteContact:
+                    return contactMethod.ContactInfo;
                 default:
-                    return LegislativeBody.Unknown;
+                    return string.Empty;
             }
         }
 
@@ -59,16 +69,6 @@ namespace Write2Congress.Shared.BusinessLayer
             }
         }
 
-        public static DateTime DateFromSunlightTime(string dateVal)
-        {
-            DateTime date;
-
-            return DateTime.TryParseExact(dateVal, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date)
-                ? date
-                : DateTime.MinValue;
-        }
-
-
         public bool ValidZipFormat(string zip)
         {
             if (zip.Length != 5)
@@ -79,5 +79,30 @@ namespace Write2Congress.Shared.BusinessLayer
             //TODO RM: handle errors, logging or exception
             return int.TryParse(zip, out zipNumber);            
         }
+        #endregion
+
+        #region Sunlight Api Helper Methods
+        public static DateTime DateFromSunlightTime(string dateVal)
+        {
+            DateTime date;
+
+            return DateTime.TryParseExact(dateVal, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date)
+                ? date
+                : DateTime.MinValue;
+        }
+
+        public static LegislativeBody GetLegislativeBodyFromSunlight(string chamber)
+        {
+            switch (chamber.ToLower())
+            {
+                case "senate":
+                    return LegislativeBody.Senate;
+                case "house":
+                    return LegislativeBody.House;
+                default:
+                    return LegislativeBody.Unknown;
+            }
+        }
+        #endregion
     }
 }

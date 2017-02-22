@@ -93,6 +93,8 @@
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\Main.cs" />
+    <Compile Include="Adapters\ContactMethodAdapter.cs" />
+    <Compile Include="Adapters\ContactMethodAdapterViewHolder.cs" />
     <Compile Include="Adapters\LegislatorAdapter.cs" />
     <Compile Include="Adapters\LegislatorAdapterViewHolder.cs" />
     <Compile Include="BaseApplication.cs" />
@@ -408,7 +410,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_democratic_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\facebook_button.xml" />
+    <AndroidResource Include="Resources\drawable\facebook_button.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

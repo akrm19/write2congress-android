@@ -28,7 +28,6 @@ namespace Write2Congress.Shared.BusinessLayer
 
         }
 
-
         public List<Legislator> GetLegislatorByZipcode(string zipcode)
         {
             var legislators = new List<Legislator>();
@@ -37,7 +36,6 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return legislators;
         }
-
         #endregion
     }
 }
