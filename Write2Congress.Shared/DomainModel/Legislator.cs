@@ -15,7 +15,7 @@ namespace Write2Congress.Shared.DomainModel
 
         public Party Party;
         public LegislativeBody Chamber;
-        public State State;
+        public StateOrTerritory State;
         public Gender Gender;
 
         public DateTime TermStartDate { get; set; }

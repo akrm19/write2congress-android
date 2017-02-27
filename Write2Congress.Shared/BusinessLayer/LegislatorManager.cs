@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Write2Congress.Shared.BusinessLayer
         }
 
         #region Get Legislator Methods
-        public List<Legislator> GetLegislatorByState(State state)
+        public List<Legislator> GetLegislatorByState(StateOrTerritory state)
         {
             return new List<Legislator>();
 
@@ -35,6 +36,52 @@ namespace Write2Congress.Shared.BusinessLayer
             legislators = _legislatorSvc.GetLegislatorsByZipCode(zipcode).Result;
 
             return legislators;
+        }
+
+        public List<Legislator> GetAllLegislators()
+        {
+            return _legislatorSvc.GetAllAlegislators();
+        }
+
+        public static bool SaveLegislatorToFile(string filePath, List<Legislator> legislators)
+        {
+            try
+            {
+                var serializedLegislators = JsonConvert.SerializeObject(legislators);
+                
+                File.WriteAllText(filePath, serializedLegislators);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                //TODO RM: Add logging
+                return false;
+            }
+        }
+
+        public static List<Legislator> GetLegislatorsFromFileSource(string legislatorsFilePath)
+        {
+            var cachedLegislators = new List<Legislator>();
+
+            if (!File.Exists(legislatorsFilePath))
+            {
+                //TODO RM: Add logging
+                return cachedLegislators;
+            }
+
+            try
+            {
+                var fileContents = File.ReadAllText(legislatorsFilePath);
+                cachedLegislators = JsonConvert.DeserializeObject<List<Legislator>>(fileContents);
+            }
+            catch (Exception e)
+            {
+                //TODO RM: add logging
+                throw;
+            }
+
+            return cachedLegislators;
         }
         #endregion
     }

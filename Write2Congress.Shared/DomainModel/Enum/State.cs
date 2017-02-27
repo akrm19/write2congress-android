@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Write2Congress.Shared.DomainModel.Enum
 {
-    public enum State
+    public enum StateOrTerritory
     {
         AL,
         AK,
@@ -55,13 +55,15 @@ namespace Write2Congress.Shared.DomainModel.Enum
         WA,
         WV,
         WI,
-        WY
+        WY,
 
-        /*Unincorporated
-         *  
-         *  GUAM	GU
-            PUERTO RICO	PR
-            VIRGIN ISLANDS	VI
-         */
+        //TODO RM: Look into ordering this or fixing it
+        //Unincorporated
+        //GUAM	
+        GU,
+        //PUERTO RICO	
+        PR,
+        //VIRGIN ISLANDS	
+        VI
     }
 }

@@ -11,6 +11,66 @@ namespace Write2Congress.Shared.BusinessLayer
 {
     public class Util
     {
+        public static List<Legislator> LegislatorsFromSunlightLegislatorResult(SunlightLegislatorResult legislatorResults)
+        {
+            var legislators = new List<Legislator>();
+
+
+            foreach (var l in legislatorResults.results)
+            {
+                var legislator = new Legislator()
+                {
+                    FirstName = l.first_name,
+                    MiddleName = l.middle_name,
+                    LastName = l.last_name,
+                    Birthday = Util.DateFromSunlightTime(l.birthday),
+                    Party = Util.PartyFromString(l.party),
+                    Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
+                    State = Util.GetStateOrTerritoryFromSunlight(l.state),
+                    Gender = Util.GenderFromString(l.gender),
+                    TermStartDate = Util.DateFromSunlightTime(l.term_start),
+                    TermEndDate = Util.DateFromSunlightTime(l.term_end),
+                    BioguideId = l.bioguide_id ?? string.Empty,
+
+                    OfficeAddress = string.IsNullOrWhiteSpace(l.office)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Mail, l.office),
+                    OfficeNumber = string.IsNullOrWhiteSpace(l.phone)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Phone, l.phone),
+                    Email = string.IsNullOrWhiteSpace(l.oc_email)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Email, l.oc_email),
+
+                    FacebookId = string.IsNullOrWhiteSpace(l.facebook_id)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Facebook, l.facebook_id),
+                    TwitterId = string.IsNullOrWhiteSpace(l.twitter_id)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Twitter, l.twitter_id),
+                    YouTubeId = string.IsNullOrWhiteSpace(l.youtube_id)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.YouTube, l.youtube_id),
+                    Website = string.IsNullOrWhiteSpace(l.website)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSite, l.website),
+                    ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
+
+
+                    TotalVotes = 0, //TODO: get rid of the following or populate
+                    MissedVotesPercent = 0,
+                    VotesWithPartyPercent = 0,
+                    Senority = string.Empty
+                };
+
+                legislators.Add(legislator);
+            }
+
+            return legislators;
+        }
+
         #region HelperMethods
         public static string GetUrlFromSocialContactMethod(ContactMethod contactMethod)
         {
@@ -102,6 +162,20 @@ namespace Write2Congress.Shared.BusinessLayer
                 default:
                     return LegislativeBody.Unknown;
             }
+        }
+
+        public static StateOrTerritory GetStateOrTerritoryFromSunlight(string stateOrTerritory)
+        {
+            StateOrTerritory result = StateOrTerritory.AK;
+            //TODO RM: handle unkonw state or territory
+            if (string.IsNullOrWhiteSpace(stateOrTerritory))
+                return result;
+
+            if (Enum.TryParse<StateOrTerritory>(stateOrTerritory, true, out result))
+                return result;
+
+            //TODO RM: Handle errors
+            return result;
         }
         #endregion
     }

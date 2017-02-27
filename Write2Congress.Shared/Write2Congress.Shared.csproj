@@ -40,6 +40,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer\Extensions.cs" />
     <Compile Include="BusinessLayer\LegislatorManager.cs" />
     <Compile Include="BusinessLayer\Services\LegislatorSvc.cs" />
     <Compile Include="BusinessLayer\Services\ServiceBase.cs" />

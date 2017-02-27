@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Write2Congress.Shared.DomainModel;
+using Write2Congress.Droid.Code;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -28,6 +30,18 @@ namespace Write2Congress.Droid.Fragments
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
 
             return base.OnCreateView(inflater, container, savedInstanceState);
+        }
+
+
+        protected BaseApplication GetBaseApp()
+        {
+            return Activity.Application as BaseApplication;
+        }
+
+        protected List<Legislator> GetCachedLegislators()
+        {
+            //var legislators = (Activity.Application as BaseApplication).GetCachedLegislators();
+            return AppHelper.GetCachedLegislators();
         }
     }
 }

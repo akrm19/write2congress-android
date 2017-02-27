@@ -16,9 +16,9 @@ namespace Write2Congress.Shared.DomainModel
 
     public class Page
     {
-        public int count { get; set; }
-        public int per_page { get; set; }
-        public int page { get; set; }
+        public int? count { get; set; }
+        public int? per_page { get; set; }
+        public int? page { get; set; }
     }
 
     public class Result

@@ -21,7 +21,7 @@ namespace Write2Congress.Droid.Adapters
     public class LegislatorAdapter : RecyclerView.Adapter
     {
         private List<Legislator> _legislators;
-        private BaseActivity _activity;
+        //private BaseActivity _activity;
         private BaseFragment _fragment;
         private TypedValue _selectableItemBackground = new TypedValue();
         private string _termStartDate, _termEndDate, _senate, _congress;
@@ -48,11 +48,13 @@ namespace Write2Congress.Droid.Adapters
             }
         }
 
+        /*
         public LegislatorAdapter(BaseActivity activity, List<Legislator> legislators)
         {
             _legislators = legislators;
             _activity = activity;
         }
+        */
 
         public override int ItemCount
         {
@@ -60,6 +62,12 @@ namespace Write2Congress.Droid.Adapters
             {
                 return _legislators.Count;
             }
+        }
+
+        public void UpdateLegislators(List<Legislator> legislators)
+        {
+            _legislators = legislators;
+            NotifyDataSetChanged();
         }
 
         // Create new views (invoked by the layout manager)
@@ -102,7 +110,7 @@ namespace Write2Congress.Droid.Adapters
 
         private void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
         {
-            var portraitBitmap = AndroidHelper.GetPortraitForLegislator(legislator);
+            var portraitBitmap = AppHelper.GetPortraitForLegislator(legislator);
 
             if (portraitBitmap != null)
                 imageButton.SetImageBitmap(portraitBitmap);
@@ -136,6 +144,7 @@ namespace Write2Congress.Droid.Adapters
                     break;
             }
         }
+
         private void SetImageButton(ImageView imageButton, ContactMethod contactMethod)
         {
             imageButton.Visibility = contactMethod.IsEmpty
@@ -152,7 +161,7 @@ namespace Write2Congress.Droid.Adapters
 
         protected void ContactMethodAction(ContactMethod contactMethod)
         {
-            var intent = Intent.CreateChooser(AndroidHelper.GetIntentForContactMethod(contactMethod), "Open with");
+            var intent = Intent.CreateChooser(AppHelper.GetIntentForContactMethod(contactMethod), "Open with");
             _fragment.StartActivity(intent);
         }
     }
