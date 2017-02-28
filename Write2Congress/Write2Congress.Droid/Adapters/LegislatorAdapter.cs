@@ -26,7 +26,11 @@ namespace Write2Congress.Droid.Adapters
         private TypedValue _selectableItemBackground = new TypedValue();
         private string _termStartDate, _termEndDate, _senate, _congress;
 
-        public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators)
+
+        //public LegislatorAdapter(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
+        //{ }
+
+        public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators) //: base()
         {
             _legislators = legislators;
             _fragment = fragment;
@@ -154,7 +158,8 @@ namespace Write2Congress.Droid.Adapters
             if(_selectableItemBackground != null)
                 imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
 
-            //TODO RM: Is unsubscribe method needed
+            //TODO RM: Is unsubscribe method needed or should Item click should be implemented differently?
+            //Example: https://github.com/xamarin/monodroid-samples/blob/master/android5.0/RecyclerViewer/RecyclerViewer/MainActivity.cs
             imageButton.Click -= (sender, e) => ContactMethodAction(contactMethod);
             imageButton.Click += (sender, e) => ContactMethodAction(contactMethod);
         }

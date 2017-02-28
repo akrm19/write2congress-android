@@ -27,7 +27,7 @@ namespace Write2Congress.Droid.Fragments
     {
         RecyclerView _recyclerView;
         RecyclerView.LayoutManager _layoutManager;
-        //LegislatorAdapter _legislatorAdapter;
+        LegislatorAdapter _legislatorAdapter;
 
         Spinner _states;
         Address _currentAddress;
@@ -60,13 +60,17 @@ namespace Write2Congress.Droid.Fragments
             var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton);
             var searchInputTest = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
 
-            //var statesAdapter = new ArrayAdapter<string>(Activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateNames);
-            //_states.Adapter = statesAdapter;
-            //_states.ItemSelected += _states_ItemSelected;
+            var statesAdapter = new ArrayAdapter<string>(this.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateNames);
+            _states.Adapter = statesAdapter;
+            
+            _states.ItemSelected += _states_ItemSelected;
 
             _legislators = AppHelper.GetCachedLegislators();
-            var legislatorAdapter = new LegislatorAdapter(this, _legislators);
-            _recyclerView.SetAdapter(legislatorAdapter);
+            //var legislatorAdapter = new LegislatorAdapter(this, _legislators);
+            _legislatorAdapter = new LegislatorAdapter(this, _legislators);
+
+
+            _recyclerView.SetAdapter(_legislatorAdapter);
             //using (var legislatorAdapter = new LegislatorAdapter(this, _legislators))
             //    _recyclerView.SetAdapter(legislatorAdapter);
 
@@ -76,12 +80,21 @@ namespace Write2Congress.Droid.Fragments
             }
 
             button.Click += delegate {
-                _legislators = AppHelper.GetCachedLegislators().FilterByFirstMiddleOrLastName(searchInputTest.Text);
-                var legislatorAdapter2 = new LegislatorAdapter(this, _legislators);
-                _recyclerView.SetAdapter(legislatorAdapter2);
+                //_legislators = AppHelper.GetCachedLegislators().FilterByFirstMiddleOrLastName(searchInputTest.Text);
+                //var legislatorAdapter2 = new LegislatorAdapter(this, _legislators);
+                //_recyclerView.SetAdapter(legislatorAdapter2);
+                _legislatorAdapter.UpdateLegislators(_legislators.FilterByFirstMiddleOrLastName(searchInputTest.Text));
+                _legislatorAdapter.NotifyDataSetChanged();
             };
 
             return mainFragment;
+        }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+
+
         }
 
         private void _states_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -93,14 +106,31 @@ namespace Write2Congress.Droid.Fragments
 
             if(Enum.TryParse<StateOrTerritory>(selectedState, out stateOrTerritory))
             {
-                var _legislators = AppHelper.GetCachedLegislators().FilterByState(stateOrTerritory);
-                //using (var legislatorAdapter = _recyclerView.GetAdapter() as LegislatorAdapter)
-                //{
-                //
-                //    //legislatorAdapter.UpdateLegislators(legislators);
-                //}
+                //var _legislators = AppHelper.GetCachedLegislators().FilterByState(stateOrTerritory);
+                //TODO RM: FInd out why this break things
+                try
+                {
+                    //using (var legislatorAdapter = ((LegislatorAdapter)_recyclerView.GetAdapter()))// _recyclerView.GetAdapter() as LegislatorAdapter)
+                    //{
+                        if (_legislatorAdapter == null)
+                            return;
+
+                        this.Activity.RunOnUiThread(() =>
+                        {
+                            //_legislators = AppHelper.GetCachedLegislators().FilterByState(stateOrTerritory);
+                            //_legislatorAdapter.NotifyDataSetChanged();
+                            _legislatorAdapter.UpdateLegislators(_legislators.FilterByState(stateOrTerritory));
+                        });
+                        //legislatorAdapter.UpdateLegislators(legislators);
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error " + ex);
+                }
+
             }
-            Toast.MakeText(this.Context, selectedState, ToastLength.Short).Show();
+            //Toast.MakeText(this.Context, selectedState, ToastLength.Short).Show();
         }
     }
 }
