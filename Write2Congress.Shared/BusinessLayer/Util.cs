@@ -26,7 +26,7 @@ namespace Write2Congress.Shared.BusinessLayer
                     Birthday = Util.DateFromSunlightTime(l.birthday),
                     Party = Util.PartyFromString(l.party),
                     Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
-                    State = Util.GetStateOrTerritoryFromSunlight(l.state),
+                    State = Util.GetStateOrTerritoryFromSunlight(l.state_name),
                     Gender = Util.GenderFromString(l.gender),
                     TermStartDate = Util.DateFromSunlightTime(l.term_start),
                     TermEndDate = Util.DateFromSunlightTime(l.term_end),
@@ -166,7 +166,7 @@ namespace Write2Congress.Shared.BusinessLayer
 
         public static StateOrTerritory GetStateOrTerritoryFromSunlight(string stateOrTerritory)
         {
-            StateOrTerritory result = StateOrTerritory.AK;
+            StateOrTerritory result = StateOrTerritory.ALL;
             //TODO RM: handle unkonw state or territory
             if (string.IsNullOrWhiteSpace(stateOrTerritory))
                 return result;

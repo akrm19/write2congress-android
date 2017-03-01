@@ -117,14 +117,13 @@
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\Main.cs" />
-    <Compile Include="Adapters\ContactMethodAdapter.cs" />
-    <Compile Include="Adapters\ContactMethodAdapterViewHolder.cs" />
     <Compile Include="Adapters\LegislatorAdapter.cs" />
     <Compile Include="Adapters\LegislatorAdapterViewHolder.cs" />
     <Compile Include="BaseApplication.cs" />
     <Compile Include="Code\AppHelper.cs" />
     <Compile Include="Code\GeoHelper.cs" />
     <Compile Include="Code\Logger.cs" />
+    <Compile Include="CustomControls\LegislatorsViewer.cs" />
     <Compile Include="DomainModel\Constants\TagsType.cs" />
     <Compile Include="Fragments\BaseFragment.cs" />
     <Compile Include="Fragments\MainFragment.cs" />
@@ -153,6 +152,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ctrl_legislator.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ctrl_LegislatorsViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

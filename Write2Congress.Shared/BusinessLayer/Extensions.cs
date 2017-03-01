@@ -22,7 +22,9 @@ namespace Write2Congress.Shared.BusinessLayer
 
         public static List<Legislator> FilterByState(this List<Legislator> legislators, StateOrTerritory stateOrTerritory)
         {
-            return legislators.Where(l => l.State == stateOrTerritory).ToList();
+            return stateOrTerritory == StateOrTerritory.ALL
+                ? legislators
+                : legislators.Where(l => l.State == stateOrTerritory).ToList();
         }
 
         //public static List<Legislator> FilterByPostalCode(this List<Legislator> legislators, string postalCode)

@@ -17,12 +17,13 @@ namespace Write2Congress.Droid.Fragments
 {
     public class BaseFragment : Fragment
     {
-        protected Logger Logger;
+        public Logger Logger2;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Logger = new Logger(Class.SimpleName);
+            //TODO RM: Rename this to Logger and Logger to MyLogger
+            Logger2 = new Logger(Class.SimpleName);
             // Create your fragment here
         }
 

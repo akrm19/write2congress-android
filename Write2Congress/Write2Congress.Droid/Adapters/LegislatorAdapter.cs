@@ -20,18 +20,18 @@ namespace Write2Congress.Droid.Adapters
 {
     public class LegislatorAdapter : RecyclerView.Adapter
     {
+        protected Logger Logger;
         private List<Legislator> _legislators;
-        //private BaseActivity _activity;
         private BaseFragment _fragment;
         private TypedValue _selectableItemBackground = new TypedValue();
         private string _termStartDate, _termEndDate, _senate, _congress;
-
 
         //public LegislatorAdapter(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
         //{ }
 
         public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators) //: base()
         {
+            Logger = new Logger(Class.SimpleName);
             _legislators = legislators;
             _fragment = fragment;
 
@@ -47,18 +47,10 @@ namespace Write2Congress.Droid.Adapters
             }
             catch (Exception e)
             {
-                //TODO RM: add logging
+                Logger.Error($"An Error occurred while retrieving the SelectableItemBackground used for transparent buttons. {e.Message}");
                 _selectableItemBackground = null;
             }
         }
-
-        /*
-        public LegislatorAdapter(BaseActivity activity, List<Legislator> legislators)
-        {
-            _legislators = legislators;
-            _activity = activity;
-        }
-        */
 
         public override int ItemCount
         {

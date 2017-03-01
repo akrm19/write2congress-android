@@ -17,7 +17,14 @@ namespace Write2Congress.Droid.Code
     {
         private static Logger _logger = new Logger("GeoHelper");
 
-        public static Location GetCurrentLocation(LocationManager locationManager = null) //Tuple<string, string> GetLocation()
+        public static bool IsAddressInUs(Address address)
+        {
+            return address != null
+                && !string.IsNullOrWhiteSpace(address.CountryCode)
+                && address.CountryCode.ToLower().Equals("us");
+        }
+
+        public static Location GetCurrentLocation(LocationManager locationManager = null) 
         {
             Location location = null;
 
@@ -34,7 +41,7 @@ namespace Write2Congress.Droid.Code
             if (bestLocationProvider != null)
                 location = locationManager.GetLastKnownLocation(bestLocationProvider);
             else
-                _logger.Info("Unable to get LocationManager's BestProvider");
+                _logger.Warn("Unable to get LocationManager's BestProvider");
 
             return location;
         }

@@ -31,6 +31,7 @@ namespace Write2Congress.Droid.Fragments
 
         Spinner _states;
         Address _currentAddress;
+        StateOrTerritory _defaultStateOrTerritory = StateOrTerritory.ALL;
 
         List<string> _stateNames;
         List<Legislator> _legislators;
@@ -38,54 +39,37 @@ namespace Write2Congress.Droid.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
             // Create your fragment here
-
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var legislatorManager = new LegislatorManager();
+            //Inflate fragment
             var mainFragment = inflater.Inflate(Resource.Layout.frag_Main, container, false);
 
-            // Use this to return your custom view for this Fragment
-            _layoutManager = new LinearLayoutManager(Activity, LinearLayoutManager.Vertical, false);
-            _states = mainFragment.FindViewById<Spinner>(Resource.Id.mainFrag_states);
+            //Setup Legislator RecyclerView 
             _recyclerView = mainFragment.FindViewById<RecyclerView>(Resource.Id.mainFrag_legislatorsParentRecycler);
+            _layoutManager = new LinearLayoutManager(Activity, LinearLayoutManager.Vertical, false);
             _recyclerView.SetLayoutManager(_layoutManager);
+            //Setup Legislator Adapater
+            _legislators = AppHelper.GetCachedLegislators();
+            _legislatorAdapter = new LegislatorAdapter(this, _legislators);
+            _recyclerView.SetAdapter(_legislatorAdapter);
 
-            _stateNames = Enum.GetNames(typeof(Shared.DomainModel.Enum.StateOrTerritory)).ToList();
-            _currentAddress = GeoHelper.GetCurrentAddress();
-
-            var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton);
-            var searchInputTest = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
-
+            //Setup States spinner
+            _states = mainFragment.FindViewById<Spinner>(Resource.Id.mainFrag_states);
+            _stateNames = Enum.GetNames(typeof(StateOrTerritory)).ToList();
             var statesAdapter = new ArrayAdapter<string>(this.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateNames);
             _states.Adapter = statesAdapter;
-            
             _states.ItemSelected += _states_ItemSelected;
 
-            _legislators = AppHelper.GetCachedLegislators();
-            //var legislatorAdapter = new LegislatorAdapter(this, _legislators);
-            _legislatorAdapter = new LegislatorAdapter(this, _legislators);
-
-
-            _recyclerView.SetAdapter(_legislatorAdapter);
-            //using (var legislatorAdapter = new LegislatorAdapter(this, _legislators))
-            //    _recyclerView.SetAdapter(legislatorAdapter);
-
-            if (_currentAddress != null)
-            {
-                searchInputTest.Text = _currentAddress.PostalCode;
-            }
-
-            button.Click += delegate {
-                //_legislators = AppHelper.GetCachedLegislators().FilterByFirstMiddleOrLastName(searchInputTest.Text);
-                //var legislatorAdapter2 = new LegislatorAdapter(this, _legislators);
-                //_recyclerView.SetAdapter(legislatorAdapter2);
-                _legislatorAdapter.UpdateLegislators(_legislators.FilterByFirstMiddleOrLastName(searchInputTest.Text));
-                _legislatorAdapter.NotifyDataSetChanged();
-            };
+            //Temp
+            using (var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton))
+                button.Click += delegate {
+                    var searchInputTest = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
+                    _legislatorAdapter.UpdateLegislators(_legislators.FilterByFirstMiddleOrLastName(searchInputTest.Text));
+                    //_legislatorAdapter.NotifyDataSetChanged();
+                };
 
             return mainFragment;
         }
@@ -94,43 +78,85 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnActivityCreated(savedInstanceState);
 
+            _currentAddress = GeoHelper.GetCurrentAddress();
 
+            if (GeoHelper.IsAddressInUs(_currentAddress))
+            {
+                //TODO RM: _currentAddress.AdminArea returns full state name, like Texas, need to handle 
+                //this since it is imcopatible w/current enum
+                
+                var state = _currentAddress.AdminArea.ToLower().Equals("texas")
+                    ? StateOrTerritory.TX
+                    : ParseFromString(_currentAddress.AdminArea, _defaultStateOrTerritory);
+
+                SetStateSpinner(state);
+            }
+
+            Logger2.Info("User is not in US (use is in {0}). Setting selected state to: {1}",
+                _currentAddress.CountryName ?? string.Empty,
+                _defaultStateOrTerritory.ToString());
+
+            SetStateSpinner(_defaultStateOrTerritory);
+
+            var searchInputTest = View.FindViewById<EditText>(Resource.Id.mainFrag_zip);
+            searchInputTest.Text = _currentAddress.PostalCode;
+        }
+
+        private StateOrTerritory ParseFromString(string stateOrTerritoryString, StateOrTerritory defaultStateOrTerritory)
+        {
+            StateOrTerritory stateOrTerritory;
+
+            if (Enum.TryParse<StateOrTerritory>(stateOrTerritoryString, out stateOrTerritory))
+                return stateOrTerritory;
+
+            Logger2.Error($"Could not parse StateOrTerritory: {stateOrTerritoryString}. Returning default value {defaultStateOrTerritory}");
+            return defaultStateOrTerritory;
+        }
+
+        private void SetStateSpinner(StateOrTerritory stateOrTerritory)
+        {
+            var position = GetStateOrTerritoryPosition(_stateNames, stateOrTerritory);
+            if(position >= 0)
+                _states.SetSelection(position);
+        }
+
+        //TODO RM: Change to generic extension
+        private int GetStateOrTerritoryPosition(List<string> stateOrTerritories, StateOrTerritory lookupItem)
+        {
+            var stringVal = lookupItem.ToString();
+            return stateOrTerritories.FindIndex(s => s.Equals(lookupItem));
         }
 
         private void _states_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             var spinner = (Spinner)sender;
             var selectedState = Convert.ToString(spinner.GetItemAtPosition(e.Position));
-
             StateOrTerritory stateOrTerritory;
 
-            if(Enum.TryParse<StateOrTerritory>(selectedState, out stateOrTerritory))
+            if(!Enum.TryParse<StateOrTerritory>(selectedState, out stateOrTerritory))
             {
-                //var _legislators = AppHelper.GetCachedLegislators().FilterByState(stateOrTerritory);
-                //TODO RM: FInd out why this break things
-                try
-                {
-                    //using (var legislatorAdapter = ((LegislatorAdapter)_recyclerView.GetAdapter()))// _recyclerView.GetAdapter() as LegislatorAdapter)
-                    //{
-                        if (_legislatorAdapter == null)
-                            return;
-
-                        this.Activity.RunOnUiThread(() =>
-                        {
-                            //_legislators = AppHelper.GetCachedLegislators().FilterByState(stateOrTerritory);
-                            //_legislatorAdapter.NotifyDataSetChanged();
-                            _legislatorAdapter.UpdateLegislators(_legislators.FilterByState(stateOrTerritory));
-                        });
-                        //legislatorAdapter.UpdateLegislators(legislators);
-                    //}
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error("Error " + ex);
-                }
-
+            
+                Logger2.Error($"Could not parse select State: {selectedState}");
+                return;
             }
-            //Toast.MakeText(this.Context, selectedState, ToastLength.Short).Show();
+
+            try
+            {
+                if (_legislatorAdapter == null)
+                {
+                    Logger2.Error($"Legislator adapater is null. Cannot select legislators for state ({selectedState}).");
+                    return;
+                }
+
+                this.Activity.RunOnUiThread(() =>
+                {
+                    _legislatorAdapter.UpdateLegislators(_legislators.FilterByState(stateOrTerritory));
+                });
+            }
+            catch (Exception ex)
+            {
+                Logger2.Error($"Cannot select legislators for selected State ({selectedState}). Error: {ex.Message}");
+            }
         }
     }
 }

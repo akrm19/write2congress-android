@@ -49,6 +49,9 @@ namespace Write2Congress.Droid.Adapters
             Webpage = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_webpage);
             YouTube = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_youtube);
 
+            //TODO RM: Other possible way to implement onclick
+            //See bottom of post: https://developer.xamarin.com/guides/android/user_interface/recyclerview/
+            //Example code:https://github.com/xamarin/monodroid-samples/blob/master/android5.0/RecyclerViewer/RecyclerViewer/MainActivity.cs
             //Email.Click += (sender, e) => listener(base.AdapterPosition);
         }
     }
