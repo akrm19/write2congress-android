@@ -15,6 +15,8 @@ using Write2Congress.Shared.BusinessLayer;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using Write2Congress.Shared.DomainModel.Enum;
+using Android.Locations;
 
 namespace Write2Congress.Droid.Code
 {
@@ -22,48 +24,6 @@ namespace Write2Congress.Droid.Code
     {
         private static Logger _logger = new Logger("AppHelper");
         private static string _cachedLegislatorsFileName = "Legislators.json";
-
-
-        public static List<Legislator> GetCachedLegislators()
-        {
-            return ((BaseApplication)Application.Context.ApplicationContext).GetCachedLegislators();
-        }
-
-        public static List<Legislator> GetCachedLegislatorsFromFileStorage()
-        {
-            var cachedLegislators = new List<Legislator>();
-            try
-            {
-                var cachedLegislatorsFileContent = AndroidHelper.GetInternalAppFileContent(_cachedLegislatorsFileName);
-    
-                if(string.IsNullOrWhiteSpace(cachedLegislatorsFileContent))
-                {
-                    _logger.Info("No cached legislators retrieved. Returning empty list.");
-                    return cachedLegislators;
-                }
-    
-                cachedLegislators = JsonConvert.DeserializeObject<List<Legislator>>(cachedLegislatorsFileContent);
-            }
-            catch (Exception e)
-            {
-                _logger.Error("Error occurred while retrieving cached legislators. Error: " + e.Message);
-            }
-
-            return cachedLegislators;
-        }
-
-        public static void SaveLegistorsToFileStorage(List<Legislator> legistlators)
-        {
-            try
-            {
-                var serializedLegislators = JsonConvert.SerializeObject(legistlators);
-                AndroidHelper.SetInternalAppFileContent(_cachedLegislatorsFileName, serializedLegislators);
-            }
-            catch (Exception e)
-            {
-                _logger.Error("An error occurred savind the legislators to cache: Error: {0}", e.Message);
-            }
-        }
 
         public static Bitmap GetPortraitForLegislator(Legislator legislator)
         {
@@ -93,6 +53,72 @@ namespace Write2Congress.Droid.Code
             return imageBitmap;
         }
 
+        #region StateOrTerritory Helpers
+
+        public static StateOrTerritory GetUsaStateFromAddress(Address address)
+        {
+            StateOrTerritory defaultStateOrTerritory = StateOrTerritory.ALL;
+
+            if (address == null)
+                _logger.Info("Address is null. Cannot retrieve StateOrTerritory. Returning default State: " + defaultStateOrTerritory.ToString());
+
+            else if (!GeoHelper.IsAddressInUs(address))
+                _logger.Info($"Address is outside the US ({address.CountryName}). Returning default State: {defaultStateOrTerritory.ToString()}");
+
+            else if (string.IsNullOrWhiteSpace(address.AdminArea))
+                _logger.Info($"Address does not contain a State. Returning default State: {defaultStateOrTerritory.ToString()}");
+
+            else
+                defaultStateOrTerritory = Util.GetStateOrTerrByDescription(address.AdminArea, defaultStateOrTerritory);
+
+            return defaultStateOrTerritory;
+        }
+
+        #endregion
+
+        #region Legislators File Caching
+
+        public static List<Legislator> GetCachedLegislators()
+        {
+            return ((BaseApplication)Application.Context.ApplicationContext).GetCachedLegislators();
+        }
+
+        public static List<Legislator> GetCachedLegislatorsFromFileStorage()
+        {
+            var cachedLegislators = new List<Legislator>();
+            try
+            {
+                var cachedLegislatorsFileContent = AndroidHelper.GetInternalAppFileContent(_cachedLegislatorsFileName);
+
+                if (string.IsNullOrWhiteSpace(cachedLegislatorsFileContent))
+                {
+                    _logger.Info("No cached legislators retrieved. Returning empty list.");
+                    return cachedLegislators;
+                }
+
+                cachedLegislators = JsonConvert.DeserializeObject<List<Legislator>>(cachedLegislatorsFileContent);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Error occurred while retrieving cached legislators. Error: " + e.Message);
+            }
+
+            return cachedLegislators;
+        }
+
+        public static void SaveLegistorsToFileStorage(List<Legislator> legistlators)
+        {
+            try
+            {
+                var serializedLegislators = JsonConvert.SerializeObject(legistlators);
+                AndroidHelper.SetInternalAppFileContent(_cachedLegislatorsFileName, serializedLegislators);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("An error occurred savind the legislators to cache: Error: {0}", e.Message);
+            }
+        }
+        #endregion
 
         #region AppPreference Helpers
 

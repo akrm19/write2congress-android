@@ -18,7 +18,7 @@ namespace Write2Congress.Droid
     [Activity(Label = "BaseApplication")]
     public class BaseApplication : Application
     {
-        private bool _forceRetrieveAllLegislators = true;
+        private bool _forceRetrieveAllLegislators = false;
         private static BaseApplication _instance;
         private List<Legislator> _allLegislators;
         protected LegislatorManager LegislatorManager; 

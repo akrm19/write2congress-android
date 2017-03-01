@@ -40,6 +40,7 @@ namespace Write2Congress.Droid.Fragments
             //Inflate fragment
             var mainFragment = inflater.Inflate(Resource.Layout.frag_Main, container, false);
 
+            //Setup legislatorsViewer
             _legislatorsViewer = mainFragment.FindViewById<LegislatorsViewer>(Resource.Id.mainFrag_legislatorsViewer);
             _legislatorsViewer.SetupCtrl(this, AppHelper.GetCachedLegislators());
             
@@ -58,37 +59,12 @@ namespace Write2Congress.Droid.Fragments
             base.OnActivityCreated(savedInstanceState);
 
             _currentAddress = GeoHelper.GetCurrentAddress();
-            StateOrTerritory state = StateOrTerritory.ALL;
-
-            if (GeoHelper.IsAddressInUs(_currentAddress))
-            {
-                //TODO RM: _currentAddress.AdminArea returns full state name, like Texas, need to handle 
-                //this since it is imcopatible w/current enum
-                
-                state = ParseFromString(_currentAddress.AdminArea, state);
-
-                _legislatorsViewer.FilterByStateOrTerritory(state);
-            }
-
-            Logger2.Info("User is not in US (use is in {0}). Setting selected state to: {1}",
-                _currentAddress.CountryName ?? string.Empty,
-                state.ToString());
-
+            StateOrTerritory state = AppHelper.GetUsaStateFromAddress(_currentAddress);
             _legislatorsViewer.FilterByStateOrTerritory(state);
 
+            //TEMP: REMOVE
             var searchInputTest = View.FindViewById<EditText>(Resource.Id.mainFrag_zip);
             searchInputTest.Text = _currentAddress.PostalCode;
-        }
-
-        private StateOrTerritory ParseFromString(string stateOrTerritoryString, StateOrTerritory defaultStateOrTerritory)
-        {
-            StateOrTerritory stateOrTerritory;
-
-            if (Enum.TryParse<StateOrTerritory>(stateOrTerritoryString, out stateOrTerritory))
-                return stateOrTerritory;
-
-            Logger2.Error($"Could not parse StateOrTerritory: {stateOrTerritoryString}. Returning default value {defaultStateOrTerritory}");
-            return defaultStateOrTerritory;
         }
     }
 }

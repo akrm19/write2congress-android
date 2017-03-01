@@ -72,6 +72,50 @@ namespace Write2Congress.Shared.BusinessLayer
         }
 
         #region HelperMethods
+
+        public static StateOrTerritory GetStateOrTerrByDescription(string stateOrTerrDescription, StateOrTerritory defaultStateOrTerritory)
+        {
+            var statesOrTerrWithDescription = GetAllStatesAndTerrWithDescriptions();
+            var stateOrTerrDescriptionLowerCase = stateOrTerrDescription.ToLower();
+
+            Tuple<StateOrTerritory, string> matchingStateOrTerrSet = statesOrTerrWithDescription
+                .Where(set => set.Item2.ToLower().Equals(stateOrTerrDescriptionLowerCase))
+                .FirstOrDefault();
+
+            if (matchingStateOrTerrSet != null)
+                return matchingStateOrTerrSet.Item1;
+
+            //_logger.Error($"Could not parse StateOrTerritory: {stateOrTerrDescription}. Returning default value {defaultStateOrTerritory}");
+            return defaultStateOrTerritory;
+        }
+
+        public static StateOrTerritory GetStateOrTerrByName(string stateOrTerrName, StateOrTerritory defaultStateOrTerritory)
+        {
+            StateOrTerritory stateOrTerritory;
+
+            if (Enum.TryParse<StateOrTerritory>(stateOrTerrName, out stateOrTerritory))
+                return stateOrTerritory;
+
+            //_logger.Error($"Could not parse StateOrTerritory: {stateOrTerrName}. Returning default value {defaultStateOrTerritory.ToString()}");
+            return defaultStateOrTerritory;
+        }
+
+        public static List<Tuple<StateOrTerritory, string>> GetAllStatesAndTerrWithDescriptions()
+        {
+            var result = new List<Tuple<StateOrTerritory, string>>();
+
+            foreach (var stateOrTerr in Enum.GetValues(typeof(StateOrTerritory)))
+            {
+                var stateOrTerrEnum = (StateOrTerritory)stateOrTerr;
+                var description = stateOrTerrEnum.GetDescription();
+
+                var newSet = new Tuple<StateOrTerritory, string>(stateOrTerrEnum, description ?? string.Empty);
+                result.Add(newSet);
+            }
+
+            return result;
+        }
+
         public static string GetUrlFromSocialContactMethod(ContactMethod contactMethod)
         {
             switch (contactMethod.Type)
