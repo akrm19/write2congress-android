@@ -18,6 +18,7 @@ namespace Write2Congress.Droid
     [Activity(Label = "BaseApplication")]
     public class BaseApplication : Application
     {
+        private bool _forceRetrieveAllLegislators = true;
         private static BaseApplication _instance;
         private List<Legislator> _allLegislators;
         protected LegislatorManager LegislatorManager; 
@@ -40,7 +41,7 @@ namespace Write2Congress.Droid
             LegislatorManager = new LegislatorManager();
             _allLegislators = AppHelper.GetCachedLegislatorsFromFileStorage();
 
-            if (_allLegislators.Count == 0)
+            if (_allLegislators.Count == 0 || _forceRetrieveAllLegislators)
             {
                 _allLegislators = LegislatorManager.GetAllLegislators();
 

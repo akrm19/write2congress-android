@@ -40,5 +40,12 @@ namespace Write2Congress.Shared.BusinessLayer
                 //|| l.MiddleName.Contains(searchTerm) TODO: Handle null middle names
                 || l.LastName.ToLower().Contains(searchTerm)).ToList();
         }
+
+        //public static T GetAttribute<T>(this Enum enumVal) 
+        //    where T: Attribute
+        //{
+        //    var enumType = enumVal.GetType();
+        //
+        //}
     }
 }

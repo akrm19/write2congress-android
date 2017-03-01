@@ -20,21 +20,14 @@ using Android.Locations;
 using Android.Support.V4.App;
 using static Android.Manifest;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Droid.CustomControls;
 
 namespace Write2Congress.Droid.Fragments
 {
     public class MainFragment : BaseFragment
     {
-        RecyclerView _recyclerView;
-        RecyclerView.LayoutManager _layoutManager;
-        LegislatorAdapter _legislatorAdapter;
-
-        Spinner _states;
+        LegislatorsViewer _legislatorsViewer;
         Address _currentAddress;
-        StateOrTerritory _defaultStateOrTerritory = StateOrTerritory.ALL;
-
-        List<string> _stateNames;
-        List<Legislator> _legislators;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -47,28 +40,14 @@ namespace Write2Congress.Droid.Fragments
             //Inflate fragment
             var mainFragment = inflater.Inflate(Resource.Layout.frag_Main, container, false);
 
-            //Setup Legislator RecyclerView 
-            _recyclerView = mainFragment.FindViewById<RecyclerView>(Resource.Id.mainFrag_legislatorsParentRecycler);
-            _layoutManager = new LinearLayoutManager(Activity, LinearLayoutManager.Vertical, false);
-            _recyclerView.SetLayoutManager(_layoutManager);
-            //Setup Legislator Adapater
-            _legislators = AppHelper.GetCachedLegislators();
-            _legislatorAdapter = new LegislatorAdapter(this, _legislators);
-            _recyclerView.SetAdapter(_legislatorAdapter);
-
-            //Setup States spinner
-            _states = mainFragment.FindViewById<Spinner>(Resource.Id.mainFrag_states);
-            _stateNames = Enum.GetNames(typeof(StateOrTerritory)).ToList();
-            var statesAdapter = new ArrayAdapter<string>(this.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateNames);
-            _states.Adapter = statesAdapter;
-            _states.ItemSelected += _states_ItemSelected;
-
+            _legislatorsViewer = mainFragment.FindViewById<LegislatorsViewer>(Resource.Id.mainFrag_legislatorsViewer);
+            _legislatorsViewer.SetupCtrl(this, AppHelper.GetCachedLegislators());
+            
             //Temp
             using (var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton))
                 button.Click += delegate {
                     var searchInputTest = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
-                    _legislatorAdapter.UpdateLegislators(_legislators.FilterByFirstMiddleOrLastName(searchInputTest.Text));
-                    //_legislatorAdapter.NotifyDataSetChanged();
+                    _legislatorsViewer.FilterLegislatorsByFirstMiddleOrLastName(searchInputTest.Text);
                 };
 
             return mainFragment;
@@ -79,24 +58,23 @@ namespace Write2Congress.Droid.Fragments
             base.OnActivityCreated(savedInstanceState);
 
             _currentAddress = GeoHelper.GetCurrentAddress();
+            StateOrTerritory state = StateOrTerritory.ALL;
 
             if (GeoHelper.IsAddressInUs(_currentAddress))
             {
                 //TODO RM: _currentAddress.AdminArea returns full state name, like Texas, need to handle 
                 //this since it is imcopatible w/current enum
                 
-                var state = _currentAddress.AdminArea.ToLower().Equals("texas")
-                    ? StateOrTerritory.TX
-                    : ParseFromString(_currentAddress.AdminArea, _defaultStateOrTerritory);
+                state = ParseFromString(_currentAddress.AdminArea, state);
 
-                SetStateSpinner(state);
+                _legislatorsViewer.FilterByStateOrTerritory(state);
             }
 
             Logger2.Info("User is not in US (use is in {0}). Setting selected state to: {1}",
                 _currentAddress.CountryName ?? string.Empty,
-                _defaultStateOrTerritory.ToString());
+                state.ToString());
 
-            SetStateSpinner(_defaultStateOrTerritory);
+            _legislatorsViewer.FilterByStateOrTerritory(state);
 
             var searchInputTest = View.FindViewById<EditText>(Resource.Id.mainFrag_zip);
             searchInputTest.Text = _currentAddress.PostalCode;
@@ -111,52 +89,6 @@ namespace Write2Congress.Droid.Fragments
 
             Logger2.Error($"Could not parse StateOrTerritory: {stateOrTerritoryString}. Returning default value {defaultStateOrTerritory}");
             return defaultStateOrTerritory;
-        }
-
-        private void SetStateSpinner(StateOrTerritory stateOrTerritory)
-        {
-            var position = GetStateOrTerritoryPosition(_stateNames, stateOrTerritory);
-            if(position >= 0)
-                _states.SetSelection(position);
-        }
-
-        //TODO RM: Change to generic extension
-        private int GetStateOrTerritoryPosition(List<string> stateOrTerritories, StateOrTerritory lookupItem)
-        {
-            var stringVal = lookupItem.ToString();
-            return stateOrTerritories.FindIndex(s => s.Equals(lookupItem));
-        }
-
-        private void _states_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            var spinner = (Spinner)sender;
-            var selectedState = Convert.ToString(spinner.GetItemAtPosition(e.Position));
-            StateOrTerritory stateOrTerritory;
-
-            if(!Enum.TryParse<StateOrTerritory>(selectedState, out stateOrTerritory))
-            {
-            
-                Logger2.Error($"Could not parse select State: {selectedState}");
-                return;
-            }
-
-            try
-            {
-                if (_legislatorAdapter == null)
-                {
-                    Logger2.Error($"Legislator adapater is null. Cannot select legislators for state ({selectedState}).");
-                    return;
-                }
-
-                this.Activity.RunOnUiThread(() =>
-                {
-                    _legislatorAdapter.UpdateLegislators(_legislators.FilterByState(stateOrTerritory));
-                });
-            }
-            catch (Exception ex)
-            {
-                Logger2.Error($"Cannot select legislators for selected State ({selectedState}). Error: {ex.Message}");
-            }
         }
     }
 }

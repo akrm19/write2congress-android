@@ -26,7 +26,7 @@ namespace Write2Congress.Shared.BusinessLayer
                     Birthday = Util.DateFromSunlightTime(l.birthday),
                     Party = Util.PartyFromString(l.party),
                     Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
-                    State = Util.GetStateOrTerritoryFromSunlight(l.state_name),
+                    State = Util.GetStateOrTerritoryFromSunlight(l.state),
                     Gender = Util.GenderFromString(l.gender),
                     TermStartDate = Util.DateFromSunlightTime(l.term_start),
                     TermEndDate = Util.DateFromSunlightTime(l.term_end),
