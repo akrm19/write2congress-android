@@ -3,8 +3,14 @@
   <item
     android:id="@+id/mainMenu_search"
     android:title="@string/searchLegislators"
-    android:showAsAction="always"
-    android:icon="@drawable/ic_search_white_48dp" />
+    android:icon="@drawable/ic_search_white_48dp"
+    android:showAsAction="ifRoom|collapseActionView"
+    />
+  <!--
+    android:actionViewClass="android.support.v7.widget.SearchView"
+  android:showAsAction="always"
+  android.support.v7.widget.SearchView"
+  -->
   
   <item
     android:id="@+id/mainMenu_writeNew"

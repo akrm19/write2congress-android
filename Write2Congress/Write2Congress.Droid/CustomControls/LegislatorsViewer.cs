@@ -22,17 +22,15 @@ namespace Write2Congress.Droid.CustomControls
 {
     public class LegislatorsViewer : LinearLayout
     {
-        RecyclerView _recyclerView;
-        RecyclerView.LayoutManager _layoutManager;
-        LegislatorAdapter _legislatorAdapter;
-        Spinner _states;
-        BaseFragment _fragment;
+        private LegislatorAdapter _legislatorAdapter;
+        private Spinner _statesAndTerrSpinner;
+        private BaseFragment _fragment;
 
-        List<string> _stateNames;
-        List<Tuple<StateOrTerritory, string>> _statesAndTerrWithDescription;
-        List<Legislator> _legislators;
+        private List<string> _stateAndTerrNames;
+        private List<Tuple<StateOrTerritory, string>> _statesAndTerrWithDescription;
+        private List<Legislator> _legislators;
 
-        Logger Logger;
+        protected Logger Logger;
 
         public LegislatorsViewer(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -67,39 +65,40 @@ namespace Write2Congress.Droid.CustomControls
         public void SetupCtrl(BaseFragment fragment, List<Legislator> legislators)
         {
             _fragment = fragment;
+            _legislators = legislators;
 
             //Setup Legislator RecyclerView 
-            _recyclerView = FindViewById<RecyclerView>(Resource.Id.legislatorsViewer_legislatorsRecycler);
-            _layoutManager = new LinearLayoutManager(_fragment.Context, LinearLayoutManager.Vertical, false);
-            _recyclerView.SetLayoutManager(_layoutManager);
+            var recyclerView = FindViewById<RecyclerView>(Resource.Id.legislatorsViewer_legislatorsRecycler);
+            var layoutManager = new LinearLayoutManager(_fragment.Context, LinearLayoutManager.Vertical, false);
+            recyclerView.SetLayoutManager(layoutManager);
+
             //Setup Legislator Adapater
-            _legislators = legislators;
             _legislatorAdapter = new LegislatorAdapter(_fragment, _legislators);
-            _recyclerView.SetAdapter(_legislatorAdapter);
+            recyclerView.SetAdapter(_legislatorAdapter);
 
             //Setup States spinner
-            _states = FindViewById<Spinner>(Resource.Id.legislatorsViewer_statesSpinner);
+            _statesAndTerrSpinner = FindViewById<Spinner>(Resource.Id.legislatorsViewer_statesSpinner);
             _statesAndTerrWithDescription = Util.GetAllStatesAndTerrWithDescriptions();
-            _stateNames = _statesAndTerrWithDescription.Select(s => s.Item2).ToList(); 
+            _stateAndTerrNames = _statesAndTerrWithDescription.Select(s => s.Item2).ToList(); 
 
-            var statesAdapter = new ArrayAdapter<string>(_fragment.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateNames);
-            _states.Adapter = statesAdapter;
-            _states.ItemSelected += _states_ItemSelected;
+            var statesAdapter = new ArrayAdapter<string>(_fragment.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateAndTerrNames);
+            _statesAndTerrSpinner.Adapter = statesAdapter;
+            _statesAndTerrSpinner.ItemSelected += _states_ItemSelected;
         }
 
 
         private void SetStateSpinner(StateOrTerritory stateOrTerritory)
         {
-            var position = GetStateOrTerritoryPosition(_stateNames, stateOrTerritory);
+            var position = GetStateOrTerritoryPosition(_stateAndTerrNames, stateOrTerritory);
 
             if (position >= 0)
-                _states.SetSelection(position);
+                _statesAndTerrSpinner.SetSelection(position);
         }
 
         //TODO RM: Change to generic extension
         private int GetStateOrTerritoryPosition(List<string> stateOrTerritories, StateOrTerritory lookupItem)
         {
-            var stringVal = _statesAndTerrWithDescription[(int)lookupItem].Item2;//lookupItem.GetDescription();
+            var stringVal = _statesAndTerrWithDescription[(int)lookupItem].Item2;
 
             return stateOrTerritories.IndexOf(stringVal);
         }

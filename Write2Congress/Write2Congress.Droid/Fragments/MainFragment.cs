@@ -45,11 +45,11 @@ namespace Write2Congress.Droid.Fragments
             _legislatorsViewer.SetupCtrl(this, AppHelper.GetCachedLegislators());
             
             //Temp
-            using (var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton))
-                button.Click += delegate {
-                    var searchInputTest = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
-                    _legislatorsViewer.FilterLegislatorsByFirstMiddleOrLastName(searchInputTest.Text);
-                };
+            //using (var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton))
+            //    button.Click += delegate {
+            //        var searchInputTest = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
+            //        _legislatorsViewer.FilterLegislatorsByFirstMiddleOrLastName(searchInputTest.Text);
+            //    };
 
             return mainFragment;
         }
@@ -63,8 +63,8 @@ namespace Write2Congress.Droid.Fragments
             _legislatorsViewer.FilterByStateOrTerritory(state);
 
             //TEMP: REMOVE
-            var searchInputTest = View.FindViewById<EditText>(Resource.Id.mainFrag_zip);
-            searchInputTest.Text = _currentAddress.PostalCode;
+            //var searchInputTest = View.FindViewById<EditText>(Resource.Id.mainFrag_zip);
+            //searchInputTest.Text = _currentAddress.PostalCode;
         }
     }
 }
