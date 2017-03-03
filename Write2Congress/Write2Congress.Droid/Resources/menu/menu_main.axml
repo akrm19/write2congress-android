@@ -4,35 +4,34 @@ mlns:app="http://schemas.android.com/apk/lib/write2congress.droid"
   xmlns:app="http://schemas.android.com/apk/lib/write2congress.droid">
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
-  <item
-    android:id="@+id/mainMenu_search"
-    android:title="@string/searchLegislators"
-    android:icon="@drawable/ic_search_white_48dp"
-    app:showAsAction="always|collapseActionView"
-    app:actionViewClass="android.support.v7.widget.SearchView"
-    />
-  <!--
-  android:showAsAction="always"
-  android.support.v7.widget.SearchView"
-  -->
-
-  <item
-    android:id="@+id/mainMenu_writeNew"
-    android:title="@string/writeNew"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/mainMenu_search"
+        android:title="@string/searchLegislators"
+        android:icon="@drawable/ic_search_white_48dp"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
+    <!--
     android:showAsAction="always"
-    android:icon="@drawable/ic_create_white_48dp"/>
+    android.support.v7.widget.SearchView"
+    -->
 
-  <item
-    android:id="@+id/mainMenu_settings"
-    android:title="@string/settings"
-    android:showAsAction="never"/>
+    <item
+        android:id="@+id/mainMenu_writeNew"
+        android:title="@string/writeNew"
+        android:icon="@drawable/ic_create_white_48dp"
+        app:showAsAction="always"/>
 
-  <item android:id="@+id/mainMenu_donate"
-    android:title="@string/donate"
-    android:showAsAction="never"/>
+    <item
+        android:id="@+id/mainMenu_settings"
+        android:title="@string/settings"
+        android:showAsAction="never"/>
 
-  <item android:id="@+id/mainMenu_exit"
-    android:title="@string/exit"
-    android:showAsAction="never"/>
+    <item android:id="@+id/mainMenu_donate"
+        android:title="@string/donate"
+        android:showAsAction="never"/>
+
+    <item android:id="@+id/mainMenu_exit"
+        android:title="@string/exit"
+        android:showAsAction="never"/>
 </menu>

@@ -17,6 +17,7 @@ using Write2Congress.Shared.DomainModel.Enum;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Fragments;
 using Write2Congress.Shared.BusinessLayer;
+using Write2Congress.Droid.Interfaces;
 
 namespace Write2Congress.Droid.CustomControls
 {
@@ -54,9 +55,27 @@ namespace Write2Congress.Droid.CustomControls
 
         public void FilterLegislatorsByFirstMiddleOrLastName(string filter)
         {
-            _legislatorAdapter.UpdateLegislators(_legislators.FilterByFirstMiddleOrLastName(filter));
+            FilterLegislatorsByFirstMiddleOrLastName(filter, true);
         }
 
+        public void FilterLegislatorsByFirstMiddleOrLastName(string filter, bool filterSelectedStateOrTerr = true)
+        {
+            if(filterSelectedStateOrTerr)
+            {
+                try
+                {
+                    StateOrTerritory selectedStateOrTerr =  _statesAndTerrWithDescription[_statesAndTerrSpinner.SelectedItemPosition].Item1;
+                    _legislatorAdapter.UpdateLegislators(_legislators.FilterByState(selectedStateOrTerr).FilterByFirstMiddleOrLastName(filter));
+                }
+                catch (Exception ex)
+                {
+                    //TODO RM add loggging;
+                }
+            }
+            else
+                _legislatorAdapter.UpdateLegislators(_legislators.FilterByFirstMiddleOrLastName(filter));
+        }
+        
         public void FilterByStateOrTerritory(StateOrTerritory stateOrterritory)
         {
             SetStateSpinner(stateOrterritory);
@@ -66,7 +85,7 @@ namespace Write2Congress.Droid.CustomControls
         {
             _fragment = fragment;
             _legislators = legislators;
-
+            
             //Setup Legislator RecyclerView 
             var recyclerView = FindViewById<RecyclerView>(Resource.Id.legislatorsViewer_legislatorsRecycler);
             var layoutManager = new LinearLayoutManager(_fragment.Context, LinearLayoutManager.Vertical, false);
@@ -84,12 +103,21 @@ namespace Write2Congress.Droid.CustomControls
             var statesAdapter = new ArrayAdapter<string>(_fragment.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateAndTerrNames);
             _statesAndTerrSpinner.Adapter = statesAdapter;
             _statesAndTerrSpinner.ItemSelected += _states_ItemSelected;
+
+            HookupToActivitySearchTextChangedDelegate();
+        }
+
+        private void HookupToActivitySearchTextChangedDelegate()
+        {
+            var par = _fragment.Activity as ILegislatorViewerActivity;
+
+            par.LegislatorSearchTextChanged += FilterLegislatorsByFirstMiddleOrLastName;
         }
 
 
         private void SetStateSpinner(StateOrTerritory stateOrTerritory)
         {
-            var position = GetStateOrTerritoryPosition(_stateAndTerrNames, stateOrTerritory);
+            var position = (int)stateOrTerritory;  //GetStateOrTerritoryPosition(_stateAndTerrNames, stateOrTerritory);
 
             if (position >= 0)
                 _statesAndTerrSpinner.SetSelection(position);

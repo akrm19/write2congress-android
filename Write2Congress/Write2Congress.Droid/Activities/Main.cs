@@ -18,12 +18,16 @@ using Write2Congress.Droid.Code;
 using Android.Support.V4.View;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using SearchView = Android.Support.V7.Widget.SearchView;
+using Write2Congress.Droid.Interfaces;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "Main", MainLauncher =true)]
-    public class Main : BaseActivity
+    public class Main : BaseActivity, ILegislatorViewerActivity
     {
+
+        //New listener
+        public SearchTextChangedDelegate LegislatorSearchTextChanged;
         private MainFragment _mainFragment;
 
         protected override void OnCreate(Bundle bundle)
@@ -50,6 +54,14 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
+        protected override void OnDestroy()
+        {
+            LegislatorSearchTextChanged = null;
+
+            base.OnDestroy();
+        }
+
+
         private void ActionMenu_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)
@@ -68,68 +80,42 @@ namespace Write2Congress.Droid.Activities
             var searchView = MenuItemCompat.GetActionView(searchMenuitem);
 
             var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>();
-            searchViewJavaObj.QueryTextChange += (s, e) => Toast.MakeText(this, e.NewText, ToastLength.Short);
-            searchViewJavaObj.QueryTextSubmit += (s, e) => Toast.MakeText(this, "Search Query Submitted: " + e.Query, ToastLength.Long);
+            searchViewJavaObj.QueryTextChange += (s, e) =>
+            {
+                Toast.MakeText(this, e.NewText, ToastLength.Short).Show();
 
+                LegislatorSearchTextChanged?.Invoke(e.NewText);
+            };
+            
+            searchViewJavaObj.QueryTextSubmit += (s, e) =>
+            {
+                Toast.MakeText(this, "Search Query Submitted: " + e.Query, ToastLength.Long).Show();
+                
+                LegislatorSearchTextChanged?.Invoke(e.Query);
+
+                e.Handled = true;
+            };
+            //searchViewJavaObj.SetOnQueryTextListener(this);
             //MenuItemCompat.SetOnActionExpandListener(searchMenuitem, new Sea)
 
             return base.OnCreateOptionsMenu(menu);
         }
 
-        private class SearchViewExpandListener : Java.Lang.Object, MenuItemCompat.IOnActionExpandListener
+        SearchTextChangedDelegate ILegislatorViewerActivity.LegislatorSearchTextChanged
         {
-            private readonly IFilterable _adapter;
-
-            public SearchViewExpandListener(IFilterable adapter)
+            get
             {
-                _adapter = adapter;
+                return LegislatorSearchTextChanged;
             }
-
-            public bool OnMenuItemActionCollapse(IMenuItem item)
+            set
             {
-                _adapter.Filter.InvokeFilter("");
-                return true;
-            }
-
-            public bool OnMenuItemActionExpand(IMenuItem item)
-            {
-                return true;
+                LegislatorSearchTextChanged += value;
             }
         }
 
-        public override bool OnOptionsItemSelected(IMenuItem item)
+        void ILegislatorViewerActivity.ClearLegislatorSearchTextChangedDelegate()
         {
-            switch (item.ItemId)
-            {
-                case Resource.Id.mainMenu_donate:
-                    Toast.MakeText(ApplicationContext, "doonate", ToastLength.Short).Show();
-                    return true;
-
-            }
-
-            return base.OnOptionsItemSelected(item);
-        }
-    }
-
-
-    public class SearchViewExpandListener : Java.Lang.Object, MenuItemCompat.IOnActionExpandListener
-    {
-        private readonly IFilterable _adapter;
-
-        public SearchViewExpandListener(IFilterable adapter)
-        {
-            _adapter = adapter;
-        }
-
-        public bool OnMenuItemActionCollapse(IMenuItem item)
-        {
-            _adapter.Filter.InvokeFilter("");
-            return true;
-        }
-
-        public bool OnMenuItemActionExpand(IMenuItem item)
-        {
-            return true;
+            LegislatorSearchTextChanged = null; ;
         }
     }
 }
