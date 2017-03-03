@@ -1,48 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <style name="AppTheme" parent="@android:style/Theme.Material.Light">
+  <!-- Base theme applied no matter what API. Also changed AppTheme to MyAppTheme due to posible errors -->
+  <style name="MyAppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--Non compant parent would be: parent="@android:style/Theme.Material.Light"> -->
+
     <!-- Main app colors -->
     <!-- colorPrimary is used for the default action bar background -->
-    <item name="android:colorPrimary">@color/primary_blue</item>
+    <item name="colorPrimary">@color/primary_blue</item>
     <!-- colorPrimaryDark is used for the status bar -->
-    <item name="android:colorPrimaryDark">@color/primary_blue_dark</item>
+    <item name="colorPrimaryDark">@color/primary_blue_dark</item>
     <!-- colorAccent is used as the default value for colorControlActivated which is used to tint widgets -->
-    <item name="android:colorAccent">@color/accent_purple</item>
-    
+    <item name="colorAccent">@color/accent_purple</item>
+
     <!-- Hides ActionBar -->
-    <item name="android:windowActionBar">false</item>
-    <item name="android:windowNoTitle">true</item>
+    <item name="windowNoTitle">true</item>
+    <!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
+    <item name="windowActionBar">false</item>
   </style>
-  
-  <style name="ToolbarTheme">  <!-- parent="android:style/ThemeOverlay.Material.Light.ActionBar" >-->
-    <item name="android:textColorPrimary">@android:color/white</item>  
+
+  <!--Add App-wide themes here-->
+  <style name="MyAppTheme" parent="MyAppTheme.Base">
+
+  </style>
+
+  <style name="ToolbarTheme" parent="MyAppTheme.Base">
+    <!-- parent="android:style/ThemeOverlay.Material.Light.ActionBar" >-->
+    <item name="android:textColorPrimary">@android:color/white</item>
     <!-- 
     <item name="android:textColorSecondary"></item>
     -->
   </style>
 
-  <style name="MainMenuPopupTheme" > <!-- parent="android:style/ThemeOverlay.Material.Light" -->
+  <style name="MainMenuPopupTheme" parent="MyAppTheme.Base">
+    <!-- parent="android:style/ThemeOverlay.Material.Light" -->
     <item name="android:textColorPrimary">@android:color/white</item>
     <!--
     <item name="android:background"></item>
     -->
   </style>
 
-  <style name="LegislatorContactButtonTheme" >
+  <style name="LegislatorContactButtonTheme" parent="MyAppTheme.Base" >
     <!--
     <item name="android:background">@android:color/transparent</item>
     -->
     <item name="android:scaleType">center</item>
   </style>
 
-</resources>  
+</resources>
 
-    <!--
+<!--
     <item name="android:colorBackground">@color/theme_devicedefault_background</item>
-   --> 
+   -->
 
-    <!-- Control colors -->
-    <!--
+<!-- Control colors -->
+<!--
       <color name="theme_devicedefault_background">#ffeceff1</color>
   <style name="Theme.Custom" parent="@android:style/Theme.DeviceDefault">
     <item name="android:colorPrimary">#ff2196f3</item>
@@ -60,8 +71,8 @@
     <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
     <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
     <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
-    --> 
-  <!--
+    -->
+<!--
   <color name="ListViewSelected">#96BCE3</color>
   <color name="ListViewHighlighted">#E39696</color>
   -->

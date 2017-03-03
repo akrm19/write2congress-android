@@ -11,11 +11,12 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 using Write2Congress.Droid.Code;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "Write2Congress")]
-    public class BaseActivity : Activity
+    public class BaseActivity : AppCompatActivity //ActionBarActivity // AppCompatActivity //Activity
     {
         protected Logger Logger; 
 

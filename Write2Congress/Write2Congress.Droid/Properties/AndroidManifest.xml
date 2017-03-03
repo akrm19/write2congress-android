@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="24" />
+	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="24" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 	<uses-permission android:name="android.permission.LOCATION_HARDWARE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/AppTheme"></application>
+	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/MyAppTheme"></application>
 	<!--
   <application android:name="afhcan.mobile.androidapp.BaseApplication" android:label="AFHCAN" android:icon="@drawable/ic_launcher" android:theme="@style/tConsultAppTheme" android:enabled="true" android:largeHeap="true"></application>
   -->

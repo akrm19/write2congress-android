@@ -2898,9 +2898,6 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0900a0
 			public const int Animation_AppCompat_DropDownUp = 2131296416;
 			
-			// aapt resource value: 0x7f090161
-			public const int AppTheme = 2131296609;
-			
 			// aapt resource value: 0x7f0900a1
 			public const int Base_AlertDialog_AppCompat = 2131296417;
 			
@@ -3369,11 +3366,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f090160
 			public const int CardView_Light = 2131296608;
 			
-			// aapt resource value: 0x7f090164
-			public const int LegislatorContactButtonTheme = 2131296612;
+			// aapt resource value: 0x7f090165
+			public const int LegislatorContactButtonTheme = 2131296613;
 			
-			// aapt resource value: 0x7f090163
-			public const int MainMenuPopupTheme = 2131296611;
+			// aapt resource value: 0x7f090164
+			public const int MainMenuPopupTheme = 2131296612;
+			
+			// aapt resource value: 0x7f090162
+			public const int MyAppTheme = 2131296610;
+			
+			// aapt resource value: 0x7f090161
+			public const int MyAppTheme_Base = 2131296609;
 			
 			// aapt resource value: 0x7f09001e
 			public const int Platform_AppCompat = 2131296286;
@@ -3732,8 +3735,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f090114
 			public const int ThemeOverlay_AppCompat_Light = 2131296532;
 			
-			// aapt resource value: 0x7f090162
-			public const int ToolbarTheme = 2131296610;
+			// aapt resource value: 0x7f090163
+			public const int ToolbarTheme = 2131296611;
 			
 			// aapt resource value: 0x7f090115
 			public const int Widget_AppCompat_ActionBar = 2131296533;

@@ -15,6 +15,9 @@ using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Fragments;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.Code;
+using Android.Support.V4.View;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
+using SearchView = Android.Support.V7.Widget.SearchView;
 
 namespace Write2Congress.Droid.Activities
 {
@@ -29,7 +32,8 @@ namespace Write2Congress.Droid.Activities
             SetContentView(Resource.Layout.actv_Main);
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.main_toolbar);
-            SetActionBar(toolbar);
+            //SetActionBar(toolbar);
+            SetSupportActionBar(toolbar);
             toolbar.Elevation = 10f;
 
             var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
@@ -60,7 +64,37 @@ namespace Write2Congress.Droid.Activities
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
 
+            var searchMenuitem = menu.FindItem(Resource.Id.mainMenu_search);
+            var searchView = MenuItemCompat.GetActionView(searchMenuitem);
+
+            var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>();
+            searchViewJavaObj.QueryTextChange += (s, e) => Toast.MakeText(this, e.NewText, ToastLength.Short);
+            searchViewJavaObj.QueryTextSubmit += (s, e) => Toast.MakeText(this, "Search Query Submitted: " + e.Query, ToastLength.Long);
+
+            //MenuItemCompat.SetOnActionExpandListener(searchMenuitem, new Sea)
+
             return base.OnCreateOptionsMenu(menu);
+        }
+
+        private class SearchViewExpandListener : Java.Lang.Object, MenuItemCompat.IOnActionExpandListener
+        {
+            private readonly IFilterable _adapter;
+
+            public SearchViewExpandListener(IFilterable adapter)
+            {
+                _adapter = adapter;
+            }
+
+            public bool OnMenuItemActionCollapse(IMenuItem item)
+            {
+                _adapter.Filter.InvokeFilter("");
+                return true;
+            }
+
+            public bool OnMenuItemActionExpand(IMenuItem item)
+            {
+                return true;
+            }
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -74,6 +108,28 @@ namespace Write2Congress.Droid.Activities
             }
 
             return base.OnOptionsItemSelected(item);
+        }
+    }
+
+
+    public class SearchViewExpandListener : Java.Lang.Object, MenuItemCompat.IOnActionExpandListener
+    {
+        private readonly IFilterable _adapter;
+
+        public SearchViewExpandListener(IFilterable adapter)
+        {
+            _adapter = adapter;
+        }
+
+        public bool OnMenuItemActionCollapse(IMenuItem item)
+        {
+            _adapter.Filter.InvokeFilter("");
+            return true;
+        }
+
+        public bool OnMenuItemActionExpand(IMenuItem item)
+        {
+            return true;
         }
     }
 }

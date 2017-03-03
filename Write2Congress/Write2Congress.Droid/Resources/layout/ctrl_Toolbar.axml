@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Normal w/out app compat
 <Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="?android:attr/colorPrimary"
     android:layout_width="match_parent"
@@ -7,12 +9,17 @@
     android:id="@+id/toolbar"
     android:theme="@style/ToolbarTheme"
     android:popupTheme="@style/MainMenuPopupTheme">
-<!-- TODO RM: DELETE 
-    Remainder: More can be added here
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1" />
-        -->
-</Toolbar>
+    
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/lib/write2congress.droid"
+-->
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?android:attr/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/actionBarSize"
+    android:id="@+id/toolbar"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
