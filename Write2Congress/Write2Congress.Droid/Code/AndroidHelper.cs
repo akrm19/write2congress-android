@@ -10,7 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Graphics;
+//using Android.Graphics;
 using Android.Locations;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.BusinessLayer;
@@ -37,32 +37,37 @@ namespace Write2Congress.Droid.Code
             return BaseApplication.Context.GetString(resourceId);
         }
 
+        #region File Helpers
         public static string GetInternalAppFileContent(string filename)
         {
-            var path = System.IO.Path.Combine(Application.Context.FilesDir.Path, filename);
+            var path = Path.Combine(GetInternalAppDirPath(), filename);
 
-            if (File.Exists(path))
-                return File.ReadAllText(path);
-            else
-                return string.Empty;
+            return Util.GetFileContents(path);
         }
 
-        public static void SetInternalAppFileContent(string filename, string content)
+        public static bool SetInternalAppFileContent(string filename, string content)
         {
-            var path = System.IO.Path.Combine(Application.Context.FilesDir.Path, filename);
-            try
-            {
-                File.WriteAllText(path, content);
-            }
-            catch (Exception)
-            {
-                path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                path = System.IO.Path.Combine(path, filename);
+            var path = Path.Combine(GetInternalAppDirPath(), filename);
 
-                File.WriteAllText(path, content);
-            }
+            return Util.CreateFileContent(path, content);
         }
 
+        public static void CreateInternalDir(string dirName)
+        {
+            var dirPath = Path.Combine(GetInternalAppDirPath(), dirName);
+
+            Util.CreateDir(dirPath);
+        }
+        
+        public static string GetInternalAppDirPath()
+        {
+            return Application.Context.FilesDir.Path;
+        }
+
+        #endregion
+
+
+        #region SharedPreferences
         private void SetSharedPreferenceString(string preferenceName, string sharedPreferenceKey, string preferenceValue, FileCreationMode fileCreationMode = FileCreationMode.Private)
         {
             var preferecence = Application.Context.GetSharedPreferences(preferenceName, fileCreationMode);
@@ -77,6 +82,8 @@ namespace Write2Congress.Droid.Code
             var preferecence = Application.Context.GetSharedPreferences(preferenceName, fileCreationMode);
             return preferecence.GetString(sharedPreferenceKey, preferenceDefaultValue);
         }
+        #endregion
+
         #endregion
     }
 }

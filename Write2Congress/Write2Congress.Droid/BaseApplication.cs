@@ -21,7 +21,8 @@ namespace Write2Congress.Droid
         private bool _forceRetrieveAllLegislators = false;
         private static BaseApplication _instance;
         private List<Legislator> _allLegislators;
-        protected LegislatorManager LegislatorManager; 
+        protected LegislatorManager LegislatorManager;
+        public LetterManager LetterMan;
 
         public BaseApplication(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
@@ -37,6 +38,8 @@ namespace Write2Congress.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+
+            LetterMan = new LetterManager(new LetterFileProvider());
 
             LegislatorManager = new LegislatorManager();
             _allLegislators = AppHelper.GetCachedLegislatorsFromFileStorage();

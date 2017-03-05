@@ -23,12 +23,6 @@ namespace Write2Congress.Shared.BusinessLayer
         }
 
         #region Get Legislator Methods
-        public List<Legislator> GetLegislatorByState(StateOrTerritory state)
-        {
-            return new List<Legislator>();
-
-        }
-
         public List<Legislator> GetLegislatorByZipcode(string zipcode)
         {
             var legislators = new List<Legislator>();

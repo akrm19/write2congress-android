@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,67 +13,105 @@ namespace Write2Congress.Shared.BusinessLayer
 {
     public class Util
     {
-        public static List<Legislator> LegislatorsFromSunlightLegislatorResult(SunlightLegislatorResult legislatorResults)
+        #region App Agnostic
+
+        //TODO RM: This also exist in extensions. Pick one.
+        public static T DeserializeFromJson<T>(string jsonSerializedContent)
         {
-            var legislators = new List<Legislator>();
+            if (string.IsNullOrWhiteSpace(jsonSerializedContent))
+                throw new JsonSerializationException($"Cannot deserialize {typeof(T).ToString()} from an empty string");
 
-
-            foreach (var l in legislatorResults.results)
-            {
-                var legislator = new Legislator()
-                {
-                    FirstName = l.first_name,
-                    MiddleName = l.middle_name,
-                    LastName = l.last_name,
-                    Birthday = Util.DateFromSunlightTime(l.birthday),
-                    Party = Util.PartyFromString(l.party),
-                    Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
-                    State = Util.GetStateOrTerritoryFromSunlight(l.state),
-                    Gender = Util.GenderFromString(l.gender),
-                    TermStartDate = Util.DateFromSunlightTime(l.term_start),
-                    TermEndDate = Util.DateFromSunlightTime(l.term_end),
-                    BioguideId = l.bioguide_id ?? string.Empty,
-
-                    OfficeAddress = string.IsNullOrWhiteSpace(l.office)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.Mail, l.office),
-                    OfficeNumber = string.IsNullOrWhiteSpace(l.phone)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.Phone, l.phone),
-                    Email = string.IsNullOrWhiteSpace(l.oc_email)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.Email, l.oc_email),
-
-                    FacebookId = string.IsNullOrWhiteSpace(l.facebook_id)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.Facebook, l.facebook_id),
-                    TwitterId = string.IsNullOrWhiteSpace(l.twitter_id)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.Twitter, l.twitter_id),
-                    YouTubeId = string.IsNullOrWhiteSpace(l.youtube_id)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.YouTube, l.youtube_id),
-                    Website = string.IsNullOrWhiteSpace(l.website)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.WebSite, l.website),
-                    ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
-                        ? new ContactMethod(ContactType.NotSet, string.Empty)
-                        : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
-
-
-                    TotalVotes = 0, //TODO: get rid of the following or populate
-                    MissedVotesPercent = 0,
-                    VotesWithPartyPercent = 0,
-                    Senority = string.Empty
-                };
-
-                legislators.Add(legislator);
-            }
-
-            return legislators;
+            return JsonConvert.DeserializeObject<T>(jsonSerializedContent);
         }
 
-        #region HelperMethods
+        public static List<T> GetJsonSerializedObjsFromFile<T>(string path, string extension = "", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            var result = new List<T>();
+
+            var letterFiles = Util.GetAllFilesInDir
+                (path, $"*.{extension}", SearchOption.AllDirectories);
+
+            foreach (var letterFilePath in letterFiles)
+            {
+                if (!File.Exists(letterFilePath))
+                    continue;
+
+                var letterContent = File.ReadAllText(letterFilePath);
+
+                if (string.IsNullOrWhiteSpace(letterContent))
+                    continue;
+
+                var letter = DeserializeFromJson<T>(letterContent);
+
+                result.Add(letter);
+            }
+
+            return result;
+        }
+
+
+
+        public static string GetFileContents(string filePath)
+        {
+            if (File.Exists(filePath))
+                return File.ReadAllText(filePath);
+
+            //TOD RM: Add logging
+            //_logger.Error($"File does not exist, cannot retrieve file contents. Filepath: {filePath}");
+            return string.Empty;
+        }
+
+        public static bool CreateFileContent(string filePath, string content)
+        {
+            try
+            {
+                File.WriteAllText(filePath, content);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO RM: Add logging
+                //_logger.Error($"Cannot write file content to file ({filePath}). Error: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static string[] GetAllFilesInDir(string dirPath, string pattern = "", SearchOption searOptions = SearchOption.TopDirectoryOnly)
+        {
+            if (!Directory.Exists(dirPath))
+            {
+
+                //TODO RM: Add logging
+                //_logger.Error($"Directory does not exist. Cannot retrive files, returning empty array. Directory: {dirPath}");
+                return new string[] { };
+            }
+
+            var dir = new DirectoryInfo(dirPath);
+
+            return string.IsNullOrWhiteSpace(pattern)
+                ? Directory.GetFiles(dirPath)
+                : Directory.GetFiles(dirPath, pattern, searOptions);
+        }
+
+        public static void CreateDir(string dirPath)
+        {
+            if (Directory.Exists(dirPath))
+                return;
+
+            try
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            catch (Exception ex)
+            {
+                //TODO RM Add logging
+                //_logger.Error($"Error creating directory: {dirPath}. {ex.Message}");
+            }
+        }
+
+        #endregion
+
+        #region App Specific Helper Methods
 
         public static StateOrTerritory GetStateOrTerrByDescription(string stateOrTerrDescription, StateOrTerritory defaultStateOrTerritory)
         {
@@ -186,6 +226,66 @@ namespace Write2Congress.Shared.BusinessLayer
         #endregion
 
         #region Sunlight Api Helper Methods
+        public static List<Legislator> LegislatorsFromSunlightLegislatorResult(SunlightLegislatorResult legislatorResults)
+        {
+            var legislators = new List<Legislator>();
+
+
+            foreach (var l in legislatorResults.results)
+            {
+                var legislator = new Legislator()
+                {
+                    FirstName = l.first_name,
+                    MiddleName = l.middle_name,
+                    LastName = l.last_name,
+                    Birthday = Util.DateFromSunlightTime(l.birthday),
+                    Party = Util.PartyFromString(l.party),
+                    Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
+                    State = Util.GetStateOrTerritoryFromSunlight(l.state),
+                    Gender = Util.GenderFromString(l.gender),
+                    TermStartDate = Util.DateFromSunlightTime(l.term_start),
+                    TermEndDate = Util.DateFromSunlightTime(l.term_end),
+                    BioguideId = l.bioguide_id ?? string.Empty,
+
+                    OfficeAddress = string.IsNullOrWhiteSpace(l.office)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Mail, l.office),
+                    OfficeNumber = string.IsNullOrWhiteSpace(l.phone)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Phone, l.phone),
+                    Email = string.IsNullOrWhiteSpace(l.oc_email)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Email, l.oc_email),
+
+                    FacebookId = string.IsNullOrWhiteSpace(l.facebook_id)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Facebook, l.facebook_id),
+                    TwitterId = string.IsNullOrWhiteSpace(l.twitter_id)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Twitter, l.twitter_id),
+                    YouTubeId = string.IsNullOrWhiteSpace(l.youtube_id)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.YouTube, l.youtube_id),
+                    Website = string.IsNullOrWhiteSpace(l.website)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSite, l.website),
+                    ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
+
+
+                    TotalVotes = 0, //TODO: get rid of the following or populate
+                    MissedVotesPercent = 0,
+                    VotesWithPartyPercent = 0,
+                    Senority = string.Empty
+                };
+
+                legislators.Add(legislator);
+            }
+
+            return legislators;
+        }
+
         public static DateTime DateFromSunlightTime(string dateVal)
         {
             DateTime date;

@@ -17,6 +17,7 @@
     <Toolbar
         android:layout_alignParentBottom="true"
 -->
+<!--
     <include
         layout="@layout/ctrl_Toolbar"
         android:minHeight="?android:attr/actionBarSize"
@@ -24,7 +25,6 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/colorPrimary"
         android:id="@+id/main_bottomMenu" />
-<!--
         android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
         android:popupTheme="@android:style/ThemeOverlay.Material.Light"  />
   -->

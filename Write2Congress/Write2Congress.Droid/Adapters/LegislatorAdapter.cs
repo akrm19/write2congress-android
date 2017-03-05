@@ -106,12 +106,17 @@ namespace Write2Congress.Droid.Adapters
 
         private void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
         {
-            var portraitBitmap = AppHelper.GetPortraitForLegislator(legislator);
+            //TODO RM: Implement protrait?
+            //var portraitBitmap = AppHelper.GetPortraitForLegislator(legislator);
+            //
+            //if (portraitBitmap != null)
+            //    imageButton.SetImageBitmap(portraitBitmap);
+            //else
 
-            if (portraitBitmap != null)
-                imageButton.SetImageBitmap(portraitBitmap);
-            else
-                SetDefaultLegislatorPortrait(legislator, imageButton);
+            //TODO RM: Look into seeing current image, if it is a republic image and legislator
+            //is republan, then don't update
+            
+            SetDefaultLegislatorPortrait(legislator, imageButton);
         }
 
         private void SetDefaultLegislatorPortrait(Legislator legislator, ImageView imageButton)

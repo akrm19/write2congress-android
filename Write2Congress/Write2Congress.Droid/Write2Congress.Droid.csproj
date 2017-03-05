@@ -116,6 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
+    <Compile Include="Activities\ToolBarSearchActivity.cs" />
+    <Compile Include="Code\LetterFileProvider.cs" />
     <Compile Include="DomainModel\Interfaces\ILegislatorViewerActivity.cs" />
     <Compile Include="Activities\Main.cs" />
     <Compile Include="Adapters\LegislatorAdapter.cs" />

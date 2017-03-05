@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BusinessLayer\Extensions.cs" />
     <Compile Include="BusinessLayer\LegislatorManager.cs" />
+    <Compile Include="BusinessLayer\LetterManager.cs" />
     <Compile Include="BusinessLayer\Services\LegislatorSvc.cs" />
     <Compile Include="BusinessLayer\Services\ServiceBase.cs" />
     <Compile Include="BusinessLayer\Util.cs" />
@@ -51,7 +52,9 @@
     <Compile Include="DomainModel\Enum\LegislativeBody.cs" />
     <Compile Include="DomainModel\Enum\Party.cs" />
     <Compile Include="DomainModel\Enum\State.cs" />
+    <Compile Include="DomainModel\Interface\ILetterProvider.cs" />
     <Compile Include="DomainModel\Legislator.cs" />
+    <Compile Include="DomainModel\Letter.cs" />
     <Compile Include="DomainModel\SunlightLegislatorResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

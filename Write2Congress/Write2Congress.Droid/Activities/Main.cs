@@ -22,12 +22,9 @@ using Write2Congress.Droid.Interfaces;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "Main", MainLauncher =true)]
-    public class Main : BaseActivity, ILegislatorViewerActivity
+    [Activity(MainLauncher =true)]
+    public class Main : ToolBarSearchActivity
     {
-
-        //New listener
-        public SearchTextChangedDelegate LegislatorSearchTextChanged;
         private MainFragment _mainFragment;
 
         protected override void OnCreate(Bundle bundle)
@@ -35,15 +32,16 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.actv_Main);
 
-            var toolbar = FindViewById<Toolbar>(Resource.Id.main_toolbar);
-            //SetActionBar(toolbar);
-            SetSupportActionBar(toolbar);
-            toolbar.Elevation = 10f;
+            using (var toolbar = FindViewById<Toolbar>(Resource.Id.main_toolbar))
+            {
+                //SetActionBar(toolbar);
+                SetSupportActionBar(toolbar);
+                toolbar.Elevation = 10f;
+            }
 
-            var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
-            actionMenu.InflateMenu(Resource.Menu.menu_action);
-            actionMenu.MenuItemClick += ActionMenu_MenuItemClick;
-            
+            //var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
+            //actionMenu.InflateMenu(Resource.Menu.menu_action);
+            //actionMenu.MenuItemClick += ActionMenu_MenuItemClick;
             
             _mainFragment = FragmentManager.FindFragmentByTag<MainFragment>(TagsType.MainParentFragment);
 
@@ -54,14 +52,6 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
-        protected override void OnDestroy()
-        {
-            LegislatorSearchTextChanged = null;
-
-            base.OnDestroy();
-        }
-
-
         private void ActionMenu_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)
@@ -70,52 +60,6 @@ namespace Write2Congress.Droid.Activities
                     Toast.MakeText(ApplicationContext, "search", ToastLength.Short).Show();
                     break;
             }
-        }
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-
-            var searchMenuitem = menu.FindItem(Resource.Id.mainMenu_search);
-            var searchView = MenuItemCompat.GetActionView(searchMenuitem);
-
-            var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>();
-            searchViewJavaObj.QueryTextChange += (s, e) =>
-            {
-                Toast.MakeText(this, e.NewText, ToastLength.Short).Show();
-
-                LegislatorSearchTextChanged?.Invoke(e.NewText);
-            };
-            
-            searchViewJavaObj.QueryTextSubmit += (s, e) =>
-            {
-                Toast.MakeText(this, "Search Query Submitted: " + e.Query, ToastLength.Long).Show();
-                
-                LegislatorSearchTextChanged?.Invoke(e.Query);
-
-                e.Handled = true;
-            };
-            //searchViewJavaObj.SetOnQueryTextListener(this);
-            //MenuItemCompat.SetOnActionExpandListener(searchMenuitem, new Sea)
-
-            return base.OnCreateOptionsMenu(menu);
-        }
-
-        SearchTextChangedDelegate ILegislatorViewerActivity.LegislatorSearchTextChanged
-        {
-            get
-            {
-                return LegislatorSearchTextChanged;
-            }
-            set
-            {
-                LegislatorSearchTextChanged += value;
-            }
-        }
-
-        void ILegislatorViewerActivity.ClearLegislatorSearchTextChangedDelegate()
-        {
-            LegislatorSearchTextChanged = null; ;
         }
     }
 }
