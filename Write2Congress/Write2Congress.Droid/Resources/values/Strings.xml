@@ -3,16 +3,23 @@
   <string name="about">About</string>
 	<string name="app_name">Write2Congress.Droid</string>
   <string name="congress">Congress</string>
+  <string name="copyText">Copy Text</string>
   <string name="donate">Donate</string>
   <string name="drafts">Drafts</string>
   <string name="exit">Exit</string>
+  <string name="emptyBodyText">Letter content</string>
+  <string name="emptyRecipientText">To: ...</string>
+  <string name="emptySubjectText">Subject (optional)</string>
+  <string name="emptySignatureText">Letter signature</string>
+  <string name="letterRecipient">Letter Recipient</string>
+  <string name="letterLastSaved">Letter Last Saved</string>
   <string name="searchLegislators">Search Legislators</string>
   <string name="senate">Senate</string>
   <string name="sent">Sent</string>
   <string name="settings">Settings</string>
+  <string name="subject">Subject</string>
   <string name="termEnds">Term Ends</string>
   <string name="termStarted">Term Started</string>
   <string name="unknown">Unknown</string>
   <string name="writeNew">Write New</string>
-  <string name="hello">Hello World, Click Me!</string>
 </resources>

@@ -113,6 +113,14 @@ namespace Write2Congress.Shared.BusinessLayer
 
         #region App Specific Helper Methods
 
+        public static Legislator DeserializeLegislatorJson(Legislator objectToSerialize, string jsonSerializedContent)
+        {
+            if (string.IsNullOrWhiteSpace(jsonSerializedContent))
+                throw new JsonSerializationException($"Cannot deserialize {objectToSerialize.GetType().ToString()} from an empty string");
+
+            return JsonConvert.DeserializeObject<Legislator>(jsonSerializedContent);
+        }
+
         public static StateOrTerritory GetStateOrTerrByDescription(string stateOrTerrDescription, StateOrTerritory defaultStateOrTerritory)
         {
             var statesOrTerrWithDescription = GetAllStatesAndTerrWithDescriptions();

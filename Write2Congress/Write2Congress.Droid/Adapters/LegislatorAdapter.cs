@@ -114,7 +114,7 @@ namespace Write2Congress.Droid.Adapters
             //else
 
             //TODO RM: Look into seeing current image, if it is a republic image and legislator
-            //is republan, then don't update
+            //is republican, then don't update
             
             SetDefaultLegislatorPortrait(legislator, imageButton);
         }

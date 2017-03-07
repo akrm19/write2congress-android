@@ -22,8 +22,10 @@ namespace Write2Congress.Droid.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             //TODO RM: Rename this to Logger and Logger to MyLogger
             Logger2 = new Logger(Class.SimpleName);
+
             // Create your fragment here
         }
 

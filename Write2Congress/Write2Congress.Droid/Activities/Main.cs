@@ -16,7 +16,6 @@ using Write2Congress.Droid.Fragments;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.Code;
 using Android.Support.V4.View;
-using Toolbar = Android.Support.V7.Widget.Toolbar;
 using SearchView = Android.Support.V7.Widget.SearchView;
 using Write2Congress.Droid.Interfaces;
 
@@ -32,23 +31,14 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.actv_Main);
 
-            using (var toolbar = FindViewById<Toolbar>(Resource.Id.main_toolbar))
-            {
-                //SetActionBar(toolbar);
-                SetSupportActionBar(toolbar);
-                toolbar.Elevation = 10f;
-            }
-
-            //var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
-            //actionMenu.InflateMenu(Resource.Menu.menu_action);
-            //actionMenu.MenuItemClick += ActionMenu_MenuItemClick;
+            SetupToolbar(Resource.Id.mainActv_toolbar);
             
             _mainFragment = FragmentManager.FindFragmentByTag<MainFragment>(TagsType.MainParentFragment);
 
             if(_mainFragment == null)
             {
                 _mainFragment = new MainFragment();
-                AndroidHelper.AddFragment(FragmentManager, _mainFragment, Resource.Id.main_fragmentContainer, TagsType.MainParentFragment);
+                AndroidHelper.AddFragment(FragmentManager, _mainFragment, Resource.Id.mainActv_fragmentContainer, TagsType.MainParentFragment);
             }
         }
 

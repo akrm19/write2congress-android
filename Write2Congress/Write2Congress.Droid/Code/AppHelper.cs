@@ -17,6 +17,8 @@ using System.IO;
 using Newtonsoft.Json;
 using Write2Congress.Shared.DomainModel.Enum;
 using Android.Locations;
+using Write2Congress.Droid.Activities;
+using Write2Congress.Droid.DomainModel.Constants;
 
 namespace Write2Congress.Droid.Code
 {
@@ -142,7 +144,18 @@ namespace Write2Congress.Droid.Code
 
         #endregion
 
-        #region IntentsForContactMethods
+        #region Intents Methods (ContactMethods & Actions)
+
+        public static void GetWriteNewLetterIntent(Activity activity, Legislator legislator = null)
+        {
+            using (var intent = new Intent(activity, typeof(WriteLetterActivity)))
+            {
+                if (legislator != null)
+                    intent.PutExtra(BundleType.Legislator, legislator.SerializeToJson());
+
+                activity.StartActivity(intent);
+            }
+        }
 
         public static Intent GetIntentForContactMethod(ContactMethod contactMethod)
         {

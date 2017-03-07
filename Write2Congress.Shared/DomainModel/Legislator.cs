@@ -50,5 +50,27 @@ namespace Write2Congress.Shared.DomainModel
                     LastName);
             }
         }
+
+        //TODO RM: rename
+        public string FormalAddressTitle
+        {
+            get
+            {
+                switch (Chamber)
+                {
+                    case LegislativeBody.Senate:
+                        return $"Senator {LastName}";
+                    case LegislativeBody.House:
+                        return string.Format("{0} {1}",
+                            Gender == Gender.Female
+                                ? "Congresswoman"
+                                : "Congressman",
+                            LastName);
+                    case LegislativeBody.Unknown:
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
     }
 }

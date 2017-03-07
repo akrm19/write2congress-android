@@ -11,19 +11,24 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 using Write2Congress.Droid.Code;
+using Write2Congress.Droid.Fragments;
+using Write2Congress.Droid.DomainModel.Constants;
+
 using Toolbar = Android.Support.V7.Widget.Toolbar;
+using Write2Congress.Shared.DomainModel;
+using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "Write2Congress")]
-    public class BaseActivity : AppCompatActivity //ActionBarActivity // AppCompatActivity //Activity
+    public abstract class BaseActivity : AppCompatActivity 
     {
         protected Logger Logger; 
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            
             Logger = new Logger(Class.SimpleName);
         }
     }

@@ -3,16 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:id="@+id/main_parent">
+    android:id="@+id/mainActv_parent">
     <include
         layout="@layout/ctrl_Toolbar"
         android:minHeight="?android:attr/actionBarSize"
-        android:id="@+id/main_toolbar" />
+        android:id="@+id/mainActv_toolbar" />
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/main_fragmentContainer" />
+        android:id="@+id/mainActv_fragmentContainer" />
 <!-- TODO RM: Replace toobar for backwards compatebility
     <Toolbar
         android:layout_alignParentBottom="true"

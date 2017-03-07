@@ -12,9 +12,8 @@ using Android.Widget;
 
 namespace Write2Congress.Droid.DomainModel.Constants
 {
-    public class TagsType
+    public static class BundleType
     {
-        public const string MainParentFragment = "MainParentFragment";
-        public const string WriteLetterFragment = "WriteLetterFragment";
+        public const string Legislator = "Legislator";
     }
 }

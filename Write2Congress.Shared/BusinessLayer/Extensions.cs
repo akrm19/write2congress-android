@@ -36,7 +36,7 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             return JsonConvert.SerializeObject(objectToSerialize);
         }
-        
+
         public static T DeserializeFromJson<T>(this T objectToSerialize, string jsonSerializedContent)
         {
             if (string.IsNullOrWhiteSpace(jsonSerializedContent))
