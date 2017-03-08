@@ -39,20 +39,6 @@ namespace Write2Congress.Droid.Activities
 
         protected abstract void SetupOnCreateOptionsMenu(IMenu menu);
 
-        protected void SetupToolbar(int toolbarResourceId)
-        {
-            //var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
-            //actionMenu.InflateMenu(Resource.Menu.menu_action);
-            //actionMenu.MenuItemClick += ActionMenu_MenuItemClick;
-
-            //SetActionBar(toolbar);
-            using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
-            {
-                SetSupportActionBar(toolbar);
-                toolbar.Elevation = 10f;
-            }
-        }
-
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)

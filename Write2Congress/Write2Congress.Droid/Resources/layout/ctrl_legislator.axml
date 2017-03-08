@@ -86,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/legislatorCtrl_phone" />
                         <ImageButton
-                            android:src="@drawable/ic_action_home"
+                            android:src="@drawable/ic_action_location_on"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/legislatorCtrl_address" />

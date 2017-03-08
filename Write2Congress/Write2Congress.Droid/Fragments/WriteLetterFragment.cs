@@ -13,6 +13,7 @@ using Android.Widget;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Shared.DomainModel;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -37,13 +38,15 @@ namespace Write2Congress.Droid.Fragments
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-            
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
             var fragment = inflater.Inflate(Resource.Layout.frag_WriteLetter, container, false);
+
+            var toolbar = SetupToolbar(fragment, Resource.Id.writeLetterFrag_toolbar);
+            toolbar.MenuItemClick += Toolbar_MenuItemClick;
 
             _recipient = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_recipient);
             _subject = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_subject);
@@ -55,6 +58,18 @@ namespace Write2Congress.Droid.Fragments
                 PopulateFieldsFromLegislator(_selectedLegislator);
 
             return fragment;
+        }
+
+        private void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.menu_writeLetter, menu);
+
+            base.OnCreateOptionsMenu(menu, inflater);
         }
 
         private void PopulateFieldsFromLegislator(Legislator legislator)

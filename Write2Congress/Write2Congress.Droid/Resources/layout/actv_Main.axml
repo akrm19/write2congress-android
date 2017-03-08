@@ -13,10 +13,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/mainActv_fragmentContainer" />
-<!-- TODO RM: Replace toobar for backwards compatebility
-    <Toolbar
-        android:layout_alignParentBottom="true"
--->
 <!--
     <include
         layout="@layout/ctrl_Toolbar"

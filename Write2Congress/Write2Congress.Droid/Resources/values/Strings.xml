@@ -4,6 +4,7 @@
 	<string name="app_name">Write2Congress.Droid</string>
   <string name="congress">Congress</string>
   <string name="copyText">Copy Text</string>
+  <string name="delete">Delete</string>
   <string name="donate">Donate</string>
   <string name="drafts">Drafts</string>
   <string name="exit">Exit</string>
@@ -13,6 +14,7 @@
   <string name="emptySignatureText">Letter signature</string>
   <string name="letterRecipient">Letter Recipient</string>
   <string name="letterLastSaved">Letter Last Saved</string>
+  <string name="save">Save</string>
   <string name="searchLegislators">Search Legislators</string>
   <string name="senate">Senate</string>
   <string name="sent">Sent</string>

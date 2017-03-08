@@ -12,6 +12,8 @@ using Android.Views;
 using Android.Widget;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Code;
+using Write2Congress.Droid.Activities;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -37,10 +39,35 @@ namespace Write2Congress.Droid.Fragments
             return base.OnCreateView(inflater, container, savedInstanceState);
         }
 
+        protected Toolbar SetupToolbar(View fragment, int toolbarResourceId, string title = "")
+        {
+            SetHasOptionsMenu(true);
+            var toolbar = fragment.FindViewById<Toolbar>(toolbarResourceId);
+            
+            GetBaseActivity().SetSupportActionBar(toolbar);
+            toolbar.Elevation = 10f;
+
+            //if (!string.IsNullOrWhiteSpace(title))
+                toolbar.Title = title;
+
+            return toolbar; 
+        }
+
+        #region Helpers - Getter
 
         protected BaseApplication GetBaseApp()
         {
             return Activity.Application as BaseApplication;
+        }
+
+        protected BaseActivity GetBaseActivity()
+        {
+            return Activity as BaseActivity;
+        } 
+
+        protected Android.Support.V7.App.ActionBar GetToolbar()
+        {
+            return GetBaseActivity().SupportActionBar;
         }
 
         protected List<Legislator> GetCachedLegislators()
@@ -48,5 +75,6 @@ namespace Write2Congress.Droid.Fragments
             //var legislators = (Activity.Application as BaseApplication).GetCachedLegislators();
             return AppHelper.GetCachedLegislators();
         }
+        #endregion
     }
 }

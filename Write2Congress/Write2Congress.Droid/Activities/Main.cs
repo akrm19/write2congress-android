@@ -29,8 +29,8 @@ namespace Write2Congress.Droid.Activities
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.actv_Main);
 
+            SetContentView(Resource.Layout.actv_Main);
             SetupToolbar(Resource.Id.mainActv_toolbar);
             
             _mainFragment = FragmentManager.FindFragmentByTag<MainFragment>(TagsType.MainParentFragment);

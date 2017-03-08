@@ -31,5 +31,18 @@ namespace Write2Congress.Droid.Activities
             
             Logger = new Logger(Class.SimpleName);
         }
+
+        protected void SetupToolbar(int toolbarResourceId)
+        {
+            //var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
+            //actionMenu.InflateMenu(Resource.Menu.menu_action);
+            //actionMenu.MenuItemClick += ActionMenu_MenuItemClick;
+
+            using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
+            {
+                SetSupportActionBar(toolbar);
+                toolbar.Elevation = 10f;
+            }
+        }
     }
 }
