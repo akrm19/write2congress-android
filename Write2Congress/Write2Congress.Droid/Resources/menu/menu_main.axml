@@ -11,10 +11,6 @@ mlns:app="http://schemas.android.com/apk/lib/write2congress.droid"
         android:icon="@drawable/ic_search_white_48dp"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
-    <!--
-    android:showAsAction="always"
-    android.support.v7.widget.SearchView"
-    -->
 
     <item
         android:id="@+id/mainMenu_writeNew"

@@ -2,8 +2,11 @@
 <resources>
   <string name="about">About</string>
 	<string name="app_name">Write2Congress.Droid</string>
+  <string name="cannotSendLetterWithoutRecipient">Cannot send letter without a recipient</string>
   <string name="congress">Congress</string>
   <string name="copyText">Copy Text</string>
+  <string name="copyTextFail">Error: Unable to copy letter\'s text</string>
+  <string name="copyTextSuccess">Copied letter\'s text</string>
   <string name="delete">Delete</string>
   <string name="donate">Donate</string>
   <string name="drafts">Drafts</string>
@@ -12,11 +15,17 @@
   <string name="emptyRecipientText">To: ...</string>
   <string name="emptySubjectText">Subject (optional)</string>
   <string name="emptySignatureText">Letter signature</string>
+  <string name="lastSaved">Last saved</string>
   <string name="letterRecipient">Letter Recipient</string>
-  <string name="letterLastSaved">Letter Last Saved</string>
+  <string name="letterDeleted">Letter was succesfully deleted</string>
+  <string name="letterDeleteFailed">Error: Unable to delete letter</string>
+  <string name="letterAutoSaved">Letter auto-saved</string>
+  <string name="letterSaved">Letter saved</string>
+  <string name="letterSaveFailed">Error: Unabled to save letter</string>
   <string name="save">Save</string>
   <string name="searchLegislators">Search Legislators</string>
   <string name="senate">Senate</string>
+  <string name="send">Send</string>
   <string name="sent">Sent</string>
   <string name="settings">Settings</string>
   <string name="subject">Subject</string>

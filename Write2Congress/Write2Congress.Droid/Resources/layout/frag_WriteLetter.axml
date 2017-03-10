@@ -45,7 +45,7 @@
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
         <EditText
             android:hint="@string/emptySignatureText"
             android:layout_width="match_parent"
@@ -56,5 +56,6 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:textAlignment="center"
         android:id="@+id/writeLetterFrag_lastSaved" />
 </LinearLayout>

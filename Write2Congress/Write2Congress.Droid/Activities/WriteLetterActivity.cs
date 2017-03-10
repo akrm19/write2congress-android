@@ -31,7 +31,6 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.actv_WriteLetter);
-            //SetupToolbar(Resource.Id.writeLetterActv_toolbar);
 
             _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.writeLetterActv_parent);
             _navigationView = FindViewById<NavigationView>(Resource.Id.writeLetterActv_navigationDrawer);

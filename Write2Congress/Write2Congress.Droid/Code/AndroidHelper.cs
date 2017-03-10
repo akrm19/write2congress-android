@@ -37,6 +37,28 @@ namespace Write2Congress.Droid.Code
             return BaseApplication.Context.GetString(resourceId);
         }
 
+        public static Intent GetSendEmailIntent(string to, string subject, string body, string cc)
+        {
+            var intent = new Intent(Intent.ActionSend);
+
+            if(!string.IsNullOrWhiteSpace(to))
+                intent.PutExtra(Intent.ExtraEmail, to);
+
+            if(!string.IsNullOrWhiteSpace(subject))
+                intent.PutExtra(Intent.ExtraSubject, subject);
+
+            if(!string.IsNullOrWhiteSpace(body))
+                intent.PutExtra(Intent.ExtraText, body);
+
+            if (!string.IsNullOrWhiteSpace(cc))
+                intent.PutExtra(Intent.ExtraCc, cc);
+
+            //TODO RM: review if this is needed
+            intent.SetType("message/rfc822");
+
+            return intent;
+        }
+
         #region File Helpers
         public static string GetInternalAppFileContent(string filename)
         {

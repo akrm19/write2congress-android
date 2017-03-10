@@ -14,6 +14,7 @@ using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.Activities;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
+using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -53,6 +54,26 @@ namespace Write2Congress.Droid.Fragments
             return toolbar; 
         }
 
+        protected void ShowToast(string message, ToastLength lenght = ToastLength.Short)
+        {
+            Toast.MakeText(this.Context, message, lenght).Show();
+        }
+
+        protected void ExitButtonPressed()
+        {
+            (Activity as BaseToolbarActivity).ExitButtonPressed();
+        }
+
+        protected void DonatePressed()
+        {
+            (Activity as BaseToolbarActivity).DonatePressed();
+        }
+
+        protected void SettingsPressed()
+        {
+            (Activity as BaseToolbarActivity).SettingsPressed();
+        }
+
         #region Helpers - Getter
 
         protected BaseApplication GetBaseApp()
@@ -75,6 +96,11 @@ namespace Write2Congress.Droid.Fragments
             //var legislators = (Activity.Application as BaseApplication).GetCachedLegislators();
             return AppHelper.GetCachedLegislators();
         }
+
+        protected LetterManager GetLetterManager()
+        {
+            return GetBaseApp().LetterManager;
+        } 
         #endregion
     }
 }

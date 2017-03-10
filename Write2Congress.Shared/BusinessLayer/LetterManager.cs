@@ -46,14 +46,24 @@ namespace Write2Congress.Shared.BusinessLayer
             return _provider.SaveLetter(letter);
         }
 
+        public bool DeleteLetterById(string letterId)
+        {
+            if(string.IsNullOrWhiteSpace(letterId))
+            {
+                //TODO add logging
+                return true;
+            }
+
+            return _provider.DeleteLetterById(letterId);
+        }
+
+        #region Helper Methods
+
         private List<Letter> GetAllLetters()
         {
             return _provider.GetAllLetters() 
                 ?? new List<Letter>();
         }
-
-        #region Helper Methods
-
 
         #endregion
     }

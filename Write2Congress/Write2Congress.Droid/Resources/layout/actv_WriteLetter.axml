@@ -11,12 +11,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/writeLetterActv_fragAndToolbarParent">
-        <!--
-        <include
-            layout="@layout/ctrl_Toolbar"
-            android:minHeight="?android:attr/actionBarSize"
-            android:id="@+id/writeLetterActv_toolbar" />
-        -->
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"

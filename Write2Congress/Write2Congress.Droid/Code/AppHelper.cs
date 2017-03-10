@@ -186,17 +186,11 @@ namespace Write2Congress.Droid.Code
 
         private static Intent GetIntentForContactEmail(ContactMethod contactMethod)
         {
-            var intent = new Intent(Intent.ActionSend);
             var to = contactMethod.ContactInfo;
             var subject = "TODO RM";
             var body = "Hello legislator, you suck";
 
-            intent.PutExtra(Intent.ExtraEmail, to);
-            intent.PutExtra(Intent.ExtraSubject, subject);
-            intent.PutExtra(Intent.ExtraText, body);
-
-            //TODO RM: review if this is needed
-            intent.SetType("message/rfc822");
+            var intent = AndroidHelper.GetSendEmailIntent(to, subject, body, string.Empty);
 
             return intent;
         }

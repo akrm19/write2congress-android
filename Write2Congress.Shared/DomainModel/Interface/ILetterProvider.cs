@@ -8,8 +8,8 @@ namespace Write2Congress.Shared.DomainModel.Interface
 {
     public interface ILetterProvider
     {
-        bool SaveLetter(Letter letter);
         List<Letter> GetAllLetters();
-
+        bool SaveLetter(Letter letter);
+        bool DeleteLetterById(string letterId);
     }
 }

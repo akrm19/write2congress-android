@@ -47,5 +47,12 @@ namespace Write2Congress.Droid.Code
         {
             Util.CreateDir(_lettersDirectory);
         }
+        
+        public bool DeleteLetterById(string letterId)
+        {
+            var letterPath = Path.Combine(_lettersDirectory, $"{letterId}.{_lettersExtension}");
+
+            return Util.DeleteFile(letterPath);
+        }
     }
 }

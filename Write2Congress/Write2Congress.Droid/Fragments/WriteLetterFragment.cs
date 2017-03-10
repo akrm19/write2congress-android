@@ -14,6 +14,7 @@ using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Shared.DomainModel;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
+using Write2Congress.Droid.Code;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -24,13 +25,36 @@ namespace Write2Congress.Droid.Fragments
         private EditText _body;
         private EditText _signature;
         private TextView _lastSaved;
-        private Legislator _selectedLegislator;
-        private Letter _currentLetter; 
+        //private Legislator _selectedLegislator;
+        private Letter _currentLetter;
+        private System.Timers.Timer _autoSaveTimer;
+        private double _autoSaveIntervalInMilliSecs = 60000;
 
-        public WriteLetterFragment(Legislator legislator = null)
+        bool _firstTimeInit = false;
+
+        public WriteLetterFragment()
         {
-            if (legislator != null)
-                _selectedLegislator = legislator;
+            _firstTimeInit = true;
+
+            _autoSaveTimer = new System.Timers.Timer(_autoSaveIntervalInMilliSecs);
+            _autoSaveTimer.Elapsed += AutoSaveTimer_Elapsed;
+            _autoSaveTimer.Enabled = false;
+        }
+
+        public WriteLetterFragment(Legislator legislator) : this()
+        {
+            //_selectedLegislator = legislator;
+            _currentLetter = new Letter(legislator);
+        }
+
+        public WriteLetterFragment(Letter letter)
+        {
+            _currentLetter = letter;
+        }
+
+        private void AutoSaveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            SaveCurrentLetter(true);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -54,15 +78,133 @@ namespace Write2Congress.Droid.Fragments
             _signature = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_signature);
             _lastSaved = fragment.FindViewById<TextView>(Resource.Id.writeLetterFrag_lastSaved);
 
-            if (_selectedLegislator != null)
-                PopulateFieldsFromLegislator(_selectedLegislator);
-
             return fragment;
+        }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+
+            if (_firstTimeInit)
+            {
+                PopulateFieldsFromSavedLetter(_currentLetter);
+                _firstTimeInit = false;
+            }
+
+            _autoSaveTimer.Enabled = true;
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            _autoSaveTimer.Enabled = true;    
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+
+            _autoSaveTimer.Enabled = false;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            _autoSaveTimer.Enabled = false;
+            _autoSaveTimer.Dispose();
         }
 
         private void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            switch (e.Item.ItemId)
+            {
+                case Resource.Id.writeLetterMenu_send:
+                    SendCurrentLetter();
+                    break;
+                case Resource.Id.writeLetterMenu_save:
+                    SaveCurrentLetter(false);
+                    break;
+                case Resource.Id.writeLetterMenu_delete:
+                    DeleteCurrentLetter();
+                    break;
+                case Resource.Id.writeLetterMenu_donate:
+                    DonatePressed();
+                    break;
+                case Resource.Id.writeLetterMenu_settings:
+                    SettingsPressed();
+                    break;
+                case Resource.Id.writeLetterMenu_exit:
+                    ExitButtonPressed();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SendCurrentLetter()
+        {
+            if(string.IsNullOrWhiteSpace(_recipient.Text))
+            {
+                ShowToast(GetString(Resource.String.cannotSendLetterWithoutRecipient));
+                return;
+            }
+
+            var intent = AndroidHelper.GetSendEmailIntent(_recipient.Text, _subject.Text, _body.Text, string.Empty);
+
+            StartActivity(intent);
+        }
+
+        private void DeleteCurrentLetter()
+        {
+            var result = GetLetterManager().DeleteLetterById(_currentLetter.Id.ToString());
+
+            if(result)
+                ClearTextFields();
+
+            ShowToast(GetString(result
+                ? Resource.String.letterDeleted
+                : Resource.String.letterDeleteFailed));
+        }
+
+        private void ClearTextFields()
+        {
+            _recipient.Text = string.Empty;
+            _subject.Text = string.Empty;
+            _body.Text = string.Empty;
+            _signature.Text = string.Empty;
+            _lastSaved.Text = string.Empty;
+        }
+
+        private void SaveCurrentLetter(bool isAutoSave, bool showToastUpdate = true)
+        {
+            if (_currentLetter == null)
+                return;
+
+            UpdateLetterFromFields(_currentLetter);
+
+            var oldLastSavedTime = _currentLetter.LastSaved;
+            _currentLetter.LastSaved = DateTime.Now;
+
+            var letterSaved = GetLetterManager().SaveLetter(_currentLetter);
+
+            if (letterSaved)
+            {
+                _lastSaved.Text = GetLastSavedText(_currentLetter.LastSaved);
+
+                if(showToastUpdate)
+                    ShowToast(GetString(isAutoSave
+                        ? Resource.String.letterAutoSaved
+                        : Resource.String.letterSaved));
+            }
+            else
+            {
+                _currentLetter.LastSaved = oldLastSavedTime;
+
+                if (!isAutoSave && showToastUpdate)
+                    ShowToast(GetString(Resource.String.letterSaveFailed));
+            }
         }
 
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
@@ -72,39 +214,22 @@ namespace Write2Congress.Droid.Fragments
             base.OnCreateOptionsMenu(menu, inflater);
         }
 
-        private void PopulateFieldsFromLegislator(Legislator legislator)
-        {
-            if (!string.IsNullOrWhiteSpace(_recipient.Text))
-            {
-                _recipient.Text = legislator.Email.IsEmpty
-                    ? string.Empty
-                    : legislator.Email.ContactInfo;
-            }
-
-            if (!string.IsNullOrWhiteSpace(_body.Text))
-                return;
-
-            _body.Text = string.Format("{0}: {1}{1}",
-                legislator.FormalAddressTitle,
-                System.Environment.NewLine);
-        }
-
         private void PopulateFieldsFromSavedLetter(Letter letter)
         {
             if (letter == null)
                 return;
 
-            _recipient.Text = letter.Recipient.Email.IsEmpty
+            _recipient.Text = string.IsNullOrWhiteSpace(letter.RecipientEmail)
                 ? string.Empty
-                : letter.Recipient.Email.ContactInfo;
+                : letter.RecipientEmail;
 
-            _subject.Text = letter.Body ?? string.Empty;
-
+            _subject.Text = letter.Subject ?? string.Empty;
+            _body.Text = letter.Body ?? string.Empty;
             _signature.Text = letter.Signature ?? string.Empty;
 
             _lastSaved.Text = (letter.LastSaved == null || letter.LastSaved == DateTime.MinValue)
                 ? string.Empty
-                : letter.LastSaved.ToString("G");
+                : GetLastSavedText(letter.LastSaved);
         }
 
         private void UpdateLetterFromFields(Letter letter)
@@ -114,6 +239,12 @@ namespace Write2Congress.Droid.Fragments
             letter.Body = _body.Text;
             letter.Signature = _signature.Text;
         }
-        
+
+        private string GetLastSavedText(DateTime lastSaved)
+        {
+            return string.Format("{0}: {1}",
+                GetString(Resource.String.lastSaved),
+                lastSaved.ToString("G"));
+        }
     }
 }

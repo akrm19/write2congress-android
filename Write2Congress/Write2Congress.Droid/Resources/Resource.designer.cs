@@ -3092,20 +3092,23 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0a00a8
 			public const int writeLetterFrag_toolbar = 2131361960;
 			
-			// aapt resource value: 0x7f0a00d1
-			public const int writeLetterMenu_delete = 2131362001;
-			
-			// aapt resource value: 0x7f0a00d3
-			public const int writeLetterMenu_donate = 2131362003;
+			// aapt resource value: 0x7f0a00d2
+			public const int writeLetterMenu_delete = 2131362002;
 			
 			// aapt resource value: 0x7f0a00d4
-			public const int writeLetterMenu_exit = 2131362004;
+			public const int writeLetterMenu_donate = 2131362004;
+			
+			// aapt resource value: 0x7f0a00d5
+			public const int writeLetterMenu_exit = 2131362005;
+			
+			// aapt resource value: 0x7f0a00d1
+			public const int writeLetterMenu_save = 2131362001;
 			
 			// aapt resource value: 0x7f0a00d0
-			public const int writeLetterMenu_save = 2131362000;
+			public const int writeLetterMenu_send = 2131362000;
 			
-			// aapt resource value: 0x7f0a00d2
-			public const int writeLetterMenu_settings = 2131362002;
+			// aapt resource value: 0x7f0a00d3
+			public const int writeLetterMenu_settings = 2131362003;
 			
 			static Id()
 			{
@@ -3504,6 +3507,9 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0001
 			public const int bottom_sheet_behavior = 2131427329;
 			
+			// aapt resource value: 0x7f0b003c
+			public const int cannotSendLetterWithoutRecipient = 2131427388;
+			
 			// aapt resource value: 0x7f0b0002
 			public const int character_counter_pattern = 2131427330;
 			
@@ -3558,41 +3564,62 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0017
 			public const int common_signin_button_text_long = 2131427351;
 			
-			// aapt resource value: 0x7f0b003c
-			public const int congress = 2131427388;
-			
 			// aapt resource value: 0x7f0b003d
-			public const int copyText = 2131427389;
+			public const int congress = 2131427389;
 			
 			// aapt resource value: 0x7f0b003e
-			public const int delete = 2131427390;
+			public const int copyText = 2131427390;
 			
 			// aapt resource value: 0x7f0b003f
-			public const int donate = 2131427391;
+			public const int copyTextFail = 2131427391;
 			
 			// aapt resource value: 0x7f0b0040
-			public const int drafts = 2131427392;
-			
-			// aapt resource value: 0x7f0b0042
-			public const int emptyBodyText = 2131427394;
-			
-			// aapt resource value: 0x7f0b0043
-			public const int emptyRecipientText = 2131427395;
-			
-			// aapt resource value: 0x7f0b0045
-			public const int emptySignatureText = 2131427397;
-			
-			// aapt resource value: 0x7f0b0044
-			public const int emptySubjectText = 2131427396;
+			public const int copyTextSuccess = 2131427392;
 			
 			// aapt resource value: 0x7f0b0041
-			public const int exit = 2131427393;
+			public const int delete = 2131427393;
 			
-			// aapt resource value: 0x7f0b0047
-			public const int letterLastSaved = 2131427399;
+			// aapt resource value: 0x7f0b0042
+			public const int donate = 2131427394;
+			
+			// aapt resource value: 0x7f0b0043
+			public const int drafts = 2131427395;
+			
+			// aapt resource value: 0x7f0b0045
+			public const int emptyBodyText = 2131427397;
 			
 			// aapt resource value: 0x7f0b0046
-			public const int letterRecipient = 2131427398;
+			public const int emptyRecipientText = 2131427398;
+			
+			// aapt resource value: 0x7f0b0048
+			public const int emptySignatureText = 2131427400;
+			
+			// aapt resource value: 0x7f0b0047
+			public const int emptySubjectText = 2131427399;
+			
+			// aapt resource value: 0x7f0b0044
+			public const int exit = 2131427396;
+			
+			// aapt resource value: 0x7f0b0049
+			public const int lastSaved = 2131427401;
+			
+			// aapt resource value: 0x7f0b004d
+			public const int letterAutoSaved = 2131427405;
+			
+			// aapt resource value: 0x7f0b004c
+			public const int letterDeleteFailed = 2131427404;
+			
+			// aapt resource value: 0x7f0b004b
+			public const int letterDeleted = 2131427403;
+			
+			// aapt resource value: 0x7f0b004a
+			public const int letterRecipient = 2131427402;
+			
+			// aapt resource value: 0x7f0b004f
+			public const int letterSaveFailed = 2131427407;
+			
+			// aapt resource value: 0x7f0b004e
+			public const int letterSaved = 2131427406;
 			
 			// aapt resource value: 0x7f0b0003
 			public const int password_toggle_content_description = 2131427331;
@@ -3609,41 +3636,44 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0007
 			public const int path_password_strike_through = 2131427335;
 			
-			// aapt resource value: 0x7f0b0048
-			public const int save = 2131427400;
+			// aapt resource value: 0x7f0b0050
+			public const int save = 2131427408;
 			
-			// aapt resource value: 0x7f0b0049
-			public const int searchLegislators = 2131427401;
+			// aapt resource value: 0x7f0b0051
+			public const int searchLegislators = 2131427409;
 			
 			// aapt resource value: 0x7f0b002c
 			public const int search_menu_title = 2131427372;
 			
-			// aapt resource value: 0x7f0b004a
-			public const int senate = 2131427402;
+			// aapt resource value: 0x7f0b0052
+			public const int senate = 2131427410;
 			
-			// aapt resource value: 0x7f0b004b
-			public const int sent = 2131427403;
+			// aapt resource value: 0x7f0b0053
+			public const int send = 2131427411;
 			
-			// aapt resource value: 0x7f0b004c
-			public const int settings = 2131427404;
+			// aapt resource value: 0x7f0b0054
+			public const int sent = 2131427412;
+			
+			// aapt resource value: 0x7f0b0055
+			public const int settings = 2131427413;
 			
 			// aapt resource value: 0x7f0b002d
 			public const int status_bar_notification_info_overflow = 2131427373;
 			
-			// aapt resource value: 0x7f0b004d
-			public const int subject = 2131427405;
+			// aapt resource value: 0x7f0b0056
+			public const int subject = 2131427414;
 			
-			// aapt resource value: 0x7f0b004e
-			public const int termEnds = 2131427406;
+			// aapt resource value: 0x7f0b0057
+			public const int termEnds = 2131427415;
 			
-			// aapt resource value: 0x7f0b004f
-			public const int termStarted = 2131427407;
+			// aapt resource value: 0x7f0b0058
+			public const int termStarted = 2131427416;
 			
-			// aapt resource value: 0x7f0b0050
-			public const int unknown = 2131427408;
+			// aapt resource value: 0x7f0b0059
+			public const int unknown = 2131427417;
 			
-			// aapt resource value: 0x7f0b0051
-			public const int writeNew = 2131427409;
+			// aapt resource value: 0x7f0b005a
+			public const int writeNew = 2131427418;
 			
 			static String()
 			{

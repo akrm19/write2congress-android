@@ -61,6 +61,25 @@ namespace Write2Congress.Shared.BusinessLayer
             return string.Empty;
         }
 
+        public static bool DeleteFile(string filePath)
+        {
+
+            if (!File.Exists(filePath))
+                return true;
+
+            try
+            {
+                File.Delete(filePath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                //TODO RM: Add loggin
+                //
+            }
+        }
+
         public static bool CreateFileContent(string filePath, string content)
         {
             try

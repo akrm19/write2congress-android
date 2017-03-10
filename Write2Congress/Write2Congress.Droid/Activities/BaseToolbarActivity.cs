@@ -47,18 +47,33 @@ namespace Write2Congress.Droid.Activities
                     AppHelper.GetWriteNewLetterIntent(this);
                     return true;
                 case Resource.Id.mainMenu_settings:
-                    //TODO RM Implement settings
+                    SettingsPressed();
                     return true;
                 case Resource.Id.mainMenu_donate:
-                    //TODO RM Implement donate
+                    DonatePressed();
                     return true;
                 case Resource.Id.mainMenu_exit:
-                    FinishAffinity();
+                    ExitButtonPressed();
                     return true;
                 default:
                     return true;
             }
             //return base.OnOptionsItemSelected(item);
+        }
+
+        public void ExitButtonPressed()
+        {
+            FinishAffinity();
+        }
+
+        public void DonatePressed()
+        {
+
+        }
+
+        public void SettingsPressed()
+        {
+
         }
     }
 
