@@ -34,6 +34,9 @@ namespace Write2Congress.Droid.Fragments
 
         public WriteLetterFragment()
         {
+            if (_currentLetter == null)
+                _currentLetter = new Letter();
+
             _firstTimeInit = true;
 
             _autoSaveTimer = new System.Timers.Timer(_autoSaveIntervalInMilliSecs);
@@ -47,9 +50,9 @@ namespace Write2Congress.Droid.Fragments
             _currentLetter = new Letter(legislator);
         }
 
-        public WriteLetterFragment(Letter letter)
+        public WriteLetterFragment(Letter letter) : this()
         {
-            _currentLetter = letter;
+            _currentLetter = letter ?? new Letter();
         }
 
         private void AutoSaveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -69,7 +72,7 @@ namespace Write2Congress.Droid.Fragments
             // Use this to return your custom view for this Fragment
             var fragment = inflater.Inflate(Resource.Layout.frag_WriteLetter, container, false);
 
-            var toolbar = SetupToolbar(fragment, Resource.Id.writeLetterFrag_toolbar);
+            var toolbar = SetupToolbar(fragment, Resource.Id.writeLetterFrag_toolbar, AndroidHelper.GetString(Resource.String.writeNewLetterTitle));
             toolbar.MenuItemClick += Toolbar_MenuItemClick;
 
             _recipient = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_recipient);

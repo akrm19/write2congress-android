@@ -20,7 +20,7 @@ using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "Write2Congress")]
+    [Activity]
     public abstract class BaseActivity : AppCompatActivity 
     {
         protected Logger Logger; 
@@ -32,7 +32,7 @@ namespace Write2Congress.Droid.Activities
             Logger = new Logger(Class.SimpleName);
         }
 
-        protected void SetupToolbar(int toolbarResourceId)
+        protected void SetupToolbar(int toolbarResourceId, string title = "")
         {
             //var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
             //actionMenu.InflateMenu(Resource.Menu.menu_action);
@@ -40,6 +40,12 @@ namespace Write2Congress.Droid.Activities
 
             using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
             {
+                //Unlike other attributes the toolbar title needs to be 
+                //set first, otherwise app will default to activity tile
+                toolbar.Title = string.IsNullOrWhiteSpace(title)
+                    ? null
+                    : title;
+
                 SetSupportActionBar(toolbar);
                 toolbar.Elevation = 10f;
             }

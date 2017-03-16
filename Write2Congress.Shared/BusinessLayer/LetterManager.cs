@@ -36,7 +36,7 @@ namespace Write2Congress.Shared.BusinessLayer
         public List<Letter> GetAllDraftLetters()
         {
             return GetAllLetters()
-                .Where(l => l.Sent = false)
+                .Where(l => l.Sent == false)
                 .OrderBy(lt => lt.DateCreated)
                 .ToList();
         }

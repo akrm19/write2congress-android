@@ -15,10 +15,12 @@ using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Droid.Code;
+using Android.Support.Design.Widget;
+using Write2Congress.Droid.Fragments;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "BaseToolbarActivity")]
+    [Activity]
     public abstract class BaseToolbarActivity : BaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -75,6 +77,48 @@ namespace Write2Congress.Droid.Activities
         {
 
         }
+
+        protected void NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
+        {
+            switch (e.MenuItem.ItemId)
+            {
+                case Resource.Id.actionMenu_drafts:
+                    e.Handled = true;
+                    OpenDrafts();
+                    break;
+                case Resource.Id.actionMenu_sent:
+                    //e.Handled = true;
+                    OpenSent();
+                    break;
+                default:
+                    break;
+            }
+            //e.Handled = true;
+        }
+
+        private void OpenDrafts()
+        {
+            var viewDraftsFragment = new DraftLettersFragment();
+            var containerId = Resource.Id.writeLetterActv_fragmentContainer;
+            RepalceFragmentByTag(this, viewDraftsFragment, containerId, TagsType.WriteLetterFragment);
+        }
+
+        private void OpenSent()
+        {
+            var intent = new Intent(this, typeof(ViewLettersActivity));
+            StartActivity(Intent);
+        }
+
+        private void RepalceFragmentByTag(BaseActivity activity, BaseFragment newFragment, int containerId, string tag)
+        {
+            //var transacton = activity.SupportFragmentManager.BeginTransaction();
+            var transacton = activity.SupportFragmentManager.BeginTransaction();
+            transacton.Replace(containerId, newFragment, TagsType.WriteLetterFragment);
+            //transacton.AddToBackStack(null);
+            transacton.Commit();
+        }
+
+
     }
 
 

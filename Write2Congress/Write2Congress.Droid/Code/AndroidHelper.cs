@@ -32,6 +32,14 @@ namespace Write2Congress.Droid.Code
             transaction.Commit();
         }
 
+        public static void AddSupportFragment(Android.Support.V4.App.FragmentManager fragmentManager, Android.Support.V4.App.Fragment fragment, int containerId, string tag)
+        {
+            var transaction = fragmentManager.BeginTransaction();
+
+            transaction.Add(containerId, fragment, tag);
+            transaction.Commit();
+        }
+
         public static string GetString(int resourceId)
         {
             return BaseApplication.Context.GetString(resourceId);

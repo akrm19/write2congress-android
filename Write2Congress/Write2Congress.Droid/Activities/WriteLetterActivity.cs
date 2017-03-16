@@ -19,12 +19,12 @@ using Android.Support.Design.Widget;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "WriteLetterActivity")]
-    public class WriteLetterActivity : BaseActivity
+    [Activity]
+    public class WriteLetterActivity : BaseToolbarActivity
     {
         private WriteLetterFragment _writeLetterFragment;
         private DrawerLayout _drawerLayout;
-        private NavigationView _navigationView; 
+        //private NavigationView _navigationView; 
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,22 +32,31 @@ namespace Write2Congress.Droid.Activities
 
             SetContentView(Resource.Layout.actv_WriteLetter);
 
-            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.writeLetterActv_parent);
-            _navigationView = FindViewById<NavigationView>(Resource.Id.writeLetterActv_navigationDrawer);
-            _navigationView.NavigationItemSelected += NavigationItemSelected;
+            using (var navigationView = FindViewById<NavigationView>(Resource.Id.writeLetterActv_navigationDrawer))
+                navigationView.NavigationItemSelected += NavigationItemSelected;
 
-            _writeLetterFragment = FragmentManager.FindFragmentByTag<WriteLetterFragment>(TagsType.WriteLetterFragment);
+            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.writeLetterActv_parent);
+            _writeLetterFragment = SupportFragmentManager.FindFragmentByTag(TagsType.WriteLetterFragment) as WriteLetterFragment;
 
             if(_writeLetterFragment == null)
             {
-                _writeLetterFragment = new WriteLetterFragment();
-                AndroidHelper.AddFragment(FragmentManager, _writeLetterFragment, Resource.Id.writeLetterActv_fragmentContainer, TagsType.WriteLetterFragment);
+                var letter = GetLetterFromIntentBundle(savedInstanceState);
+                _writeLetterFragment = new WriteLetterFragment(letter);
+
+                AndroidHelper.AddSupportFragment(SupportFragmentManager, _writeLetterFragment, Resource.Id.writeLetterActv_fragmentContainer, TagsType.WriteLetterFragment);
             }
         }
 
-        private void NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
+
+        private Letter GetLetterFromIntentBundle(Bundle bundle)
         {
-            //throw new NotImplementedException();
+            if (bundle == null || !bundle.ContainsKey(BundleType.Letter))
+                return null;
+
+            var serialziedLetter = bundle.GetString(BundleType.Letter);
+
+            var letter = new Letter().DeserializeFromJson(serialziedLetter);
+            return letter;
         }
 
         private Legislator GetLegislatorFromIntent()
@@ -67,6 +76,12 @@ namespace Write2Congress.Droid.Activities
                 Logger.Error($"Unable to deserialize legislator from string: {serializedLegislator}");
                 return null;
             }
+        }
+
+        //TODO Implement
+        protected override void SetupOnCreateOptionsMenu(IMenu menu)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

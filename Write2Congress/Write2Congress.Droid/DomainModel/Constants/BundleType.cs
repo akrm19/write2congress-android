@@ -15,5 +15,6 @@ namespace Write2Congress.Droid.DomainModel.Constants
     public static class BundleType
     {
         public const string Legislator = "Legislator";
+        public const string Letter = "Letter";
     }
 }

@@ -33,12 +33,12 @@ namespace Write2Congress.Droid.Activities
             SetContentView(Resource.Layout.actv_Main);
             SetupToolbar(Resource.Id.mainActv_toolbar);
             
-            _mainFragment = FragmentManager.FindFragmentByTag<MainFragment>(TagsType.MainParentFragment);
+            _mainFragment = SupportFragmentManager.FindFragmentByTag(TagsType.MainParentFragment) as MainFragment;
 
             if(_mainFragment == null)
             {
                 _mainFragment = new MainFragment();
-                AndroidHelper.AddFragment(FragmentManager, _mainFragment, Resource.Id.mainActv_fragmentContainer, TagsType.MainParentFragment);
+                AndroidHelper.AddSupportFragment(SupportFragmentManager, _mainFragment, Resource.Id.mainActv_fragmentContainer, TagsType.MainParentFragment);
             }
         }
 

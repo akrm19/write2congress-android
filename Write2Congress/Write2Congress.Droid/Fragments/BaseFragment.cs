@@ -14,11 +14,12 @@ using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.Activities;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
+using Fragment = Android.Support.V4.App.Fragment;
 using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Fragments
 {
-    public class BaseFragment : Fragment
+    public class BaseFragment : Android.Support.V4.App.Fragment
     {
         public Logger Logger2;
 
@@ -42,19 +43,22 @@ namespace Write2Congress.Droid.Fragments
 
         protected Toolbar SetupToolbar(View fragment, int toolbarResourceId, string title = "")
         {
-            SetHasOptionsMenu(true);
+            //This is needed, others Toolbar will not show
+            HasOptionsMenu = true;
+
             var toolbar = fragment.FindViewById<Toolbar>(toolbarResourceId);
             
-            GetBaseActivity().SetSupportActionBar(toolbar);
             toolbar.Elevation = 10f;
+            toolbar.Title = string.IsNullOrWhiteSpace(title)
+                ? null
+                : title;
 
-            //if (!string.IsNullOrWhiteSpace(title))
-                toolbar.Title = title;
+            GetBaseActivity().SetSupportActionBar(toolbar);
 
             return toolbar; 
         }
 
-        protected void ShowToast(string message, ToastLength lenght = ToastLength.Short)
+        public void ShowToast(string message, ToastLength lenght = ToastLength.Short)
         {
             Toast.MakeText(this.Context, message, lenght).Show();
         }
@@ -76,12 +80,12 @@ namespace Write2Congress.Droid.Fragments
 
         #region Helpers - Getter
 
-        protected BaseApplication GetBaseApp()
+        public BaseApplication GetBaseApp()
         {
             return Activity.Application as BaseApplication;
         }
 
-        protected BaseActivity GetBaseActivity()
+        public BaseActivity GetBaseActivity()
         {
             return Activity as BaseActivity;
         } 
@@ -91,13 +95,13 @@ namespace Write2Congress.Droid.Fragments
             return GetBaseActivity().SupportActionBar;
         }
 
-        protected List<Legislator> GetCachedLegislators()
+        public List<Legislator> GetCachedLegislators()
         {
             //var legislators = (Activity.Application as BaseApplication).GetCachedLegislators();
             return AppHelper.GetCachedLegislators();
         }
 
-        protected LetterManager GetLetterManager()
+        public LetterManager GetLetterManager()
         {
             return GetBaseApp().LetterManager;
         } 
