@@ -12,10 +12,9 @@ using Android.Widget;
 
 namespace Write2Congress.Droid.DomainModel.Constants
 {
-    public static class BundleType
+    public static class ViewLettersFragmentType
     {
-        public const string Legislator = "Legislator";
-        public const string Letter = "Letter";
-        public const string ViewLettersFragType = "ViewLettersFragType";
+        public const string Drafts = "Drafts";
+        public const string Sent = "Sent";
     }
 }

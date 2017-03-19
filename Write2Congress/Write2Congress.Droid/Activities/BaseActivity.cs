@@ -23,32 +23,22 @@ namespace Write2Congress.Droid.Activities
     [Activity]
     public abstract class BaseActivity : AppCompatActivity 
     {
-        protected Logger Logger; 
+        protected Logger MyLogger; 
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
-            Logger = new Logger(Class.SimpleName);
+             
+            MyLogger = new Logger(Class.SimpleName);
         }
 
-        protected void SetupToolbar(int toolbarResourceId, string title = "")
+        #region Helpers
+        protected void ReplaceFragmentByTag(BaseActivity activity, BaseFragment newFragment, int containerId, string tag)
         {
-            //var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
-            //actionMenu.InflateMenu(Resource.Menu.menu_action);
-            //actionMenu.MenuItemClick += ActionMenu_MenuItemClick;
-
-            using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
-            {
-                //Unlike other attributes the toolbar title needs to be 
-                //set first, otherwise app will default to activity tile
-                toolbar.Title = string.IsNullOrWhiteSpace(title)
-                    ? null
-                    : title;
-
-                SetSupportActionBar(toolbar);
-                toolbar.Elevation = 10f;
-            }
+            var transacton = activity.SupportFragmentManager.BeginTransaction();
+            transacton.Replace(containerId, newFragment, tag);
+            transacton.Commit();
         }
+        #endregion
     }
 }

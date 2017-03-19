@@ -19,6 +19,9 @@ namespace Write2Congress.Droid.Activities
     [Activity]
     public class ViewLettersActivity : BaseToolbarActivity
     {
+        private string _fragmentType;
+        private BaseFragment _currentFragment;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -28,18 +31,62 @@ namespace Write2Congress.Droid.Activities
             using (var navigationView = FindViewById<NavigationView>(Resource.Id.viewLettersActv_navigationDrawer))
                 navigationView.NavigationItemSelected += NavigationItemSelected;
 
-            var viewLettersFragment = SupportFragmentManager.FindFragmentByTag(TagsType.DraftsFragment) as DraftLettersFragment;
+            _currentFragment = SupportFragmentManager.FindFragmentByTag(TagsType.ViewLettersFragment) as BaseFragment;
 
-            if (viewLettersFragment == null)
+            if (_currentFragment == null)
             {
-                viewLettersFragment = new DraftLettersFragment();
-                AndroidHelper.AddSupportFragment(SupportFragmentManager, viewLettersFragment, Resource.Id.viewLettersActv_fragmentContainer, TagsType.DraftsFragment);
+                var _fragmentType = GetFragmentTypeFromIntent();
+
+                _currentFragment = GetNewFragmentByViewLettersFragType(_fragmentType);
+                AndroidHelper.AddSupportFragment(SupportFragmentManager, _currentFragment, Resource.Id.viewLettersActv_fragmentContainer, TagsType.ViewLettersFragment);
             }
         }
 
-        protected override void SetupOnCreateOptionsMenu(IMenu menu)
+        private BaseFragment GetNewFragmentByViewLettersFragType(string fragmentType)
         {
-            //throw new NotImplementedException();
+            switch (fragmentType)
+            {
+                case ViewLettersFragmentType.Drafts:
+                    return new DraftLettersFragment();
+                case ViewLettersFragmentType.Sent:
+                    return new SentLettersFragment();
+                default:
+                    MyLogger.Error("ViewLettersFragmentType is not valid. Unable to create fragment");
+                    return null;
+            }
+        }
+
+        private string GetFragmentTypeFromIntent()
+        {
+            var fragType = ViewLettersFragmentType.Sent;
+            if (Intent != null && Intent.HasExtra(BundleType.ViewLettersFragType))
+                fragType = Intent.GetStringExtra(BundleType.ViewLettersFragType);
+
+            return fragType;
+        }
+
+        protected override void OpenDrafts()
+        {
+            if (_currentFragment.GetType() == typeof(DraftLettersFragment))
+                return;
+
+            ReplaceFragment(ViewLettersFragmentType.Drafts);
+        }
+
+        protected override void OpenSent()
+        {
+            if (_currentFragment.GetType() == typeof(SentLettersFragment))
+                return;
+
+            ReplaceFragment(ViewLettersFragmentType.Sent);
+        }
+
+        private void ReplaceFragment(string newViewLettersFragmentType)
+        {
+            _currentFragment = GetNewFragmentByViewLettersFragType(newViewLettersFragmentType);
+            var containerId = Resource.Id.viewLettersActv_fragmentContainer;
+
+            ReplaceFragmentByTag(this, _currentFragment, containerId, TagsType.ViewLettersFragment);
         }
     }
 }

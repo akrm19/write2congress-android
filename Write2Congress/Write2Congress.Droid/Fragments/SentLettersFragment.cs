@@ -16,10 +16,10 @@ using Write2Congress.Droid.Code;
 
 namespace Write2Congress.Droid.Fragments
 {
-    public class DraftLettersFragment : BaseFragment
+    public class SentLettersFragment : BaseFragment
     {
         private LetterAdapter _adapter;
-        private RecyclerView _draftsRecyclerView; 
+        private RecyclerView _sentLettersRecyclerView;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,22 +32,17 @@ namespace Write2Congress.Droid.Fragments
         {
             var fragment = inflater.Inflate(Resource.Layout.frag_ViewLetters, container, false);
 
-            var toolbar = SetupToolbar(fragment, Resource.Id.viewLettersFrag_toolbar, AndroidHelper.GetString(Resource.String.drafts));
+            var toolbar = SetupToolbar(fragment, Resource.Id.viewLettersFrag_toolbar, AndroidHelper.GetString(Resource.String.sent));
 
-            _draftsRecyclerView = fragment.FindViewById<RecyclerView>(Resource.Id.viewLettersFrag_lettersRecycler);
+            _sentLettersRecyclerView = fragment.FindViewById<RecyclerView>(Resource.Id.viewLettersFrag_lettersRecycler);
             var layoutManager = new LinearLayoutManager(fragment.Context, LinearLayoutManager.Vertical, false);
-            _draftsRecyclerView.SetLayoutManager(layoutManager);
+            _sentLettersRecyclerView.SetLayoutManager(layoutManager);
 
-            var letters = GetBaseApp().LetterManager.GetAllDraftLetters();
+            var letters = GetBaseApp().LetterManager.GettAllSentLetters();
             _adapter = new LetterAdapter(this, letters);
-            _draftsRecyclerView.SetAdapter(_adapter);
+            _sentLettersRecyclerView.SetAdapter(_adapter);
 
             return fragment;
-        }
-
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            base.OnActivityCreated(savedInstanceState);
         }
     }
 }

@@ -103,10 +103,10 @@ namespace Write2Congress.Droid.Adapters
 
             viewHolder.Delete.Click += (sender, e) => Delete_Click(letter, position); 
             viewHolder.OpenOrEdit.Click += (sender, e) => OpenOrEdit_Click(letter, position);
-            viewHolder.Copy.Click += (sender, e) => Copy_Click(sender, letter, position);
+            viewHolder.Copy.Click += (sender, e) => Copy_Click(letter, position);
         }
 
-        private void Copy_Click(object sender, Letter letter, int position)
+        private void Copy_Click(Letter letter, int position)
         {
             var copiedLetter = new Letter()
             {
@@ -121,13 +121,13 @@ namespace Write2Congress.Droid.Adapters
                 Subject = letter.Subject
             };
 
-            if (_fragment.GetBaseApp().LetterManager.SaveLetter(letter))
+            if (_fragment.GetBaseApp().LetterManager.SaveLetter(copiedLetter))
             {
                 _letters.Insert(0, copiedLetter);
                 NotifyItemInserted(0);
-                
                 _fragment.ShowToast("Letter Copied");
-                ((RecyclerView)sender).SmoothScrollToPosition(0);
+                //TODO RM:
+                //((RecyclerView)sender).SmoothScrollToPosition(0);
             }
             else
                 _fragment.ShowToast("Unable to copy letter");
@@ -150,11 +150,7 @@ namespace Write2Congress.Droid.Adapters
             using (var intent = new Intent(_fragment.Activity, typeof(WriteLetterActivity)))
             {
                 var serializedLetter = letter.SerializeToJson();
-
-                var bundle = new Bundle();
-                bundle.PutString(BundleType.Letter, serializedLetter);
-
-                intent.PutExtras(bundle);
+                intent.PutExtra(BundleType.Letter, serializedLetter);
 
                 _fragment.Activity.StartActivity(intent);
                 _fragment.Activity.Finish();

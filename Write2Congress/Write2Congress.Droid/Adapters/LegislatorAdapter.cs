@@ -69,7 +69,7 @@ namespace Write2Congress.Droid.Adapters
         // Create new views (invoked by the layout manager)
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            var legislatorView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_legislator, parent, false);
+            var legislatorView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Legislator, parent, false);
 
             return new LegislatorAdapterViewHolder(legislatorView);
         }

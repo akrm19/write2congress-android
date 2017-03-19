@@ -40,13 +40,23 @@ namespace Write2Congress.Droid.Activities
 
             if(_writeLetterFragment == null)
             {
-                var letter = GetLetterFromIntentBundle(savedInstanceState);
+                var letter = GetLetterFromIntent();
                 _writeLetterFragment = new WriteLetterFragment(letter);
 
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _writeLetterFragment, Resource.Id.writeLetterActv_fragmentContainer, TagsType.WriteLetterFragment);
             }
         }
 
+        private Letter GetLetterFromIntent()
+        {
+            if (Intent == null || !Intent.HasExtra(BundleType.Letter))
+                return null;
+
+            var serialziedLetter = Intent.GetStringExtra(BundleType.Letter);
+
+            var letter = new Letter().DeserializeFromJson(serialziedLetter);
+            return letter;
+        }
 
         private Letter GetLetterFromIntentBundle(Bundle bundle)
         {
@@ -73,15 +83,9 @@ namespace Write2Congress.Droid.Activities
             }
             catch (Exception ex)
             {
-                Logger.Error($"Unable to deserialize legislator from string: {serializedLegislator}");
+                MyLogger.Error($"Unable to deserialize legislator from string: {serializedLegislator}");
                 return null;
             }
-        }
-
-        //TODO Implement
-        protected override void SetupOnCreateOptionsMenu(IMenu menu)
-        {
-            //throw new NotImplementedException();
         }
     }
 }

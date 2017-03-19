@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/actionMenu_writeNew" 
-		  android:icon="@drawable/ic_search_white_48dp" 
+		  android:icon="@drawable/ic_create_white_48dp" 
 		  android:showAsAction="always" 
 		  android:title="@string/writeNew" />
   

@@ -26,28 +26,12 @@ namespace Write2Congress.Droid.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your application here
         }
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-
-            SetupOnCreateOptionsMenu(menu);
-
-            return base.OnCreateOptionsMenu(menu);
-        }
-
-        protected abstract void SetupOnCreateOptionsMenu(IMenu menu);
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
             {
-                case Resource.Id.mainMenu_writeNew:
-                    AppHelper.GetWriteNewLetterIntent(this);
-                    return true;
                 case Resource.Id.mainMenu_settings:
                     SettingsPressed();
                     return true;
@@ -58,9 +42,8 @@ namespace Write2Congress.Droid.Activities
                     ExitButtonPressed();
                     return true;
                 default:
-                    return true;
+                    return base.OnOptionsItemSelected(item);
             }
-            //return base.OnOptionsItemSelected(item);
         }
 
         public void ExitButtonPressed()
@@ -87,39 +70,50 @@ namespace Write2Congress.Droid.Activities
                     OpenDrafts();
                     break;
                 case Resource.Id.actionMenu_sent:
-                    //e.Handled = true;
                     OpenSent();
+                    break;
+                case Resource.Id.actionMenu_search:
+                    OpenLegislatorSearch();
+                    e.Handled = true;
+                    break;
+                case Resource.Id.actionMenu_writeNew:
+                    OpenWriteNewLetter();
                     break;
                 default:
                     break;
             }
-            //e.Handled = true;
         }
 
-        private void OpenDrafts()
+        private void OpenWriteNewLetter()
         {
-            var viewDraftsFragment = new DraftLettersFragment();
-            var containerId = Resource.Id.writeLetterActv_fragmentContainer;
-            RepalceFragmentByTag(this, viewDraftsFragment, containerId, TagsType.WriteLetterFragment);
+            if (GetType() == typeof(WriteLetterActivity))
+                return;
+
+            var intent = new Intent(this, typeof(WriteLetterActivity));
+            StartActivity(intent);
         }
 
-        private void OpenSent()
+        private void OpenLegislatorSearch()
+        {
+            if (GetType() == typeof(MainActivity))
+                return;
+
+            var intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
+        }
+
+        protected virtual void OpenDrafts()
         {
             var intent = new Intent(this, typeof(ViewLettersActivity));
-            StartActivity(Intent);
+            intent.PutExtra(BundleType.ViewLettersFragType, ViewLettersFragmentType.Drafts);
+            StartActivity(intent);
         }
 
-        private void RepalceFragmentByTag(BaseActivity activity, BaseFragment newFragment, int containerId, string tag)
+        protected virtual void OpenSent()
         {
-            //var transacton = activity.SupportFragmentManager.BeginTransaction();
-            var transacton = activity.SupportFragmentManager.BeginTransaction();
-            transacton.Replace(containerId, newFragment, TagsType.WriteLetterFragment);
-            //transacton.AddToBackStack(null);
-            transacton.Commit();
+            var intent = new Intent(this, typeof(ViewLettersActivity));
+            intent.PutExtra(BundleType.ViewLettersFragType, ViewLettersFragmentType.Sent);
+            StartActivity(intent);
         }
-
-
     }
-
-
 }

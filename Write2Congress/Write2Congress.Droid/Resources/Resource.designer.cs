@@ -2251,26 +2251,26 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+			// aapt resource value: 0x7f020097
+			public const int avd_hide_password_1 = 2130837655;
+			
 			// aapt resource value: 0x7f020098
-			public const int avd_hide_password_1 = 2130837656;
+			public const int avd_hide_password_2 = 2130837656;
 			
 			// aapt resource value: 0x7f020099
-			public const int avd_hide_password_2 = 2130837657;
-			
-			// aapt resource value: 0x7f02009a
-			public const int avd_hide_password_3 = 2130837658;
+			public const int avd_hide_password_3 = 2130837657;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
+			// aapt resource value: 0x7f02009a
+			public const int avd_show_password_1 = 2130837658;
+			
 			// aapt resource value: 0x7f02009b
-			public const int avd_show_password_1 = 2130837659;
+			public const int avd_show_password_2 = 2130837659;
 			
 			// aapt resource value: 0x7f02009c
-			public const int avd_show_password_2 = 2130837660;
-			
-			// aapt resource value: 0x7f02009d
-			public const int avd_show_password_3 = 2130837661;
+			public const int avd_show_password_3 = 2130837660;
 			
 			// aapt resource value: 0x7f020055
 			public const int common_full_open_on_phone = 2130837589;
@@ -2381,97 +2381,94 @@ namespace Write2Congress.Droid
 			public const int ic_action_social_youtube = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int ic_content_copy_black_48dp = 2130837625;
+			public const int ic_assignment_blue_48dp = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int ic_content_copy_white_48dp = 2130837626;
+			public const int ic_content_copy_black_48dp = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int ic_copy_whiteOnBlue_48dp = 2130837627;
+			public const int ic_content_copy_white_48dp = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int ic_create_white_48dp = 2130837628;
+			public const int ic_copy_blue_48dp = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int ic_create_whiteOnBlue_48dp = 2130837629;
+			public const int ic_create_white_48dp = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int ic_delete_white_48dp = 2130837630;
+			public const int ic_delete_blue_48dp = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int ic_delete_whiteOnBlue_48dp = 2130837631;
+			public const int ic_delete_white_48dp = 2130837631;
 			
 			// aapt resource value: 0x7f020080
 			public const int ic_democratic_logo = 2130837632;
 			
 			// aapt resource value: 0x7f020081
-			public const int ic_document_whiteOnBlue_48dp = 2130837633;
+			public const int ic_drafts_white_48dp = 2130837633;
 			
 			// aapt resource value: 0x7f020082
-			public const int ic_drafts_white_48dp = 2130837634;
+			public const int ic_favorite_white_48dp = 2130837634;
 			
 			// aapt resource value: 0x7f020083
-			public const int ic_favorite_white_48dp = 2130837635;
+			public const int ic_person_black_48dp = 2130837635;
 			
 			// aapt resource value: 0x7f020084
-			public const int ic_person_black_48dp = 2130837636;
+			public const int ic_person_white_48dp = 2130837636;
 			
 			// aapt resource value: 0x7f020085
-			public const int ic_person_white_48dp = 2130837637;
+			public const int ic_republican_elephant = 2130837637;
 			
 			// aapt resource value: 0x7f020086
-			public const int ic_republican_elephant = 2130837638;
+			public const int ic_save_white_48dp = 2130837638;
 			
 			// aapt resource value: 0x7f020087
-			public const int ic_save_white_48dp = 2130837639;
+			public const int ic_search_white_48dp = 2130837639;
 			
 			// aapt resource value: 0x7f020088
-			public const int ic_search_white_48dp = 2130837640;
+			public const int ic_send_white_48dp = 2130837640;
 			
 			// aapt resource value: 0x7f020089
-			public const int ic_send_white_48dp = 2130837641;
+			public const int Icon = 2130837641;
 			
 			// aapt resource value: 0x7f02008a
-			public const int Icon = 2130837642;
+			public const int navigation_empty_icon = 2130837642;
 			
 			// aapt resource value: 0x7f02008b
-			public const int navigation_empty_icon = 2130837643;
+			public const int notification_action_background = 2130837643;
 			
 			// aapt resource value: 0x7f02008c
-			public const int notification_action_background = 2130837644;
+			public const int notification_bg = 2130837644;
 			
 			// aapt resource value: 0x7f02008d
-			public const int notification_bg = 2130837645;
+			public const int notification_bg_low = 2130837645;
 			
 			// aapt resource value: 0x7f02008e
-			public const int notification_bg_low = 2130837646;
+			public const int notification_bg_low_normal = 2130837646;
 			
 			// aapt resource value: 0x7f02008f
-			public const int notification_bg_low_normal = 2130837647;
+			public const int notification_bg_low_pressed = 2130837647;
 			
 			// aapt resource value: 0x7f020090
-			public const int notification_bg_low_pressed = 2130837648;
+			public const int notification_bg_normal = 2130837648;
 			
 			// aapt resource value: 0x7f020091
-			public const int notification_bg_normal = 2130837649;
+			public const int notification_bg_normal_pressed = 2130837649;
 			
 			// aapt resource value: 0x7f020092
-			public const int notification_bg_normal_pressed = 2130837650;
-			
-			// aapt resource value: 0x7f020093
-			public const int notification_icon_background = 2130837651;
-			
-			// aapt resource value: 0x7f020096
-			public const int notification_template_icon_bg = 2130837654;
-			
-			// aapt resource value: 0x7f020097
-			public const int notification_template_icon_low_bg = 2130837655;
-			
-			// aapt resource value: 0x7f020094
-			public const int notification_tile_bg = 2130837652;
+			public const int notification_icon_background = 2130837650;
 			
 			// aapt resource value: 0x7f020095
-			public const int notify_panel_notification_icon_bg = 2130837653;
+			public const int notification_template_icon_bg = 2130837653;
+			
+			// aapt resource value: 0x7f020096
+			public const int notification_template_icon_low_bg = 2130837654;
+			
+			// aapt resource value: 0x7f020093
+			public const int notification_tile_bg = 2130837651;
+			
+			// aapt resource value: 0x7f020094
+			public const int notify_panel_notification_icon_bg = 2130837652;
 			
 			static Drawable()
 			{
@@ -2650,15 +2647,6 @@ namespace Write2Congress.Droid
 			
 			// aapt resource value: 0x7f0a003c
 			public const int disableHome = 2131361852;
-			
-			// aapt resource value: 0x7f0a00b8
-			public const int draftLettersFrag_lettersRecycler = 2131361976;
-			
-			// aapt resource value: 0x7f0a00b6
-			public const int draftLettersFrag_parent = 2131361974;
-			
-			// aapt resource value: 0x7f0a00b7
-			public const int draftLettersFrag_toolbar = 2131361975;
 			
 			// aapt resource value: 0x7f0a0070
 			public const int edit_query = 2131361904;
@@ -2855,11 +2843,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0a007e
 			public const int mainActv_toolbar = 2131361918;
 			
-			// aapt resource value: 0x7f0a00ba
-			public const int mainFrag_legislatorsViewer = 2131361978;
+			// aapt resource value: 0x7f0a00b7
+			public const int mainFrag_legislatorsViewer = 2131361975;
 			
-			// aapt resource value: 0x7f0a00b9
-			public const int mainFrag_parent = 2131361977;
+			// aapt resource value: 0x7f0a00b6
+			public const int mainFrag_parent = 2131361974;
 			
 			// aapt resource value: 0x7f0a00e2
 			public const int mainMenu_donate = 2131362018;
@@ -3122,6 +3110,15 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0a0080
 			public const int viewLettersActv_parent = 2131361920;
 			
+			// aapt resource value: 0x7f0a00ba
+			public const int viewLettersFrag_lettersRecycler = 2131361978;
+			
+			// aapt resource value: 0x7f0a00b8
+			public const int viewLettersFrag_parent = 2131361976;
+			
+			// aapt resource value: 0x7f0a00b9
+			public const int viewLettersFrag_toolbar = 2131361977;
+			
 			// aapt resource value: 0x7f0a0002
 			public const int view_offset_helper = 2131361794;
 			
@@ -3335,7 +3332,7 @@ namespace Write2Congress.Droid
 			public const int actv_WriteLetter = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int ctrl_legislator = 2130903070;
+			public const int ctrl_Legislator = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
 			public const int ctrl_LegislatorsViewer = 2130903071;
@@ -3389,10 +3386,10 @@ namespace Write2Congress.Droid
 			public const int design_text_input_password_icon = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int frag_DraftLetters = 2130903088;
+			public const int frag_Main = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int frag_Main = 2130903089;
+			public const int frag_ViewLetters = 2130903089;
 			
 			// aapt resource value: 0x7f030032
 			public const int frag_WriteLetter = 2130903090;
