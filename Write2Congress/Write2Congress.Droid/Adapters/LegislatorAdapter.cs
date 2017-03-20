@@ -94,6 +94,7 @@ namespace Write2Congress.Droid.Adapters
                 : $"{_termEndDate}: {legislator.TermEndDate.ToShortDateString()}";
 
             //Contact, social media, ect buttons
+            SetWriteLettterButton(viewHolder.WriteLetter, legislator);
             SetImageButton(viewHolder.Email, legislator.Email);
             SetImageButton(viewHolder.Phone, legislator.OfficeNumber);
             SetImageButton(viewHolder.Address, legislator.OfficeAddress);
@@ -146,19 +147,38 @@ namespace Write2Congress.Droid.Adapters
             }
         }
 
+        private void SetWriteLettterButton(ImageView imageButton, Legislator legislator)
+        {
+            SetImageButtonVisibility(imageButton, legislator.Email);
+
+            imageButton.Click -= (sender, e) => WriteLetterAction(legislator);
+            imageButton.Click += (sender, e) => WriteLetterAction(legislator);
+
+        }
+
         private void SetImageButton(ImageView imageButton, ContactMethod contactMethod)
         {
-            imageButton.Visibility = contactMethod.IsEmpty
-                ? ViewStates.Gone
-                : ViewStates.Visible;
-
-            if(_selectableItemBackground != null)
-                imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
+            SetImageButtonVisibility(imageButton, contactMethod);
 
             //TODO RM: Is unsubscribe method needed or should Item click should be implemented differently?
             //Example: https://github.com/xamarin/monodroid-samples/blob/master/android5.0/RecyclerViewer/RecyclerViewer/MainActivity.cs
             imageButton.Click -= (sender, e) => ContactMethodAction(contactMethod);
             imageButton.Click += (sender, e) => ContactMethodAction(contactMethod);
+        }
+
+        private void SetImageButtonVisibility(ImageView imageButton, ContactMethod contactMethod)
+        {
+            imageButton.Visibility = contactMethod.IsEmpty
+                ? ViewStates.Gone
+                : ViewStates.Visible;
+
+            if (_selectableItemBackground != null)
+                imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
+        }
+
+        protected void WriteLetterAction(Legislator legislator)
+        {
+            AppHelper.StartWriteNewLetterIntent(_fragment.GetBaseActivity(), legislator);
         }
 
         protected void ContactMethodAction(ContactMethod contactMethod)

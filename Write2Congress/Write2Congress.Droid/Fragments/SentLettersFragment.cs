@@ -33,6 +33,7 @@ namespace Write2Congress.Droid.Fragments
             var fragment = inflater.Inflate(Resource.Layout.frag_ViewLetters, container, false);
 
             var toolbar = SetupToolbar(fragment, Resource.Id.viewLettersFrag_toolbar, AndroidHelper.GetString(Resource.String.sent));
+            toolbar.MenuItemClick += Toolbar_MenuItemClick;
 
             _sentLettersRecyclerView = fragment.FindViewById<RecyclerView>(Resource.Id.viewLettersFrag_lettersRecycler);
             var layoutManager = new LinearLayoutManager(fragment.Context, LinearLayoutManager.Vertical, false);
@@ -43,6 +44,40 @@ namespace Write2Congress.Droid.Fragments
             _sentLettersRecyclerView.SetAdapter(_adapter);
 
             return fragment;
+        }
+
+        private void Toolbar_MenuItemClick(object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e)
+        {
+            switch (e.Item.ItemId)
+            {
+                case Resource.Id.viewLettersMenu_refresh:
+                    RefreshSentLetters();
+                    break;
+                case Resource.Id.viewLettersMenu_settings:
+                    SettingsPressed();
+                    break;
+                case Resource.Id.viewLettersMenu_donate:
+                    DonatePressed();
+                    break;
+                case Resource.Id.viewLettersMenu_exit:
+                    ExitButtonPressed();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.menu_viewLetters, menu);
+
+            base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        private void RefreshSentLetters()
+        {
+            var updatedLetters = GetBaseApp().LetterManager.GetAllDraftLetters();
+            _adapter.UpdateLetters(updatedLetters);
         }
     }
 }

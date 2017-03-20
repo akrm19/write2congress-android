@@ -31,15 +31,14 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.actv_WriteLetter);
-
-            using (var navigationView = FindViewById<NavigationView>(Resource.Id.writeLetterActv_navigationDrawer))
-                navigationView.NavigationItemSelected += NavigationItemSelected;
+            SetupNavigationMenu(Resource.Id.writeLetterActv_navigationDrawer);
 
             _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.writeLetterActv_parent);
             _writeLetterFragment = SupportFragmentManager.FindFragmentByTag(TagsType.WriteLetterFragment) as WriteLetterFragment;
 
             if(_writeLetterFragment == null)
             {
+                //TODO RM: look into why this not work when click from legislators view
                 var letter = GetLetterFromIntent();
                 _writeLetterFragment = new WriteLetterFragment(letter);
 
@@ -53,17 +52,6 @@ namespace Write2Congress.Droid.Activities
                 return null;
 
             var serialziedLetter = Intent.GetStringExtra(BundleType.Letter);
-
-            var letter = new Letter().DeserializeFromJson(serialziedLetter);
-            return letter;
-        }
-
-        private Letter GetLetterFromIntentBundle(Bundle bundle)
-        {
-            if (bundle == null || !bundle.ContainsKey(BundleType.Letter))
-                return null;
-
-            var serialziedLetter = bundle.GetString(BundleType.Letter);
 
             var letter = new Letter().DeserializeFromJson(serialziedLetter);
             return letter;

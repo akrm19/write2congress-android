@@ -146,7 +146,8 @@ namespace Write2Congress.Droid.Code
 
         #region Intents Methods (ContactMethods & Actions)
 
-        public static void GetWriteNewLetterIntent(Activity activity, Legislator legislator = null)
+
+        public static void StartWriteNewLetterIntent(BaseActivity activity, Legislator legislator = null)
         {
             using (var intent = new Intent(activity, typeof(WriteLetterActivity)))
             {
@@ -163,19 +164,19 @@ namespace Write2Congress.Droid.Code
 
             switch (contactMethod.Type)
             {
-                case Shared.DomainModel.Enum.ContactType.NotSet:
+                case ContactType.NotSet:
                     break;
-                case Shared.DomainModel.Enum.ContactType.Email:
+                case ContactType.Email:
                     return GetIntentForContactEmail(contactMethod);
-                case Shared.DomainModel.Enum.ContactType.Phone:
+                case ContactType.Phone:
                     return GetIntentForContactPhone(contactMethod);
-                case Shared.DomainModel.Enum.ContactType.Mail:
+                case ContactType.Mail:
                     return GetIntentForContactAddress(contactMethod);
-                case Shared.DomainModel.Enum.ContactType.Facebook:
-                case Shared.DomainModel.Enum.ContactType.Twitter:
-                case Shared.DomainModel.Enum.ContactType.YouTube:
-                case Shared.DomainModel.Enum.ContactType.WebSite:
-                case Shared.DomainModel.Enum.ContactType.WebSiteContact:
+                case ContactType.Facebook:
+                case ContactType.Twitter:
+                case ContactType.YouTube:
+                case ContactType.WebSite:
+                case ContactType.WebSiteContact:
                     return GetIntentForContactWebsite(contactMethod);
                 default:
                     return intent;

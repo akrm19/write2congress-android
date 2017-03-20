@@ -22,6 +22,7 @@ namespace Write2Congress.Droid.Adapters
         public TextView TermStartDate { get; private set; }
         public TextView TermEndDate { get; private set; }
 
+        public ImageButton WriteLetter { get; private set; }
         public ImageButton Email { get; private set; }
         public ImageButton Phone { get; private set; }
         public ImageButton Address { get; private set; }
@@ -40,6 +41,7 @@ namespace Write2Congress.Droid.Adapters
             TermStartDate = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_termStartDate);
             TermEndDate = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_termEndDate);
 
+            WriteLetter = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_writeLetter);
             Email = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_email);
             Phone = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_phone);
             Address = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_address);

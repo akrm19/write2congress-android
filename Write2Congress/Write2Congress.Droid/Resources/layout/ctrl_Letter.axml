@@ -65,10 +65,11 @@
                 android:layout_weight=".5"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:id="@+id/letterCtrl_actionButtonsParent">
+                android:gravity="center_vertical"
+                android:id="@+id/letterCtrl_actionButtonsParent" >
                 <ImageButton
                     android:src="@drawable/ic_assignment_blue_48dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/letterCrl_viewOrEdit" />
                 <ImageButton

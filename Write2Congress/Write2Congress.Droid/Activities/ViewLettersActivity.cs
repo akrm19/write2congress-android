@@ -27,9 +27,7 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.actv_ViewLetters);
-
-            using (var navigationView = FindViewById<NavigationView>(Resource.Id.viewLettersActv_navigationDrawer))
-                navigationView.NavigationItemSelected += NavigationItemSelected;
+            SetupNavigationMenu(Resource.Id.viewLettersActv_navigationDrawer);
 
             _currentFragment = SupportFragmentManager.FindFragmentByTag(TagsType.ViewLettersFragment) as BaseFragment;
 

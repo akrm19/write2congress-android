@@ -57,6 +57,14 @@ namespace Write2Congress.Droid.Adapters
             }
         }
 
+        public void UpdateLetters(List<Letter> letters)
+        {
+            _letters = letters;
+            NotifyDataSetChanged();
+
+            _fragment.ShowToast(AndroidHelper.GetString(Resource.String.updatedDraftLetters), ToastLength.Short);
+        }
+
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             //var letterView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Letter, parent, false);
@@ -69,7 +77,7 @@ namespace Write2Congress.Droid.Adapters
             var viewHolder = holder as LetterAdapterViewHolder;
 
             //TODO RM: change color backgroudn and images
-            viewHolder.Image.SetBackgroundColor(Android.Graphics.Color.CadetBlue);
+            viewHolder.Image.SetBackgroundResource(Resource.Color.accent_purple); // (Android.Graphics.Color.CadetBlue);
             viewHolder.Image.SetImageResource(letter.Sent
                 ? Resource.Drawable.ic_send_white_48dp
                 : Resource.Drawable.ic_drafts_white_48dp);
@@ -106,6 +114,8 @@ namespace Write2Congress.Droid.Adapters
             viewHolder.Copy.Click += (sender, e) => Copy_Click(letter, position);
         }
 
+
+        //TODO RM: look into why copied letters are not saved
         private void Copy_Click(Letter letter, int position)
         {
             var copiedLetter = new Letter()
@@ -113,7 +123,7 @@ namespace Write2Congress.Droid.Adapters
                 Body = letter.Body,
                 Id = new Guid(),
                 DateSent = DateTime.MinValue,
-                LastSaved = DateTime.MinValue,
+                LastSaved = DateTime.Now,
                 Recipient = letter.Recipient,
                 RecipientEmail = letter.RecipientEmail,
                 Sent = false,
@@ -149,6 +159,7 @@ namespace Write2Congress.Droid.Adapters
         {
             using (var intent = new Intent(_fragment.Activity, typeof(WriteLetterActivity)))
             {
+                _fragment.ShowToast(letter.Id.ToString());
                 var serializedLetter = letter.SerializeToJson();
                 intent.PutExtra(BundleType.Letter, serializedLetter);
 

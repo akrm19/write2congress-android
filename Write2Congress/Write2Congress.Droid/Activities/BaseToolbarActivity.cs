@@ -28,37 +28,10 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(savedInstanceState);
         }
 
-        public override bool OnOptionsItemSelected(IMenuItem item)
+        protected void SetupNavigationMenu(int navigationViewid)
         {
-            switch (item.ItemId)
-            {
-                case Resource.Id.mainMenu_settings:
-                    SettingsPressed();
-                    return true;
-                case Resource.Id.mainMenu_donate:
-                    DonatePressed();
-                    return true;
-                case Resource.Id.mainMenu_exit:
-                    ExitButtonPressed();
-                    return true;
-                default:
-                    return base.OnOptionsItemSelected(item);
-            }
-        }
-
-        public void ExitButtonPressed()
-        {
-            FinishAffinity();
-        }
-
-        public void DonatePressed()
-        {
-
-        }
-
-        public void SettingsPressed()
-        {
-
+            using (var navigationView = FindViewById<NavigationView>(navigationViewid))
+                navigationView.NavigationItemSelected += NavigationItemSelected;
         }
 
         protected void NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -114,6 +87,39 @@ namespace Write2Congress.Droid.Activities
             var intent = new Intent(this, typeof(ViewLettersActivity));
             intent.PutExtra(BundleType.ViewLettersFragType, ViewLettersFragmentType.Sent);
             StartActivity(intent);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.mainMenu_settings:
+                    SettingsPressed();
+                    return true;
+                case Resource.Id.mainMenu_donate:
+                    DonatePressed();
+                    return true;
+                case Resource.Id.mainMenu_exit:
+                    ExitButtonPressed();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
+
+        public void ExitButtonPressed()
+        {
+            FinishAffinity();
+        }
+
+        public void DonatePressed()
+        {
+
+        }
+
+        public void SettingsPressed()
+        {
+
         }
     }
 }

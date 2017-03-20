@@ -19,6 +19,7 @@ using Android.Support.V4.View;
 using SearchView = Android.Support.V7.Widget.SearchView;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Write2Congress.Droid.Interfaces;
+using Android.Support.Design.Widget;
 
 namespace Write2Congress.Droid.Activities
 {
@@ -35,7 +36,9 @@ namespace Write2Congress.Droid.Activities
 
             SetContentView(Resource.Layout.actv_Main);
             SetupToolbar(Resource.Id.mainActv_toolbar);
-            
+
+            SetupNavigationMenu(Resource.Id.mainActv_navigationDrawer);
+
             _mainFragment = SupportFragmentManager.FindFragmentByTag(TagsType.MainParentFragment) as MainFragment;
 
             if(_mainFragment == null)
@@ -47,19 +50,17 @@ namespace Write2Congress.Droid.Activities
 
         protected void SetupToolbar(int toolbarResourceId, string title = "")
         {
-            //var actionMenu = FindViewById<Toolbar>(Resource.Id.main_bottomMenu);
-            //actionMenu.InflateMenu(Resource.Menu.menu_action);
-            //actionMenu.MenuItemClick += ActionMenu_MenuItemClick;
-
             using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
             {
                 //Unlike other attributes the toolbar title needs to be 
                 //set first, otherwise app will default to activity tile
-
                 SetSupportActionBar(toolbar);
-                toolbar.Title = string.IsNullOrWhiteSpace(title)
-                    ? null
-                    : title;
+
+                if (string.IsNullOrWhiteSpace(title))
+                    SupportActionBar.SetDisplayShowTitleEnabled(false);
+                else
+                    toolbar.Title = title;
+
                 toolbar.Elevation = 10f;
             }
         }
@@ -79,7 +80,7 @@ namespace Write2Congress.Droid.Activities
             switch (item.ItemId)
             {
                 case Resource.Id.mainMenu_writeNew:
-                    AppHelper.GetWriteNewLetterIntent(this);
+                    AppHelper.StartWriteNewLetterIntent(this);
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);

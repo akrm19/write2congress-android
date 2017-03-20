@@ -61,10 +61,6 @@ namespace Write2Congress.Droid.Fragments
             _currentAddress = GeoHelper.GetCurrentAddress();
             StateOrTerritory state = AppHelper.GetUsaStateFromAddress(_currentAddress);
             _legislatorsViewer.FilterByStateOrTerritory(state);
-
-            //TEMP: REMOVE
-            //var searchInputTest = View.FindViewById<EditText>(Resource.Id.mainFrag_zip);
-            //searchInputTest.Text = _currentAddress.PostalCode;
         }
     }
 }
