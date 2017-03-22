@@ -86,7 +86,7 @@ namespace Write2Congress.Droid.Adapters
 
             if(legislator == null)
             {
-                Logger.Error($"Unablle to process legislator's action button click. Unable to find legislator at position {position}");
+                Logger.Error($"Unable to process legislator's action button click. Unable to find legislator at position {position}");
                 _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToProcessAction));
                 return;
             }
@@ -207,11 +207,6 @@ namespace Write2Congress.Droid.Adapters
             if (_selectableItemBackground != null)
                 imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
         }
-
-        //protected void WriteLetterAction(Legislator legislator)
-        //{
-        //    AppHelper.StartWriteNewLetterIntent(_fragment.GetBaseActivity(), BundleSenderKind.LegislatorViewer, legislator);
-        //}
 
         protected void ContactMethodAction(ContactMethod contactMethod, bool useChooser)
         {

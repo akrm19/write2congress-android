@@ -24,8 +24,14 @@ namespace Write2Congress.Droid.Activities
     public class WriteLetterActivity : BaseToolbarActivity
     {
         private WriteLetterFragment _writeLetterFragment;
-        private DrawerLayout _drawerLayout;
-        //private NavigationView _navigationView; 
+
+        protected override int DrawerLayoutId
+        {
+            get
+            {
+                return Resource.Id.writeLetterActv_parent;
+            }
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,7 +40,6 @@ namespace Write2Congress.Droid.Activities
             SetContentView(Resource.Layout.actv_WriteLetter);
             SetupNavigationMenu(Resource.Id.writeLetterActv_navigationDrawer);
 
-            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.writeLetterActv_parent);
             _writeLetterFragment = SupportFragmentManager.FindFragmentByTag(TagsType.WriteLetterFragment) as WriteLetterFragment;
 
             if(_writeLetterFragment == null)
@@ -85,13 +90,6 @@ namespace Write2Congress.Droid.Activities
                 MyLogger.Error($"Unable to retrieve letter from intent's {BundleType.Letter} extra.");
 
             return letter;
-            //if (Intent == null || !Intent.HasExtra(BundleType.Letter))
-            //    return null;
-            //
-            //var serialziedLetter = Intent.GetStringExtra(BundleType.Letter);
-            //
-            //var letter = new Letter().DeserializeFromJson(serialziedLetter);
-            //return letter;
         }
 
         private Legislator GetLegislatorFromIntent()
@@ -102,23 +100,6 @@ namespace Write2Congress.Droid.Activities
                 MyLogger.Error($"Unable to retrieve legislator from intent's {BundleType.Legislator} extra.");
 
             return legislator;
-            /*
-            var serializedLegislator = Intent.Extras.ContainsKey(BundleType.Legislator)
-                ? Intent.GetStringExtra(BundleType.Legislator)
-                : string.Empty;
-
-            try
-            {
-                return string.IsNullOrWhiteSpace(serializedLegislator)
-                    ? null
-                    : new Legislator().DeserializeFromJson(serializedLegislator);
-            }
-            catch (Exception ex)
-            {
-                MyLogger.Error($"Unable to deserialize legislator from string: {serializedLegislator}");
-                return null;
-            }
-            */
         }
     }
 }

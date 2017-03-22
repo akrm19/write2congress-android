@@ -48,8 +48,34 @@ namespace Write2Congress.Droid.Fragments
                 : title;
 
             GetBaseActivity().SetSupportActionBar(toolbar);
+            GetToolbar().SetHomeAsUpIndicator(Resource.Drawable.ic_action_menu);
+            GetToolbar().SetDisplayHomeAsUpEnabled(true);
 
             return toolbar; 
+        }
+
+        protected virtual void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
+        {
+            switch (e.Item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    (Activity as BaseToolbarActivity).CurrentDrawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    (Activity as BaseToolbarActivity).CurrentDrawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
+                    return true;
+            }
+
+            return base.OnOptionsItemSelected(item);    
         }
 
         public void ShowToast(string message, ToastLength lenght = ToastLength.Short)

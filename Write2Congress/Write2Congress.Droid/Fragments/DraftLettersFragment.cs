@@ -17,6 +17,7 @@ using Write2Congress.Droid.Activities;
 using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.DomainModel.Enums;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -55,7 +56,7 @@ namespace Write2Congress.Droid.Fragments
             _draftsRecyclerView.SmoothScrollToPosition(0);
         }
 
-        private void Toolbar_MenuItemClick(object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e)
+        protected override void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)  
             {
@@ -72,7 +73,8 @@ namespace Write2Congress.Droid.Fragments
                     ExitButtonPressed();
                     break;
                 default:
-                    break;
+                    base.Toolbar_MenuItemClick(sender, e);
+                     break;
             }
         }
 

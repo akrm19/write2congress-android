@@ -131,9 +131,6 @@ namespace Write2Congress.Droid.Adapters
                 viewHolder.Copy.SetBackgroundResource(_selectableItemBackground.ResourceId);
                 viewHolder.Delete.SetBackgroundResource(_selectableItemBackground.ResourceId);
             }
-
-            //TODO RM: Is unsubscribe method needed or should Item click should be implemented differently?
-            //Example: https://github.com/xamarin/monodroid-samples/blob/master/android5.0/RecyclerViewer/RecyclerViewer/MainActivity.cs
         }
 
         private void Copy_Click(int position)
@@ -164,9 +161,9 @@ namespace Write2Congress.Droid.Adapters
             {
                 _letters.Insert(0, copiedLetter);
                 NotifyItemInserted(0);
-                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.letterCopied));
 
                 OnCopyLetterSucceeded(position);
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.letterCopied));
             }
             else
                 _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToCopyLetter));

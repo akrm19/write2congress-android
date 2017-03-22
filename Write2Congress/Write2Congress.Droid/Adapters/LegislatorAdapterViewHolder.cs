@@ -45,16 +45,16 @@ namespace Write2Congress.Droid.Adapters
             WriteLetter.Click += (sender, e) => writeListener(base.AdapterPosition);
 
             Email = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_email);
-            Email.Click += (sender, e) => actionButtonListner(base.AdapterPosition, Email.Id);
+            Email.Click += (sender, e) => actionButtonListner(base.AdapterPosition, (sender as View).Id);
 
             Phone = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_phone);
-            Phone.Click += (sender, e) => actionButtonListner(base.AdapterPosition, Phone.Id);
+            Phone.Click += (sender, e) => actionButtonListner(base.AdapterPosition, (sender as View).Id);
 
             Address = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_address);
-            Address.Click += (sender, e) => actionButtonListner(base.AdapterPosition, Address.Id);
+            Address.Click += (sender, e) => actionButtonListner(base.AdapterPosition, (sender as View).Id);
 
             Facebook = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_facebook);
-            Facebook.Click += (sender, e) => actionButtonListner(base.AdapterPosition, Facebook.Id);
+            Facebook.Click += (sender, e) => actionButtonListner(base.AdapterPosition, (sender as View).Id);
 
             Twitter = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_twitter);
             Twitter.Click += (sender, e) => actionButtonListner(base.AdapterPosition, (sender as View).Id);
@@ -64,10 +64,6 @@ namespace Write2Congress.Droid.Adapters
 
             YouTube = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_youtube);
             YouTube.Click += (sender, e) => actionButtonListner(base.AdapterPosition, (sender as View).Id);
-
-            //TODO RM: Other possible way to implement onclick
-            //See bottom of post: https://developer.xamarin.com/guides/android/user_interface/recyclerview/
-            //Example code:https://github.com/xamarin/monodroid-samples/blob/master/android5.0/RecyclerViewer/RecyclerViewer/MainActivity.cs
         }
     }
 }

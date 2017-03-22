@@ -15,6 +15,7 @@
   <string name="emptyRecipientText">To: ...</string>
   <string name="emptySubjectText">Subject (optional)</string>
   <string name="emptySignatureText">Letter signature</string>
+  <string name="feedback">Feedback</string>
   <string name="lastSaved">Last saved</string>
   <string name="letterAutoSaved">Letter auto-saved</string>
   <string name="letterCopied">Letter copied</string>

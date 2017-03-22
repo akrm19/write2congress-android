@@ -21,6 +21,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Write2Congress.Droid.Interfaces;
 using Android.Support.Design.Widget;
 using Write2Congress.Droid.DomainModel.Enums;
+using Android.Support.V7.App;
 
 namespace Write2Congress.Droid.Activities
 {
@@ -28,16 +29,22 @@ namespace Write2Congress.Droid.Activities
     public class MainActivity : BaseToolbarActivity, ILegislatorViewerActivity
     {
         private MainFragment _mainFragment;
-        //New listener
         private SearchTextChangedDelegate _legislatorSearchTextChanged;
+
+        protected override int DrawerLayoutId
+        {
+            get
+            {
+                return Resource.Id.mainActv_parent;
+            }
+        }
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
             SetContentView(Resource.Layout.actv_Main);
-            SetupToolbar(Resource.Id.mainActv_toolbar);
 
+            SetupToolbar(Resource.Id.mainActv_toolbar);
             SetupNavigationMenu(Resource.Id.mainActv_navigationDrawer);
 
             _mainFragment = SupportFragmentManager.FindFragmentByTag(TagsType.MainParentFragment) as MainFragment;
@@ -56,13 +63,20 @@ namespace Write2Congress.Droid.Activities
                 //Unlike other attributes the toolbar title needs to be 
                 //set first, otherwise app will default to activity tile
                 SetSupportActionBar(toolbar);
+                SupportActionBar.Elevation = 10f;
+                //toolbar.Elevation = 10f;
 
                 if (string.IsNullOrWhiteSpace(title))
                     SupportActionBar.SetDisplayShowTitleEnabled(false);
                 else
                     toolbar.Title = title;
 
-                toolbar.Elevation = 10f;
+                //SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_action_menu);
+                //SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
+                var drawerToggle = new ActionBarDrawerToggle(this, CurrentDrawerLayout, toolbar, Resource.String.termStarted, Resource.String.termEnds);
+                CurrentDrawerLayout.AddDrawerListener(drawerToggle);
+                drawerToggle.SyncState();
             }
         }
 

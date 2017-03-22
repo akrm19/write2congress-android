@@ -46,7 +46,7 @@ namespace Write2Congress.Droid.Fragments
             return fragment;
         }
 
-        private void Toolbar_MenuItemClick(object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e)
+        protected override void Toolbar_MenuItemClick(object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)
             {
@@ -63,6 +63,7 @@ namespace Write2Congress.Droid.Fragments
                     ExitButtonPressed();
                     break;
                 default:
+                    base.Toolbar_MenuItemClick(sender, e);
                     break;
             }
         }

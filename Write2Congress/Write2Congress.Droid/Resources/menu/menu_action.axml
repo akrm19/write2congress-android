@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/actionMenu_writeNew" 
-		  android:icon="@drawable/ic_create_white_48dp" 
-		  android:showAsAction="always" 
-		  android:title="@string/writeNew" />
-  
-	<item android:id="@+id/actionMenu_drafts" 
-		  android:icon="@drawable/ic_drafts_white_48dp" 
-		  android:showAsAction="always"
-		  android:title="@string/drafts" />
-  
-	<item android:id="@+id/actionMenu_sent" 
-		  android:icon="@drawable/ic_send_white_48dp" 
-		  android:showAsAction="always" 
-		  android:title="@string/sent" />
-  
-  <item android:id="@+id/actionMenu_search"
-      android:icon="@drawable/ic_search_white_48dp"
-      android:showAsAction="always"
-      android:title="@string/searchLegislators"
-      android:actionViewClass="android.support.v7.widget.SearchView"/>
+  <group android:checkableBehavior="single">
+	  <item android:id="@+id/actionMenu_writeNew" 
+	  	  android:icon="@drawable/ic_create_white_48dp" 
+	  	  android:showAsAction="always" 
+	  	  android:title="@string/writeNew" />
+    
+	  <item android:id="@+id/actionMenu_drafts" 
+	  	  android:icon="@drawable/ic_drafts_white_48dp" 
+	  	  android:showAsAction="always"
+	  	  android:title="@string/drafts" />
+    
+	  <item android:id="@+id/actionMenu_sent" 
+	  	  android:icon="@drawable/ic_send_white_48dp" 
+	  	  android:showAsAction="always" 
+	  	  android:title="@string/sent" />
+    
+    <item android:id="@+id/actionMenu_search"
+        android:icon="@drawable/ic_search_white_48dp"
+        android:showAsAction="always"
+        android:title="@string/searchLegislators"
+        android:actionViewClass="android.support.v7.widget.SearchView"/>
+  </group>
+  <item android:title="Options">
+    <menu>
+      <item android:id="@+id/actionMenu_settings"
+        android:icon="@drawable/ic_action_settings_blue"
+        android:showAsAction="always"
+        android:title="@string/settings" />      
+
+      <item android:id="@+id/actionMenu_feedback"
+	  	  android:icon="@drawable/ic_action_comment_blue"
+	  	  android:showAsAction="always"
+	  	  android:title="@string/feedback" />
+      
+      <item android:id="@+id/actionMenu_donate"
+	  	  android:icon="@drawable/ic_action_heart_blue"
+	  	  android:showAsAction="always"
+	  	  android:title="@string/donate" />
+      
+      <item android:id="@+id/actionMenu_exit"
+	  	  android:icon="@drawable/ic_action_exit_blue"
+	  	  android:showAsAction="always"
+	  	  android:title="@string/exit" />
+    </menu>
+  </item>
 </menu>

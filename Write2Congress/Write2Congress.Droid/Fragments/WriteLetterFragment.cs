@@ -119,7 +119,7 @@ namespace Write2Congress.Droid.Fragments
             _autoSaveTimer.Dispose();
         }
 
-        private void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
+        protected override void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)
             {
@@ -142,6 +142,7 @@ namespace Write2Congress.Droid.Fragments
                     ExitButtonPressed();
                     break;
                 default:
+                    base.Toolbar_MenuItemClick(sender, e);
                     break;
             }
         }

@@ -22,6 +22,14 @@ namespace Write2Congress.Droid.Activities
         private string _fragmentType;
         private BaseFragment _currentFragment;
 
+        protected override int DrawerLayoutId
+        {
+            get
+            {
+                return Resource.Id.viewLettersActv_parent;
+            }
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

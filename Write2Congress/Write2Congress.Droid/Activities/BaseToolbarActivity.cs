@@ -17,12 +17,27 @@ using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Droid.Code;
 using Android.Support.Design.Widget;
 using Write2Congress.Droid.Fragments;
+using Android.Support.V4.Widget;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity]
     public abstract class BaseToolbarActivity : BaseActivity
     {
+        protected abstract int DrawerLayoutId { get; }
+        private DrawerLayout _currentDrawerLayout;
+
+        public DrawerLayout CurrentDrawerLayout
+        {
+            get
+            {
+                if (_currentDrawerLayout == null)
+                     _currentDrawerLayout = FindViewById<DrawerLayout>(DrawerLayoutId);
+
+                return _currentDrawerLayout;
+            }
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -34,12 +49,15 @@ namespace Write2Congress.Droid.Activities
                 navigationView.NavigationItemSelected += NavigationItemSelected;
         }
 
+
         protected void NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
+            e.MenuItem.SetChecked(true);
+            e.Handled = true;
+
             switch (e.MenuItem.ItemId)
             {
                 case Resource.Id.actionMenu_drafts:
-                    e.Handled = true;
                     OpenDrafts();
                     break;
                 case Resource.Id.actionMenu_sent:
@@ -47,7 +65,7 @@ namespace Write2Congress.Droid.Activities
                     break;
                 case Resource.Id.actionMenu_search:
                     OpenLegislatorSearch();
-                    e.Handled = true;
+                    //e.Handled = true;
                     break;
                 case Resource.Id.actionMenu_writeNew:
                     OpenWriteNewLetter();
@@ -55,6 +73,8 @@ namespace Write2Congress.Droid.Activities
                 default:
                     break;
             }
+
+            CurrentDrawerLayout.CloseDrawers();
         }
 
         private void OpenWriteNewLetter()
