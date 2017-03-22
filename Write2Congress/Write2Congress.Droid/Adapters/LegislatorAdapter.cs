@@ -15,6 +15,7 @@ using Write2Congress.Droid.Activities;
 using Write2Congress.Droid.Fragments;
 using Write2Congress.Droid.Code;
 using Android.Util;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Adapters
 {
@@ -26,10 +27,9 @@ namespace Write2Congress.Droid.Adapters
         private TypedValue _selectableItemBackground = new TypedValue();
         private string _termStartDate, _termEndDate, _senate, _congress;
 
-        //public LegislatorAdapter(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
-        //{ }
+        public event EventHandler<int> WriteLetterToLegislatorClick;
 
-        public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators) //: base()
+        public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators) 
         {
             Logger = new Logger(Class.SimpleName);
             _legislators = legislators;
@@ -60,23 +60,89 @@ namespace Write2Congress.Droid.Adapters
             }
         }
 
+        public Legislator GetLegislatorAtPosition(int position)
+        {
+            
+            if (_legislators.Count > position)
+                return _legislators[position];
+
+            return null;
+        }
+
         public void UpdateLegislators(List<Legislator> legislators)
         {
             _legislators = legislators;
             NotifyDataSetChanged();
         }
 
-        // Create new views (invoked by the layout manager)
+        private void OnWriteLetterToLegislatorClick(int position)
+        {
+            WriteLetterToLegislatorClick?.Invoke(this, position);
+        }
+
+        private void OnActionButtonClick(int position, int buttonResourceId)
+        {
+            var legislator = GetLegislatorAtPosition(position);
+
+            if(legislator == null)
+            {
+                Logger.Error($"Unablle to process legislator's action button click. Unable to find legislator at position {position}");
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToProcessAction));
+                return;
+            }
+
+            ContactMethod contactMethod = null;
+
+            switch (buttonResourceId)
+            {
+                case Resource.Id.legislatorCtrl_email:
+                    contactMethod = legislator.Email;
+                    break;
+                case Resource.Id.legislatorCtrl_phone:
+                    contactMethod = legislator.OfficeNumber;
+                    break;
+                case Resource.Id.legislatorCtrl_address:
+                    contactMethod = legislator.OfficeAddress;
+                    break;
+                case Resource.Id.legislatorCtrl_facebook:
+                    contactMethod = legislator.FacebookId;
+                    break;
+                case Resource.Id.legislatorCtrl_twitter:
+                    contactMethod = legislator.TwitterId;
+                    break;
+                case Resource.Id.legislatorCtrl_youtube:
+                    contactMethod = legislator.YouTubeId;
+                    break;
+                case Resource.Id.legislatorCtrl_webpage:
+                    contactMethod = legislator.Website;
+                    break;
+            }
+
+            if (contactMethod != null)
+                ContactMethodAction(contactMethod, false);
+        }
+
+        /// <summary>
+        /// Create new views (invoked by the layout manager)
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="viewType"></param>
+        /// <returns></returns>
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var legislatorView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Legislator, parent, false);
 
-            return new LegislatorAdapterViewHolder(legislatorView);
+            return new LegislatorAdapterViewHolder(legislatorView, OnWriteLetterToLegislatorClick, OnActionButtonClick);
         }
 
-        // Replace the contents of a view (invoked by the layout manager
+        /// <summary>
+        /// Replace the contents of a view (invoked by the layout manager)
+        /// </summary>
+        /// <param name="holder"></param>
+        /// <param name="position"></param>
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
+            //TODO RM: Since position is not zero base, do we need to decrease 1 from it?
             var legislator = _legislators[position];
             var viewHolder = holder as LegislatorAdapterViewHolder;
 
@@ -94,34 +160,19 @@ namespace Write2Congress.Droid.Adapters
                 : $"{_termEndDate}: {legislator.TermEndDate.ToShortDateString()}";
 
             //Contact, social media, ect buttons
-            SetWriteLettterButton(viewHolder.WriteLetter, legislator);
-            SetImageButton(viewHolder.Email, legislator.Email);
-            SetImageButton(viewHolder.Phone, legislator.OfficeNumber);
-            SetImageButton(viewHolder.Address, legislator.OfficeAddress);
+            SetImageButtonVisibility(viewHolder.WriteLetter, legislator.Email);
+            SetImageButtonVisibility(viewHolder.Email, legislator.Email);
+            SetImageButtonVisibility(viewHolder.Phone, legislator.OfficeNumber);
+            SetImageButtonVisibility(viewHolder.Address, legislator.OfficeAddress);
 
-            SetImageButton(viewHolder.Facebook, legislator.FacebookId);
-            SetImageButton(viewHolder.Twitter, legislator.TwitterId);
-            SetImageButton(viewHolder.Webpage, legislator.Website);
-            SetImageButton(viewHolder.YouTube, legislator.YouTubeId);
+            SetImageButtonVisibility(viewHolder.Facebook, legislator.FacebookId);
+            SetImageButtonVisibility(viewHolder.Twitter, legislator.TwitterId);
+            SetImageButtonVisibility(viewHolder.Webpage, legislator.Website);
+            SetImageButtonVisibility(viewHolder.YouTube, legislator.YouTubeId);
         }
 
         private void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
-        {
-            //TODO RM: Implement protrait?
-            //var portraitBitmap = AppHelper.GetPortraitForLegislator(legislator);
-            //
-            //if (portraitBitmap != null)
-            //    imageButton.SetImageBitmap(portraitBitmap);
-            //else
-
-            //TODO RM: Look into seeing current image, if it is a republic image and legislator
-            //is republican, then don't update
-            
-            SetDefaultLegislatorPortrait(legislator, imageButton);
-        }
-
-        private void SetDefaultLegislatorPortrait(Legislator legislator, ImageView imageButton)
-        {
+        {           
             switch (legislator.Party)
             {
                 case Shared.DomainModel.Enum.Party.Democratic:
@@ -147,25 +198,6 @@ namespace Write2Congress.Droid.Adapters
             }
         }
 
-        private void SetWriteLettterButton(ImageView imageButton, Legislator legislator)
-        {
-            SetImageButtonVisibility(imageButton, legislator.Email);
-
-            imageButton.Click -= (sender, e) => WriteLetterAction(legislator);
-            imageButton.Click += (sender, e) => WriteLetterAction(legislator);
-
-        }
-
-        private void SetImageButton(ImageView imageButton, ContactMethod contactMethod)
-        {
-            SetImageButtonVisibility(imageButton, contactMethod);
-
-            //TODO RM: Is unsubscribe method needed or should Item click should be implemented differently?
-            //Example: https://github.com/xamarin/monodroid-samples/blob/master/android5.0/RecyclerViewer/RecyclerViewer/MainActivity.cs
-            imageButton.Click -= (sender, e) => ContactMethodAction(contactMethod);
-            imageButton.Click += (sender, e) => ContactMethodAction(contactMethod);
-        }
-
         private void SetImageButtonVisibility(ImageView imageButton, ContactMethod contactMethod)
         {
             imageButton.Visibility = contactMethod.IsEmpty
@@ -176,14 +208,17 @@ namespace Write2Congress.Droid.Adapters
                 imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
         }
 
-        protected void WriteLetterAction(Legislator legislator)
-        {
-            AppHelper.StartWriteNewLetterIntent(_fragment.GetBaseActivity(), legislator);
-        }
+        //protected void WriteLetterAction(Legislator legislator)
+        //{
+        //    AppHelper.StartWriteNewLetterIntent(_fragment.GetBaseActivity(), BundleSenderKind.LegislatorViewer, legislator);
+        //}
 
-        protected void ContactMethodAction(ContactMethod contactMethod)
+        protected void ContactMethodAction(ContactMethod contactMethod, bool useChooser)
         {
-            var intent = Intent.CreateChooser(AppHelper.GetIntentForContactMethod(contactMethod), "Open with");
+            var intent = useChooser
+                ? Intent.CreateChooser(AppHelper.GetIntentForContactMethod(contactMethod), "Open with")
+                : new Intent(AppHelper.GetIntentForContactMethod(contactMethod));
+
             _fragment.StartActivity(intent);
         }
     }

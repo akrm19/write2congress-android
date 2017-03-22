@@ -15,6 +15,7 @@ using Android.Locations;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.BusinessLayer;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Write2Congress.Droid.Code
 {
@@ -40,11 +41,6 @@ namespace Write2Congress.Droid.Code
             transaction.Commit();
         }
 
-        public static string GetString(int resourceId)
-        {
-            return BaseApplication.Context.GetString(resourceId);
-        }
-
         public static Intent GetSendEmailIntent(string to, string subject, string body, string cc)
         {
             var intent = new Intent(Intent.ActionSend);
@@ -65,6 +61,32 @@ namespace Write2Congress.Droid.Code
             intent.SetType("message/rfc822");
 
             return intent;
+        }
+
+        public static T GetSerializedTypeFromIntent<T>(Intent intent, string extraName) where T : class
+        {
+            try
+            {
+                if (intent == null || !intent.HasExtra(extraName))
+                    return default(T);
+
+                var serializedObject = intent.GetStringExtra(extraName);
+                
+                var result = JsonConvert.DeserializeObject<T>(serializedObject);
+    
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                //TODO RM: adding logging
+                return default(T);
+            }
+        }
+
+        public static string GetString(int resourceId)
+        {
+            return BaseApplication.Context.GetString(resourceId);
         }
 
         #region File Helpers

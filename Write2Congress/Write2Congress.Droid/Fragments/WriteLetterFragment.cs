@@ -46,8 +46,8 @@ namespace Write2Congress.Droid.Fragments
 
         public WriteLetterFragment(Legislator legislator) : this()
         {
-            //_selectedLegislator = legislator;
-            _currentLetter = new Letter(legislator);
+            if(legislator != null)
+                _currentLetter = new Letter(legislator);
         }
 
         public WriteLetterFragment(Letter letter) : this()

@@ -23,11 +23,10 @@ namespace Write2Congress.Droid.Adapters
         public TextView LastSavedDate;
         public TextView SendDate;
 
-        public ImageButton OpenOrEdit;
         public ImageButton Copy;
         public ImageButton Delete;
 
-        public LetterAdapterViewHolder(View itemView) : base(itemView)
+        public LetterAdapterViewHolder(View itemView, Action<int> onClickListener, Action<int> onCopyClickListner, Action<int> onDeleteClickListener) : base(itemView)
         {
             Image = itemView.FindViewById<ImageView>(Resource.Id.letterCtrl_image);
 
@@ -36,9 +35,16 @@ namespace Write2Congress.Droid.Adapters
             LastSavedDate = itemView.FindViewById<TextView>(Resource.Id.letterCtrl_lastSavedDate);
             SendDate = itemView.FindViewById<TextView>(Resource.Id.letterCtrl_sentDate);
 
-            OpenOrEdit = itemView.FindViewById<ImageButton>(Resource.Id.letterCrl_viewOrEdit);
             Copy = itemView.FindViewById<ImageButton>(Resource.Id.letterCtrl_copy);
+            Copy.Click -= (sender, e) => onCopyClickListner(AdapterPosition);
+            Copy.Click += (sender, e) => onCopyClickListner(AdapterPosition);
+
             Delete = itemView.FindViewById<ImageButton>(Resource.Id.letterCtrl_delete);
+            Delete.Click -= (sender, e) => onDeleteClickListener(AdapterPosition);
+            Delete.Click += (sender, e) => onDeleteClickListener(AdapterPosition);
+
+            itemView.Click -= (sender, e) => onClickListener(AdapterPosition);
+            itemView.Click += (sender, e) => onClickListener(AdapterPosition);
         }
     }
 }

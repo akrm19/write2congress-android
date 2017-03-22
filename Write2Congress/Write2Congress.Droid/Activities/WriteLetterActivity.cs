@@ -16,6 +16,7 @@ using Write2Congress.Droid.Code;
 using Write2Congress.Shared.DomainModel;
 using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Activities
 {
@@ -38,27 +39,70 @@ namespace Write2Congress.Droid.Activities
 
             if(_writeLetterFragment == null)
             {
-                //TODO RM: look into why this not work when click from legislators view
-                var letter = GetLetterFromIntent();
-                _writeLetterFragment = new WriteLetterFragment(letter);
+                var senderKind = GetSenderKindFromIntent();
+
+                switch (senderKind)
+                {
+                    case BundleSenderKind.LegislatorViewer:
+                        var legislator = GetLegislatorFromIntent();
+                        _writeLetterFragment = new WriteLetterFragment(legislator);
+                        break;
+                    case BundleSenderKind.ViewLettersAdapter:
+                        var letter = GetLetterFromIntent();
+                        _writeLetterFragment = new WriteLetterFragment(letter);
+                        break;
+                    default:
+                        _writeLetterFragment = new WriteLetterFragment();
+                        break;
+                }
 
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _writeLetterFragment, Resource.Id.writeLetterActv_fragmentContainer, TagsType.WriteLetterFragment);
             }
         }
 
+        private BundleSenderKind GetSenderKindFromIntent()
+        {
+            try
+            {
+                if (Intent == null || !Intent.HasExtra(BundleType.Sender))
+                    return default(BundleSenderKind);
+
+                var senderKindAsInt = Intent.GetIntExtra(BundleType.Sender, 0);
+                return (BundleSenderKind)senderKindAsInt;
+            }
+            catch (Exception ex)
+            {
+                MyLogger.Error($"Unable to retrieve {BundleType.Sender} from intent Extras. Error {ex.ToString()}");
+                return default(BundleSenderKind);
+            }
+        }
+
         private Letter GetLetterFromIntent()
         {
-            if (Intent == null || !Intent.HasExtra(BundleType.Letter))
-                return null;
+            var letter = AndroidHelper.GetSerializedTypeFromIntent<Letter>(Intent, BundleType.Letter);
 
-            var serialziedLetter = Intent.GetStringExtra(BundleType.Letter);
+            if (letter == null)
+                MyLogger.Error($"Unable to retrieve letter from intent's {BundleType.Letter} extra.");
 
-            var letter = new Letter().DeserializeFromJson(serialziedLetter);
             return letter;
+            //if (Intent == null || !Intent.HasExtra(BundleType.Letter))
+            //    return null;
+            //
+            //var serialziedLetter = Intent.GetStringExtra(BundleType.Letter);
+            //
+            //var letter = new Letter().DeserializeFromJson(serialziedLetter);
+            //return letter;
         }
 
         private Legislator GetLegislatorFromIntent()
         {
+            var legislator = AndroidHelper.GetSerializedTypeFromIntent<Legislator>(Intent, BundleType.Legislator);
+
+            if (legislator == null)
+                MyLogger.Error($"Unable to retrieve legislator from intent's {BundleType.Legislator} extra.");
+
+            return legislator;
+            /*
             var serializedLegislator = Intent.Extras.ContainsKey(BundleType.Legislator)
                 ? Intent.GetStringExtra(BundleType.Legislator)
                 : string.Empty;
@@ -74,6 +118,7 @@ namespace Write2Congress.Droid.Activities
                 MyLogger.Error($"Unable to deserialize legislator from string: {serializedLegislator}");
                 return null;
             }
+            */
         }
     }
 }

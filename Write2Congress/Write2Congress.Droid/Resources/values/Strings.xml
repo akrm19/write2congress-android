@@ -16,10 +16,11 @@
   <string name="emptySubjectText">Subject (optional)</string>
   <string name="emptySignatureText">Letter signature</string>
   <string name="lastSaved">Last saved</string>
-  <string name="letterRecipient">Letter Recipient</string>
+  <string name="letterAutoSaved">Letter auto-saved</string>
+  <string name="letterCopied">Letter copied</string>
   <string name="letterDeleted">Letter was succesfully deleted</string>
   <string name="letterDeleteFailed">Error: Unable to delete letter</string>
-  <string name="letterAutoSaved">Letter auto-saved</string>
+  <string name="letterRecipient">Letter Recipient</string>
   <string name="letterSaved">Letter saved</string>
   <string name="letterSaveFailed">Error: Unabled to save letter</string>
   <string name="refresh">Refresh</string>
@@ -33,6 +34,9 @@
   <string name="subject">Subject</string>
   <string name="termEnds">Term Ends</string>
   <string name="termStarted">Term Started</string>
+  <string name="unableToCopyLetter">Unable to copy letter</string>
+  <string name="unableToDeleteLetter">Unable to delete letter</string>
+  <string name="unableToProcessAction">Unable to process action</string>
   <string name="unknown">Unknown</string>
   <string name="updatedDraftLetters">Updated Draft Letters</string>
   <string name="updatedSentLetters">Updated Sent Letters</string>

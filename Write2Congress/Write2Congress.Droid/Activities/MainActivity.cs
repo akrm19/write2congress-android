@@ -20,6 +20,7 @@ using SearchView = Android.Support.V7.Widget.SearchView;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Write2Congress.Droid.Interfaces;
 using Android.Support.Design.Widget;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Activities
 {
@@ -80,7 +81,7 @@ namespace Write2Congress.Droid.Activities
             switch (item.ItemId)
             {
                 case Resource.Id.mainMenu_writeNew:
-                    AppHelper.StartWriteNewLetterIntent(this);
+                    AppHelper.StartWriteNewLetterIntent(this, BundleSenderKind.LegislatorViewer);
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);

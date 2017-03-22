@@ -21,23 +21,17 @@ namespace Write2Congress.Droid.Fragments
 {
     public class BaseFragment : Android.Support.V4.App.Fragment
     {
-        public Logger Logger2;
+        protected Logger MyLogger;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            //TODO RM: Rename this to Logger and Logger to MyLogger
-            Logger2 = new Logger(Class.SimpleName);
-
-            // Create your fragment here
+            MyLogger = new Logger(Class.SimpleName);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-
             return base.OnCreateView(inflater, container, savedInstanceState);
         }
 

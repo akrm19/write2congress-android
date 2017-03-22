@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="8dp"
-                android:layout_weight=".5"
+                android:layout_weight=".7"
                 android:id="@+id/letterCtrl_basicInfoParent">
                 <TextView
                     android:text="Subject"
@@ -62,16 +62,11 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight=".5"
+                android:layout_weight=".3"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:id="@+id/letterCtrl_actionButtonsParent" >
-                <ImageButton
-                    android:src="@drawable/ic_assignment_blue_48dp"
-                    android:layout_width="48dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/letterCrl_viewOrEdit" />
+                android:id="@+id/letterCtrl_actionButtonsParent">
                 <ImageButton
                     android:src="@drawable/ic_copy_blue_48dp"
                     android:layout_width="wrap_content"

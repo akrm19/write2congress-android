@@ -132,6 +132,7 @@
     <Compile Include="Code\LetterFileProvider.cs" />
     <Compile Include="DomainModel\Constants\BundleType.cs" />
     <Compile Include="DomainModel\Constants\ViewLettersFragmentType.cs" />
+    <Compile Include="DomainModel\Enums\BundleSenderKind.cs" />
     <Compile Include="DomainModel\Interfaces\ILegislatorViewerActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\LegislatorAdapter.cs" />
@@ -219,9 +220,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DomainModel\Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\values\Colors.xml" />
   </ItemGroup>

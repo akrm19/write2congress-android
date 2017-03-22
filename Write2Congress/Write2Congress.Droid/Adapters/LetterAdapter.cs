@@ -28,6 +28,11 @@ namespace Write2Congress.Droid.Adapters
         private TypedValue _selectableItemBackground = new TypedValue();
         private string _lastSavedDate, _sendDate;
 
+        public event EventHandler<int> LetterClick;
+        public event EventHandler<int> CopyLetterClick;
+        public event EventHandler<int> CopyLetterSucceeded;
+        public event EventHandler<int> DeleteLetterClick;
+
         public LetterAdapter(BaseFragment fragment, List<Letter> letters)
         {
             _logger = new Logger(Class.SimpleName);
@@ -65,10 +70,33 @@ namespace Write2Congress.Droid.Adapters
             _fragment.ShowToast(AndroidHelper.GetString(Resource.String.updatedDraftLetters), ToastLength.Short);
         }
 
+        protected void OnClick(int position)
+        {
+            LetterClick?.Invoke(this, position);
+            OnClick(position);
+        }
+
+        protected void OnCopyLetterClick(int position)
+        {
+            CopyLetterClick?.Invoke(this, position);
+            Copy_Click(position);
+        }
+
+        protected void OnCopyLetterSucceeded(int position)
+        {
+            CopyLetterSucceeded?.Invoke(this, position);
+        }
+
+        protected void OnDeleteLetterClick(int position)
+        {
+            DeleteLetterClick?.Invoke(this, position);
+            Delete_Click(position);
+        }
+
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            //var letterView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Letter, parent, false);
-            return new LetterAdapterViewHolder(LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Letter, parent, false));
+            var letterView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Letter, parent, false);
+            return new LetterAdapterViewHolder(letterView, OnClick, OnCopyLetterClick, OnDeleteLetterClick);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
@@ -76,8 +104,7 @@ namespace Write2Congress.Droid.Adapters
             var letter = _letters[position];
             var viewHolder = holder as LetterAdapterViewHolder;
 
-            //TODO RM: change color backgroudn and images
-            viewHolder.Image.SetBackgroundResource(Resource.Color.accent_purple); // (Android.Graphics.Color.CadetBlue);
+            viewHolder.Image.SetBackgroundResource(Resource.Color.accent_purple); 
             viewHolder.Image.SetImageResource(letter.Sent
                 ? Resource.Drawable.ic_send_white_48dp
                 : Resource.Drawable.ic_drafts_white_48dp);
@@ -101,27 +128,29 @@ namespace Write2Congress.Droid.Adapters
 
             if (_selectableItemBackground != null)
             {
-                viewHolder.OpenOrEdit.SetBackgroundResource(_selectableItemBackground.ResourceId);
                 viewHolder.Copy.SetBackgroundResource(_selectableItemBackground.ResourceId);
                 viewHolder.Delete.SetBackgroundResource(_selectableItemBackground.ResourceId);
             }
 
             //TODO RM: Is unsubscribe method needed or should Item click should be implemented differently?
             //Example: https://github.com/xamarin/monodroid-samples/blob/master/android5.0/RecyclerViewer/RecyclerViewer/MainActivity.cs
-
-            viewHolder.Delete.Click += (sender, e) => Delete_Click(letter, position); 
-            viewHolder.OpenOrEdit.Click += (sender, e) => OpenOrEdit_Click(letter, position);
-            viewHolder.Copy.Click += (sender, e) => Copy_Click(letter, position);
         }
 
-
-        //TODO RM: look into why copied letters are not saved
-        private void Copy_Click(Letter letter, int position)
+        private void Copy_Click(int position)
         {
+            var letter = GetLetterAtPosition(position);
+
+            if(letter == null)
+            {
+                _logger.Error($"Unable to copy letter. Could not retrive letter at position {position}.");
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToCopyLetter));
+                return;
+            }
+
             var copiedLetter = new Letter()
             {
                 Body = letter.Body,
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 DateSent = DateTime.MinValue,
                 LastSaved = DateTime.Now,
                 Recipient = letter.Recipient,
@@ -135,37 +164,46 @@ namespace Write2Congress.Droid.Adapters
             {
                 _letters.Insert(0, copiedLetter);
                 NotifyItemInserted(0);
-                _fragment.ShowToast("Letter Copied");
-                //TODO RM:
-                //((RecyclerView)sender).SmoothScrollToPosition(0);
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.letterCopied));
+
+                OnCopyLetterSucceeded(position);
             }
             else
-                _fragment.ShowToast("Unable to copy letter");
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToCopyLetter));
         }
 
-        private void Delete_Click(Letter letter, int position)
+        private void Delete_Click(int position)
         {
+            var letter = GetLetterAtPosition(position);
+
+            if(letter == null)
+            {
+                _logger.Error($"Unable to delete letter. Could not retrive letter at position {position}.");
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToDeleteLetter));
+                return;
+            }
+
             if (_fragment.GetBaseApp().LetterManager.DeleteLetterById(letter.Id.ToString()))
             {
+                //Position is not zero based
                 _letters.RemoveAt(position);
                 NotifyItemRemoved(position);
-                _fragment.ShowToast("Letter removed");
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.letterDeleted));
             }
             else
-                _fragment.ShowToast("Unable to delete letter");            
+                _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToDeleteLetter));            
         }
 
-        private void OpenOrEdit_Click(Letter letter, int positioni)
+        public List<Letter> GetLetters()
         {
-            using (var intent = new Intent(_fragment.Activity, typeof(WriteLetterActivity)))
-            {
-                _fragment.ShowToast(letter.Id.ToString());
-                var serializedLetter = letter.SerializeToJson();
-                intent.PutExtra(BundleType.Letter, serializedLetter);
+            return _letters;
+        }
 
-                _fragment.Activity.StartActivity(intent);
-                _fragment.Activity.Finish();
-            }
+        public Letter GetLetterAtPosition(int position)
+        {
+            return _letters.Count > position
+                ? _letters[position]
+                : null;
         }
     }
 }

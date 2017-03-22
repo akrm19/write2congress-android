@@ -13,6 +13,10 @@ using Android.Widget;
 using Write2Congress.Droid.Adapters;
 using Android.Support.V7.Widget;
 using Write2Congress.Droid.Code;
+using Write2Congress.Droid.Activities;
+using Write2Congress.Shared.BusinessLayer;
+using Write2Congress.Droid.DomainModel.Constants;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -39,9 +43,16 @@ namespace Write2Congress.Droid.Fragments
 
             var letters = GetBaseApp().LetterManager.GetAllDraftLetters();
             _adapter = new LetterAdapter(this, letters);
+            _adapter.LetterClick += OnLetterClicked;
+            _adapter.CopyLetterSucceeded += CopyLetterSucceeded;
             _draftsRecyclerView.SetAdapter(_adapter);
 
             return fragment;
+        }
+
+        private void CopyLetterSucceeded(object sender, int e)
+        {
+            _draftsRecyclerView.SmoothScrollToPosition(0);
         }
 
         private void Toolbar_MenuItemClick(object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e)
@@ -81,6 +92,19 @@ namespace Write2Congress.Droid.Fragments
             inflater.Inflate(Resource.Menu.menu_viewLetters, menu);
 
             base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        protected void OnLetterClicked(object sender, int position)
+        {
+            var letter = _adapter.GetLetterAtPosition(position);
+
+            if(letter == null)
+            {
+                MyLogger.Error($"Unable to retrieve letter at position {position}");
+                return;
+            }
+
+            AppHelper.StartWriteNewLetterIntent(GetBaseActivity(), BundleSenderKind.ViewLettersAdapter, letter, true);
         }
     }
 }

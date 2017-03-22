@@ -18,6 +18,7 @@ using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Fragments;
 using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Droid.Interfaces;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.CustomControls
 {
@@ -93,7 +94,9 @@ namespace Write2Congress.Droid.CustomControls
 
             //Setup Legislator Adapater
             _legislatorAdapter = new LegislatorAdapter(_fragment, _legislators);
+            _legislatorAdapter.WriteLetterToLegislatorClick += WriteNewLetterItemClicked;
             recyclerView.SetAdapter(_legislatorAdapter);
+            
 
             //Setup States spinner
             _statesAndTerrSpinner = FindViewById<Spinner>(Resource.Id.legislatorsViewer_statesSpinner);
@@ -105,6 +108,20 @@ namespace Write2Congress.Droid.CustomControls
             _statesAndTerrSpinner.ItemSelected += _states_ItemSelected;
 
             HookupToActivitySearchTextChangedDelegate();
+        }
+        
+        void WriteNewLetterItemClicked(object sender, int position)
+        {
+            var legislator = _legislatorAdapter.GetLegislatorAtPosition(position);
+
+            if(legislator == null)
+            {
+                //TODO RM: Add loggin
+                return;
+            }
+            _fragment.ShowToast($"WriteLetter for {legislator.FullName} was clicked!");
+
+            AppHelper.StartWriteNewLetterIntent(_fragment.GetBaseActivity(), BundleSenderKind.LegislatorViewer, legislator);
         }
 
         private void HookupToActivitySearchTextChangedDelegate()
