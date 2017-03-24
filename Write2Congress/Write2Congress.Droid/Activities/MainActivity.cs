@@ -56,30 +56,6 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
-        protected void SetupToolbar(int toolbarResourceId, string title = "")
-        {
-            using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
-            {
-                //Unlike other attributes the toolbar title needs to be 
-                //set first, otherwise app will default to activity tile
-                SetSupportActionBar(toolbar);
-                SupportActionBar.Elevation = 10f;
-                //toolbar.Elevation = 10f;
-
-                if (string.IsNullOrWhiteSpace(title))
-                    SupportActionBar.SetDisplayShowTitleEnabled(false);
-                else
-                    toolbar.Title = title;
-
-                //SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_action_menu);
-                //SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-
-                var drawerToggle = new ActionBarDrawerToggle(this, CurrentDrawerLayout, toolbar, Resource.String.termStarted, Resource.String.termEnds);
-                CurrentDrawerLayout.AddDrawerListener(drawerToggle);
-                drawerToggle.SyncState();
-            }
-        }
-
         private void ActionMenu_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)

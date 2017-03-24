@@ -11,6 +11,10 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/writeLetterActv_fragAndToolbarParent">
+        <include
+            layout="@layout/ctrl_Toolbar"
+            android:minHeight="?android:attr/actionBarSize"
+            android:id="@+id/writeLetterActv_toolbar" />
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -23,9 +27,4 @@
         android:layout_gravity="start"
         android:id="@+id/writeLetterActv_navigationDrawer"
         app:menu="@menu/menu_action"/>
-        <!--
-        app:headerLayout="@layout/drawer_header"
-        app:headerLayout controls the (optional) layout used for the header and 
-        app:menu is the menu resource inflated for the navigation items
-        -->
 </android.support.v4.widget.DrawerLayout>

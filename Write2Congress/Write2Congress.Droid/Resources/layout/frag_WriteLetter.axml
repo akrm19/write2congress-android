@@ -4,10 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/writeLetterFrag_parent">
-    <include
-        layout="@layout/ctrl_Toolbar"
-        android:minHeight="?android:attr/actionBarSize"
-        android:id="@+id/writeLetterFrag_toolbar" />
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -38,6 +38,7 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.actv_WriteLetter);
+            SetupToolbar(Resource.Id.writeLetterActv_toolbar);//, AndroidHelper.GetString(Resource.String.writeNewLetterTitle));
             SetupNavigationMenu(Resource.Id.writeLetterActv_navigationDrawer);
 
             _writeLetterFragment = SupportFragmentManager.FindFragmentByTag(TagsType.WriteLetterFragment) as WriteLetterFragment;

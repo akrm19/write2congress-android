@@ -35,54 +35,20 @@ namespace Write2Congress.Droid.Fragments
             return base.OnCreateView(inflater, container, savedInstanceState);
         }
 
-        protected Toolbar SetupToolbar(View fragment, int toolbarResourceId, string title = "")
-        {
-            //This is needed, others Toolbar will not show
-            HasOptionsMenu = true;
-
-            var toolbar = fragment.FindViewById<Toolbar>(toolbarResourceId);
-            
-            toolbar.Elevation = 10f;
-            toolbar.Title = string.IsNullOrWhiteSpace(title)
-                ? null
-                : title;
-
-            GetBaseActivity().SetSupportActionBar(toolbar);
-            GetToolbar().SetHomeAsUpIndicator(Resource.Drawable.ic_action_menu);
-            GetToolbar().SetDisplayHomeAsUpEnabled(true);
-
-            return toolbar; 
-        }
-
-        protected virtual void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
-        {
-            switch (e.Item.ItemId)
-            {
-                case Android.Resource.Id.Home:
-                    (Activity as BaseToolbarActivity).CurrentDrawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
                     (Activity as BaseToolbarActivity).CurrentDrawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
-                    return true;
+                    break;
+                    //return true;
             }
 
             return base.OnOptionsItemSelected(item);    
         }
 
-        public void ShowToast(string message, ToastLength lenght = ToastLength.Short)
-        {
-            Toast.MakeText(this.Context, message, lenght).Show();
-        }
-
+        /*
         protected void ExitButtonPressed()
         {
             (Activity as BaseToolbarActivity).ExitButtonPressed();
@@ -97,8 +63,14 @@ namespace Write2Congress.Droid.Fragments
         {
             (Activity as BaseToolbarActivity).SettingsPressed();
         }
+        */
 
-        #region Helpers - Getter
+        public void ShowToast(string message, ToastLength lenght = ToastLength.Short)
+        {
+            Toast.MakeText(this.Context, message, lenght).Show();
+        }
+
+        #region Helpers - Getters
 
         public BaseApplication GetBaseApp()
         {

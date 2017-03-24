@@ -63,17 +63,16 @@ namespace Write2Congress.Droid.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            //This is needed to tell host activity that the fragment as menu options to add
+            HasOptionsMenu = true;
+
             // Use this to return your custom view for this Fragment
             var fragment = inflater.Inflate(Resource.Layout.frag_WriteLetter, container, false);
-
-            var toolbar = SetupToolbar(fragment, Resource.Id.writeLetterFrag_toolbar, AndroidHelper.GetString(Resource.String.writeNewLetterTitle));
-            toolbar.MenuItemClick += Toolbar_MenuItemClick;
 
             _recipient = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_recipient);
             _subject = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_subject);
@@ -119,9 +118,16 @@ namespace Write2Congress.Droid.Fragments
             _autoSaveTimer.Dispose();
         }
 
-        protected override void Toolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
         {
-            switch (e.Item.ItemId)
+            inflater.Inflate(Resource.Menu.menu_writeLetter, menu);
+
+            base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
             {
                 case Resource.Id.writeLetterMenu_send:
                     SendCurrentLetter();
@@ -132,24 +138,24 @@ namespace Write2Congress.Droid.Fragments
                 case Resource.Id.writeLetterMenu_delete:
                     DeleteCurrentLetter();
                     break;
-                case Resource.Id.writeLetterMenu_donate:
-                    DonatePressed();
-                    break;
-                case Resource.Id.writeLetterMenu_settings:
-                    SettingsPressed();
-                    break;
-                case Resource.Id.writeLetterMenu_exit:
-                    ExitButtonPressed();
-                    break;
+                //case Resource.Id.writeLetterMenu_donate:
+                //    DonatePressed();
+                //    break;
+                //case Resource.Id.writeLetterMenu_settings:
+                //    SettingsPressed();
+                //    break;
+                //case Resource.Id.writeLetterMenu_exit:
+                //    ExitButtonPressed();
+                //    break;
                 default:
-                    base.Toolbar_MenuItemClick(sender, e);
-                    break;
+                    return base.OnOptionsItemSelected(item);
             }
+            return true;
         }
 
         private void SendCurrentLetter()
         {
-            if(string.IsNullOrWhiteSpace(_recipient.Text))
+            if (string.IsNullOrWhiteSpace(_recipient.Text))
             {
                 ShowToast(GetString(Resource.String.cannotSendLetterWithoutRecipient));
                 return;
@@ -164,7 +170,7 @@ namespace Write2Congress.Droid.Fragments
         {
             var result = GetLetterManager().DeleteLetterById(_currentLetter.Id.ToString());
 
-            if(result)
+            if (result)
                 ClearTextFields();
 
             ShowToast(GetString(result
@@ -197,7 +203,7 @@ namespace Write2Congress.Droid.Fragments
             {
                 _lastSaved.Text = GetLastSavedText(_currentLetter.LastSaved);
 
-                if(showToastUpdate)
+                if (showToastUpdate)
                     ShowToast(GetString(isAutoSave
                         ? Resource.String.letterAutoSaved
                         : Resource.String.letterSaved));
@@ -209,13 +215,6 @@ namespace Write2Congress.Droid.Fragments
                 if (!isAutoSave && showToastUpdate)
                     ShowToast(GetString(Resource.String.letterSaveFailed));
             }
-        }
-
-        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
-        {
-            inflater.Inflate(Resource.Menu.menu_writeLetter, menu);
-
-            base.OnCreateOptionsMenu(menu, inflater);
         }
 
         private void PopulateFieldsFromSavedLetter(Letter letter)

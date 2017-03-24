@@ -37,19 +37,15 @@ namespace Write2Congress.Droid.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            //This is needed to tell host activity that the fragment as menu options to add
+            HasOptionsMenu = true;
+
             //Inflate fragment
             var mainFragment = inflater.Inflate(Resource.Layout.frag_Main, container, false);
 
             //Setup legislatorsViewer
             _legislatorsViewer = mainFragment.FindViewById<LegislatorsViewer>(Resource.Id.mainFrag_legislatorsViewer);
             _legislatorsViewer.SetupCtrl(this, AppHelper.GetCachedLegislators());
-            
-            //Temp
-            //using (var button = mainFragment.FindViewById<Button>(Resource.Id.mainFrag_myButton))
-            //    button.Click += delegate {
-            //        var searchInputTest = mainFragment.FindViewById<EditText>(Resource.Id.mainFrag_zip);
-            //        _legislatorsViewer.FilterLegislatorsByFirstMiddleOrLastName(searchInputTest.Text);
-            //    };
 
             return mainFragment;
         }

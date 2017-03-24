@@ -24,16 +24,14 @@ namespace Write2Congress.Droid.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var fragment = inflater.Inflate(Resource.Layout.frag_ViewLetters, container, false);
+            HasOptionsMenu = true;
 
-            var toolbar = SetupToolbar(fragment, Resource.Id.viewLettersFrag_toolbar, AndroidHelper.GetString(Resource.String.sent));
-            toolbar.MenuItemClick += Toolbar_MenuItemClick;
+            var fragment = inflater.Inflate(Resource.Layout.frag_ViewLetters, container, false);
 
             _sentLettersRecyclerView = fragment.FindViewById<RecyclerView>(Resource.Id.viewLettersFrag_lettersRecycler);
             var layoutManager = new LinearLayoutManager(fragment.Context, LinearLayoutManager.Vertical, false);
@@ -46,33 +44,24 @@ namespace Write2Congress.Droid.Fragments
             return fragment;
         }
 
-        protected override void Toolbar_MenuItemClick(object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e)
-        {
-            switch (e.Item.ItemId)
-            {
-                case Resource.Id.viewLettersMenu_refresh:
-                    RefreshSentLetters();
-                    break;
-                case Resource.Id.viewLettersMenu_settings:
-                    SettingsPressed();
-                    break;
-                case Resource.Id.viewLettersMenu_donate:
-                    DonatePressed();
-                    break;
-                case Resource.Id.viewLettersMenu_exit:
-                    ExitButtonPressed();
-                    break;
-                default:
-                    base.Toolbar_MenuItemClick(sender, e);
-                    break;
-            }
-        }
-
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
         {
             inflater.Inflate(Resource.Menu.menu_viewLetters, menu);
 
             base.OnCreateOptionsMenu(menu, inflater);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.viewLettersMenu_refresh:
+                    RefreshSentLetters();
+                    break;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+            return true;
         }
 
         private void RefreshSentLetters()

@@ -17,19 +17,56 @@ using Write2Congress.Droid.DomainModel.Constants;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.BusinessLayer;
+using Android.Support.V4.Widget;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity]
     public abstract class BaseActivity : AppCompatActivity 
     {
-        protected Logger MyLogger; 
+        protected Logger MyLogger;
+        protected abstract int DrawerLayoutId { get; }
+        private DrawerLayout _currentDrawerLayout;
+
+        public DrawerLayout CurrentDrawerLayout
+        {
+            get
+            {
+                if (_currentDrawerLayout == null)
+                    _currentDrawerLayout = FindViewById<DrawerLayout>(DrawerLayoutId);
+
+                return _currentDrawerLayout;
+            }
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
              
             MyLogger = new Logger(Class.SimpleName);
+        }
+
+        public void SetupToolbar(int toolbarResourceId, string title = "")
+        {
+            using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
+            {
+                //Unlike other attributes the toolbar title needs to be 
+                //set first, otherwise app will default to activity tile
+                SetSupportActionBar(toolbar);
+
+                if (string.IsNullOrWhiteSpace(title))
+                    SupportActionBar.SetDisplayShowTitleEnabled(false);
+                else
+                    toolbar.Title = title;
+
+                SupportActionBar.Elevation = 10f;
+                SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_action_menu);
+                SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
+                var drawerToggle = new ActionBarDrawerToggle(this, CurrentDrawerLayout, toolbar, Resource.String.termStarted, Resource.String.termEnds);
+                CurrentDrawerLayout.AddDrawerListener(drawerToggle);
+                drawerToggle.SyncState();
+            }
         }
 
         #region Helpers

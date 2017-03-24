@@ -18,26 +18,13 @@ using Write2Congress.Droid.Code;
 using Android.Support.Design.Widget;
 using Write2Congress.Droid.Fragments;
 using Android.Support.V4.Widget;
+using Android.Support.V7.App;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity]
     public abstract class BaseToolbarActivity : BaseActivity
     {
-        protected abstract int DrawerLayoutId { get; }
-        private DrawerLayout _currentDrawerLayout;
-
-        public DrawerLayout CurrentDrawerLayout
-        {
-            get
-            {
-                if (_currentDrawerLayout == null)
-                     _currentDrawerLayout = FindViewById<DrawerLayout>(DrawerLayoutId);
-
-                return _currentDrawerLayout;
-            }
-        }
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

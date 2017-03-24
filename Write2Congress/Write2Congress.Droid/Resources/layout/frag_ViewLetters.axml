@@ -4,10 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/viewLettersFrag_parent">
-    <include
-        layout="@layout/ctrl_Toolbar"
-        android:minHeight="?android:attr/actionBarSize"
-        android:id="@+id/viewLettersFrag_toolbar" />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
