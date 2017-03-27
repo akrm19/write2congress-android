@@ -144,10 +144,9 @@
     <Compile Include="CustomControls\LegislatorsViewer.cs" />
     <Compile Include="DomainModel\Constants\TagsType.cs" />
     <Compile Include="Fragments\BaseFragment.cs" />
-    <Compile Include="Fragments\DraftLettersFragment.cs" />
+    <Compile Include="Fragments\BaseViewLetterFragment.cs" />
     <Compile Include="Fragments\MainFragment.cs" />
     <Compile Include="Code\AndroidHelper.cs" />
-    <Compile Include="Fragments\SentLettersFragment.cs" />
     <Compile Include="Fragments\WriteLetterFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

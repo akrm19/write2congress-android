@@ -54,9 +54,8 @@ namespace Write2Congress.Droid.Activities
             switch (fragmentType)
             {
                 case ViewLettersFragmentType.Drafts:
-                    return new DraftLettersFragment();
                 case ViewLettersFragmentType.Sent:
-                    return new SentLettersFragment();
+                    return new BaseViewLetterFragment(fragmentType);
                 default:
                     MyLogger.Error("ViewLettersFragmentType is not valid. Unable to create fragment");
                     return null;
@@ -74,7 +73,9 @@ namespace Write2Congress.Droid.Activities
 
         protected override void OpenDrafts()
         {
-            if (_currentFragment.GetType() == typeof(DraftLettersFragment))
+            if (_currentFragment.GetType() == typeof(BaseViewLetterFragment)
+                && string.IsNullOrWhiteSpace(_fragmentType) 
+                && _fragmentType.Equals(ViewLettersFragmentType.Drafts))
                 return;
 
             ReplaceFragment(ViewLettersFragmentType.Drafts);
@@ -82,7 +83,9 @@ namespace Write2Congress.Droid.Activities
 
         protected override void OpenSent()
         {
-            if (_currentFragment.GetType() == typeof(SentLettersFragment))
+            if (_currentFragment.GetType() == typeof(BaseViewLetterFragment)
+                && string.IsNullOrWhiteSpace(_fragmentType) 
+                && _fragmentType.Equals(ViewLettersFragmentType.Sent))
                 return;
 
             ReplaceFragment(ViewLettersFragmentType.Sent);

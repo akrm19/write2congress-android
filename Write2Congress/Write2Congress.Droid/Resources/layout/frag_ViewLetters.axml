@@ -4,8 +4,20 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/viewLettersFrag_parent">
-    <android.support.v7.widget.RecyclerView
+    <ViewSwitcher
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/viewLettersFrag_lettersRecycler" />
+        android:id="@+id/viewLettersFrag_viewSwitcher"
+        android:inAnimation="@android:anim/slide_in_left"
+        android:outAnimation="@android:anim/slide_out_right" >
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/viewLettersFrag_lettersRecycler" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/viewLettersFrag_emptyText" />
+    </ViewSwitcher>
 </LinearLayout>

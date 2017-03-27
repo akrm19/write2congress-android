@@ -116,10 +116,9 @@ namespace Write2Congress.Droid.CustomControls
 
             if(legislator == null)
             {
-                //TODO RM: Add loggin
+                Logger.Error("Unable to write to legislator. Unable to retrive legislator at positition " + position);
                 return;
             }
-            _fragment.ShowToast($"WriteLetter for {legislator.FullName} was clicked!");
 
             AppHelper.StartWriteNewLetterIntent(_fragment.GetBaseActivity(), BundleSenderKind.LegislatorViewer, legislator);
         }

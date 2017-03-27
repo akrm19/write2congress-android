@@ -32,13 +32,14 @@ namespace Write2Congress.Droid.Adapters
         public event EventHandler<int> CopyLetterClick;
         public event EventHandler<int> CopyLetterSucceeded;
         public event EventHandler<int> DeleteLetterClick;
+        public event EventHandler<int> DeleteLetterSucceeded;
 
         public LetterAdapter(BaseFragment fragment, List<Letter> letters)
         {
             _logger = new Logger(Class.SimpleName);
             _letters = letters;
             _fragment = fragment;
-
+            
             _lastSavedDate = AndroidHelper.GetString(Resource.String.letterSaved);
             _sendDate = AndroidHelper.GetString(Resource.String.send);
 
@@ -73,7 +74,7 @@ namespace Write2Congress.Droid.Adapters
         protected void OnClick(int position)
         {
             LetterClick?.Invoke(this, position);
-            OnClick(position);
+            //OnClick(position);
         }
 
         protected void OnCopyLetterClick(int position)
@@ -186,6 +187,7 @@ namespace Write2Congress.Droid.Adapters
                 _letters.RemoveAt(position);
                 NotifyItemRemoved(position);
                 _fragment.ShowToast(AndroidHelper.GetString(Resource.String.letterDeleted));
+                DeleteLetterSucceeded?.Invoke(this, position);
             }
             else
                 _fragment.ShowToast(AndroidHelper.GetString(Resource.String.unableToDeleteLetter));            

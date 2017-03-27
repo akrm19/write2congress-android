@@ -17,7 +17,7 @@ mlns:app="http://schemas.android.com/apk/lib/write2congress.droid"
         android:title="@string/writeNew"
         android:icon="@drawable/ic_create_white_48dp"
         app:showAsAction="always"/>
-
+<!--
     <item
         android:id="@+id/mainMenu_settings"
         android:title="@string/settings"
@@ -30,4 +30,5 @@ mlns:app="http://schemas.android.com/apk/lib/write2congress.droid"
     <item android:id="@+id/mainMenu_exit"
         android:title="@string/exit"
         android:showAsAction="never"/>
+-->
 </menu>

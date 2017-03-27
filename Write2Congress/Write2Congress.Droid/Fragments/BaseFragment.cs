@@ -48,23 +48,6 @@ namespace Write2Congress.Droid.Fragments
             return base.OnOptionsItemSelected(item);    
         }
 
-        /*
-        protected void ExitButtonPressed()
-        {
-            (Activity as BaseToolbarActivity).ExitButtonPressed();
-        }
-
-        protected void DonatePressed()
-        {
-            (Activity as BaseToolbarActivity).DonatePressed();
-        }
-
-        protected void SettingsPressed()
-        {
-            (Activity as BaseToolbarActivity).SettingsPressed();
-        }
-        */
-
         public void ShowToast(string message, ToastLength lenght = ToastLength.Short)
         {
             Toast.MakeText(this.Context, message, lenght).Show();

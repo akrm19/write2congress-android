@@ -96,23 +96,23 @@ namespace Write2Congress.Droid.Activities
             StartActivity(intent);
         }
 
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.mainMenu_settings:
-                    SettingsPressed();
-                    return true;
-                case Resource.Id.mainMenu_donate:
-                    DonatePressed();
-                    return true;
-                case Resource.Id.mainMenu_exit:
-                    ExitButtonPressed();
-                    return true;
-                default:
-                    return base.OnOptionsItemSelected(item);
-            }
-        }
+        //public override bool OnOptionsItemSelected(IMenuItem item)
+        //{
+        //    switch (item.ItemId)
+        //    {
+        //        case Resource.Id.mainMenu_settings:
+        //            SettingsPressed();
+        //            return true;
+        //        case Resource.Id.mainMenu_donate:
+        //            DonatePressed();
+        //            return true;
+        //        case Resource.Id.mainMenu_exit:
+        //            ExitButtonPressed();
+        //            return true;
+        //        default:
+        //            return base.OnOptionsItemSelected(item);
+        //    }
+        //}
 
         public void ExitButtonPressed()
         {
