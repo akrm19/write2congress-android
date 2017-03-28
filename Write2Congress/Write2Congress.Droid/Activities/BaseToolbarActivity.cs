@@ -36,7 +36,6 @@ namespace Write2Congress.Droid.Activities
                 navigationView.NavigationItemSelected += NavigationItemSelected;
         }
 
-
         protected void NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
             e.MenuItem.SetChecked(true);
@@ -56,6 +55,17 @@ namespace Write2Congress.Droid.Activities
                     break;
                 case Resource.Id.actionMenu_writeNew:
                     OpenWriteNewLetter();
+                    break;
+                case Resource.Id.actionMenu_settings:
+                    SettingsPressed();
+                    break;
+                case Resource.Id.actionMenu_feedback:
+                    break;
+                case Resource.Id.actionMenu_donate:
+                    DonatePressed();
+                    break;
+                case Resource.Id.actionMenu_exit:
+                    ExitButtonPressed();
                     break;
                 default:
                     break;
@@ -84,6 +94,13 @@ namespace Write2Congress.Droid.Activities
 
         protected virtual void OpenDrafts()
         {
+            var viewLettersActivity = this as ViewLettersActivity;
+
+            if(viewLettersActivity != null 
+                && !string.IsNullOrWhiteSpace(viewLettersActivity.ViewLettersActivityType)
+                && viewLettersActivity.ViewLettersActivityType == ViewLettersFragmentType.Drafts)
+                return;
+
             var intent = new Intent(this, typeof(ViewLettersActivity));
             intent.PutExtra(BundleType.ViewLettersFragType, ViewLettersFragmentType.Drafts);
             StartActivity(intent);
@@ -91,28 +108,17 @@ namespace Write2Congress.Droid.Activities
 
         protected virtual void OpenSent()
         {
+            var viewLettersActivity = this as ViewLettersActivity;
+
+            if (viewLettersActivity != null
+                && !string.IsNullOrWhiteSpace(viewLettersActivity.ViewLettersActivityType)
+                && viewLettersActivity.ViewLettersActivityType == ViewLettersFragmentType.Sent)
+                return;
+
             var intent = new Intent(this, typeof(ViewLettersActivity));
             intent.PutExtra(BundleType.ViewLettersFragType, ViewLettersFragmentType.Sent);
             StartActivity(intent);
         }
-
-        //public override bool OnOptionsItemSelected(IMenuItem item)
-        //{
-        //    switch (item.ItemId)
-        //    {
-        //        case Resource.Id.mainMenu_settings:
-        //            SettingsPressed();
-        //            return true;
-        //        case Resource.Id.mainMenu_donate:
-        //            DonatePressed();
-        //            return true;
-        //        case Resource.Id.mainMenu_exit:
-        //            ExitButtonPressed();
-        //            return true;
-        //        default:
-        //            return base.OnOptionsItemSelected(item);
-        //    }
-        //}
 
         public void ExitButtonPressed()
         {
@@ -126,7 +132,11 @@ namespace Write2Congress.Droid.Activities
 
         public void SettingsPressed()
         {
+            if (GetType() == typeof(SettingsActivity))
+                return;
 
+            var intent = new Intent(this, typeof(SettingsActivity));
+            StartActivity(intent);
         }
     }
 }

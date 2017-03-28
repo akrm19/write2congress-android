@@ -19,7 +19,7 @@ namespace Write2Congress.Droid.Activities
     [Activity]
     public class ViewLettersActivity : BaseToolbarActivity
     {
-        private string _fragmentType;
+        public string ViewLettersActivityType;
         private BaseFragment _currentFragment;
 
         protected override int DrawerLayoutId
@@ -74,8 +74,8 @@ namespace Write2Congress.Droid.Activities
         protected override void OpenDrafts()
         {
             if (_currentFragment.GetType() == typeof(BaseViewLetterFragment)
-                && string.IsNullOrWhiteSpace(_fragmentType) 
-                && _fragmentType.Equals(ViewLettersFragmentType.Drafts))
+                && !string.IsNullOrWhiteSpace(ViewLettersActivityType) 
+                && ViewLettersActivityType.Equals(ViewLettersFragmentType.Drafts))
                 return;
 
             ReplaceFragment(ViewLettersFragmentType.Drafts);
@@ -84,8 +84,8 @@ namespace Write2Congress.Droid.Activities
         protected override void OpenSent()
         {
             if (_currentFragment.GetType() == typeof(BaseViewLetterFragment)
-                && string.IsNullOrWhiteSpace(_fragmentType) 
-                && _fragmentType.Equals(ViewLettersFragmentType.Sent))
+                && !string.IsNullOrWhiteSpace(ViewLettersActivityType) 
+                && ViewLettersActivityType.Equals(ViewLettersFragmentType.Sent))
                 return;
 
             ReplaceFragment(ViewLettersFragmentType.Sent);

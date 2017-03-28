@@ -138,15 +138,6 @@ namespace Write2Congress.Droid.Fragments
                 case Resource.Id.writeLetterMenu_delete:
                     DeleteCurrentLetter();
                     break;
-                //case Resource.Id.writeLetterMenu_donate:
-                //    DonatePressed();
-                //    break;
-                //case Resource.Id.writeLetterMenu_settings:
-                //    SettingsPressed();
-                //    break;
-                //case Resource.Id.writeLetterMenu_exit:
-                //    ExitButtonPressed();
-                //    break;
                 default:
                     return base.OnOptionsItemSelected(item);
             }
