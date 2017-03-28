@@ -36,7 +36,6 @@ namespace Write2Congress.Droid.Code
         public static void AddSupportFragment(Android.Support.V4.App.FragmentManager fragmentManager, Android.Support.V4.App.Fragment fragment, int containerId, string tag)
         {
             var transaction = fragmentManager.BeginTransaction();
-
             transaction.Add(containerId, fragment, tag);
             transaction.Commit();
         }

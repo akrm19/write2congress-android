@@ -16,6 +16,7 @@
     <item name="windowNoTitle">true</item>
     <!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
     <item name="windowActionBar">false</item>
+    <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
   </style>
 
   <!--Add App-wide themes here-->

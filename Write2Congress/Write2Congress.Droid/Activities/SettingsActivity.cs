@@ -10,12 +10,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Write2Congress.Droid.Code;
+using Write2Congress.Droid.Fragments;
+using Write2Congress.Droid.DomainModel.Constants;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity]
     public class SettingsActivity : BaseToolbarActivity
     {
+        private SettingsFragment _settingsFrag;
+
         protected override int DrawerLayoutId
         {
             get
@@ -32,8 +36,11 @@ namespace Write2Congress.Droid.Activities
             SetupToolbar(Resource.Id.settingsActv_toolbar, AndroidHelper.GetString(Resource.String.settings));
             SetupNavigationMenu(Resource.Id.settingsActv_navigationDrawer);
 
-
-            
+            if(_settingsFrag == null)
+            {
+                _settingsFrag = new SettingsFragment();
+                AndroidHelper.AddSupportFragment(SupportFragmentManager, _settingsFrag, Resource.Id.settingsActv_fragmentContainer, TagsType.SettingsFragment);
+            }
         }
     }
 }
