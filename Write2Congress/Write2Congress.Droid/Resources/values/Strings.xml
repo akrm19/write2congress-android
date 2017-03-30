@@ -4,10 +4,13 @@
 	<string name="app_name">Write2Congress.Droid</string>
   <string name="cannotSendLetterWithoutRecipient">Cannot send letter without a recipient</string>
   <string name="congress">Congress</string>
+  <string name="confirmRefresh">Confirm Refresh</string>
   <string name="copyText">Copy Text</string>
   <string name="copyTextFail">Error: Unable to copy letter\'s text</string>
   <string name="copyTextSuccess">Copied letter\'s text</string>
+  <string name="copyTextToClipboard">Copy text to clipboard</string>
   <string name="delete">Delete</string>
+  <string name="dismiss">Dismiss</string>
   <string name="donate">Donate</string>
   <string name="drafts">Drafts</string>
   <string name="exit">Exit</string>
@@ -19,13 +22,16 @@
   <string name="emptySubjectText">Subject (optional)</string>
   <string name="feedback">Feedback</string>
   <string name="lastSaved">Last saved</string>
+  <string name="legislatorDataSuccessfullyUpdated">The legislator data was successfully updated</string>
   <string name="letterAutoSaved">Letter auto-saved</string>
   <string name="letterCopied">Letter copied</string>
+  <string name="letterCopiedToClipboard">Letter copied to clipboard</string>
   <string name="letterDeleted">Letter was succesfully deleted</string>
   <string name="letterDeleteFailed">Error: Unable to delete letter</string>
   <string name="letterRecipient">Letter Recipient</string>
   <string name="letterSaved">Letter saved</string>
   <string name="letterSaveFailed">Error: Unabled to save letter</string>
+  <string name="ok">OK</string>
   <string name="refresh">Refresh</string>
   <string name="save">Save</string>
   <string name="searchLegislators">Search Legislators</string>
@@ -41,11 +47,16 @@
   <string name="termEnds">Term Ends</string>
   <string name="termStarted">Term Started</string>
   <string name="unableToCopyLetter">Unable to copy letter</string>
+  <string name="unableToCopyLetterToClipboard">Unable to copy letter to clipboard</string>
   <string name="unableToDeleteLetter">Unable to delete letter</string>
   <string name="unableToProcessAction">Unable to process action</string>
+  <string name="unableToUpdateLegislatorData">Error Encountered: Unable to update legislator data</string>
   <string name="unknown">Unknown</string>
   <string name="updatedDraftLetters">Updated Draft Letters</string>
   <string name="updatedSentLetters">Updated Sent Letters</string>
+  <string name="verifyUpdateOfLegislatorData">Are you sure you want to update the lesgislator data?</string>  
+  <string name="verifyUpdateOfLegislatorDataLastUpdate">Legislator data was last updated on</string>
+  <string name="verifyUpdateOfLegislatorDataWarning">Updates are only needed if you think your legislator data is out of date.</string>
   <string name="writeNewLetterTitle">Write New Letter</string>
   <string name="writeNew">Write New</string>
 </resources>

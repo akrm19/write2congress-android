@@ -76,6 +76,11 @@ namespace Write2Congress.Droid.Activities
             transacton.Replace(containerId, newFragment, tag);
             transacton.Commit();
         }
+
+        public BaseApplication GetBaseApp()
+        {
+            return Application as BaseApplication;
+        }
         #endregion
     }
 }

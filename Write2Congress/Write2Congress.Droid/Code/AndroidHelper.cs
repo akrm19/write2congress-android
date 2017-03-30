@@ -88,6 +88,20 @@ namespace Write2Congress.Droid.Code
             return BaseApplication.Context.GetString(resourceId);
         }
 
+        public static void SaveTextToClipboard(string label, string textToSave)
+        {
+            try
+            {
+                var clipboardManager = Application.Context.GetSystemService(Context.ClipboardService) as ClipboardManager;
+                var clip = ClipData.NewPlainText(label, textToSave);
+                clipboardManager.PrimaryClip = clip;
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Unable to copy text to clipboard");
+            }
+        }
+
         #region File Helpers
         public static string GetInternalAppFileContent(string filename)
         {
@@ -123,7 +137,7 @@ namespace Write2Congress.Droid.Code
         {
             var preferecence = Application.Context.GetSharedPreferences(preferenceName, fileCreationMode);
             var preferenceEdit = preferecence.Edit();
-
+            
             preferenceEdit.PutString(sharedPreferenceKey, preferenceValue);
             preferenceEdit.Commit();
         }

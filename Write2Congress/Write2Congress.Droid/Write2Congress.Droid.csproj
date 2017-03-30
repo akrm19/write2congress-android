@@ -140,6 +140,7 @@
     <Compile Include="Adapters\LetterAdapterViewHolder.cs" />
     <Compile Include="Code\LetterFileProvider.cs" />
     <Compile Include="DomainModel\Constants\BundleType.cs" />
+    <Compile Include="DomainModel\Constants\SharedPreference.cs" />
     <Compile Include="DomainModel\Constants\ViewLettersFragmentType.cs" />
     <Compile Include="DomainModel\Enums\BundleSenderKind.cs" />
     <Compile Include="DomainModel\Interfaces\ILegislatorViewerActivity.cs" />

@@ -77,10 +77,17 @@ namespace Write2Congress.Droid.Fragments
             _recipient = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_recipient);
             _subject = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_subject);
             _body = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_body);
-            _signature = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_signature);
             _lastSaved = fragment.FindViewById<TextView>(Resource.Id.writeLetterFrag_lastSaved);
 
+            _signature = fragment.FindViewById<EditText>(Resource.Id.writeLetterFrag_signature);
+            _signature.Text = GetSignaturePreference();
+
             return fragment;
+        }
+
+        private string GetSignaturePreference()
+        {
+            return AppHelper.GetDefaultPreferenceString(SharedPreference.Signature, "");
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -90,6 +97,7 @@ namespace Write2Congress.Droid.Fragments
             if (_firstTimeInit)
             {
                 PopulateFieldsFromSavedLetter(_currentLetter);
+                FocusOnNextEmptyTextFields();
                 _firstTimeInit = false;
             }
 
@@ -138,10 +146,37 @@ namespace Write2Congress.Droid.Fragments
                 case Resource.Id.writeLetterMenu_delete:
                     DeleteCurrentLetter();
                     break;
+                case Resource.Id.writeLetterMenu_copyToClipboard:
+                    CopyLetterTextToClipboard();
+                    break;
                 default:
                     return base.OnOptionsItemSelected(item);
             }
             return true;
+        }
+
+        private void CopyLetterTextToClipboard()
+        {
+            try
+            {
+                var text = new StringBuilder();
+
+                if (!string.IsNullOrWhiteSpace(_body.Text))
+                    text.AppendLine(_body.Text);
+
+                text.AppendLine();
+
+                if (!string.IsNullOrWhiteSpace(_signature.Text))
+                    text.AppendLine(_signature.Text);
+
+                AndroidHelper.SaveTextToClipboard("write2CongressLetter", text.ToString());
+                ShowToast(GetString(Resource.String.copyTextToClipboard)); 
+            }
+            catch (Exception e)
+            {
+                MyLogger.Error("Unable to copy letter to clipboard." + e.ToString());
+                ShowToast(GetString(Resource.String.unableToCopyLetterToClipboard));
+            }
         }
 
         private void SendCurrentLetter()
@@ -167,6 +202,8 @@ namespace Write2Congress.Droid.Fragments
             ShowToast(GetString(result
                 ? Resource.String.letterDeleted
                 : Resource.String.letterDeleteFailed));
+
+            Activity.Finish();
         }
 
         private void ClearTextFields()
@@ -176,6 +213,28 @@ namespace Write2Congress.Droid.Fragments
             _body.Text = string.Empty;
             _signature.Text = string.Empty;
             _lastSaved.Text = string.Empty;
+        }
+
+        private void FocusOnNextEmptyTextFields()
+        {
+            Activity.RunOnUiThread(() =>
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(_recipient.Text))
+                        _recipient.RequestFocus();
+                    else if (string.IsNullOrWhiteSpace(_subject.Text))
+                        _subject.RequestFocus();
+                    else if (string.IsNullOrWhiteSpace(_body.Text))
+                        _body.RequestFocus();
+                    else
+                        _signature.RequestFocus();
+                }
+                catch (Exception e)
+                {
+                    MyLogger.Error("Error encountered finding the next text field to focus on." + e.ToString());
+                }
+            });
         }
 
         private void SaveCurrentLetter(bool isAutoSave, bool showToastUpdate = true)
@@ -219,7 +278,9 @@ namespace Write2Congress.Droid.Fragments
 
             _subject.Text = letter.Subject ?? string.Empty;
             _body.Text = letter.Body ?? string.Empty;
-            _signature.Text = letter.Signature ?? string.Empty;
+
+            if(string.IsNullOrWhiteSpace(_signature.Text))
+                _signature.Text = letter.Signature ?? string.Empty;
 
             _lastSaved.Text = (letter.LastSaved == null || letter.LastSaved == DateTime.MinValue)
                 ? string.Empty

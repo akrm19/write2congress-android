@@ -52,6 +52,22 @@ namespace Write2Congress.Droid
             }
         }
 
+        public bool UpdateLegislatorData()
+        {
+            try
+            {
+                _allLegislators = LegislatorManager.GetAllLegislators();
+                AppHelper.SaveLegistorsToFileStorage(_allLegislators);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                //TODO RM: Add logging
+                return false;
+            }
+        }
+
         public List<Legislator> GetCachedLegislators()
         {
             return _allLegislators;

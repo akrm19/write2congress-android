@@ -73,10 +73,75 @@ namespace Write2Congress.Droid.Activities
                 case Resource.Id.mainMenu_writeNew:
                     AppHelper.StartWriteNewLetterIntent(this, BundleSenderKind.LegislatorViewer);
                     return true;
+                case Resource.Id.mainMenu_refresh:
+                    UpdateLegislatorsWithPrompt();
+                    return true;
                 default:
                     return base.OnOptionsItemSelected(item);
             }
         }
+
+        private void UpdateLegislatorsWithPrompt()
+        {
+            if (!LegislatorsUpdatedInLast30Days())
+                UpdateLegislators();
+            else
+                VerifyUserWantsToUpdateLegislators();
+        }
+
+        private void UpdateLegislators()
+        {
+            var results = GetBaseApp().UpdateLegislatorData();
+            var message = AndroidHelper.GetString(results
+                ? Resource.String.legislatorDataSuccessfullyUpdated
+                : Resource.String.unableToUpdateLegislatorData);
+
+            ShowToast(message);
+        }
+
+        private void ShowToast(string message, ToastLength lenght = ToastLength.Short)
+        {
+            Toast.MakeText(ApplicationContext, message, lenght).Show();
+        }
+
+        private bool LegislatorsUpdatedInLast30Days()
+        {
+            var lastUpdate = AppHelper.GetLastLegislatorUpdate();
+
+            return lastUpdate == DateTime.MinValue
+                ? true
+                : lastUpdate.CompareTo(DateTime.Now.AddDays(-30)) >= 0;
+        }
+
+        private void VerifyUserWantsToUpdateLegislators()
+        {
+            var lastUpdate = AppHelper.GetLastLegislatorUpdate();
+
+            var message = string.Format("{0}{1}{1}{2}{1}{3}",
+                AndroidHelper.GetString(Resource.String.verifyUpdateOfLegislatorData),
+                System.Environment.NewLine,
+                AndroidHelper.GetString(Resource.String.verifyUpdateOfLegislatorDataWarning),
+                lastUpdate == DateTime.MinValue
+                    ? string.Empty
+                    : $"{AndroidHelper.GetString(Resource.String.verifyUpdateOfLegislatorDataLastUpdate)}: {lastUpdate.ToString("G")}");
+
+            var verifyPrompt = new Android.Support.V7.App.AlertDialog.Builder(this);
+            verifyPrompt.SetTitle(AndroidHelper.GetString(Resource.String.confirmRefresh));
+            verifyPrompt.SetMessage(message);
+            verifyPrompt.SetNegativeButton(Resource.String.dismiss,
+                (sender, args) => 
+                    {
+                        RunOnUiThread(() => (sender as Android.Support.V7.App.AlertDialog).Dismiss());
+                    });
+            verifyPrompt.SetPositiveButton(Resource.String.ok,
+                (sender, args) =>
+                {
+                    RunOnUiThread(UpdateLegislators);
+                });
+
+            verifyPrompt.Create().Show();
+        }
+
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {

@@ -20,6 +20,7 @@ using Android.Locations;
 using Write2Congress.Droid.Activities;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.DomainModel.Enums;
+using Android.Support.V7.Preferences;
 
 namespace Write2Congress.Droid.Code
 {
@@ -115,6 +116,7 @@ namespace Write2Congress.Droid.Code
             {
                 var serializedLegislators = JsonConvert.SerializeObject(legistlators);
                 AndroidHelper.SetInternalAppFileContent(_cachedLegislatorsFileName, serializedLegislators);
+                SetDefaultPreferenceString(SharedPreference.LegislatorsLastUpdate, DateTime.UtcNow.ToString());
             }
             catch (Exception e)
             {
@@ -123,16 +125,31 @@ namespace Write2Congress.Droid.Code
         }
         #endregion
 
+
         #region AppPreference Helpers
+
+        public static DateTime GetLastLegislatorUpdate()
+        {
+            var lastUpdateString = GetDefaultPreferenceString(SharedPreference.LegislatorsLastUpdate);
+            DateTime lastUpdate;
+
+            if (string.IsNullOrWhiteSpace(lastUpdateString) || !DateTime.TryParse(lastUpdateString, out lastUpdate))
+                return DateTime.MinValue;
+
+            return lastUpdate;
+        }
 
         public static string GetAppPreferenceString(string preferenceKey, string defaultValue = "")
         {
             return GetAppPreferences().GetString(preferenceKey, defaultValue);
         }
 
-        public static string SetAppPreferenceString(string preferenceName, string defaultValue = "")
+        public static bool SetAppPreferenceString(string preferenceName, string value)
         {
-            return GetAppPreferences().GetString(preferenceName, defaultValue);
+            return GetAppPreferences()
+                .Edit()
+                .PutString(preferenceName, value)
+                .Commit();
         }
 
         public static ISharedPreferences GetAppPreferences()
@@ -143,10 +160,27 @@ namespace Write2Congress.Droid.Code
             return prefereces;
         }
 
+        public static string GetDefaultPreferenceString(string preferenceKey, string defaultValue = "")
+        {
+            return GetDefaultSharedPreferences().GetString(preferenceKey, defaultValue);
+        }
+
+        public static bool SetDefaultPreferenceString(string preferenceName, string value)
+        {
+            return GetDefaultSharedPreferences()
+                .Edit()
+                .PutString(preferenceName, value)
+                .Commit();
+        }
+
+        public static ISharedPreferences GetDefaultSharedPreferences()
+        {
+            return PreferenceManager.GetDefaultSharedPreferences(Application.Context);
+        }
         #endregion
 
-        #region Intents Methods (ContactMethods & Actions)
 
+        #region Intents Methods (ContactMethods & Actions)
 
         public static void StartWriteNewLetterIntent(BaseActivity activity, BundleSenderKind senderKind, Legislator legislator = null, bool finishActivity = false)
         {
