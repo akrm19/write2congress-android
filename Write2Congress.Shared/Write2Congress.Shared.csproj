@@ -40,23 +40,40 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer\CommitteeManager.cs" />
     <Compile Include="BusinessLayer\Extensions.cs" />
     <Compile Include="BusinessLayer\LegislatorManager.cs" />
     <Compile Include="BusinessLayer\LetterManager.cs" />
+    <Compile Include="BusinessLayer\Services\CommitteeSvc.cs" />
     <Compile Include="BusinessLayer\Services\LegislatorSvc.cs" />
     <Compile Include="BusinessLayer\Services\ServiceBase.cs" />
+    <Compile Include="BusinessLayer\Services\VoteSvc.cs" />
     <Compile Include="BusinessLayer\Util.cs" />
+    <Compile Include="BusinessLayer\VoteManager.cs" />
+    <Compile Include="DomainModel\Committee.cs" />
     <Compile Include="DomainModel\ContactMethod.cs" />
+    <Compile Include="DomainModel\Enum\BillVoteType.cs" />
     <Compile Include="DomainModel\Enum\ContactType.cs" />
     <Compile Include="DomainModel\Enum\Gender.cs" />
     <Compile Include="DomainModel\Enum\LegislativeBody.cs" />
     <Compile Include="DomainModel\Enum\Party.cs" />
     <Compile Include="DomainModel\Enum\State.cs" />
+    <Compile Include="DomainModel\Enum\VoteType.cs" />
     <Compile Include="DomainModel\Interface\ILetterProvider.cs" />
+    <Compile Include="DomainModel\Interface\IMyLogger.cs" />
     <Compile Include="DomainModel\Legislator.cs" />
     <Compile Include="DomainModel\Letter.cs" />
+    <Compile Include="DomainModel\SunlightBaseResult.cs" />
+    <Compile Include="DomainModel\SunlightBillsByLegislatorResult.cs" />
+    <Compile Include="DomainModel\SunlightCommitteesByLegislatorResult.cs" />
     <Compile Include="DomainModel\SunlightLegislatorResult.cs" />
+    <Compile Include="DomainModel\SunlightVotesByLegislatorResult.cs" />
+    <Compile Include="DomainModel\Test.cs" />
+    <Compile Include="DomainModel\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DomainModel\Constants\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

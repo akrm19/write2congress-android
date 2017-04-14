@@ -12,6 +12,7 @@ using Android.Widget;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Code;
 using Write2Congress.Shared.BusinessLayer;
+using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Droid
 {
@@ -19,10 +20,13 @@ namespace Write2Congress.Droid
     public class BaseApplication : Application
     {
         private bool _forceRetrieveAllLegislators = false;
+        private IMyLogger _logger;
         private static BaseApplication _instance;
         private List<Legislator> _allLegislators;
-        protected LegislatorManager LegislatorManager;
+
         public LetterManager LetterManager;
+        public CommitteeManager CommitteeManager;
+        protected LegislatorManager LegislatorManager;
 
         public BaseApplication(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
@@ -38,9 +42,11 @@ namespace Write2Congress.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+            _logger = new Logger("BaseApplication");
 
             LetterManager = new LetterManager(new LetterFileProvider());
 
+            CommitteeManager = new CommitteeManager(_logger);
             LegislatorManager = new LegislatorManager();
             _allLegislators = AppHelper.GetCachedLegislatorsFromFileStorage();
 

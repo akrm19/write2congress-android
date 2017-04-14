@@ -32,8 +32,10 @@ namespace Write2Congress.Droid.Adapters
         public ImageButton YouTube { get; private set; }
         public ImageButton Webpage { get; private set; }
 
-        public LegislatorAdapterViewHolder(View itemView, Action<int> writeListener, Action<int, int> actionButtonListner) :base(itemView)
+        public LegislatorAdapterViewHolder(View itemView, Action<int> writeListener, Action<int, int> actionButtonListner, Action<int> legislatorClickListner) :base(itemView)
         {
+            itemView.Click += (sender, e) => legislatorClickListner(base.AdapterPosition);
+
             Portrait = itemView.FindViewById<ImageView>(Resource.Id.legislatorCtrl_portrait);
             Chamber = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_chamber);
             Name = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_name);

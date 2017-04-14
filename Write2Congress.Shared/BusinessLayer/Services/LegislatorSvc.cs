@@ -82,7 +82,8 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var responseText = response.Content.ReadAsStringAsync().Result;
-                    var results = JsonConvert.DeserializeObject<SunlightLegislatorResult>(responseText);
+                    //var responseText = await response.Content.ReadAsStringAsync();
+                    var results = JsonConvert.DeserializeObject<SunlightLegislatorResult.Rootobject>(responseText);
 
                     legislators = Util.LegislatorsFromSunlightLegislatorResult(results);
                 }

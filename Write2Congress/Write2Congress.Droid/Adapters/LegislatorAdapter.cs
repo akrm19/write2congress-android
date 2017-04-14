@@ -28,6 +28,7 @@ namespace Write2Congress.Droid.Adapters
         private string _termStartDate, _termEndDate, _senate, _congress;
 
         public event EventHandler<int> WriteLetterToLegislatorClick;
+        public event EventHandler<int> LegislatorClick;
 
         public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators) 
         {
@@ -73,6 +74,10 @@ namespace Write2Congress.Droid.Adapters
         {
             _legislators = legislators;
             NotifyDataSetChanged();
+        }
+        private void OnLegislatorClick(int position)
+        {
+            LegislatorClick?.Invoke(this, position);
         }
 
         private void OnWriteLetterToLegislatorClick(int position)
@@ -132,7 +137,7 @@ namespace Write2Congress.Droid.Adapters
         {
             var legislatorView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Legislator, parent, false);
 
-            return new LegislatorAdapterViewHolder(legislatorView, OnWriteLetterToLegislatorClick, OnActionButtonClick);
+            return new LegislatorAdapterViewHolder(legislatorView, OnWriteLetterToLegislatorClick, OnActionButtonClick, OnLegislatorClick);
         }
 
         /// <summary>

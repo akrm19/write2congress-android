@@ -220,6 +220,9 @@ namespace Write2Congress.Shared.BusinessLayer
                 case "g":
                 case "green":
                     return Party.Green;
+                case "i":
+                case "independent":
+                    return Party.Independent;
                 default:
                     return Party.Unknown;
             }
@@ -253,18 +256,42 @@ namespace Write2Congress.Shared.BusinessLayer
         #endregion
 
         #region Sunlight Api Helper Methods
-        public static List<Legislator> LegislatorsFromSunlightLegislatorResult(SunlightLegislatorResult legislatorResults)
+        public static List<Committee> CommitteesFromSunlightCommitteeResult(SunlightCommitteesByLegislatorResult.Rootobject committeeResults)
+        {
+            var committees = new List<Committee>();
+
+            foreach (var c in committeeResults.results)
+            {
+                var committee = new Committee()
+                {
+                    Id = c.committee_id ?? string.Empty,
+                    Name = c.name ?? string.Empty,
+                    Chamber = GetLegislativeBodyFromSunlight(c.chamber),
+                    IsSubcommittee = c.subcommittee,
+                    ParentCommitteeId = c.subcommittee
+                        ? (c.parent_committee_id ?? string.Empty)
+                        : string.Empty,
+                    Phone  = c.phone ?? string.Empty,
+                    Url = c.url ?? string.Empty
+                };
+
+                committees.Add(committee);
+            }
+
+            return committees;
+        }
+
+        public static List<Legislator> LegislatorsFromSunlightLegislatorResult(SunlightLegislatorResult.Rootobject legislatorResults)
         {
             var legislators = new List<Legislator>();
-
 
             foreach (var l in legislatorResults.results)
             {
                 var legislator = new Legislator()
                 {
-                    FirstName = l.first_name,
-                    MiddleName = l.middle_name,
-                    LastName = l.last_name,
+                    FirstName = l.first_name ?? string.Empty,
+                    MiddleName = l.middle_name ?? string.Empty,
+                    LastName = l.last_name ?? string.Empty,
                     Birthday = Util.DateFromSunlightTime(l.birthday),
                     Party = Util.PartyFromString(l.party),
                     Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
@@ -324,12 +351,17 @@ namespace Write2Congress.Shared.BusinessLayer
 
         public static LegislativeBody GetLegislativeBodyFromSunlight(string chamber)
         {
+            if (string.IsNullOrWhiteSpace(chamber))
+                return LegislativeBody.Unknown;
+
             switch (chamber.ToLower())
             {
                 case "senate":
                     return LegislativeBody.Senate;
                 case "house":
                     return LegislativeBody.House;
+                case "joint":
+                    return LegislativeBody.Joint;
                 default:
                     return LegislativeBody.Unknown;
             }

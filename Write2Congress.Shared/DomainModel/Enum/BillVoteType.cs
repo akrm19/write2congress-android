@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel.Enum
 {
-    public enum LegislativeBody
+    public enum BillVoteType
     {
-        [Description("Senate")]
-        Senate,
-        [Description("House")]
-        House,
-        [Description("Joint")]
-        Joint,
+        [Description("Nay")]
+        Nay,
+        [Description("Yea")]
+        Yea,
+        [Description("Not Voting")]
+        NotVoting,
+        [Description("Present")]
+        Present,
         [Description("Unknown")]
         Unknown
     }

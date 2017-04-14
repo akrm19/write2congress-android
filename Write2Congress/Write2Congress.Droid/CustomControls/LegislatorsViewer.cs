@@ -95,6 +95,7 @@ namespace Write2Congress.Droid.CustomControls
             //Setup Legislator Adapater
             _legislatorAdapter = new LegislatorAdapter(_fragment, _legislators);
             _legislatorAdapter.WriteLetterToLegislatorClick += WriteNewLetterItemClicked;
+            _legislatorAdapter.LegislatorClick += LegislatorClicked;
             recyclerView.SetAdapter(_legislatorAdapter);
             
 
@@ -109,7 +110,27 @@ namespace Write2Congress.Droid.CustomControls
 
             HookupToActivitySearchTextChangedDelegate();
         }
-        
+
+        private void LegislatorClicked(object sender, int position)
+        {
+            var legislator = _legislatorAdapter.GetLegislatorAtPosition(position);
+
+            if (legislator == null)
+            {
+                Logger.Error("Error opening legislator details. Unable to retrive legislator at positition " + position);
+                return;
+            }
+            var committeesForLegislator = _fragment.GetBaseApp().CommitteeManager.GetCommitteesForLegislator(legislator.BioguideId);
+            if (committeesForLegislator.Count == 0)
+                return;
+
+            var results = new StringBuilder();
+
+            foreach (var c in committeesForLegislator)
+                results.Append($"{c.Name}{System.Environment.NewLine}");
+            //TODO RM: Add code to open legislator details
+        }
+
         void WriteNewLetterItemClicked(object sender, int position)
         {
             var legislator = _legislatorAdapter.GetLegislatorAtPosition(position);

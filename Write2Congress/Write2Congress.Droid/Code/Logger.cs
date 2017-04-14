@@ -11,10 +11,11 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 using Java.Lang;
+using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Droid.Code
 {
-    public class Logger
+    public class Logger : IMyLogger
     {
         private string _tag;
         private string _msgFormat;
@@ -28,6 +29,11 @@ namespace Write2Congress.Droid.Code
         public void Debug(string msg)
         {
             Log.Debug(_tag, _msgFormat + msg);
+        }
+
+        public void Debug(string msg, System.Exception e)
+        {
+            Log.Debug(_tag, $"{_msgFormat} {msg}.{System.Environment.NewLine}{e.ToString()}");
         }
 
         public void Debug(string format, params object[] args)
@@ -49,6 +55,11 @@ namespace Write2Congress.Droid.Code
             Log.Error(_tag, _msgFormat + msg);
         }
 
+        public void Error(string msg, System.Exception e)
+        {
+            Log.Error(_tag, $"{_msgFormat} {msg}.{System.Environment.NewLine}{e.ToString()}");
+        }
+
         public void Error(Throwable tr, string msg)
         {
             Log.Error(_tag, tr, _msgFormat + msg);
@@ -66,6 +77,11 @@ namespace Write2Congress.Droid.Code
         public void Info(string msg)
         {
             Log.Info(_tag, _msgFormat + msg);
+        }
+
+        public void Info(string msg, System.Exception e)
+        {
+            Log.Info(_tag, $"{_msgFormat} {msg}.{System.Environment.NewLine}{e.ToString()}");
         }
 
         public void Info(string format, params object[] args)
@@ -105,6 +121,11 @@ namespace Write2Congress.Droid.Code
         public void Warn(string msg)
         {
             Log.Warn(_tag, _msgFormat + msg);
+        }
+
+        public void Warn(string msg, System.Exception e)
+        {
+            Log.Warn(_tag, $"{_msgFormat} {msg}.{System.Environment.NewLine}{e.ToString()}");
         }
 
         public void Warn(Throwable tr)

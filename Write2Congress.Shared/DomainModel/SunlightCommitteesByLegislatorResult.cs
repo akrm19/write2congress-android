@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Write2Congress.Shared.DomainModel
+{
+    public class SunlightCommitteesByLegislatorResult : SunlightBaseResult
+    {
+        public class Rootobject : BaseRootobject
+        {
+            public Result[] results { get; set; }
+        }
+
+        public class Result
+        {
+            public string chamber { get; set; }
+            public string committee_id { get; set; }
+            public string name { get; set; }
+            public string office { get; set; }
+            public string phone { get; set; }
+            public string url { get; set; }
+            public bool subcommittee { get; set; }
+            public string parent_committee_id { get; set; }
+        }
+    }
+}
