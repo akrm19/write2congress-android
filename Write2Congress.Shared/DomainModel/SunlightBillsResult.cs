@@ -6,23 +6,14 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class SunlightBillResult
+    public class SunlightBillResult : SunlightBaseResult
     {   
-        public class Rootobject
+        public class Rootobject 
         {
-            public Result[] results { get; set; }
-            public int? count { get; set; }
-            public Page page { get; set; }
+            public SunlightBill[] results { get; set; }
         }
 
-        public class Page
-        {
-            public int? count { get; set; }
-            public int? per_page { get; set; }
-            public int? page { get; set; }
-        }
-
-        public class Result
+        public class SunlightBill
         {
             /// <summary>
             /// The actions field has a list of all official activity that has occurred to a bill. 

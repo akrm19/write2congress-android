@@ -6,28 +6,19 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class SunlightVoteResult
+    public class SunlightVoteResult : SunlightBaseResult
     {
         public class Rootobject
         {
-            public Result[] results { get; set; }
-            public int? count { get; set; }
-            public Page page { get; set; }
+            public SunlightVote[] results { get; set; }
         }
 
-        public class Page
-        {
-            public int? count { get; set; }
-            public int? per_page { get; set; }
-            public int? page { get; set; }
-        }
-
-        public class Result
+        public class SunlightVote
         {
             /// <summary>
             /// If a vote is related to a bill, some basic fields about the bill.
             /// </summary>
-            public SunlightBillResult.Result bill { get; set; }
+            public SunlightBillResult.SunlightBill bill { get; set; }
 
             /// <summary>
             /// If a vote is related to a bill, the bill’s ID.
