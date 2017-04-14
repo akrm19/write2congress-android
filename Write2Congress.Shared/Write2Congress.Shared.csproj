@@ -64,10 +64,10 @@
     <Compile Include="DomainModel\Legislator.cs" />
     <Compile Include="DomainModel\Letter.cs" />
     <Compile Include="DomainModel\SunlightBaseResult.cs" />
-    <Compile Include="DomainModel\SunlightBillsByLegislatorResult.cs" />
-    <Compile Include="DomainModel\SunlightCommitteesByLegislatorResult.cs" />
+    <Compile Include="DomainModel\SunlightBillsResult.cs" />
+    <Compile Include="DomainModel\SunlightCommitteeResult.cs" />
     <Compile Include="DomainModel\SunlightLegislatorResult.cs" />
-    <Compile Include="DomainModel\SunlightVotesByLegislatorResult.cs" />
+    <Compile Include="DomainModel\SunlightVotesResult.cs" />
     <Compile Include="DomainModel\Test.cs" />
     <Compile Include="DomainModel\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

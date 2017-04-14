@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class SunlightCommitteesByLegislatorResult : SunlightBaseResult
+    public class SunlightCommitteeResult : SunlightBaseResult
     {
-        public class Rootobject : BaseRootobject
+        public class Rootobject : BaseRootObject
         {
-            public Result[] results { get; set; }
+            public SunlightCommittee[] results { get; set; }
         }
 
-        public class Result
+        public class SunlightCommittee
         {
             public string chamber { get; set; }
             public string committee_id { get; set; }

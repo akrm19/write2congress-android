@@ -30,7 +30,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 }
 
                 var uri = string.Format(_allLegislatorsUri, legislatorBioguideId);
-                var result = GetTypeAsync<SunlightCommitteesByLegislatorResult.Rootobject>(uri).Result;
+                var result = GetTypeAsync<SunlightCommitteeResult.Rootobject>(uri).Result;
                
                 committees = Util.CommitteesFromSunlightCommitteeResult(result);
             }

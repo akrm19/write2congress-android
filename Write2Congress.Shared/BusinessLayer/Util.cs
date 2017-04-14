@@ -256,7 +256,7 @@ namespace Write2Congress.Shared.BusinessLayer
         #endregion
 
         #region Sunlight Api Helper Methods
-        public static List<Committee> CommitteesFromSunlightCommitteeResult(SunlightCommitteesByLegislatorResult.Rootobject committeeResults)
+        public static List<Committee> CommitteesFromSunlightCommitteeResult(SunlightCommitteeResult.Rootobject committeeResults)
         {
             var committees = new List<Committee>();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class SunlightVotesByLegislatorResult
+    public class SunlightVoteResult
     {
         public class Rootobject
         {
@@ -27,7 +27,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// If a vote is related to a bill, some basic fields about the bill.
             /// </summary>
-            public SunlightBillsByLegislatorResult.Result bill { get; set; }
+            public SunlightBillResult.Result bill { get; set; }
 
             /// <summary>
             /// If a vote is related to a bill, the bill’s ID.

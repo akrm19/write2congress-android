@@ -8,12 +8,12 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class SunlightLegislatorResult : SunlightBaseResult
     {
-        public class Rootobject : BaseRootobject
+        public class Rootobject : BaseRootObject
         {
-            public Result[] results { get; set; }
+            public SunlightLegislator[] results { get; set; }
         }
 
-        public class Result
+        public class SunlightLegislator
         {
             public bool in_office { get; set; }
             public int? senate_class { get; set; }

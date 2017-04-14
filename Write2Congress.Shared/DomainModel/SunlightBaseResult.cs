@@ -8,7 +8,7 @@ namespace Write2Congress.Shared.DomainModel
 {
     public abstract class SunlightBaseResult
     {
-        public class BaseRootobject
+        public class BaseRootObject
         {
             //public object[] results { get; set; }
             public int? count { get; set; }

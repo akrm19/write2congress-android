@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class SunlightBillsByLegislatorResult
+    public class SunlightBillResult
     {   
         public class Rootobject
         {
