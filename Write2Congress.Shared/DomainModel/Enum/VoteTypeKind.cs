@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel.Enum
 {
-    public enum VoteType
+    public enum VoteTypeKind
     {
         [Description("passage")]
         Passage,

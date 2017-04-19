@@ -57,17 +57,19 @@
     <Compile Include="DomainModel\Committee.cs" />
     <Compile Include="DomainModel\ContactMethod.cs" />
     <Compile Include="DomainModel\Enum\BillTypeKind.cs" />
-    <Compile Include="DomainModel\Enum\BillVoteType.cs" />
+    <Compile Include="DomainModel\Enum\VoteCastedType.cs" />
     <Compile Include="DomainModel\Enum\ContactType.cs" />
     <Compile Include="DomainModel\Enum\Gender.cs" />
     <Compile Include="DomainModel\Enum\LegislativeBody.cs" />
     <Compile Include="DomainModel\Enum\Party.cs" />
     <Compile Include="DomainModel\Enum\State.cs" />
-    <Compile Include="DomainModel\Enum\VoteType.cs" />
+    <Compile Include="DomainModel\Enum\VoteTypeKind.cs" />
     <Compile Include="DomainModel\Interface\ILetterProvider.cs" />
     <Compile Include="DomainModel\Interface\IMyLogger.cs" />
     <Compile Include="DomainModel\Legislator.cs" />
     <Compile Include="DomainModel\Letter.cs" />
+    <Compile Include="DomainModel\Nomination.cs" />
+    <Compile Include="DomainModel\Nominee.cs" />
     <Compile Include="DomainModel\SunlightBaseResult.cs" />
     <Compile Include="DomainModel\SunlightBillsResult.cs" />
     <Compile Include="DomainModel\SunlightCommitteeResult.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="DomainModel\SunlightVotesResult.cs" />
     <Compile Include="DomainModel\Test.cs" />
     <Compile Include="DomainModel\Vote.cs" />
+    <Compile Include="DomainModel\VoteType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

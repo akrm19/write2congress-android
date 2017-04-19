@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Write2Congress.Shared.DomainModel.Enum
 {
-    public enum BillVoteType
+    public enum VoteCastedType
     {
         [Description("Nay")]
         Nay,

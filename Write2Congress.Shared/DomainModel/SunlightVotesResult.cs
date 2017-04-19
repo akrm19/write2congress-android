@@ -42,7 +42,7 @@ namespace Write2Congress.Shared.DomainModel
             /// Senate is the only chamber which considers presidential nominations.
             /// If a vote is related to a nomination, some basic fields about the nomination.
             /// </summary>
-            public Nomination nomination { get; set; }
+            public SunlighNomination nomination { get; set; }
 
             /// <summary>
             /// If a vote is related to a nomination, the nomination’s ID.
@@ -164,16 +164,61 @@ namespace Write2Congress.Shared.DomainModel
             public int? Present { get; set; }
         }
 
-        public class Nomination
+        public class SunlighNomination
         {
+            /// <summary>
+            /// An array of IDs of committees that the nomination has 
+            /// been referred to for consideration.
+            /// </summary>
             public string[] committee_ids { get; set; }
+
+            /// <summary>
+            /// The Congress in which this nomination was presented.
+            /// </summary>
             public int? congress { get; set; }
+
+            /// <summary>
+            /// A convenience field containing only the most recent action object.
+            /// </summary>
             public Last_Action last_action { get; set; }
+
+            /// <summary>
+            /// The date this nomination last received action. If there 
+            /// are no official actions, then this field will fall back 
+            /// to the value of received_on.
+            /// </summary>
             public string last_action_at { get; set; }
+
+            /// <summary>
+            /// The unique identifier for this nomination, taken from 
+            /// the Library of Congress. Of the form “PN[number]-[congress]”.
+            /// </summary>
             public string nomination_id { get; set; }
-            public Nominee[] nominees { get; set; }
+
+            /// <summary>
+            /// An array of objects with fields (described below) 
+            /// about each nominee. Nominations for civil posts 
+            /// tend to have only one nominee. Nominations for 
+            /// military posts tend to have batches of multiple 
+            /// nominees. In either case, the nominees field will 
+            /// always be an array.
+            /// </summary>
+            public SunlightNominee[] nominees { get; set; }
+
+            /// <summary>
+            /// The number of this nomination, taken from the Library 
+            /// of Congress. Can occasionally contain hyphens, e.g. “PN64-01”.
+            /// </summary>
             public string number { get; set; }
+
+            /// <summary>
+            /// The organization the nominee would be appointed to, if confirmed.
+            /// </summary>
             public string organization { get; set; }
+
+            /// <summary>
+            /// The date this nomination was received in the Senate.
+            /// </summary>
             public string received_on { get; set; }
         }
 
@@ -185,10 +230,24 @@ namespace Write2Congress.Shared.DomainModel
             public string type { get; set; }
         }
 
-        public class Nominee
+        public class SunlightNominee
         {
+            /// <summary>
+            /// The name of the nominee, as it appears in THOMAS. 
+            /// Capitalization is not consistent.
+            /// </summary>
             public string name { get; set; }
+
+            /// <summary>
+            /// The position the nominee is being nominated for.
+            /// </summary>
             public string position { get; set; }
+
+            /// <summary>
+            /// The which state in the United States this nominee hails 
+            /// from. This field is only available for some nominees, 
+            /// and never for batches of multiple nominees.
+            /// </summary>
             public string state { get; set; }
         }
     }
