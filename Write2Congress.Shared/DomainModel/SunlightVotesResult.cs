@@ -35,7 +35,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The Congress this vote was taken in.
             /// </summary>
-            public int congress { get; set; }
+            public int? congress { get; set; }
 
             /// <summary>
             /// These fields can only occur on Senate votes, as the 
@@ -52,7 +52,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The number that vote was assigned. Numbers reset every legislative year.
             /// </summary>
-            public int number { get; set; }
+            public int? number { get; set; }
 
             /// <summary>
             /// The official full question that the vote is addressing.
@@ -103,7 +103,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The time the vote was taken.
             /// </summary>
-            public DateTime voted_at { get; set; }
+            public string voted_at { get; set; }
 
             /// <summary>
             /// This contains a list with the Legislator
@@ -117,7 +117,7 @@ namespace Write2Congress.Shared.DomainModel
             /// year changes at noon EST on January 3rd. A vote taken 
             /// on January 1, 2013 has a “legislative year” of 2012.
             /// </summary>
-            public int year { get; set; }
+            public int? year { get; set; }
         }
 
         /// <summary>
@@ -158,16 +158,16 @@ namespace Write2Congress.Shared.DomainModel
 
         public class VoteBreakdown
         {
-            public int Yea { get; set; }
-            public int NotVoting { get; set; }
-            public int Nay { get; set; }
-            public int Present { get; set; }
+            public int? Yea { get; set; }
+            public int? NotVoting { get; set; }
+            public int? Nay { get; set; }
+            public int? Present { get; set; }
         }
 
         public class Nomination
         {
             public string[] committee_ids { get; set; }
-            public int congress { get; set; }
+            public int? congress { get; set; }
             public Last_Action last_action { get; set; }
             public string last_action_at { get; set; }
             public string nomination_id { get; set; }

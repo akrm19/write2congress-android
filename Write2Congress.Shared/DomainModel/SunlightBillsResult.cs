@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Write2Congress.Shared.DomainModel.Enum;
 
 namespace Write2Congress.Shared.DomainModel
 {
@@ -45,7 +46,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The Congress in which this bill was introduced. For example, bills introduced in the “111th Congress” have a congress of 111.
             /// </summary>
-            public int congress { get; set; }
+            public int? congress { get; set; }
 
             /// <summary>
             /// An array of bioguide IDs for each cosponsor of the bill. 
@@ -56,7 +57,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The number of active cosponsors of the bill.
             /// </summary>
-            public int cosponsors_count { get; set; }
+            public int? cosponsors_count { get; set; }
 
             /// <summary>
             /// If a bill has been enacted into law, the enacted_as field contains 
@@ -97,7 +98,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The date or time of the most recent vote on this bill.
             /// </summary>
-            public DateTime last_action_at { get; set; }
+            public string last_action_at { get; set; }
 
             /// <summary>
             /// The date or time of the most recent official action. In the rare case 
@@ -121,7 +122,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The number for this bill. For the bill “H.R. 4921”, the number is 4921.
             /// </summary>
-            public int number { get; set; }
+            public int? number { get; set; }
 
             /// <summary>
             /// The current official title of a bill. Official titles are sentences. 
@@ -162,7 +163,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// An object with most simple legislator fields for the bill’s sponsor, if there is one.
             /// </summary>
-            public Sponsor sponsor { get; set; }
+            public SunlightLegislatorResult.SunlightLegislator sponsor { get; set; }
 
             /// <summary>
             /// The bioguide ID of the bill’s sponsoring legislator, 
@@ -203,7 +204,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The number of withdrawn cosponsors of the bill.
             /// </summary>
-            public int withdrawn_cosponsors_count { get; set; }
+            public int? withdrawn_cosponsors_count { get; set; }
 
             /// <summary>
             /// The upcoming field has an array of objects describing 
@@ -243,7 +244,7 @@ namespace Write2Congress.Shared.DomainModel
             /// for any committees referenced in an action. Will be missing 
             /// if no committees are mentioned.
             /// </summary>
-            public Committee[] committees { get; set; }
+            public SunlightCommitteeResult.SunlightCommittee[] committees { get; set; }
 
             /// <summary>
             /// If the action is a vote, how the vote was taken. Can be “roll”, “voice”, or “Unanimous Consent”.
@@ -366,7 +367,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The date or time the House last voted on passage. Only present if this vote occurred.
             /// </summary>
-            public DateTime house_passage_result_at { get; set; }
+            public string house_passage_result_at { get; set; }
 
             /// <summary>
             /// The result of the last time the Senate voted on passage. 
@@ -377,7 +378,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The date or time the Senate last voted on passage. Only present if this vote occurred.
             /// </summary>
-            public DateTime senate_passage_result_at { get; set; }
+            public string senate_passage_result_at { get; set; }
 
             /// <summary>
             /// The result of the last time the Senate voted on cloture. 
@@ -389,7 +390,7 @@ namespace Write2Congress.Shared.DomainModel
             /// The date or time the Senate last voted on cloture.
             /// Only present if this vote occurred.
             /// </summary>
-            public DateTime senate_cloture_result_at { get; set; }
+            public string senate_cloture_result_at { get; set; }
 
             /// <summary>
             /// The date or time the bill began awaiting the President’s signature. 
@@ -406,7 +407,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The date or time the House last voted to override a veto. Only present if this vote occurred.
             /// </summary>
-            public DateTime house_override_result_at { get; set; }
+            public string house_override_result_at { get; set; }
 
             /// <summary>
             /// The result of the last time the Senate voted to override a veto. 
@@ -427,19 +428,13 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// The date or time the bill was vetoed by the President. Only present if this happened.
             /// </summary>
-            public DateTime vetoed_at { get; set; }
+            public string vetoed_at { get; set; }
         }
 
         public class Reference
         {
             public string reference { get; set; }
             public string type { get; set; }
-        }
-
-        public class Committee
-        {
-            public string committee_id { get; set; }
-            public string name { get; set; }
         }
 
         public class Last_Version
@@ -459,16 +454,6 @@ namespace Write2Congress.Shared.DomainModel
             public string xml { get; set; }
         }
 
-        public class Sponsor
-        {
-            public string first_name { get; set; }
-            public string last_name { get; set; }
-            public string middle_name { get; set; }
-            public string name_suffix { get; set; }
-            public string nickname { get; set; }
-            public string title { get; set; }
-        }
-
         public class Title
         {
             public string _as { get; set; }
@@ -479,7 +464,7 @@ namespace Write2Congress.Shared.DomainModel
 
         public class Upcoming
         {
-            public DateTime scheduled_at { get; set; }
+            public string scheduled_at { get; set; }
 
             /// <summary>
             /// What Congress this is occurring in.

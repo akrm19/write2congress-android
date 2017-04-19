@@ -10,7 +10,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 {
     public class CommitteeSvc : ServiceBase
     {
-        private static string _allLegislatorsUri = "committees?member_ids={0}&per_page=all";
+        private static string _committeesForLegislatorsUri = "committees?member_ids={0}&per_page=all";
 
         public CommitteeSvc(IMyLogger logger)
         {
@@ -29,7 +29,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                     return committees;
                 }
 
-                var uri = string.Format(_allLegislatorsUri, legislatorBioguideId);
+                var uri = string.Format(_committeesForLegislatorsUri, legislatorBioguideId);
                 var result = GetTypeAsync<SunlightCommitteeResult.Rootobject>(uri).Result;
                
                 committees = Util.CommitteesFromSunlightCommitteeResult(result);

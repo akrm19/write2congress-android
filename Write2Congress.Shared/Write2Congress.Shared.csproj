@@ -40,18 +40,23 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer\BillManager.cs" />
     <Compile Include="BusinessLayer\CommitteeManager.cs" />
     <Compile Include="BusinessLayer\Extensions.cs" />
     <Compile Include="BusinessLayer\LegislatorManager.cs" />
     <Compile Include="BusinessLayer\LetterManager.cs" />
+    <Compile Include="BusinessLayer\Services\BillSevc.cs" />
     <Compile Include="BusinessLayer\Services\CommitteeSvc.cs" />
     <Compile Include="BusinessLayer\Services\LegislatorSvc.cs" />
     <Compile Include="BusinessLayer\Services\ServiceBase.cs" />
     <Compile Include="BusinessLayer\Services\VoteSvc.cs" />
     <Compile Include="BusinessLayer\Util.cs" />
     <Compile Include="BusinessLayer\VoteManager.cs" />
+    <Compile Include="DomainModel\Bill.cs" />
+    <Compile Include="DomainModel\BillType.cs" />
     <Compile Include="DomainModel\Committee.cs" />
     <Compile Include="DomainModel\ContactMethod.cs" />
+    <Compile Include="DomainModel\Enum\BillTypeKind.cs" />
     <Compile Include="DomainModel\Enum\BillVoteType.cs" />
     <Compile Include="DomainModel\Enum\ContactType.cs" />
     <Compile Include="DomainModel\Enum\Gender.cs" />

@@ -256,31 +256,6 @@ namespace Write2Congress.Shared.BusinessLayer
         #endregion
 
         #region Sunlight Api Helper Methods
-        public static List<Committee> CommitteesFromSunlightCommitteeResult(SunlightCommitteeResult.Rootobject committeeResults)
-        {
-            var committees = new List<Committee>();
-
-            foreach (var c in committeeResults.results)
-            {
-                var committee = new Committee()
-                {
-                    Id = c.committee_id ?? string.Empty,
-                    Name = c.name ?? string.Empty,
-                    Chamber = GetLegislativeBodyFromSunlight(c.chamber),
-                    IsSubcommittee = c.subcommittee,
-                    ParentCommitteeId = c.subcommittee
-                        ? (c.parent_committee_id ?? string.Empty)
-                        : string.Empty,
-                    Phone  = c.phone ?? string.Empty,
-                    Url = c.url ?? string.Empty
-                };
-
-                committees.Add(committee);
-            }
-
-            return committees;
-        }
-
         public static List<Legislator> LegislatorsFromSunlightLegislatorResult(SunlightLegislatorResult.Rootobject legislatorResults)
         {
             var legislators = new List<Legislator>();
@@ -340,11 +315,250 @@ namespace Write2Congress.Shared.BusinessLayer
             return legislators;
         }
 
+        public static List<Committee> CommitteesFromSunlightCommitteeResult(SunlightCommitteeResult.Rootobject committeeResults)
+        {
+            var committees = new List<Committee>();
+
+            foreach (var c in committeeResults.results)
+            {
+                var committee = new Committee()
+                {
+                    Id = c.committee_id ?? string.Empty,
+                    Name = c.name ?? string.Empty,
+                    Chamber = GetLegislativeBodyFromSunlight(c.chamber),
+                    IsSubcommittee = c.subcommittee,
+                    ParentCommitteeId = c.subcommittee
+                        ? (c.parent_committee_id ?? string.Empty)
+                        : string.Empty,
+                    Phone = c.phone ?? string.Empty,
+                    Url = c.url ?? string.Empty
+                };
+
+                committees.Add(committee);
+            }
+
+            return committees;
+        }
+
+        public static List<Bill> BillsFromSunlightBillResult(SunlightBillResult.Rootobject billResults)
+        {
+            var bills = new List<Bill>();
+
+            foreach(var b in billResults.results)
+            {
+                var bill = new Bill()
+                {
+                    Chamber = GetLegislativeBodyFromSunlight(b.chamber),
+                    Congress = b.congress ?? 0,
+                    CosponsorIds = b.cosponsor_ids ?? new string[0],
+                    DateIntroduced = DateFromSunlightTime(b.introduced_on),
+                    DateOfLastVote = DateFromSunlightTime(b.last_vote_at),
+                    history = HistoryFromSunlight(b.history),
+                    Id = b.bill_id ?? string.Empty,
+                    LastAction = ActionFromSunlight(b.last_action),
+                    Nicknames = b.Nicknames ?? new string[0],
+                    Number = b.number ?? 0,
+                    SponsorId = b.sponsor_id ?? string.Empty,
+                    Summary = b.summary ?? string.Empty,
+                    SummaryCappedAt1k = b.summary_short ?? string.Empty,
+                    Titles = new BillTitles()
+                    {
+                        OfficialTile = b.official_title ?? string.Empty,
+                        PopularTitlePerLoc = b.popular_title ?? string.Empty,
+                        ShortTitle = b.short_title ?? string.Empty
+                    },
+                    Type = BillTypeFromSunlight(b.bill_type),
+                    UpcomingActions = UpcomingBillActionFromSunlight(b.upcoming),
+                    Urls = UrlsFromSunlightBillUrls(b.urls),
+                    WithdrawnCosponsorIds = b.withdrawn_cosponsor_ids == null
+                        ? new List<string>()
+                        : new List<string>(b.withdrawn_cosponsor_ids)
+                };
+
+                bills.Add(bill);
+            }
+
+            return bills;
+        }
+
+        private static List<string> UrlsFromSunlightBillUrls(SunlightBillResult.Urls urls)
+        {
+            var result = new List<string>();
+
+            if (urls == null)
+                return result;
+
+            if (!string.IsNullOrWhiteSpace(urls.congress))
+                result.Add(urls.congress);
+
+            if (!string.IsNullOrWhiteSpace(urls.govtrack))
+                result.Add(urls.govtrack);
+
+            return result;
+        }
+
+        private static List<UpcomingAction> UpcomingBillActionFromSunlight(SunlightBillResult.Upcoming[] upcoming)
+        {
+            var upcomingActions = new List<UpcomingAction>();
+
+            foreach (var ua in upcoming)
+            {
+                var upcomingAction = new UpcomingAction()
+                {
+                    Chamber = GetLegislativeBodyFromSunlight(ua.chamber),
+                    Context = ua.context ?? string.Empty,
+                    Date = DateFromSunlightTime(ua.scheduled_at),
+                    Url = ua.url ?? string.Empty
+                };
+
+                upcomingActions.Add(upcomingAction);
+            }
+
+            return upcomingActions;
+        }
+
+        /// <summary>
+        ///  The type for this bill. For the bill “H.R. 4921”, the bill_type represents the 
+        /// “H.R.” part. Bill types can be: hr, hres, hjres, hconres, s, sres, sjres, sconres.
+        /// </summary>
+        /// <param name="bill_type"></param>
+        /// <returns></returns>
+        private static BillType BillTypeFromSunlight(string type)
+        {
+            if (string.IsNullOrWhiteSpace(type))
+                return new BillType(BillTypeKind.Empty, string.Empty);
+
+            var billTypeKind = BillTypeKind.Empty;
+
+            switch (type.ToLower())
+            {
+                case "hr":
+                    billTypeKind = BillTypeKind.hr;
+                    break;
+                case "hres":
+                    billTypeKind = BillTypeKind.hres;
+                    break;
+                case "hjres":
+                    billTypeKind = BillTypeKind.hjres;
+                    break;
+                case "hconres":
+                    billTypeKind = BillTypeKind.hconres;
+                    break;
+                case "s":
+                    billTypeKind = BillTypeKind.s;
+                    break;
+                case "sres":
+                    billTypeKind = BillTypeKind.sres;
+                    break;
+                case "sjres":
+                    billTypeKind = BillTypeKind.sjres;
+                    break;
+                case "sconres":
+                    billTypeKind = BillTypeKind.sconres;
+                    break;
+                default:
+                    break;
+            }
+
+            return new BillType(billTypeKind, type);
+        }
+
+        private static BillAction ActionFromSunlight(SunlightBillResult.Action action)
+        {
+            if (action == null)
+                return null;
+
+            var billAction = new BillAction()
+            {
+                Date = DateFromSunlightTime(action.acted_at),
+                Text = action.text ?? string.Empty,
+                Type = BillActionTypeFromSunlight(action.type)
+            };
+
+            return billAction;
+        }
+
+        /// <summary>
+        /// The type of action. Always present. Can be “action” (generic), 
+        /// “vote” (passage vote), “vote-aux” (cloture vote), “vetoed”, 
+        /// “topresident”, and “enacted”. There can be other values, but 
+        /// these are the only ones we support.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private static BillActionType BillActionTypeFromSunlight(string type)
+        {
+            if (string.IsNullOrWhiteSpace(type))
+                return BillActionType.Unknown;
+
+            switch (type.ToLower())
+            {
+                case "action":
+                    return BillActionType.GenericAction;
+                case "vote":
+                    return BillActionType.PassageVote;
+                case "vote-aux":
+                    return BillActionType.ClotureVote;
+                case "vetoed":
+                    return BillActionType.Vetoed;
+                case "topresident":
+                    return BillActionType.ToPresident;
+                case "enacted":
+                    return BillActionType.Enacted;
+                default:
+                    return BillActionType.Unknown;
+            }
+        }
+
+        private static BillHistory HistoryFromSunlight(SunlightBillResult.History billHistory)
+        {
+            if (billHistory == null)
+                return null;
+
+            var history = new BillHistory()
+            {
+                AwaitingSignature = billHistory.awaiting_signature,
+                AwaitingSignatureSince = DateFromSunlightTime(billHistory.awaiting_signature_since),
+                DateHouseLastVotedOnPassage = DateFromSunlightTime(billHistory.house_passage_result_at),
+                DateSenateLastVotedOnPassage = DateFromSunlightTime(billHistory.senate_passage_result_at),
+                DateEnacted = DateFromSunlightTime(billHistory.enacted_at),
+                Enacted = billHistory.enacted,
+                DateVetoed = DateFromSunlightTime(billHistory.vetoed_at),
+                Vetoed = billHistory.vetoed,
+                HousePassageResult = LegislativeBillVoteFromSunlight(billHistory.house_passage_result),
+                SenatePassageResult = LegislativeBillVoteFromSunlight(billHistory.senate_passage_result)
+            };
+
+            return history;
+        }
+
+        private static LegislativeBillVote LegislativeBillVoteFromSunlight(string passageResult)
+        {
+            if (string.IsNullOrWhiteSpace(passageResult))
+                return LegislativeBillVote.Na;
+
+            switch (passageResult.ToLower())
+            {
+                case "pass":
+                    return LegislativeBillVote.Pass;
+                case "fail":
+                    return LegislativeBillVote.Fail;
+                default:
+                    return LegislativeBillVote.Na;
+            }
+        }
+
         public static DateTime DateFromSunlightTime(string dateVal)
         {
+            if (string.IsNullOrWhiteSpace(dateVal))
+                return DateTime.MinValue;
+
             DateTime date;
 
-            return DateTime.TryParseExact(dateVal, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date)
+            if (DateTime.TryParseExact(dateVal, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date))
+                return date;
+
+            return DateTime.TryParseExact(dateVal, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date)
                 ? date
                 : DateTime.MinValue;
         }
