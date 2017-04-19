@@ -12,13 +12,15 @@ namespace Write2Congress.Shared.BusinessLayer.Services
     {
         private static int _defaultResultsPage = 30;
         private static string _billsBase = "bills?";
-        private static string _fields = "&fields=bill_id, bill_type, number, congress, chamber, introduced_on, last_vote_at, official_title, short_title, popular_title, nicknames, summary, summary_short, urls, history, last_action, cosponsor_ids, withdrawn_cosponsor_ids, upcoming";
+        private static string _fields = "&fields=bill_id,bill_type,number,congress,chamber,introduced_on,last_vote_at,official_title,short_title,popular_title,nicknames,summary,summary_short,urls,history,last_action,cosponsor_ids,withdrawn_cosponsor_ids,upcoming";
         private static string _perPage = "&per_page=";
         private static string _page = "&page=";
+        private Util _util;
 
         public BillSvc(IMyLogger logger)
         {
             SetLogger(logger);
+            _util = new Util(logger);
         }
 
         public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage)
@@ -47,7 +49,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 var uri = CreateUri(query, page, resultsPerPage);
                 var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
 
-                bills = Util.BillsFromSunlightBillResult(result);
+                bills = _util.BillsFromSunlightBillResult(result);
 
                 return bills;
             }
@@ -62,7 +64,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         private string CreateUri(string query, int page, int resultsPerPage)
         {
             if (string.IsNullOrWhiteSpace(query))
-                throw new ArgumentException($"Error: Cannot retrieve Bills for legislator because of invalid query: {page}");
+                throw new ArgumentException($"Error: Cannot retrieve Bills for legislator because of invalid query: {query}");
 
             if (page < 1)
                 throw new ArgumentException($"Error: Cannot retrieve Bills for legislator because of invalid page value: {page}");

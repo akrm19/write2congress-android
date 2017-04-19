@@ -9,6 +9,8 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class Vote
     {
+        public VoteCastedType VoteCastedByLegislator { get; set; }
+
         /// <summary>
         /// The Bill, if the vote was for a bill.
         /// </summary>
@@ -23,6 +25,16 @@ namespace Write2Congress.Shared.DomainModel
         /// The chamber the vote was taken in. “house” or “senate”.
         /// </summary>
         public LegislativeBody Chamber { get; set; }
+
+        /// <summary>
+        /// NominationId if vote is for a nomination
+        /// </summary>
+        public string NominationId { get; set; }
+
+        /// <summary>
+        /// The nomination, if the vote was for a Nomination
+        /// </summary>
+        public Nomination Nomination { get; set; }
 
         /// <summary>
         /// The Congress this vote was taken in.

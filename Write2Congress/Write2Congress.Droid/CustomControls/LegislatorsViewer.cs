@@ -124,6 +124,11 @@ namespace Write2Congress.Droid.CustomControls
             if (committeesForLegislator.Count == 0)
                 return;
 
+            var billsForLegislator = _fragment.GetBaseApp().BillMngr.GetBillsSponsoredbyLegislator(legislator.BioguideId, 1);
+
+            var votesForLegislator = _fragment.GetBaseApp().VoteMngr.GetLegislatorVotes(legislator.BioguideId, 1);
+
+
             var results = new StringBuilder();
 
             foreach (var c in committeesForLegislator)

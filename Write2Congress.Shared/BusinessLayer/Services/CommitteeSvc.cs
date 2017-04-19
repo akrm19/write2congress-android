@@ -36,7 +36,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             }
             catch (Exception e)
             {
-                _logger.Error($"Error occurred retriving Committees for legislator {legislatorBioguideId}. Uri {_allLegislatorsUri}.", e);
+                _logger.Error($"Error occurred retriving Committees for legislator {legislatorBioguideId}.", e);
             }
 
             return committees;

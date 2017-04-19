@@ -8,11 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.BusinessLayer
 {
     public class Util
     {
+        private IMyLogger _logger;
+        public Util(IMyLogger logger)
+        {
+            _logger = logger;
+        }
+
         #region App Agnostic
 
         //TODO RM: This also exist in extensions. Pick one.
@@ -48,8 +55,6 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return result;
         }
-
-
 
         public static string GetFileContents(string filePath)
         {
@@ -269,7 +274,7 @@ namespace Write2Congress.Shared.BusinessLayer
                     LastName = l.last_name ?? string.Empty,
                     Birthday = Util.DateFromSunlightTime(l.birthday),
                     Party = Util.PartyFromString(l.party),
-                    Chamber = Util.GetLegislativeBodyFromSunlight(l.chamber),
+                    Chamber = Util.LegislativeBodyFromSunlight(l.chamber),
                     State = Util.GetStateOrTerritoryFromSunlight(l.state),
                     Gender = Util.GenderFromString(l.gender),
                     TermStartDate = Util.DateFromSunlightTime(l.term_start),
@@ -325,7 +330,7 @@ namespace Write2Congress.Shared.BusinessLayer
                 {
                     Id = c.committee_id ?? string.Empty,
                     Name = c.name ?? string.Empty,
-                    Chamber = GetLegislativeBodyFromSunlight(c.chamber),
+                    Chamber = LegislativeBodyFromSunlight(c.chamber),
                     IsSubcommittee = c.subcommittee,
                     ParentCommitteeId = c.subcommittee
                         ? (c.parent_committee_id ?? string.Empty)
@@ -340,20 +345,166 @@ namespace Write2Congress.Shared.BusinessLayer
             return committees;
         }
 
-        public static List<Bill> BillsFromSunlightBillResult(SunlightBillResult.Rootobject billResults)
+        public List<Vote> VotesFromSunlightVoteResult(SunlightVoteResult.Rootobject result, string legislatorBioguideId)
+        {
+            var votes = new List<Vote>();
+
+            foreach (var v in result.results)
+            {
+                Vote vote = VoteFromSunlightVote(v, legislatorBioguideId);
+
+                if (vote != null)
+                    votes.Add(vote);
+            }
+
+            return votes;
+        }
+
+        private Vote VoteFromSunlightVote(SunlightVoteResult.SunlightVote v, string legislatorBioguideId)
+        {
+            try
+            {
+                var vote = new Vote()
+                {
+                    Bill = v.bill == null
+                        ? null
+                        : BillFromSunlightBill(v.bill),
+                    BillId = v.bill_id ?? string.Empty,
+                    Chamber = LegislativeBodyFromSunlight(v.chamber),
+                    Question = v.question ?? string.Empty,
+                    Result = v.result,
+                    Source = v.source,
+                    Type = new VoteType( v.vote_type ?? string.Empty, 
+                        VoteTypeKindFromSunlightVoteType(v.vote_type)),
+                    VotedAt = DateFromSunlightTime(v.voted_at),
+                    Year = v.year ?? 0,
+                    VoteCastedByLegislator = VoteCasedTypeFromSunlight(v.voter_ids, legislatorBioguideId),
+                    NominationId = v.nomination_id ?? string.Empty,
+                    Nomination = NominationFromSunlightNomination(v.nomination)
+                };
+
+                return vote;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Error: Could not create Vote from Sunlight vote", ex);
+                return null;
+            }
+        }
+
+        private Nomination NominationFromSunlightNomination(SunlightVoteResult.SunlighNomination n)
+        {
+            var nomination = new Nomination()
+            {
+                DateOfLastAction = DateFromSunlightTime(n.last_action_at),
+                DateReceived = DateFromSunlightTime(n.received_on),
+                Organization = n.organization ?? string.Empty,
+                Nominees = NomineesFromSunlightNominees(n.nominees)
+            };
+
+            return nomination;
+        }
+
+        private List<Nominee> NomineesFromSunlightNominees(SunlightVoteResult.SunlightNominee[] sunlightNominees)
+        {
+            var nominees = new List<Nominee>();
+
+            if (sunlightNominees == null)
+            {
+                _logger.Warn("Cannot retrive nominees from SunlightNominees because the value is null!");
+                return nominees;
+            }
+
+            foreach(var n in sunlightNominees)
+            {
+                var nominee = new Nominee(n.name ?? string.Empty, n.position ?? string.Empty, n.state);
+
+                nominees.Add(nominee);
+            }
+
+            return nominees;
+        }
+
+        private VoteCastedType VoteCasedTypeFromSunlight(dynamic voter_ids, string legislatorBioguideId)
+        {
+            string legislatorsCastedVote = voter_ids["legislatorBioguideId"];
+
+            if (string.IsNullOrWhiteSpace(legislatorsCastedVote))
+                return VoteCastedType.Unknown;
+
+            switch (legislatorsCastedVote.ToLower())
+            {
+                case "nay":
+                    return VoteCastedType.Nay;
+                case "yea":
+                    return VoteCastedType.Yea;
+                case "not voting":
+                case "notvoting":
+                    return VoteCastedType.NotVoting;
+                case "present":
+                    return VoteCastedType.Present;
+                default:
+                    return VoteCastedType.Unknown;
+            }
+        }
+
+        private VoteTypeKind VoteTypeKindFromSunlightVoteType(string voteType)
+        {
+            if (string.IsNullOrWhiteSpace(voteType))
+                return VoteTypeKind.Other;
+
+            switch (voteType.ToLower())
+            {
+                case "cloture":
+                    return VoteTypeKind.Cloture;
+                case "impeachmen":
+                    return VoteTypeKind.Impeachment;
+                case "leadership":
+                    return VoteTypeKind.Leadership;
+                case "nomination":
+                    return VoteTypeKind.Nomination;
+                case "other":
+                    return VoteTypeKind.Other;
+                case "passage":
+                    return VoteTypeKind.Passage;
+                case "quorum":
+                    return VoteTypeKind.Quorum;
+                case "recommit":
+                    return VoteTypeKind.Recommit;
+                case "treaty":
+                    return VoteTypeKind.Treaty;
+                default:
+                    return VoteTypeKind.Other;
+            }
+        }
+
+        public List<Bill> BillsFromSunlightBillResult(SunlightBillResult.Rootobject billResults)
         {
             var bills = new List<Bill>();
 
             foreach(var b in billResults.results)
             {
+                var bill = BillFromSunlightBill(b);
+
+                if(bill != null)
+                    bills.Add(bill);
+            }
+
+            return bills;
+        }
+
+        private Bill BillFromSunlightBill(SunlightBillResult.SunlightBill b)
+        {
+            try
+            {
                 var bill = new Bill()
                 {
-                    Chamber = GetLegislativeBodyFromSunlight(b.chamber),
+                    Chamber = LegislativeBodyFromSunlight(b.chamber),
                     Congress = b.congress ?? 0,
                     CosponsorIds = b.cosponsor_ids ?? new string[0],
                     DateIntroduced = DateFromSunlightTime(b.introduced_on),
                     DateOfLastVote = DateFromSunlightTime(b.last_vote_at),
-                    history = HistoryFromSunlight(b.history),
+                    History = HistoryFromSunlight(b.history),
                     Id = b.bill_id ?? string.Empty,
                     LastAction = ActionFromSunlight(b.last_action),
                     Nicknames = b.Nicknames ?? new string[0],
@@ -375,10 +526,13 @@ namespace Write2Congress.Shared.BusinessLayer
                         : new List<string>(b.withdrawn_cosponsor_ids)
                 };
 
-                bills.Add(bill);
+                return bill;
             }
-
-            return bills;
+            catch (Exception ex)
+            {
+                _logger.Error("Error encoutnered creating Bill from SunlightBill.", ex);
+                return null;
+            }
         }
 
         private static List<string> UrlsFromSunlightBillUrls(SunlightBillResult.Urls urls)
@@ -405,7 +559,7 @@ namespace Write2Congress.Shared.BusinessLayer
             {
                 var upcomingAction = new UpcomingAction()
                 {
-                    Chamber = GetLegislativeBodyFromSunlight(ua.chamber),
+                    Chamber = LegislativeBodyFromSunlight(ua.chamber),
                     Context = ua.context ?? string.Empty,
                     Date = DateFromSunlightTime(ua.scheduled_at),
                     Url = ua.url ?? string.Empty
@@ -563,7 +717,7 @@ namespace Write2Congress.Shared.BusinessLayer
                 : DateTime.MinValue;
         }
 
-        public static LegislativeBody GetLegislativeBodyFromSunlight(string chamber)
+        public static LegislativeBody LegislativeBodyFromSunlight(string chamber)
         {
             if (string.IsNullOrWhiteSpace(chamber))
                 return LegislativeBody.Unknown;

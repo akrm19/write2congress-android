@@ -26,6 +26,8 @@ namespace Write2Congress.Droid
 
         public LetterManager LetterManager;
         public CommitteeManager CommitteeManager;
+        public VoteManager VoteMngr;
+        public BillManager BillMngr; 
         protected LegislatorManager LegislatorManager;
 
         public BaseApplication(IntPtr handle, JniHandleOwnership transfer)
@@ -47,6 +49,8 @@ namespace Write2Congress.Droid
             LetterManager = new LetterManager(new LetterFileProvider());
 
             CommitteeManager = new CommitteeManager(_logger);
+            VoteMngr = new VoteManager(_logger);
+            BillMngr = new BillManager(_logger);
             LegislatorManager = new LegislatorManager();
             _allLegislators = AppHelper.GetCachedLegislatorsFromFileStorage();
 

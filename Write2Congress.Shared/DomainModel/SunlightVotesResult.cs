@@ -8,7 +8,7 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class SunlightVoteResult : SunlightBaseResult
     {
-        public class Rootobject
+        public class Rootobject : BaseRootObject
         {
             public SunlightVote[] results { get; set; }
         }

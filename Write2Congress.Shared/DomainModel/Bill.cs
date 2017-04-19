@@ -75,7 +75,7 @@ namespace Write2Congress.Shared.DomainModel
         /// Time fields can hold either dates or times - Congress is 
         /// inconsistent about providing specific timestamps
         /// </summary>
-        public BillHistory history { get; set; }
+        public BillHistory History { get; set; }
 
         /// <summary>
         /// The date this bill was introduced.

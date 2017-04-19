@@ -45,7 +45,7 @@
     <Compile Include="BusinessLayer\Extensions.cs" />
     <Compile Include="BusinessLayer\LegislatorManager.cs" />
     <Compile Include="BusinessLayer\LetterManager.cs" />
-    <Compile Include="BusinessLayer\Services\BillSevc.cs" />
+    <Compile Include="BusinessLayer\Services\BillSvc.cs" />
     <Compile Include="BusinessLayer\Services\CommitteeSvc.cs" />
     <Compile Include="BusinessLayer\Services\LegislatorSvc.cs" />
     <Compile Include="BusinessLayer\Services\ServiceBase.cs" />

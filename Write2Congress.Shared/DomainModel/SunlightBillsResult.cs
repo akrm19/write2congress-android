@@ -9,7 +9,7 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class SunlightBillResult : SunlightBaseResult
     {   
-        public class Rootobject 
+        public class Rootobject : BaseRootObject
         {
             public SunlightBill[] results { get; set; }
         }
