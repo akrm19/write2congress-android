@@ -11,32 +11,40 @@ namespace Write2Congress.Shared.BusinessLayer.Services
     public class BillSvc : ServiceBase
     {
         private static int _defaultResultsPage = 30;
-        private static string _billsSponsorByLegislatorUri = "bills?sponsor_id__in={0}&fields=bill_id,bill_type,number,congress,chamber,introduced_on,last_vote_at,official_title,short_title,popular_title,nicknames,summary,summary_short,urls,history,last_action,cosponsor_ids,withdrawn_cosponsor_ids,upcoming&per_page={2}&page={1}";
+        private static string _billsBase = "bills?";
+        private static string _fields = "&fields=bill_id, bill_type, number, congress, chamber, introduced_on, last_vote_at, official_title, short_title, popular_title, nicknames, summary, summary_short, urls, history, last_action, cosponsor_ids, withdrawn_cosponsor_ids, upcoming";
+        private static string _perPage = "&per_page=";
+        private static string _page = "&page=";
 
         public BillSvc(IMyLogger logger)
         {
             SetLogger(logger);
         }
 
-        public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int? resultsPerPage = null)
+        public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage)
+        {
+            var query = "sponsor_id__in=" + legislatorBioguideId;
+            var bills = GetBillsFromQuery(query, page, resultsPerPage);
+
+            return bills;
+        }
+
+        public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage)
+        {
+            //"cosponsor_ids__in=" + legislatorBioguideId;
+            var query = "cosponsor_ids__all=" + legislatorBioguideId;
+            var bills = GetBillsFromQuery(query, page, resultsPerPage);
+
+            return bills;
+        }
+
+        private List<Bill> GetBillsFromQuery(string query, int page, int resultsPerPage)
         {
             var bills = new List<Bill>();
 
-            if(string.IsNullOrWhiteSpace(legislatorBioguideId))
-            {
-                _logger.Error("Error: Cannot retrieve Bills for legislator because ID is null or empty");
-                return bills;
-            }
-
-            if (page < 1)
-            {
-                _logger.Error($"Error: Cannot retrieve Bills for legislator {legislatorBioguideId} because of invalid page value: {page}");
-                return bills;
-            }
-
             try
             {
-                var uri = string.Format(_billsSponsorByLegislatorUri, legislatorBioguideId, page, (resultsPerPage ?? _defaultResultsPage));
+                var uri = CreateUri(query, page, resultsPerPage);
                 var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
 
                 bills = Util.BillsFromSunlightBillResult(result);
@@ -45,10 +53,31 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             }
             catch (Exception ex)
             {
-                _logger.Error($"Error: Could not retrieve Bills sponsored by {legislatorBioguideId}", ex);
+                _logger.Error($"Error: Could not retrieve Bills from query {query}", ex);
             }
 
             return bills;
+        }
+
+        private string CreateUri(string query, int page, int resultsPerPage)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                throw new ArgumentException($"Error: Cannot retrieve Bills for legislator because of invalid query: {page}");
+
+            if (page < 1)
+                throw new ArgumentException($"Error: Cannot retrieve Bills for legislator because of invalid page value: {page}");
+
+            if (resultsPerPage < 1)
+                resultsPerPage = _defaultResultsPage;
+
+            var uri = string.Format("{0}{1}{2}{3}",
+                _billsBase,
+                query,
+                _fields,
+                _perPage + resultsPerPage,
+                _page + page.ToString());
+
+            return uri;
         }
     }
 }
