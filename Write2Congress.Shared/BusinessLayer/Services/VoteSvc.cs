@@ -64,7 +64,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             if (resultsPerPage < 1)
                 resultsPerPage = _defaultResultsPage;
 
-            var uri = string.Format("{0}{1}{2}{3}{4}",
+            var uri = string.Format("{0}{1}{2}{3}{4}{5}",
                 _votesBase,
                 query,
                 _fields,

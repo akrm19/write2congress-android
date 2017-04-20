@@ -109,7 +109,7 @@ namespace Write2Congress.Shared.DomainModel
             /// This contains a list with the Legislator
             /// bioguideId and their vote results
             /// </summary>
-            public dynamic voter_ids { get; set; }
+            public Dictionary<string, string> voter_ids { get; set; }
 
             /// <summary>
             /// The “legislative year” of the vote. This is not 

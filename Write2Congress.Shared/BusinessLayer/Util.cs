@@ -394,6 +394,9 @@ namespace Write2Congress.Shared.BusinessLayer
 
         private Nomination NominationFromSunlightNomination(SunlightVoteResult.SunlighNomination n)
         {
+            if (n == null)
+                return null;
+
             var nomination = new Nomination()
             {
                 DateOfLastAction = DateFromSunlightTime(n.last_action_at),
@@ -427,7 +430,7 @@ namespace Write2Congress.Shared.BusinessLayer
 
         private VoteCastedType VoteCasedTypeFromSunlight(dynamic voter_ids, string legislatorBioguideId)
         {
-            string legislatorsCastedVote = voter_ids["legislatorBioguideId"];
+            string legislatorsCastedVote = voter_ids[legislatorBioguideId];
 
             if (string.IsNullOrWhiteSpace(legislatorsCastedVote))
                 return VoteCastedType.Unknown;
@@ -435,13 +438,17 @@ namespace Write2Congress.Shared.BusinessLayer
             switch (legislatorsCastedVote.ToLower())
             {
                 case "nay":
+                case "\"nay\"":
                     return VoteCastedType.Nay;
                 case "yea":
+                case "\"yea\"":
                     return VoteCastedType.Yea;
                 case "not voting":
                 case "notvoting":
+                case "\"not voting\"":
                     return VoteCastedType.NotVoting;
                 case "present":
+                case "\"present\"":
                     return VoteCastedType.Present;
                 default:
                     return VoteCastedType.Unknown;
@@ -554,6 +561,9 @@ namespace Write2Congress.Shared.BusinessLayer
         private static List<UpcomingAction> UpcomingBillActionFromSunlight(SunlightBillResult.Upcoming[] upcoming)
         {
             var upcomingActions = new List<UpcomingAction>();
+
+            if (upcoming == null)
+                return upcomingActions;
 
             foreach (var ua in upcoming)
             {
