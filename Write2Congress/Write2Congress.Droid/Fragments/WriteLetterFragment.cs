@@ -15,6 +15,7 @@ using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Shared.DomainModel;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Write2Congress.Droid.Code;
+using Newtonsoft.Json;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -25,7 +26,6 @@ namespace Write2Congress.Droid.Fragments
         private EditText _body;
         private EditText _signature;
         private TextView _lastSaved;
-        //private Legislator _selectedLegislator;
         private Letter _currentLetter;
         private System.Timers.Timer _autoSaveTimer;
         private double _autoSaveIntervalInMilliSecs = 60000;
@@ -34,25 +34,11 @@ namespace Write2Congress.Droid.Fragments
 
         public WriteLetterFragment()
         {
-            if (_currentLetter == null)
-                _currentLetter = new Letter();
-
             _firstTimeInit = true;
 
             _autoSaveTimer = new System.Timers.Timer(_autoSaveIntervalInMilliSecs);
             _autoSaveTimer.Elapsed += AutoSaveTimer_Elapsed;
             _autoSaveTimer.Enabled = false;
-        }
-
-        public WriteLetterFragment(Legislator legislator) : this()
-        {
-            if(legislator != null)
-                _currentLetter = new Letter(legislator);
-        }
-
-        public WriteLetterFragment(Letter letter) : this()
-        {
-            _currentLetter = letter ?? new Letter();
         }
 
         private void AutoSaveTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -63,7 +49,18 @@ namespace Write2Congress.Droid.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            // Create your fragment here
+
+            if (Arguments == null || _currentLetter != null)
+                return;
+
+            if(!string.IsNullOrWhiteSpace(Arguments.GetString(BundleType.Legislator, string.Empty)))
+            {
+                var legislator = JsonConvert.DeserializeObject<Legislator>(Arguments.GetString(BundleType.Legislator));
+                _currentLetter = new Letter(legislator);
+            }
+
+            if (!string.IsNullOrWhiteSpace(Arguments.GetString(BundleType.Letter, string.Empty)))
+                _currentLetter = JsonConvert.DeserializeObject<Letter>(Arguments.GetString(BundleType.Letter));
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

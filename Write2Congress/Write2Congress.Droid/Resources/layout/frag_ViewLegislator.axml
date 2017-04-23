@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/viewLegislatorFrag_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_portraitAndInfoParent">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/viewLegislatorFrag_portrait" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewLegislatorFrag_infoParent">
+            <TextView
+                android:text="Chamber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewLegislatorFrag_chamber" />
+            <TextView
+                android:text="Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewLegislatorFrag_name" />
+            <TextView
+                android:text="TermStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewLegislatorFrag_termStartDate" />
+            <TextView
+                android:text="TermEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewLegislatorFrag_termEndDate" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3">
+        <ImageButton
+            android:src="@drawable/ic_create_blue_48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_writeLetter" />
+        <TextView
+            android:text="@string/writeLetter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:id="@+id/viewLegislatorFrag_writeLetterText" />
+        <Button
+            android:drawableLeft="@drawable/facebook_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_facebook"
+            android:gravity="left|center"
+            android:text="Facebook"/>
+        <Button
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/facebook_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_facebook"
+            android:gravity="left|center"
+            android:text="Facebook"/>
+        <Button
+            android:drawableLeft="@drawable/facebook_button"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_facebook"
+            android:gravity="left|center"
+            android:text="Facebook"/>
+        <TextView
+            android:text="Facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:id="@+id/textView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3">
+        <ImageButton
+            android:src="@drawable/ic_action_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_email" />
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+        <ImageButton
+            android:src="@drawable/ic_action_social_twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_twitter" />
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3">
+        <ImageButton
+            android:src="@drawable/ic_action_local_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_phone" />
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+        <ImageButton
+            android:src="@drawable/ic_action_social_youtube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_youtube" />
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3">
+        <ImageButton
+            android:src="@drawable/ic_action_location_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_address" />
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+        <ImageButton
+            android:src="@drawable/ic_action_ios7_world"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLegislatorFrag_webpage" />
+        <TextView
+            android:text="Text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
+    </LinearLayout>
+</LinearLayout>

@@ -29,6 +29,8 @@ namespace Write2Congress.Droid.Fragments
         LegislatorsViewer _legislatorsViewer;
         Address _currentAddress;
 
+        public MainFragment() { }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

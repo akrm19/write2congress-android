@@ -55,7 +55,10 @@ namespace Write2Congress.Droid.Activities
             {
                 case ViewLettersFragmentType.Drafts:
                 case ViewLettersFragmentType.Sent:
-                    return new BaseViewLetterFragment(fragmentType);
+                    var baseViewLetterFrag = new BaseViewLetterFragment();
+                    baseViewLetterFrag.Arguments = baseViewLetterFrag.Arguments ?? new Bundle();
+                    baseViewLetterFrag.Arguments.PutString(BundleType.ViewLettersFragType, fragmentType);
+                    return baseViewLetterFrag;
                 default:
                     MyLogger.Error("ViewLettersFragmentType is not valid. Unable to create fragment");
                     return null;

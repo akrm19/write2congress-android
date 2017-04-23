@@ -47,18 +47,19 @@ namespace Write2Congress.Droid.Activities
             {
                 var senderKind = GetSenderKindFromIntent();
 
+                _writeLetterFragment = new WriteLetterFragment();
+                if (_writeLetterFragment.Arguments == null)
+                    _writeLetterFragment.Arguments = new Bundle();
+
                 switch (senderKind)
                 {
                     case BundleSenderKind.LegislatorViewer:
-                        var legislator = GetLegislatorFromIntent();
-                        _writeLetterFragment = new WriteLetterFragment(legislator);
+                        var legislator = AppHelper.GetLegislatorFromIntent(Intent);
+                        _writeLetterFragment.Arguments.PutString(BundleType.Legislator, legislator.SerializeToJson());
                         break;
                     case BundleSenderKind.ViewLettersAdapter:
                         var letter = GetLetterFromIntent();
-                        _writeLetterFragment = new WriteLetterFragment(letter);
-                        break;
-                    default:
-                        _writeLetterFragment = new WriteLetterFragment();
+                        _writeLetterFragment.Arguments.PutString(BundleType.Letter, letter.SerializeToJson());
                         break;
                 }
 
@@ -85,7 +86,7 @@ namespace Write2Congress.Droid.Activities
 
         private Letter GetLetterFromIntent()
         {
-            var letter = AndroidHelper.GetSerializedTypeFromIntent<Letter>(Intent, BundleType.Letter);
+            var letter = AndroidHelper.GetAndDeserializedTypeFromIntent<Letter>(Intent, BundleType.Letter);
 
             if (letter == null)
                 MyLogger.Error($"Unable to retrieve letter from intent's {BundleType.Letter} extra.");
@@ -93,14 +94,14 @@ namespace Write2Congress.Droid.Activities
             return letter;
         }
 
-        private Legislator GetLegislatorFromIntent()
-        {
-            var legislator = AndroidHelper.GetSerializedTypeFromIntent<Legislator>(Intent, BundleType.Legislator);
-
-            if (legislator == null)
-                MyLogger.Error($"Unable to retrieve legislator from intent's {BundleType.Legislator} extra.");
-
-            return legislator;
-        }
+        //private Legislator GetLegislatorFromIntent()
+        //{
+        //    var legislator = AndroidHelper.GetSerializedTypeFromIntent<Legislator>(Intent, BundleType.Legislator);
+        //
+        //    if (legislator == null)
+        //        MyLogger.Error($"Unable to retrieve legislator from intent's {BundleType.Legislator} extra.");
+        //
+        //    return legislator;
+        //}
     }
 }

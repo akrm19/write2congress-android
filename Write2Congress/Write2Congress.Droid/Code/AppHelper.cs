@@ -29,6 +29,76 @@ namespace Write2Congress.Droid.Code
         private static Logger _logger = new Logger("AppHelper");
         private static string _cachedLegislatorsFileName = "Legislators.json";
 
+        //TODO RM: Ensure this works with pre 5.0 like 4.4
+        public static Android.Util.TypedValue GetTypedValueFromActv(ContextThemeWrapper activity)
+        {
+            Android.Util.TypedValue typedValue = new Android.Util.TypedValue();
+            try
+            {
+                return activity.Theme.ResolveAttribute(Android.Resource.Attribute.SelectableItemBackground, typedValue, true)
+                    ? typedValue
+                    : null;
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"An Error occurred while retrieving the SelectableItemBackground used for transparent buttons. {e.Message}");
+                return null;
+            }
+        }
+
+
+        #region Legislator, Xyz, Populations, 
+
+        public static void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
+        {
+            switch (legislator.Party)
+            {
+                case Party.Democratic:
+                    imageButton.SetImageResource(Resource.Drawable.ic_democratic_logo);
+                    break;
+                case Party.Republican:
+                    imageButton.SetImageResource(Resource.Drawable.ic_republican_elephant);
+                    break;
+                case Party.Independent:
+                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+                    break;
+                case Party.Libertarian:
+                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+                    break;
+                case Party.Green:
+                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+                    break;
+                case Party.Unknown:
+                default:
+                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+                    break;
+            }
+        }
+
+        public static string GetLegislatorTermStartDate(Legislator legislator, string termStartDateText)
+        {
+            return legislator.TermStartDate.Equals(DateTime.MinValue)
+                    ? $"{termStartDateText}: {AndroidHelper.GetString(Resource.String.unknown)}"
+                    : $"{termStartDateText}: {legislator.TermStartDate.ToShortDateString()}";
+        }
+
+        public static string GetLegislatorTermEndDate(Legislator legislator, string termEndDateText)
+        {
+            return legislator.TermEndDate.Equals(DateTime.MinValue)
+                ? $"{termEndDateText}: {AndroidHelper.GetString(Resource.String.unknown)}"
+                : $"{termEndDateText}: {legislator.TermEndDate.ToShortDateString()}";
+        }
+
+        public static void SetLegislatorContactMthdVisibility(ImageView imageButton, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
+        {
+            imageButton.Visibility = contactMethod.IsEmpty
+                ? ViewStates.Gone
+                : ViewStates.Visible;
+
+            if (selectableItemBackground != null)
+                imageButton.SetBackgroundResource(selectableItemBackground.ResourceId);
+        }
+
         public static Bitmap GetPortraitForLegislator(Legislator legislator)
         {
             Bitmap imageBitmap = null;
@@ -56,6 +126,7 @@ namespace Write2Congress.Droid.Code
 
             return imageBitmap;
         }
+        #endregion
 
         #region StateOrTerritory Helpers
 
@@ -182,6 +253,17 @@ namespace Write2Congress.Droid.Code
 
         #region Intents Methods (ContactMethods & Actions)
 
+        public static void StartViewLegislatorIntent(BaseActivity activity, Legislator legislator)
+        {
+            using (var intent = new Intent(activity, typeof(ViewLegislatorActivity)))
+            {
+                if (legislator != null)
+                    intent.PutExtra(BundleType.Legislator, legislator.SerializeToJson());
+
+                activity.StartActivity(intent);
+            }
+        }
+
         public static void StartWriteNewLetterIntent(BaseActivity activity, BundleSenderKind senderKind, Legislator legislator = null, bool finishActivity = false)
         {
             using (var intent = new Intent(activity, typeof(WriteLetterActivity)))
@@ -280,6 +362,16 @@ namespace Write2Congress.Droid.Code
 
             intent.SetData(uri);
             return intent;
+        }
+        
+        public static Legislator GetLegislatorFromIntent(Intent intent, string bundleType = BundleType.Legislator)
+        {
+            var legislator = AndroidHelper.GetAndDeserializedTypeFromIntent<Legislator>(intent, bundleType);
+
+            if (legislator == null)
+                _logger.Error($"Unable to retrieve legislator from intent's {BundleType.Legislator} extra.");
+
+            return legislator;
         }
         #endregion
     }

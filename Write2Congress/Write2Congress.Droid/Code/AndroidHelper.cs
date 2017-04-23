@@ -62,14 +62,19 @@ namespace Write2Congress.Droid.Code
             return intent;
         }
 
-        public static T GetSerializedTypeFromIntent<T>(Intent intent, string extraName) where T : class
+        public static string GetStringFromIntent(Intent intent, string extraName)
+        {
+            if (intent == null || !intent.HasExtra(extraName))
+                return string.Empty;
+
+            return intent.GetStringExtra(extraName);
+        }
+
+        public static T GetAndDeserializedTypeFromIntent<T>(Intent intent, string extraName) where T : class
         {
             try
             {
-                if (intent == null || !intent.HasExtra(extraName))
-                    return default(T);
-
-                var serializedObject = intent.GetStringExtra(extraName);
+                var serializedObject = GetStringFromIntent(intent, extraName);
                 
                 var result = JsonConvert.DeserializeObject<T>(serializedObject);
     

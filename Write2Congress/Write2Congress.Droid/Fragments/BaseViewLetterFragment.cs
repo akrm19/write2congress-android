@@ -25,9 +25,14 @@ namespace Write2Congress.Droid.Fragments
         private ViewSwitcher _viewSwitcher;
         private string _viewLettersFragmentType;
 
-        public BaseViewLetterFragment(string viewLettersFragmentType)
+        public BaseViewLetterFragment()
+        { }
+
+        public override void OnCreate(Bundle savedInstanceState)
         {
-            _viewLettersFragmentType = viewLettersFragmentType;
+            base.OnCreate(savedInstanceState);
+
+            _viewLettersFragmentType = Arguments.GetString(BundleType.ViewLettersFragType, string.Empty);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

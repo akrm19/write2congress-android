@@ -20,5 +20,6 @@ namespace Write2Congress.Droid.DomainModel.Constants
         public const string DraftsFragment = "DraftsFragment";
         public const string SentFragment = "SentFragment";
         internal static readonly string SettingsFragment = "SettingsFragment";
+        internal static readonly string ViewLegislatorsFragment = "ViewLegislatorsFragment";
     }
 }

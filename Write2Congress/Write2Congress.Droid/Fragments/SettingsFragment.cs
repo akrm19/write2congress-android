@@ -17,6 +17,7 @@ namespace Write2Congress.Droid.Fragments
 {
     public class SettingsFragment : PreferenceFragmentCompat
     {
+        public SettingsFragment() { }
         //public override void OnCreate(Bundle savedInstanceState)
         //{
         //    base.OnCreate(savedInstanceState);

@@ -23,6 +23,8 @@ namespace Write2Congress.Droid.Fragments
     {
         protected Logger MyLogger;
 
+        public BaseFragment() { }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

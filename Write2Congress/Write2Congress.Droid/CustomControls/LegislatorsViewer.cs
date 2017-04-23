@@ -120,19 +120,21 @@ namespace Write2Congress.Droid.CustomControls
                 Logger.Error("Error opening legislator details. Unable to retrive legislator at positition " + position);
                 return;
             }
-            var committeesForLegislator = _fragment.GetBaseApp().CommitteeManager.GetCommitteesForLegislator(legislator.BioguideId);
-            if (committeesForLegislator.Count == 0)
-                return;
 
-            var billsForLegislator = _fragment.GetBaseApp().BillMngr.GetBillsSponsoredbyLegislator(legislator.BioguideId, 1);
-
-            var votesForLegislator = _fragment.GetBaseApp().VoteMngr.GetLegislatorVotes(legislator.BioguideId, 1);
-
-
-            var results = new StringBuilder();
-
-            foreach (var c in committeesForLegislator)
-                results.Append($"{c.Name}{System.Environment.NewLine}");
+            AppHelper.StartViewLegislatorIntent(_fragment.GetBaseActivity(), legislator);
+            //var committeesForLegislator = _fragment.GetBaseApp().CommitteeManager.GetCommitteesForLegislator(legislator.BioguideId);
+            //if (committeesForLegislator.Count == 0)
+            //    return;
+            //
+            //var billsForLegislator = _fragment.GetBaseApp().BillMngr.GetBillsSponsoredbyLegislator(legislator.BioguideId, 1);
+            //
+            //var votesForLegislator = _fragment.GetBaseApp().VoteMngr.GetLegislatorVotes(legislator.BioguideId, 1);
+            //
+            //
+            //var results = new StringBuilder();
+            //
+            //foreach (var c in committeesForLegislator)
+            //    results.Append($"{c.Name}{System.Environment.NewLine}");
             //TODO RM: Add code to open legislator details
         }
 

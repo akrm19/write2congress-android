@@ -57,6 +57,7 @@
   <string name="verifyUpdateOfLegislatorData">Are you sure you want to update the lesgislator data?</string>  
   <string name="verifyUpdateOfLegislatorDataLastUpdate">Legislator data was last updated on</string>
   <string name="verifyUpdateOfLegislatorDataWarning">Updates are only needed if you think your legislator data is out of date.</string>
+  <string name="writeLetter">Write Letter</string>
   <string name="writeNewLetterTitle">Write New Letter</string>
   <string name="writeNew">Write New</string>
 </resources>

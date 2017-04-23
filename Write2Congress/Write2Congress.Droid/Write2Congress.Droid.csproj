@@ -134,6 +134,7 @@
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\BaseToolbarActivity.cs" />
     <Compile Include="Activities\SettingsActivity.cs" />
+    <Compile Include="Activities\ViewLegislatorActivity.cs" />
     <Compile Include="Activities\ViewLettersActivity.cs" />
     <Compile Include="Activities\WriteLetterActivity.cs" />
     <Compile Include="Adapters\LetterAdapter.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Fragments\MainFragment.cs" />
     <Compile Include="Code\AndroidHelper.cs" />
     <Compile Include="Fragments\SettingsFragment.cs" />
+    <Compile Include="Fragments\ViewLegislatorFragment.cs" />
     <Compile Include="Fragments\WriteLetterFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -210,6 +212,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\actv_Settings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\frag_ViewLegislator.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\actv_ViewLegislator.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

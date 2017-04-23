@@ -41,16 +41,7 @@ namespace Write2Congress.Droid.Adapters
             _senate = AndroidHelper.GetString(Resource.String.senate);
             _congress = AndroidHelper.GetString(Resource.String.congress);
 
-            //TODO RM: Ensure this works with pre 5.0 like 4.4
-            try
-            {
-                _fragment.Activity.Theme.ResolveAttribute(Android.Resource.Attribute.SelectableItemBackground, _selectableItemBackground, true);
-            }
-            catch (Exception e)
-            {
-                Logger.Error($"An Error occurred while retrieving the SelectableItemBackground used for transparent buttons. {e.Message}");
-                _selectableItemBackground = null;
-            }
+            _selectableItemBackground = AppHelper.GetTypedValueFromActv(_fragment.Activity);
         }
 
         public override int ItemCount
@@ -152,66 +143,62 @@ namespace Write2Congress.Droid.Adapters
             var viewHolder = holder as LegislatorAdapterViewHolder;
 
             //Portrait
-            SetLegislatorPortrait(legislator, viewHolder.Portrait);
+            AppHelper.SetLegislatorPortrait(legislator, viewHolder.Portrait);
 
             //Basic Info
             viewHolder.Chamber.Text = $"{legislator.Chamber} ({legislator.State.ToString()})";
             viewHolder.Name.Text = legislator.FullName;
-            viewHolder.TermStartDate.Text = legislator.TermStartDate.Equals(DateTime.MinValue)
-                ? $"{_termStartDate}: {AndroidHelper.GetString(Resource.String.unknown)}"
-                : $"{_termStartDate}: {legislator.TermStartDate.ToShortDateString()}";
-            viewHolder.TermEndDate.Text = legislator.TermEndDate.Equals(DateTime.MinValue)
-                ? $"{_termEndDate}: {AndroidHelper.GetString(Resource.String.unknown)}"
-                : $"{_termEndDate}: {legislator.TermEndDate.ToShortDateString()}";
+            viewHolder.TermStartDate.Text = AppHelper.GetLegislatorTermStartDate(legislator, _termStartDate);
+            viewHolder.TermEndDate.Text = AppHelper.GetLegislatorTermStartDate(legislator, _termEndDate);
 
             //Contact, social media, ect buttons
-            SetImageButtonVisibility(viewHolder.WriteLetter, legislator.Email);
-            SetImageButtonVisibility(viewHolder.Email, legislator.Email);
-            SetImageButtonVisibility(viewHolder.Phone, legislator.OfficeNumber);
-            SetImageButtonVisibility(viewHolder.Address, legislator.OfficeAddress);
-
-            SetImageButtonVisibility(viewHolder.Facebook, legislator.FacebookId);
-            SetImageButtonVisibility(viewHolder.Twitter, legislator.TwitterId);
-            SetImageButtonVisibility(viewHolder.Webpage, legislator.Website);
-            SetImageButtonVisibility(viewHolder.YouTube, legislator.YouTubeId);
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.WriteLetter, legislator.Email, _selectableItemBackground);
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Email, legislator.Email, _selectableItemBackground);
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Phone, legislator.OfficeNumber, _selectableItemBackground);
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Address, legislator.OfficeAddress, _selectableItemBackground);
+            
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Facebook, legislator.FacebookId, _selectableItemBackground);
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Twitter, legislator.TwitterId, _selectableItemBackground);
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Webpage, legislator.Website, _selectableItemBackground);
+            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.YouTube, legislator.YouTubeId, _selectableItemBackground);
         }
 
-        private void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
-        {           
-            switch (legislator.Party)
-            {
-                case Shared.DomainModel.Enum.Party.Democratic:
-                    imageButton.SetImageResource(Resource.Drawable.ic_democratic_logo);
-                    break;
-                case Shared.DomainModel.Enum.Party.Republican:
-                    imageButton.SetImageResource(Resource.Drawable.ic_republican_elephant);
-                    break;
-                case Shared.DomainModel.Enum.Party.Independent:
-                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-                    break;
-                case Shared.DomainModel.Enum.Party.Libertarian:
-                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-                    break;
-                case Shared.DomainModel.Enum.Party.Green:
-                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-                    break;
-                case Shared.DomainModel.Enum.Party.Unknown:
-                    imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-                    break;
-                default:
-                    break;
-            }
-        }
+        //private void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
+        //{           
+        //    switch (legislator.Party)
+        //    {
+        //        case Shared.DomainModel.Enum.Party.Democratic:
+        //            imageButton.SetImageResource(Resource.Drawable.ic_democratic_logo);
+        //            break;
+        //        case Shared.DomainModel.Enum.Party.Republican:
+        //            imageButton.SetImageResource(Resource.Drawable.ic_republican_elephant);
+        //            break;
+        //        case Shared.DomainModel.Enum.Party.Independent:
+        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+        //            break;
+        //        case Shared.DomainModel.Enum.Party.Libertarian:
+        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+        //            break;
+        //        case Shared.DomainModel.Enum.Party.Green:
+        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+        //            break;
+        //        case Shared.DomainModel.Enum.Party.Unknown:
+        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
-        private void SetImageButtonVisibility(ImageView imageButton, ContactMethod contactMethod)
-        {
-            imageButton.Visibility = contactMethod.IsEmpty
-                ? ViewStates.Gone
-                : ViewStates.Visible;
-
-            if (_selectableItemBackground != null)
-                imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
-        }
+        //private void SetLegislatorContactMthdVisibility(ImageView imageButton, ContactMethod contactMethod)
+        //{
+        //    imageButton.Visibility = contactMethod.IsEmpty
+        //        ? ViewStates.Gone
+        //        : ViewStates.Visible;
+        //
+        //    if (_selectableItemBackground != null)
+        //        imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
+        //}
 
         protected void ContactMethodAction(ContactMethod contactMethod, bool useChooser)
         {
