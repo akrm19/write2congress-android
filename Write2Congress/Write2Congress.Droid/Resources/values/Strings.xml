@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="about">About</string>
-	<string name="app_name">Write2Congress.Droid</string>
+  <string name="address">Address</string>
+  <string name="app_name">Write2Congress.Droid</string>
   <string name="cannotSendLetterWithoutRecipient">Cannot send letter without a recipient</string>
   <string name="congress">Congress</string>
   <string name="confirmRefresh">Confirm Refresh</string>
@@ -13,13 +14,14 @@
   <string name="dismiss">Dismiss</string>
   <string name="donate">Donate</string>
   <string name="drafts">Drafts</string>
-  <string name="exit">Exit</string>
+  <string name="email">Email</string>
   <string name="emptyBodyText">Letter content</string>
   <string name="emptyDraftLettersText">No draft letters</string>
   <string name="emptyRecipientText">To: ...</string>
   <string name="emptySentLettersText">No sent letters</string>
   <string name="emptySignatureText">Letter signature</string>
   <string name="emptySubjectText">Subject (optional)</string>
+  <string name="exit">Exit</string>
   <string name="feedback">Feedback</string>
   <string name="lastSaved">Last saved</string>
   <string name="legislatorDataSuccessfullyUpdated">The legislator data was successfully updated</string>
@@ -32,6 +34,7 @@
   <string name="letterSaved">Letter saved</string>
   <string name="letterSaveFailed">Error: Unabled to save letter</string>
   <string name="ok">OK</string>
+  <string name="phone">Phone</string>
   <string name="refresh">Refresh</string>
   <string name="save">Save</string>
   <string name="searchLegislators">Search Legislators</string>
@@ -57,6 +60,7 @@
   <string name="verifyUpdateOfLegislatorData">Are you sure you want to update the lesgislator data?</string>  
   <string name="verifyUpdateOfLegislatorDataLastUpdate">Legislator data was last updated on</string>
   <string name="verifyUpdateOfLegislatorDataWarning">Updates are only needed if you think your legislator data is out of date.</string>
+  <string name="website">Web Site</string>
   <string name="writeLetter">Write Letter</string>
   <string name="writeNewLetterTitle">Write New Letter</string>
   <string name="writeNew">Write New</string>

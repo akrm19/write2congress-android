@@ -65,32 +65,6 @@ namespace Write2Congress.Droid.Fragments
 
             return fragment;
         }
-
-        private void PopulateContactMethodsButtons(View fragment, Legislator legislator, TypedValue selectableItemBackground)
-        {
-            var WriteLetter = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_writeLetter);
-            var Email = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_email);
-            var Phone = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_phone);
-            var Address = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_address);
-
-            var Facebook = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_facebook);
-            var Twitter = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_twitter);
-            var Webpage = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_webpage);
-            var YouTube = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_youtube);
-
-            //Contact, social media, ect buttons
-            AppHelper.SetLegislatorContactMthdVisibility(WriteLetter, legislator.Email, selectableItemBackground);
-            AppHelper.SetLegislatorContactMthdVisibility(Email, legislator.Email, selectableItemBackground);
-            AppHelper.SetLegislatorContactMthdVisibility(Phone, legislator.OfficeNumber, selectableItemBackground);
-            AppHelper.SetLegislatorContactMthdVisibility(Address, legislator.OfficeAddress, selectableItemBackground);
-
-            //AppHelper.SetLegislatorContactMthdVisibility(Facebook, legislator.FacebookId, selectableItemBackground);
-            AppHelper.SetLegislatorContactMthdVisibility(Twitter, legislator.TwitterId, selectableItemBackground);
-            AppHelper.SetLegislatorContactMthdVisibility(Webpage, legislator.Website, selectableItemBackground);
-            AppHelper.SetLegislatorContactMthdVisibility(YouTube, legislator.YouTubeId, selectableItemBackground);
-
-            
-        }
         
         private void PopulateBasicInfo(View fragment, Legislator legislator)
         {
@@ -112,6 +86,44 @@ namespace Write2Congress.Droid.Fragments
             var termEndDateText = AndroidHelper.GetString(Resource.String.termEnds);
             using (var termEndDate = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_termEndDate))
                 termEndDate.Text = AppHelper.GetLegislatorTermEndDate(legislator, termEndDateText);
+        }
+
+        private void PopulateContactMethodsButtons(View fragment, Legislator legislator, TypedValue selectableItemBackground)
+        {
+            var WriteLetter = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_writeLetter);
+            var Email = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_email);
+            var Phone = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_phone);
+            var Address = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_address);
+
+            var Facebook = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_facebook);
+            var Twitter = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_twitter);
+            var Webpage = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_webpage);
+            var YouTube = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_youtube);
+
+            //Contact, social media, ect buttons
+            SetupLegislatorContactMthdButton(WriteLetter, legislator.Email, selectableItemBackground);
+            SetupLegislatorContactMthdButton(Email, legislator.Email, selectableItemBackground);
+            SetupLegislatorContactMthdButton(Phone, legislator.OfficeNumber, selectableItemBackground);
+            SetupLegislatorContactMthdButton(Address, legislator.OfficeAddress, selectableItemBackground);
+            
+            SetupLegislatorContactMthdButton(Facebook, legislator.FacebookId, selectableItemBackground);
+            SetupLegislatorContactMthdButton(Twitter, legislator.TwitterId, selectableItemBackground);
+            SetupLegislatorContactMthdButton(Webpage, legislator.Website, selectableItemBackground);
+            SetupLegislatorContactMthdButton(YouTube, legislator.YouTubeId, selectableItemBackground);
+        }
+
+        public void SetupLegislatorContactMthdButton(View button, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
+        {
+            button.Visibility = contactMethod.IsEmpty
+                ? ViewStates.Gone
+                : ViewStates.Visible;
+
+            button.Click += (sender, e) => Button_Click(contactMethod);
+        }
+
+        private void Button_Click(ContactMethod contactMethod)
+        {
+            AppHelper.PerformContactMethodIntent(this as BaseFragment, contactMethod, false);
         }
     }
 }

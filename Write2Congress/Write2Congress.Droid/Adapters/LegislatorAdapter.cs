@@ -115,7 +115,7 @@ namespace Write2Congress.Droid.Adapters
             }
 
             if (contactMethod != null)
-                ContactMethodAction(contactMethod, false);
+                AppHelper.PerformContactMethodIntent(_fragment, contactMethod, false);
         }
 
         /// <summary>
@@ -200,13 +200,13 @@ namespace Write2Congress.Droid.Adapters
         //        imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
         //}
 
-        protected void ContactMethodAction(ContactMethod contactMethod, bool useChooser)
-        {
-            var intent = useChooser
-                ? Intent.CreateChooser(AppHelper.GetIntentForContactMethod(contactMethod), "Open with")
-                : new Intent(AppHelper.GetIntentForContactMethod(contactMethod));
-
-            _fragment.StartActivity(intent);
-        }
+        //protected void ContactMethodAction(ContactMethod contactMethod, bool useChooser)
+        //{
+        //    var intent = useChooser
+        //        ? Intent.CreateChooser(AppHelper.GetIntentForContactMethod(contactMethod), "Open with")
+        //        : new Intent(AppHelper.GetIntentForContactMethod(contactMethod));
+        //
+        //    _fragment.StartActivity(intent);
+        //}
     }
 }

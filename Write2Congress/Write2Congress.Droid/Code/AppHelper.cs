@@ -89,7 +89,17 @@ namespace Write2Congress.Droid.Code
                 : $"{termEndDateText}: {legislator.TermEndDate.ToShortDateString()}";
         }
 
-        public static void SetLegislatorContactMthdVisibility(ImageView imageButton, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
+        //public static void SetLegislatorContactMthdVisibility(ImageView imageButton, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
+        //{
+        //    imageButton.Visibility = contactMethod.IsEmpty
+        //        ? ViewStates.Gone
+        //        : ViewStates.Visible;
+        //
+        //    if (selectableItemBackground != null)
+        //        imageButton.SetBackgroundResource(selectableItemBackground.ResourceId);
+        //}
+
+        public static void SetLegislatorContactMthdVisibility(View imageButton, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
         {
             imageButton.Visibility = contactMethod.IsEmpty
                 ? ViewStates.Gone
@@ -299,6 +309,15 @@ namespace Write2Congress.Droid.Code
             }
         }
 
+        public static void PerformContactMethodIntent(Fragments.BaseFragment fragment, ContactMethod contactMethod, bool useChooser)
+        {
+            var intent = useChooser
+                ? Intent.CreateChooser(GetIntentForContactMethod(contactMethod), "Open with")
+                : new Intent(GetIntentForContactMethod(contactMethod));
+
+            fragment.StartActivity(intent);
+        }
+
         public static Intent GetIntentForContactMethod(ContactMethod contactMethod)
         {
             var intent = new Intent(Intent.ActionView);
@@ -330,7 +349,7 @@ namespace Write2Congress.Droid.Code
         {
             var to = contactMethod.ContactInfo;
             var subject = "TODO RM";
-            var body = "Hello legislator, you suck";
+            var body = "Hello legislator";
 
             var intent = AndroidHelper.GetSendEmailIntent(to, subject, body, string.Empty);
 
