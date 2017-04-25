@@ -162,51 +162,5 @@ namespace Write2Congress.Droid.Adapters
             AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Webpage, legislator.Website, _selectableItemBackground);
             AppHelper.SetLegislatorContactMthdVisibility(viewHolder.YouTube, legislator.YouTubeId, _selectableItemBackground);
         }
-
-        //private void SetLegislatorPortrait(Legislator legislator, ImageView imageButton)
-        //{           
-        //    switch (legislator.Party)
-        //    {
-        //        case Shared.DomainModel.Enum.Party.Democratic:
-        //            imageButton.SetImageResource(Resource.Drawable.ic_democratic_logo);
-        //            break;
-        //        case Shared.DomainModel.Enum.Party.Republican:
-        //            imageButton.SetImageResource(Resource.Drawable.ic_republican_elephant);
-        //            break;
-        //        case Shared.DomainModel.Enum.Party.Independent:
-        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-        //            break;
-        //        case Shared.DomainModel.Enum.Party.Libertarian:
-        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-        //            break;
-        //        case Shared.DomainModel.Enum.Party.Green:
-        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-        //            break;
-        //        case Shared.DomainModel.Enum.Party.Unknown:
-        //            imageButton.SetImageResource(Resource.Drawable.ic_person_black_48dp);
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-
-        //private void SetLegislatorContactMthdVisibility(ImageView imageButton, ContactMethod contactMethod)
-        //{
-        //    imageButton.Visibility = contactMethod.IsEmpty
-        //        ? ViewStates.Gone
-        //        : ViewStates.Visible;
-        //
-        //    if (_selectableItemBackground != null)
-        //        imageButton.SetBackgroundResource(_selectableItemBackground.ResourceId);
-        //}
-
-        //protected void ContactMethodAction(ContactMethod contactMethod, bool useChooser)
-        //{
-        //    var intent = useChooser
-        //        ? Intent.CreateChooser(AppHelper.GetIntentForContactMethod(contactMethod), "Open with")
-        //        : new Intent(AppHelper.GetIntentForContactMethod(contactMethod));
-        //
-        //    _fragment.StartActivity(intent);
-        //}
     }
 }

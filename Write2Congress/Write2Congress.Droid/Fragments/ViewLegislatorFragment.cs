@@ -15,13 +15,14 @@ using Fragment = Android.Support.V4.App.Fragment;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Constants;
 using Newtonsoft.Json;
+using Write2Congress.Droid.CustomControls;
 
 namespace Write2Congress.Droid.Fragments
 {
     public class ViewLegislatorFragment : BaseFragment
     {
         private Legislator _legislator;
-        private TypedValue _selectableItemBackground;
+        private CommitteeViewer _committeeViewer;
 
         //Note: Fragment sub-classes must have a public default no argument constructor.
         //TODO RM: FIXX!!!
@@ -56,16 +57,13 @@ namespace Write2Congress.Droid.Fragments
 
             var fragment = inflater.Inflate(Resource.Layout.frag_ViewLegislator, container, false);
 
-
-            //TODO RM: This might be null
-            _selectableItemBackground = AppHelper.GetTypedValueFromActv(this.Activity);
-
             PopulateBasicInfo(fragment, _legislator);
-            PopulateContactMethodsButtons(fragment, _legislator, _selectableItemBackground);
+            PopulateContactMethodsButtons(fragment, _legislator);
+            PopulateCommitteeViewer(fragment, _legislator);
 
             return fragment;
         }
-        
+
         private void PopulateBasicInfo(View fragment, Legislator legislator)
         {
             using (var portrait = fragment.FindViewById<ImageView>(Resource.Id.viewLegislatorFrag_portrait))
@@ -88,7 +86,7 @@ namespace Write2Congress.Droid.Fragments
                 termEndDate.Text = AppHelper.GetLegislatorTermEndDate(legislator, termEndDateText);
         }
 
-        private void PopulateContactMethodsButtons(View fragment, Legislator legislator, TypedValue selectableItemBackground)
+        private void PopulateContactMethodsButtons(View fragment, Legislator legislator)
         {
             var WriteLetter = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_writeLetter);
             var Email = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_email);
@@ -101,18 +99,18 @@ namespace Write2Congress.Droid.Fragments
             var YouTube = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_youtube);
 
             //Contact, social media, ect buttons
-            SetupLegislatorContactMthdButton(WriteLetter, legislator.Email, selectableItemBackground);
-            SetupLegislatorContactMthdButton(Email, legislator.Email, selectableItemBackground);
-            SetupLegislatorContactMthdButton(Phone, legislator.OfficeNumber, selectableItemBackground);
-            SetupLegislatorContactMthdButton(Address, legislator.OfficeAddress, selectableItemBackground);
+            SetupLegislatorContactMthdButton(WriteLetter, legislator.Email);
+            SetupLegislatorContactMthdButton(Email, legislator.Email);
+            SetupLegislatorContactMthdButton(Phone, legislator.OfficeNumber);
+            SetupLegislatorContactMthdButton(Address, legislator.OfficeAddress);
             
-            SetupLegislatorContactMthdButton(Facebook, legislator.FacebookId, selectableItemBackground);
-            SetupLegislatorContactMthdButton(Twitter, legislator.TwitterId, selectableItemBackground);
-            SetupLegislatorContactMthdButton(Webpage, legislator.Website, selectableItemBackground);
-            SetupLegislatorContactMthdButton(YouTube, legislator.YouTubeId, selectableItemBackground);
+            SetupLegislatorContactMthdButton(Facebook, legislator.FacebookId);
+            SetupLegislatorContactMthdButton(Twitter, legislator.TwitterId);
+            SetupLegislatorContactMthdButton(Webpage, legislator.Website);
+            SetupLegislatorContactMthdButton(YouTube, legislator.YouTubeId);
         }
 
-        public void SetupLegislatorContactMthdButton(View button, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
+        public void SetupLegislatorContactMthdButton(View button, ContactMethod contactMethod)
         {
             button.Visibility = contactMethod.IsEmpty
                 ? ViewStates.Gone
@@ -124,6 +122,13 @@ namespace Write2Congress.Droid.Fragments
         private void Button_Click(ContactMethod contactMethod)
         {
             AppHelper.PerformContactMethodIntent(this as BaseFragment, contactMethod, false);
+        }
+
+        private void PopulateCommitteeViewer(View fragmentView, Legislator _legislator)
+        {
+            _committeeViewer = fragmentView.FindViewById<CommitteeViewer>(Resource.Id.viewLegislatorFrag_committeViewer);
+            _committeeViewer.SetupCtrl(this);
+            _committeeViewer.ShowLegislatorCommittees(_legislator);
         }
     }
 }

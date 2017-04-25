@@ -136,6 +136,17 @@ namespace Write2Congress.Droid.Code
 
             return imageBitmap;
         }
+
+        public static void SetButtonTextAndHideifNecessary(Button button, string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                button.Visibility = ViewStates.Gone;
+            else
+            {
+                button.Text = text;
+                button.Visibility = ViewStates.Visible;
+            }
+        }
         #endregion
 
         #region StateOrTerritory Helpers

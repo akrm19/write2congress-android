@@ -3,6 +3,7 @@
   <string name="about">About</string>
   <string name="address">Address</string>
   <string name="app_name">Write2Congress.Droid</string>
+  <string name="committees">Committees</string>
   <string name="cannotSendLetterWithoutRecipient">Cannot send letter without a recipient</string>
   <string name="congress">Congress</string>
   <string name="confirmRefresh">Confirm Refresh</string>
@@ -16,6 +17,7 @@
   <string name="drafts">Drafts</string>
   <string name="email">Email</string>
   <string name="emptyBodyText">Letter content</string>
+  <string name="emptyCommitteesText">No committees</string>
   <string name="emptyDraftLettersText">No draft letters</string>
   <string name="emptyRecipientText">To: ...</string>
   <string name="emptySentLettersText">No sent letters</string>
@@ -33,6 +35,7 @@
   <string name="letterRecipient">Letter Recipient</string>
   <string name="letterSaved">Letter saved</string>
   <string name="letterSaveFailed">Error: Unabled to save letter</string>
+  <string name="loading">Loading...</string>
   <string name="ok">OK</string>
   <string name="phone">Phone</string>
   <string name="refresh">Refresh</string>
@@ -46,6 +49,7 @@
   <string name="signature">Signature</string>
   <string name="signatureSummary">The signature used when writting letters to legislators.</string>
   <string name="signatureDefaultValue">Sincerely,</string>
+  <string name="subcommitte">Subcommitte</string>
   <string name="subject">Subject</string>
   <string name="termEnds">Term Ends</string>
   <string name="termStarted">Term Started</string>

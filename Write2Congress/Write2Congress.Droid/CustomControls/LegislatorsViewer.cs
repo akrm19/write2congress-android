@@ -70,7 +70,7 @@ namespace Write2Congress.Droid.CustomControls
                 }
                 catch (Exception ex)
                 {
-                    //TODO RM add loggging;
+                    Logger.Error("Error encountered filtering Legislators by first, middle, or last name.", ex);
                 }
             }
             else
