@@ -16,6 +16,8 @@ using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Constants;
 using Newtonsoft.Json;
 using Write2Congress.Droid.CustomControls;
+using Write2Congress.Shared.BusinessLayer;
+using System.Threading.Tasks;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -23,6 +25,9 @@ namespace Write2Congress.Droid.Fragments
     {
         private Legislator _legislator;
         private CommitteeViewer _committeeViewer;
+        private BillViewer _SponsoredBillsViewer;
+        private List<Bill> _sponsoredBills;
+        private BillManager _billManager;
 
         //Note: Fragment sub-classes must have a public default no argument constructor.
         //TODO RM: FIXX!!!
@@ -39,8 +44,9 @@ namespace Write2Congress.Droid.Fragments
             //https://developer.xamarin.com/guides/android/platform_features/fragments/part_1_-_creating_a_fragment/
             //SetRetainInstance(true)
 
-            var serializedLegislator = Arguments.GetString(BundleType.Legislator);
+            _billManager = new BillManager(MyLogger);
 
+            var serializedLegislator = Arguments.GetString(BundleType.Legislator);
             if (string.IsNullOrWhiteSpace(serializedLegislator))
             {
                 MyLogger.Error("No legislator passed with creating ViewLegislatorFragment. Returning");
@@ -60,6 +66,7 @@ namespace Write2Congress.Droid.Fragments
             PopulateBasicInfo(fragment, _legislator);
             PopulateContactMethodsButtons(fragment, _legislator);
             PopulateCommitteeViewer(fragment, _legislator);
+            PopulateSponsoredBills(fragment, _legislator);
 
             return fragment;
         }
@@ -116,10 +123,10 @@ namespace Write2Congress.Droid.Fragments
                 ? ViewStates.Gone
                 : ViewStates.Visible;
 
-            button.Click += (sender, e) => Button_Click(contactMethod);
+            button.Click += (sender, e) => ContactButton_Click(contactMethod);
         }
 
-        private void Button_Click(ContactMethod contactMethod)
+        private void ContactButton_Click(ContactMethod contactMethod)
         {
             AppHelper.PerformContactMethodIntent(this as BaseFragment, contactMethod, false);
         }
@@ -129,6 +136,36 @@ namespace Write2Congress.Droid.Fragments
             _committeeViewer = fragmentView.FindViewById<CommitteeViewer>(Resource.Id.viewLegislatorFrag_committeViewer);
             _committeeViewer.SetupCtrl(this);
             _committeeViewer.ShowLegislatorCommittees(_legislator);
+        }
+
+        private void PopulateSponsoredBills(View fragment, Legislator _legislator)
+        {
+            //if (_SponsoredBillsViewer == null)
+            //{
+                _SponsoredBillsViewer = fragment.FindViewById<BillViewer>(Resource.Id.viewLegislatorFrag_BillViewer);
+                _SponsoredBillsViewer.SetupCtrl(this);
+            //}
+
+            if (_sponsoredBills == null)
+            {
+                var getBillsTask = new Task<List<Bill>>(
+                    () => _billManager.GetBillsSponsoredbyLegislator(_legislator.BioguideId, 1)
+                    //_SponsoredBillsViewer.UpdateBills(_sponsoredBills);
+                );
+
+                getBillsTask.ContinueWith((antecedent) =>
+                {
+                    _sponsoredBills = antecedent.Result;
+                    Activity.RunOnUiThread(() =>
+                    {
+                        _SponsoredBillsViewer.UpdateBills(_sponsoredBills);
+                    });
+                });
+                
+                getBillsTask.Start();
+            }
+            else
+                _SponsoredBillsViewer.UpdateBills(_sponsoredBills);
         }
     }
 }

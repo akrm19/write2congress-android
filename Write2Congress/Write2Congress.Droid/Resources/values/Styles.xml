@@ -60,6 +60,16 @@
     -->
   </style>
 
+  <style name="BillCommitteeVoteCrlTitle" parent="MyAppTheme.Base">
+    <!--
+    <item name="android:typeFace"></item>
+    <item name="android:textColor"></item>
+    <item name="android:scrollHorizontally">true</item>
+    -->
+    <item name="android:textStyle">bold</item>
+    <item name="android:textSize">15sp</item>
+  </style>
+
 </resources>
 
 <!--

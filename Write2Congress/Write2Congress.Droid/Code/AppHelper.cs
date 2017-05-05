@@ -21,6 +21,7 @@ using Write2Congress.Droid.Activities;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.DomainModel.Enums;
 using Android.Support.V7.Preferences;
+using Write2Congress.Droid.Fragments;
 
 namespace Write2Congress.Droid.Code
 {
@@ -107,6 +108,19 @@ namespace Write2Congress.Droid.Code
 
             if (selectableItemBackground != null)
                 imageButton.SetBackgroundResource(selectableItemBackground.ResourceId);
+        }
+
+        public static void SetTextviewTextAndVisibility(TextView textView, string label, string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                textView.Visibility = ViewStates.Gone;
+            }
+            else
+            {
+                textView.Visibility = ViewStates.Visible;
+                textView.Text = $"{label}: {text}";
+            }
         }
 
         public static Bitmap GetPortraitForLegislator(Legislator legislator)
@@ -274,6 +288,30 @@ namespace Write2Congress.Droid.Code
 
         #region Intents Methods (ContactMethods & Actions)
 
+        public static void ShowBillDialog(Bill bill, BaseFragment fragment)
+        {
+            var dialogBuilder = new Android.Support.V7.App.AlertDialog.Builder(fragment.Context);
+            dialogBuilder
+                .SetTitle(bill.GetDisplayTitle)
+                .SetMessage(bill.Summary)
+                .SetNegativeButton(Resource.String.dismiss, (sender, e) =>
+                {
+                    //TODO RM: This does not work
+                    (sender as AlertDialog).Dismiss();
+                });
+
+            if (bill.Urls.Count > 0)
+            {
+                dialogBuilder.SetPositiveButton(Resource.String.moreInfo, (sender, e) =>
+                {
+                    var contact = new ContactMethod(ContactType.WebSite, bill.Urls[0]);
+                    AppHelper.PerformContactMethodIntent(fragment, contact, false);
+                });
+            }
+
+            dialogBuilder.Create().Show();
+        }
+
         public static void StartViewLegislatorIntent(BaseActivity activity, Legislator legislator)
         {
             using (var intent = new Intent(activity, typeof(ViewLegislatorActivity)))
@@ -322,6 +360,12 @@ namespace Write2Congress.Droid.Code
 
         public static void PerformContactMethodIntent(Fragments.BaseFragment fragment, ContactMethod contactMethod, bool useChooser)
         {
+            if(fragment == null)
+            {
+                _logger.Error("Cannot perform ContactMethodIntent. Fragment is null");
+                return;
+            }
+
             var intent = useChooser
                 ? Intent.CreateChooser(GetIntentForContactMethod(contactMethod), "Open with")
                 : new Intent(GetIntentForContactMethod(contactMethod));

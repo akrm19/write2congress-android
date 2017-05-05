@@ -10,6 +10,55 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class Bill
     {
+        //CUSTOM ADDED METHODS
+        public BillStatus GetBillStatus
+        {
+            get
+            {
+                if (History.AwaitingSignature)
+                    return new BillStatus(BillStatusKind.AwaitingSignature, History.AwaitingSignatureSince);
+
+                if (History.Enacted)
+                    return new BillStatus(BillStatusKind.Enacted, History.DateEnacted);
+
+                if (History.Vetoed)
+                    return new BillStatus(BillStatusKind.Vetoed, History.DateVetoed);
+
+                else
+                {
+                    if (History.DateHouseLastVotedOnPassage != DateTime.MinValue && History.HousePassageResult != LegislativeBillVote.Na)
+                        return new BillStatus(BillStatusKind.InCongress, History.DateHouseLastVotedOnPassage, History.HousePassageResult.ToString());
+
+                    else if (History.DateSenateLastVotedOnPassage != DateTime.MinValue && History.SenatePassageResult != LegislativeBillVote.Na)
+                        return new BillStatus(BillStatusKind.InCongress, History.DateSenateLastVotedOnPassage, History.SenatePassageResult.ToString());
+
+                    else if (LastAction.Date != DateTime.MinValue && !string.IsNullOrWhiteSpace(LastAction.Text))
+                        return new BillStatus(BillStatusKind.InCongress, LastAction.Date, LastAction.Text);
+
+                    else
+                        return new BillStatus(BillStatusKind.Unknown, DateTime.MinValue);
+                }
+            }
+        }
+
+        public string GetDisplayTitle
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(Titles.ShortTitle))
+                    return string.Format("{0}{1}",
+                        Titles.ShortTitle,
+                        string.IsNullOrWhiteSpace(Titles.OfficialTile)
+                            ? $"({Titles.OfficialTile})"
+                            : string.Empty);
+
+                else
+                    return Titles.OfficialTile;
+            }
+        }
+        //END OF CUSTOM ADDED METHODS
+
+
         /// <summary>
         /// The actions field has a list of all official activity that has occurred to a bill. 
         /// All fields are parsed out of non-standardized sentence text, so mistakes and omissions are possible.

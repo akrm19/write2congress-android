@@ -19,9 +19,9 @@ namespace Write2Congress.Droid.Adapters
 {
     public class CommitteeAdapter : RecyclerView.Adapter
     {
-        private List<Committee> _committees;
         private BaseFragment _fragment; 
         private Logger _logger;
+        private List<Committee> _committees;
         private string _subcommitte;
 
         public CommitteeAdapter(List<Committee> committees, BaseFragment fragment) 
@@ -32,9 +32,9 @@ namespace Write2Congress.Droid.Adapters
         public CommitteeAdapter(BaseFragment fragment)
         {
             _fragment = fragment;
-            _subcommitte = AndroidHelper.GetString(Resource.String.subcommitte);
-
             _logger = new Logger(Class.SimpleName);
+
+            _subcommitte = AndroidHelper.GetString(Resource.String.subcommitte);
         }
 
         public override int ItemCount
@@ -53,6 +53,12 @@ namespace Write2Congress.Droid.Adapters
             //_fragment.ShowToast(AndroidHelper.GetString());
         }
 
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            var committeeView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Committee, parent, false);
+            return new CommitteeAdapterViewHolder(committeeView, OnClick);
+        }
+
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var committee = _committees[position] ?? null;
@@ -69,13 +75,6 @@ namespace Write2Congress.Droid.Adapters
 
             AppHelper.SetButtonTextAndHideifNecessary(viewHolder.Phone, committee.Phone);
             AppHelper.SetButtonTextAndHideifNecessary(viewHolder.Website, committee.Url);
-        }
-
-        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            var committeeView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Committee, parent, false);
-
-            return new CommitteeAdapterViewHolder(committeeView, OnClick);
         }
 
         protected void OnClick(int position, int buttonId)

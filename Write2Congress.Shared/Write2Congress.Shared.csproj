@@ -53,9 +53,11 @@
     <Compile Include="BusinessLayer\Util.cs" />
     <Compile Include="BusinessLayer\VoteManager.cs" />
     <Compile Include="DomainModel\Bill.cs" />
+    <Compile Include="DomainModel\BillStatus.cs" />
     <Compile Include="DomainModel\BillType.cs" />
     <Compile Include="DomainModel\Committee.cs" />
     <Compile Include="DomainModel\ContactMethod.cs" />
+    <Compile Include="DomainModel\Enum\BillStatusKind.cs" />
     <Compile Include="DomainModel\Enum\BillTypeKind.cs" />
     <Compile Include="DomainModel\Enum\VoteCastedType.cs" />
     <Compile Include="DomainModel\Enum\ContactType.cs" />

@@ -56,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/viewLegislatorFrag_contactMethodsParent"
-                android:rowCount="2"
-                android:columnCount="3">
+                android:columnCount="3"
+                android:rowCount="3" >
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_create_blue_48dp"
@@ -141,6 +141,10 @@
             </GridLayout>
             <write2congress.droid.customcontrols.CommitteeViewer
                 android:id="@+id/viewLegislatorFrag_committeViewer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <write2congress.droid.customcontrols.BillViewer
+                android:id="@+id/viewLegislatorFrag_BillViewer"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

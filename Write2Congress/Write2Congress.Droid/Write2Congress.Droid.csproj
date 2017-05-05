@@ -137,11 +137,14 @@
     <Compile Include="Activities\ViewLegislatorActivity.cs" />
     <Compile Include="Activities\ViewLettersActivity.cs" />
     <Compile Include="Activities\WriteLetterActivity.cs" />
+    <Compile Include="Adapters\BillAdapter.cs" />
+    <Compile Include="Adapters\BillAdapterViewHolder.cs" />
     <Compile Include="Adapters\CommitteeAdapter.cs" />
     <Compile Include="Adapters\CommitteeAdapterViewHolder.cs" />
     <Compile Include="Adapters\LetterAdapter.cs" />
     <Compile Include="Adapters\LetterAdapterViewHolder.cs" />
     <Compile Include="Code\LetterFileProvider.cs" />
+    <Compile Include="CustomControls\BillViewer.cs" />
     <Compile Include="CustomControls\CommitteeViewer.cs" />
     <Compile Include="DomainModel\Constants\BundleType.cs" />
     <Compile Include="DomainModel\Constants\SharedPreference.cs" />
@@ -227,6 +230,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ctrl_CommitteeViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ctrl_Bill.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ctrl_BillViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
