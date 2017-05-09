@@ -19,16 +19,10 @@ using Android.Support.V7.Widget;
 
 namespace Write2Congress.Droid.CustomControls
 {
-    public class BillViewer : LinearLayout
+    public class BillViewer : BaseViewer
     {
-        private BillAdapter _billAdapter;
-        private ViewSwitcher _viewSwitcher;
-        private TextView _header, _emptyText;
-
         private BillManager _billManager;
         private List<Bill> _bills;
-        private BaseFragment _fragment;
-        private Logger _logger;
 
         public BillViewer(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -42,29 +36,14 @@ namespace Write2Congress.Droid.CustomControls
             Initialize();
         }
 
-        private void Initialize()
+        public override void SetupCtrl(BaseFragment fragment)
         {
-            _logger = new Logger(Class.SimpleName);
-            _billManager = new BillManager(_logger);
+            base.SetupCtrl(fragment);
 
-            using (var layoutInflater = Context.GetSystemService(Context.LayoutInflaterService) as LayoutInflater)
-                layoutInflater.Inflate(Resource.Layout.ctrl_BillViewer, this, true);
-        }
+            _billManager = new BillManager(myLogger);
 
-        public void SetupCtrl(BaseFragment fragment)
-        {
-            _fragment = fragment;
-
-            _viewSwitcher = FindViewById<ViewSwitcher>(Resource.Id.billViewer_viewSwitcher);
-            _header = FindViewById<TextView>(Resource.Id.billViewer_header);
-            _emptyText = FindViewById<TextView>(Resource.Id.billViewer_emptyText);
-
-            var layoutManager = new LinearLayoutManager(_fragment.Context, LinearLayoutManager.Vertical, false);
-            var recyclerView = FindViewById<RecyclerView>(Resource.Id.billViewer_recycler);
-            recyclerView.SetLayoutManager(layoutManager);
-
-            _billAdapter = new BillAdapter(_fragment);
-            recyclerView.SetAdapter(_billAdapter);
+            recyclerAdapter = new BillAdapter(fragment);
+            recycler.SetAdapter(recyclerAdapter);
 
             SetLoadingUi();
         }
@@ -83,34 +62,18 @@ namespace Write2Congress.Droid.CustomControls
 
         public void UpdateBills(List<Bill> bills)
         {
-            _billAdapter.UpdateBill(bills);
+            (recyclerAdapter as BillAdapter).UpdateBill(bills);
             SetLoadingUiOff();
         }
 
-        private void SetLoadingUiOff()
+        protected override string EmptyText()
         {
-            _emptyText.Text = AndroidHelper.GetString(Resource.String.emptyBillsText);
-            ShowEmptyviewIfNecessary();
+            return AndroidHelper.GetString(Resource.String.emptyBillsText);
         }
 
-        private void SetLoadingUi()
+        protected override string ViewerTitle()
         {
-            _emptyText.Text = AndroidHelper.GetString(Resource.String.loading);
-            ShowEmptyview();
-        }
-
-        private void ShowEmptyview()
-        {
-            if (_viewSwitcher.NextView.Id == Resource.Id.billViewer_emptyText)
-                _viewSwitcher.ShowNext();
-        }
-
-        private void ShowEmptyviewIfNecessary()
-        {
-            if (_billAdapter.ItemCount == 0 && _viewSwitcher.NextView.Id == Resource.Id.billViewer_emptyText)
-                _viewSwitcher.ShowNext();
-            else if (_billAdapter.ItemCount > 0 && _viewSwitcher.CurrentView.Id != Resource.Id.billViewer_recycler)
-                _viewSwitcher.ShowNext();
+            return AndroidHelper.GetString(Resource.String.billsSponsored);
         }
     }
 }

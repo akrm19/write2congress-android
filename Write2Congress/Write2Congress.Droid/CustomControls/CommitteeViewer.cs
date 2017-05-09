@@ -19,16 +19,10 @@ using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.CustomControls
 {
-    public class CommitteeViewer : LinearLayout
+    public class CommitteeViewer : BaseViewer
     {
-        private CommitteeAdapter _committeeAdapter;
-        private ViewSwitcher _viewSwitcher;
-        private TextView _header, _emptyText;
-
         private CommitteeManager _committeeManager; 
         private List<Committee> _committees;
-        private BaseFragment _fragment;
-        protected Logger _logger;
 
         public CommitteeViewer(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -42,29 +36,16 @@ namespace Write2Congress.Droid.CustomControls
             Initialize();
         }
 
-        private void Initialize()
+        public override void SetupCtrl(BaseFragment fragment)
         {
-            _logger = new Logger(Class.SimpleName);
-            _committeeManager = new CommitteeManager(_logger);
+            base.SetupCtrl(fragment);
 
-            using (var layoutInflater = Context.GetSystemService(Context.LayoutInflaterService) as LayoutInflater)
-                layoutInflater.Inflate(Resource.Layout.ctrl_CommitteeViewer, this, true);
-        }
+            _committeeManager = new CommitteeManager(myLogger);
 
-        public void SetupCtrl(BaseFragment fragment)
-        {
-            _fragment = fragment;
+            recyclerAdapter = new CommitteeAdapter(fragment);
+            recycler.SetAdapter(recyclerAdapter);
 
-            _viewSwitcher = FindViewById<ViewSwitcher>(Resource.Id.committeeViewer_viewSwitcher);
-            _header = FindViewById<TextView>(Resource.Id.committeeViewer_header);
-            _emptyText = FindViewById<TextView>(Resource.Id.committeeViewer_emptyText);
-
-            var layoutManager = new LinearLayoutManager(_fragment.Context, LinearLayoutManager.Vertical, false);
-            var recyclerView = FindViewById<RecyclerView>(Resource.Id.committeeViewer_recycler);
-            recyclerView.SetLayoutManager(layoutManager);
-
-            _committeeAdapter = new CommitteeAdapter(_fragment);
-            recyclerView.SetAdapter(_committeeAdapter);
+            SetLoadingUi();
         }
 
         public void ShowLegislatorCommittees(Legislator legislator)
@@ -73,35 +54,19 @@ namespace Write2Congress.Droid.CustomControls
 
             //TODO RM:Make async task
             var committees = _committeeManager.GetCommitteesForLegislator(legislator.BioguideId);
-            _committeeAdapter.UpdateCommittee(committees);
+            (recyclerAdapter as CommitteeAdapter).UpdateCommittee(committees);
             
             SetLoadingUiOff();
         }
 
-        private void SetLoadingUiOff()
+        protected override string EmptyText()
         {
-            _emptyText.Text = AndroidHelper.GetString(Resource.String.emptyCommitteesText);
-            ShowEmptyviewIfNecessary();
+            return AndroidHelper.GetString(Resource.String.emptyCommitteesText);
         }
 
-        private void SetLoadingUi()
+        protected override string ViewerTitle()
         {
-            _emptyText.Text = AndroidHelper.GetString(Resource.String.loading);
-            ShowEmptyview();
-        }
-
-        private void ShowEmptyview()
-        {
-            if (_viewSwitcher.NextView.Id == Resource.Id.committeeViewer_emptyText)
-                _viewSwitcher.ShowNext();
-        }
-
-        private void ShowEmptyviewIfNecessary()
-        {
-            if (_committeeAdapter.ItemCount == 0 && _viewSwitcher.NextView.Id == Resource.Id.committeeViewer_emptyText)
-                _viewSwitcher.ShowNext();
-            else if (_committeeAdapter.ItemCount > 0 && _viewSwitcher.CurrentView.Id != Resource.Id.committeeViewer_recycler)
-                _viewSwitcher.ShowNext();
+            return AndroidHelper.GetString(Resource.String.committees);
         }
     }
 }

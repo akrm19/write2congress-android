@@ -139,6 +139,13 @@
                     android:textAllCaps="false"
                     android:text="@string/website" />
             </GridLayout>
+            <android.support.v4.view.ViewPager
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/viewLegislatorFrag_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            
+            </android.support.v4.view.ViewPager>
             <write2congress.droid.customcontrols.CommitteeViewer
                 android:id="@+id/viewLegislatorFrag_committeViewer"
                 android:layout_width="fill_parent"

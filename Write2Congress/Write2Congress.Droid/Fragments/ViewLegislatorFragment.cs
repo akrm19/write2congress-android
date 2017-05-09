@@ -18,6 +18,8 @@ using Newtonsoft.Json;
 using Write2Congress.Droid.CustomControls;
 using Write2Congress.Shared.BusinessLayer;
 using System.Threading.Tasks;
+using Android.Support.V4.View;
+using Android.Support.V4.App;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -28,6 +30,7 @@ namespace Write2Congress.Droid.Fragments
         private BillViewer _SponsoredBillsViewer;
         private List<Bill> _sponsoredBills;
         private BillManager _billManager;
+        private ViewPager _viewPager;
 
         //Note: Fragment sub-classes must have a public default no argument constructor.
         //TODO RM: FIXX!!!
@@ -62,6 +65,7 @@ namespace Write2Congress.Droid.Fragments
             HasOptionsMenu = true;
 
             var fragment = inflater.Inflate(Resource.Layout.frag_ViewLegislator, container, false);
+            _viewPager = fragment.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
 
             PopulateBasicInfo(fragment, _legislator);
             PopulateContactMethodsButtons(fragment, _legislator);
