@@ -18,5 +18,7 @@ namespace Write2Congress.Droid.DomainModel.Constants
         public const string Letter = "Letter";
         public const string ViewLettersFragType = "ViewLettersFragType";
         public const string Sender = "Sender";
+        public const string Committees = "Committees";
+        public const string Bills = "Bills";
     }
 }

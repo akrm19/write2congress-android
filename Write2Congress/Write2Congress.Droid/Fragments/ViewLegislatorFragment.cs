@@ -15,22 +15,25 @@ using Fragment = Android.Support.V4.App.Fragment;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Constants;
 using Newtonsoft.Json;
-using Write2Congress.Droid.CustomControls;
 using Write2Congress.Shared.BusinessLayer;
 using System.Threading.Tasks;
 using Android.Support.V4.View;
 using Android.Support.V4.App;
+using Write2Congress.Droid.CustomControls;
+using Write2Congress.Droid.Adapters;
 
 namespace Write2Congress.Droid.Fragments
 {
     public class ViewLegislatorFragment : BaseFragment
     {
         private Legislator _legislator;
-        private CommitteeViewer _committeeViewer;
-        private BillViewer _SponsoredBillsViewer;
-        private List<Bill> _sponsoredBills;
-        private BillManager _billManager;
-        private ViewPager _viewPager;
+        private LegislatorViewPagerAdapter _viewPagerAdapter;
+        //private CommitteeViewerFragmentCtrl _committeeViewer;
+        //private Fragments.BillViewer _SponsoredBillsViewer;
+        //private List<Bill> _sponsoredBills;
+        //private BillManager _billManager;
+        //private ViewPager _viewPager;
+
 
         //Note: Fragment sub-classes must have a public default no argument constructor.
         //TODO RM: FIXX!!!
@@ -47,8 +50,6 @@ namespace Write2Congress.Droid.Fragments
             //https://developer.xamarin.com/guides/android/platform_features/fragments/part_1_-_creating_a_fragment/
             //SetRetainInstance(true)
 
-            _billManager = new BillManager(MyLogger);
-
             var serializedLegislator = Arguments.GetString(BundleType.Legislator);
             if (string.IsNullOrWhiteSpace(serializedLegislator))
             {
@@ -58,29 +59,41 @@ namespace Write2Congress.Droid.Fragments
             }
 
             _legislator = JsonConvert.DeserializeObject<Legislator>(serializedLegislator);
+            _viewPagerAdapter = new LegislatorViewPagerAdapter(ChildFragmentManager, _legislator);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             HasOptionsMenu = true;
 
-            var fragment = inflater.Inflate(Resource.Layout.frag_ViewLegislator, container, false);
-            _viewPager = fragment.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
+            var fragmentView = inflater.Inflate(Resource.Layout.frag_ViewLegislator, container, false);
 
-            PopulateBasicInfo(fragment, _legislator);
-            PopulateContactMethodsButtons(fragment, _legislator);
-            PopulateCommitteeViewer(fragment, _legislator);
-            PopulateSponsoredBills(fragment, _legislator);
+            PopulateBasicInfo(fragmentView, _legislator);
+            PopulateContactMethodsButtons(fragmentView, _legislator);
+            //PopulateCommitteeViewer(fragmentView, _legislator);
+            //PopulateSponsoredBills(fragmentView, _legislator);
+            PopulateViewPager(fragmentView, _legislator);
 
-            return fragment;
+            return fragmentView;
+        }
+
+        private void PopulateViewPager(View fragmentView, Legislator legislator)
+        {
+            //var viewers = new List<BaseRecyclerViewerFragment>();
+            //if (_SponsoredBillsViewer != null)
+            //    viewers.Add(_SponsoredBillsViewer);
+
+            //if (_committeeViewer != null)
+            //    viewers.Add(_committeeViewer);
+            var viewPager = fragmentView.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
+            viewPager.Adapter = _viewPagerAdapter;
+            viewPager.CurrentItem = 0;
         }
 
         private void PopulateBasicInfo(View fragment, Legislator legislator)
         {
             using (var portrait = fragment.FindViewById<ImageView>(Resource.Id.viewLegislatorFrag_portrait))
-            {
                 AppHelper.SetLegislatorPortrait(legislator, portrait);
-            }
 
             using (var chamber = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_chamber))
                 chamber.Text = $"{legislator.Chamber} ({legislator.State.ToString()})";
@@ -137,18 +150,27 @@ namespace Write2Congress.Droid.Fragments
 
         private void PopulateCommitteeViewer(View fragmentView, Legislator _legislator)
         {
-            _committeeViewer = fragmentView.FindViewById<CommitteeViewer>(Resource.Id.viewLegislatorFrag_committeViewer);
-            _committeeViewer.SetupCtrl(this);
-            _committeeViewer.ShowLegislatorCommittees(_legislator);
+            //_committeeViewer = CommitteeViewerFragmentCtrl.CreateInstance(_legislator);
+            //_committeeViewer.ShowLegislatorCommittees(_legislator);
+            //_committeeViewer = fragmentView.FindViewById<CommitteeViewer>(Resource.Id.viewLegislatorFrag_committeViewer);
+            //_committeeViewer.SetupCtrl(this);
+            //_committeeViewer.ShowLegislatorCommittees(_legislator);
         }
 
+            /*
         private void PopulateSponsoredBills(View fragment, Legislator _legislator)
         {
-            //if (_SponsoredBillsViewer == null)
-            //{
-                _SponsoredBillsViewer = fragment.FindViewById<BillViewer>(Resource.Id.viewLegislatorFrag_BillViewer);
-                _SponsoredBillsViewer.SetupCtrl(this);
-            //}
+            if (_SponsoredBillsViewer == null)
+            {
+            _SponsoredBillsViewer = ChildFragmentManager.FindFragmentByTag(TagsType.SponsoredBillsFragment) as Fragments.BillViewer;
+
+            if(_SponsoredBillsViewer == null)
+            {
+                _SponsoredBillsViewer = BillViewer.CreateInstance(_legislator);
+                AndroidHelper.AddSupportFragment(ChildFragmentManager, _SponsoredBillsViewer, Resource.Id.viewLegislatorFrag_BillViewer, TagsType.SponsoredBillsFragment);
+            }
+                
+          
 
             if (_sponsoredBills == null)
             {
@@ -171,5 +193,6 @@ namespace Write2Congress.Droid.Fragments
             else
                 _SponsoredBillsViewer.UpdateBills(_sponsoredBills);
         }
+                */
     }
 }

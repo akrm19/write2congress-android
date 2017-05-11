@@ -143,17 +143,14 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/viewLegislatorFrag_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            
+                android:layout_height="400dp"
+                android:minHeight="100dp">
+                <android.support.v4.view.PagerTabStrip
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>            
             </android.support.v4.view.ViewPager>
-            <write2congress.droid.customcontrols.CommitteeViewer
-                android:id="@+id/viewLegislatorFrag_committeViewer"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-            <write2congress.droid.customcontrols.BillViewer
-                android:id="@+id/viewLegislatorFrag_BillViewer"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
