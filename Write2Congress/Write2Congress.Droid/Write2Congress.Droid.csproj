@@ -146,7 +146,6 @@
     <Compile Include="Adapters\LetterAdapterViewHolder.cs" />
     <Compile Include="Code\LetterFileProvider.cs" />
     <Compile Include="CustomControls\BaseViewer.cs" />
-    <Compile Include="CustomControls\BillViewer.cs" />
     <Compile Include="CustomControls\CommitteeViewer.cs" />
     <Compile Include="DomainModel\Constants\BundleType.cs" />
     <Compile Include="DomainModel\Constants\SharedPreference.cs" />
@@ -165,7 +164,7 @@
     <Compile Include="Fragments\BaseFragment.cs" />
     <Compile Include="Fragments\BaseRecyclerViewerFragment.cs" />
     <Compile Include="Fragments\BaseViewLetterFragment.cs" />
-    <Compile Include="Fragments\BillViewer.cs" />
+    <Compile Include="Fragments\BillViewerFragmentCtrl.cs" />
     <Compile Include="Fragments\CommitteeViewerFragmentCtrl.cs" />
     <Compile Include="Fragments\MainFragment.cs" />
     <Compile Include="Code\AndroidHelper.cs" />

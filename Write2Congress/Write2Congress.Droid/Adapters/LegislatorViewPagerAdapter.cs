@@ -29,7 +29,7 @@ namespace Write2Congress.Droid.Adapters
             //context and ect are cleared 
             _legislator = legislator;
             viewers.Add(CommitteeViewerFragmentCtrl.CreateInstance(legislator));
-            viewers.Add(BillViewer.CreateInstance(legislator));
+            viewers.Add(BillViewerFragmentCtrl.CreateInstance(legislator));
         }
 
         public override Android.Support.V4.App.Fragment GetItem(int position)

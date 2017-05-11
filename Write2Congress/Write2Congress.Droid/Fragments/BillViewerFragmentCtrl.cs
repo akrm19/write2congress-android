@@ -19,17 +19,17 @@ using Write2Congress.Droid.DomainModel.Constants;
 
 namespace Write2Congress.Droid.Fragments
 {
-    public class BillViewer : BaseRecyclerViewerFragment
+    public class BillViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
         private BillManager _billManager;
         private List<Bill> _bills;
         private Legislator _legislator;
 
-        public BillViewer() { }
+        public BillViewerFragmentCtrl() { }
 
-        public static BillViewer CreateInstance(Legislator legislator)
+        public static BillViewerFragmentCtrl CreateInstance(Legislator legislator)
         {
-            var newFragment = new BillViewer();
+            var newFragment = new BillViewerFragmentCtrl();
 
             var args = new Bundle();
             args.PutString(BundleType.Legislator, legislator.SerializeToJson());

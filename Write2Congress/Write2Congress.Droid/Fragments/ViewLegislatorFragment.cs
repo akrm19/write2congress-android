@@ -28,12 +28,6 @@ namespace Write2Congress.Droid.Fragments
     {
         private Legislator _legislator;
         private LegislatorViewPagerAdapter _viewPagerAdapter;
-        //private CommitteeViewerFragmentCtrl _committeeViewer;
-        //private Fragments.BillViewer _SponsoredBillsViewer;
-        //private List<Bill> _sponsoredBills;
-        //private BillManager _billManager;
-        //private ViewPager _viewPager;
-
 
         //Note: Fragment sub-classes must have a public default no argument constructor.
         //TODO RM: FIXX!!!
@@ -70,8 +64,6 @@ namespace Write2Congress.Droid.Fragments
 
             PopulateBasicInfo(fragmentView, _legislator);
             PopulateContactMethodsButtons(fragmentView, _legislator);
-            //PopulateCommitteeViewer(fragmentView, _legislator);
-            //PopulateSponsoredBills(fragmentView, _legislator);
             PopulateViewPager(fragmentView, _legislator);
 
             return fragmentView;
@@ -79,12 +71,6 @@ namespace Write2Congress.Droid.Fragments
 
         private void PopulateViewPager(View fragmentView, Legislator legislator)
         {
-            //var viewers = new List<BaseRecyclerViewerFragment>();
-            //if (_SponsoredBillsViewer != null)
-            //    viewers.Add(_SponsoredBillsViewer);
-
-            //if (_committeeViewer != null)
-            //    viewers.Add(_committeeViewer);
             var viewPager = fragmentView.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
             viewPager.Adapter = _viewPagerAdapter;
             viewPager.CurrentItem = 0;
@@ -147,52 +133,5 @@ namespace Write2Congress.Droid.Fragments
         {
             AppHelper.PerformContactMethodIntent(this as BaseFragment, contactMethod, false);
         }
-
-        private void PopulateCommitteeViewer(View fragmentView, Legislator _legislator)
-        {
-            //_committeeViewer = CommitteeViewerFragmentCtrl.CreateInstance(_legislator);
-            //_committeeViewer.ShowLegislatorCommittees(_legislator);
-            //_committeeViewer = fragmentView.FindViewById<CommitteeViewer>(Resource.Id.viewLegislatorFrag_committeViewer);
-            //_committeeViewer.SetupCtrl(this);
-            //_committeeViewer.ShowLegislatorCommittees(_legislator);
-        }
-
-            /*
-        private void PopulateSponsoredBills(View fragment, Legislator _legislator)
-        {
-            if (_SponsoredBillsViewer == null)
-            {
-            _SponsoredBillsViewer = ChildFragmentManager.FindFragmentByTag(TagsType.SponsoredBillsFragment) as Fragments.BillViewer;
-
-            if(_SponsoredBillsViewer == null)
-            {
-                _SponsoredBillsViewer = BillViewer.CreateInstance(_legislator);
-                AndroidHelper.AddSupportFragment(ChildFragmentManager, _SponsoredBillsViewer, Resource.Id.viewLegislatorFrag_BillViewer, TagsType.SponsoredBillsFragment);
-            }
-                
-          
-
-            if (_sponsoredBills == null)
-            {
-                var getBillsTask = new Task<List<Bill>>(
-                    () => _billManager.GetBillsSponsoredbyLegislator(_legislator.BioguideId, 1)
-                    //_SponsoredBillsViewer.UpdateBills(_sponsoredBills);
-                );
-
-                getBillsTask.ContinueWith((antecedent) =>
-                {
-                    _sponsoredBills = antecedent.Result;
-                    Activity.RunOnUiThread(() =>
-                    {
-                        _SponsoredBillsViewer.UpdateBills(_sponsoredBills);
-                    });
-                });
-                
-                getBillsTask.Start();
-            }
-            else
-                _SponsoredBillsViewer.UpdateBills(_sponsoredBills);
-        }
-                */
     }
 }
