@@ -16,6 +16,7 @@ using Write2Congress.Droid.Code;
 using Write2Congress.Droid.Adapters;
 using System.Threading.Tasks;
 using Write2Congress.Droid.DomainModel.Constants;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -24,15 +25,17 @@ namespace Write2Congress.Droid.Fragments
         private BillManager _billManager;
         private List<Bill> _bills;
         private Legislator _legislator;
+        private BillViewerKind _viewerMode; 
 
         public BillViewerFragmentCtrl() { }
 
-        public static BillViewerFragmentCtrl CreateInstance(Legislator legislator)
+        public static BillViewerFragmentCtrl CreateInstance(Legislator legislator, BillViewerKind viewerMode)
         {
             var newFragment = new BillViewerFragmentCtrl();
 
             var args = new Bundle();
             args.PutString(BundleType.Legislator, legislator.SerializeToJson());
+            args.PutInt(BundleType.BillViewerFragmentType, (int)viewerMode);
             newFragment.Arguments = args;
 
             return newFragment;
@@ -44,12 +47,16 @@ namespace Write2Congress.Droid.Fragments
 
             var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
             _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
+            _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
 
             _billManager = new BillManager(MyLogger);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            if (savedInstanceState != null && savedInstanceState.ContainsKey(BundleType.BillViewerFragmentType))
+                _viewerMode = (BillViewerKind)savedInstanceState.GetInt(BundleType.BillViewerFragmentType);
+
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
             recyclerAdapter = new BillAdapter(this);
@@ -69,11 +76,16 @@ namespace Write2Congress.Droid.Fragments
             {
                 var getBillsTask = new Task<List<Bill>>((prms) =>
                 {
-                    var legislatorId = (prms as Tuple<string, BillManager>).Item1;
-                    var bm = (prms as Tuple<string, BillManager>).Item2;
+                    var paramsTuple = (prms as Tuple<string, BillManager, int>);
+                    var legislatorId = paramsTuple.Item1;
+                    var bm = paramsTuple.Item2;
+                    var mode = (BillViewerKind)((int)paramsTuple.Item3);
 
-                    return bm.GetBillsSponsoredbyLegislator(_legislator.BioguideId, 1);
-                }, new Tuple<string, BillManager>(_legislator.BioguideId, _billManager));
+                    return mode == BillViewerKind.CosponsoredBills
+                        ? bm.GetBillsCosponsoredbyLegislator(legislatorId, 1)
+                        : bm.GetBillsSponsoredbyLegislator(legislatorId, 1);
+
+                }, new Tuple<string, BillManager, int>(_legislator.BioguideId, _billManager, (int)_viewerMode));
 
                 getBillsTask.ContinueWith((antecedent) =>
                 {
@@ -92,6 +104,19 @@ namespace Write2Congress.Droid.Fragments
             return fragment;
         }
 
+        public override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            if (_bills != null)
+            {
+                var serializedBills = _bills.SerializeToJson();
+                outState.PutString(BundleType.Bills, serializedBills);
+            }
+
+            outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
+        }
+
         public void UpdateBills(List<Bill> bills)
         {
             (recyclerAdapter as BillAdapter).UpdateBill(bills);
@@ -105,7 +130,14 @@ namespace Write2Congress.Droid.Fragments
 
         public override string ViewerTitle()
         {
-            return AndroidHelper.GetString(Resource.String.billsSponsored);
+            switch (_viewerMode)
+            {
+                default:
+                case BillViewerKind.SponsoredBills:
+                    return AndroidHelper.GetString(Resource.String.billsSponsored);
+                case BillViewerKind.CosponsoredBills:
+                    return AndroidHelper.GetString(Resource.String.billsCosponsored);
+            }
         }
     }
 }

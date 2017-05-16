@@ -19,6 +19,8 @@ using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.CustomControls
 {
+
+    //NOT IN USE, FOR REFERENCE ONLY
     public class CommitteeViewer : BaseViewer
     {
         private CommitteeManager _committeeManager; 

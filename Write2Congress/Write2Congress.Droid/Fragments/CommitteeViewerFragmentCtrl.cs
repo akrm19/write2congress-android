@@ -101,34 +101,6 @@ namespace Write2Congress.Droid.Fragments
             }
         }
 
-        /*
-        private async Task<List<Committee>> RetrieveLegislatorCommitteesFromServer(Bundle savedInstanceState, Legislator legislator, CommitteeManager committeeManager)
-        {
-            var results = new List<Committee>();
-
-            try
-            {
-                if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Committees, string.Empty)))// savedInstanceState.ContainsKey(BundleType.Committees))
-                {
-                    var serializedCommittees = savedInstanceState.GetString(BundleType.Committees, string.Empty);
-                    new List<Committee>().DeserializeFromJson(serializedCommittees);
-
-                    //results = string.IsNullOrWhiteSpace(serializedCommittees)
-                    //    ? committeeManager.GetCommitteesForLegislator(legislator.BioguideId)
-                    //    : new List<Committee>().DeserializeFromJson(serializedCommittees);
-                }
-                else
-                    results = committeeManager.GetCommitteesForLegislator(legislator.BioguideId);
-            }
-            catch(Exception ex)
-            {
-                MyLogger.Error("Error ocurred retrieving legislator committees" + ex.ToString());
-            }
-
-            return results;
-        }
-        */
-
         public void ShowCommittees(List<Committee> committees)
         {
             (recyclerAdapter as CommitteeAdapter).UpdateCommittee(committees);

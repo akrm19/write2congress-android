@@ -26,6 +26,16 @@ namespace Write2Congress.Droid.Fragments
 
         public BaseRecyclerViewerFragment() { }
 
+        protected virtual void CleanUp()
+        {
+            recycler = null;
+            recyclerAdapter = null;
+            viewSwitcher = null;
+            header = null;
+            emptyText = null;
+            baseFragment = null;
+        }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -38,7 +48,8 @@ namespace Write2Congress.Droid.Fragments
             var fragment = inflater.Inflate(Resource.Layout.ctrl_BaseViewer, container, false);
 
             header = fragment.FindViewById<TextView>(Resource.Id.baseViewer_header);
-            header.Text = ViewerTitle();
+            //header.Text = ViewerTitle();
+            header.Visibility = ViewStates.Gone;
 
             viewSwitcher = fragment.FindViewById<ViewSwitcher>(Resource.Id.baseViewer_viewSwitcher);
             emptyText = fragment.FindViewById<TextView>(Resource.Id.baseViewer_emptyText);

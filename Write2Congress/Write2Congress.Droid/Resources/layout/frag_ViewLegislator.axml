@@ -56,88 +56,71 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/viewLegislatorFrag_contactMethodsParent"
-                android:columnCount="3"
-                android:rowCount="3" >
+                android:columnCount="4"
+                android:rowCount="2" >
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_create_blue_48dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="1dp"
                     android:id="@+id/viewLegislatorFrag_writeLetter"
-                    android:gravity="left|center"
-                    android:text="@string/writeNew"
-                    android:textAllCaps="false" />
+                    android:gravity="left|center"/>
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/facebook_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="1dp"
                     android:id="@+id/viewLegislatorFrag_facebook"
                     android:gravity="left|center"
-                    android:textAllCaps="false"
-                    android:text="Facebook" />
+                    android:textAllCaps="false" />
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_action_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="1dp"
                     android:id="@+id/viewLegislatorFrag_email"
-                    android:gravity="left|center"
-                    android:textAllCaps="false"
-                    android:text="@string/email" />
+                    android:gravity="left|center" />
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_action_social_twitter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="1dp"
                     android:id="@+id/viewLegislatorFrag_twitter"
-                    android:gravity="left|center"
-                    android:textAllCaps="false"
-                    android:text="Twitter" />
+                    android:gravity="left|center"/>
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_action_local_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="1dp"
                     android:id="@+id/viewLegislatorFrag_phone"
-                    android:gravity="left|center"
-                    android:textAllCaps="false"
-                    android:text="@string/phone" />
+                    android:gravity="center" />
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_action_social_youtube"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="1dp"
                     android:id="@+id/viewLegislatorFrag_youtube"
-                    android:gravity="left|center"
-                    android:textAllCaps="false"
-                    android:text="YouTube" />
+                    android:gravity="center" />
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_action_location_on"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:id="@+id/viewLegislatorFrag_address"
-                    android:gravity="left|center"
-                    android:textAllCaps="false"
-                    android:text="@string/address" />
+                    android:layout_margin="1dp"
+                    android:id="@+id/viewLegislatorFrag_address" />
                 <Button
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_action_ios7_world"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:id="@+id/viewLegislatorFrag_webpage"
-                    android:gravity="left|center"
-                    android:textAllCaps="false"
-                    android:text="@string/website" />
+                    android:layout_margin="1dp"
+                    android:id="@+id/viewLegislatorFrag_webpage" />
             </GridLayout>
             <android.support.v4.view.ViewPager
                 xmlns:android="http://schemas.android.com/apk/res/android"

@@ -12,24 +12,27 @@ using Android.Widget;
 using Android.Support.V4.App;
 using Write2Congress.Droid.Fragments;
 using Write2Congress.Shared.DomainModel;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Adapters
 {
     public class LegislatorViewPagerAdapter : FragmentPagerAdapter
     {
         public List<BaseRecyclerViewerFragment> viewers = new List<BaseRecyclerViewerFragment>();
-        private Legislator _legislator;
 
         public LegislatorViewPagerAdapter(Android.Support.V4.App.FragmentManager fm, Legislator legislator)
             : base(fm)
         {
-            //TODO RM: Find out how to implemt and where to create viewers. In parent fragment, or in adapter.
-            //Also find how to retain instance on rotation. Also ensure there are no memory leak if using
+            //TODO RM: Find how to retain instance on rotation. Also ensure there are no memory leak if using
             //FragmentPagerAdapter (since it keeps the fragment instance) and all references to activites
             //context and ect are cleared 
-            _legislator = legislator;
+
             viewers.Add(CommitteeViewerFragmentCtrl.CreateInstance(legislator));
-            viewers.Add(BillViewerFragmentCtrl.CreateInstance(legislator));
+
+            //TODO RM: For some reason this cause issues, it could be the use of an async further 
+            //down in the BillViewerFragmentCtrl code that calls the web svc
+            viewers.Add(BillViewerFragmentCtrl.CreateInstance(legislator, BillViewerKind.CosponsoredBills));
+            viewers.Add(BillViewerFragmentCtrl.CreateInstance(legislator, BillViewerKind.SponsoredBills));
         }
 
         public override Android.Support.V4.App.Fragment GetItem(int position)

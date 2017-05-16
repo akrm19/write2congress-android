@@ -19,6 +19,7 @@ using Android.Support.V7.Widget;
 
 namespace Write2Congress.Droid.CustomControls
 {
+    //NOT IN USE, FOR REFERENCE ONLY
     public abstract class BaseViewer : LinearLayout
     {
         protected RecyclerView recycler;
