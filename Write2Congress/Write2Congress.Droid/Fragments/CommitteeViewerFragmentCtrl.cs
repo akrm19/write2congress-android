@@ -89,7 +89,12 @@ namespace Write2Congress.Droid.Fragments
 
             return fragment;
         }
-        
+
+        public override void OnResume()
+        {
+            base.OnResume();
+        }
+
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);

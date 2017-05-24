@@ -52,7 +52,7 @@ namespace Write2Congress.Shared.BusinessLayer
             StateOrTerritory stateOrTerritory;
 
             if (Enum.TryParse<StateOrTerritory>(stateOrTerritorySearchTerm, out stateOrTerritory))
-                return legislators.Where(l => l.State == stateOrTerritory).ToList();
+                return legislators.Where(l => l.State == stateOrTerritory).OrderBy(ln => ln.LastName).ToList();
             else
                 return new List<Legislator>();
         }
@@ -61,7 +61,7 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             return stateOrTerritory == StateOrTerritory.ALL
                 ? legislators
-                : legislators.Where(l => l.State == stateOrTerritory).ToList();
+                : legislators.Where(l => l.State == stateOrTerritory).OrderBy(ln => ln.LastName).ToList();
         }
 
         public static List<Legislator> FilterByFirstMiddleOrLastName(this List<Legislator> legislators, string searchTerm)
@@ -72,7 +72,7 @@ namespace Write2Congress.Shared.BusinessLayer
                     l.FirstName.ToLower().Contains(searchTerm)
                     || l.LastName.ToLower().Contains(searchTerm)
                     || (!string.IsNullOrWhiteSpace(l.MiddleName) && l.MiddleName.ToLower().Contains(searchTerm))
-                ).ToList();
+                ).OrderBy(ln => ln.LastName).ToList();
         }
 
         #endregion

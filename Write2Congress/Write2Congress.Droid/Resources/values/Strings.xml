@@ -4,6 +4,7 @@
   <string name="address">Address</string>
   <string name="app_name">Write2Congress.Droid</string>
   <string name="billsCosponsored">Bills Co-Sponsored</string>
+  <string name="billInfo">Bill Info</string>
   <string name="billsSponsored">Bills Sponsored</string>
   <string name="committees">Committees</string>
   <string name="cannotSendLetterWithoutRecipient">Cannot send letter without a recipient</string>
@@ -29,6 +30,7 @@
   <string name="emptySentLettersText">No sent letters</string>
   <string name="emptySignatureText">Letter signature</string>
   <string name="emptySubjectText">Subject (optional)</string>
+  <string name="emptyVotesText">No Votes</string>
   <string name="exit">Exit</string>
   <string name="feedback">Feedback</string>
   <string name="lastAction">Last Action</string>
@@ -45,6 +47,7 @@
   <string name="letterSaveFailed">Error: Unabled to save letter</string>
   <string name="loading">Loading...</string>
   <string name="moreInfo">More Info</string>
+  <string name="nominationInfo">Nomination Info</string>
   <string name="ok">OK</string>
   <string name="phone">Phone</string>
   <string name="refresh">Refresh</string>
@@ -75,6 +78,9 @@
   <string name="verifyUpdateOfLegislatorData">Are you sure you want to update the lesgislator data?</string>  
   <string name="verifyUpdateOfLegislatorDataLastUpdate">Legislator data was last updated on</string>
   <string name="verifyUpdateOfLegislatorDataWarning">Updates are only needed if you think your legislator data is out of date.</string>
+  <string name="voteResult">Vote Result</string>
+  <string name="votes">Votes</string>
+  <string name="voteType">Vote Type</string>
   <string name="website">Web Site</string>
   <string name="writeLetter">Write Letter</string>
   <string name="writeNewLetterTitle">Write New Letter</string>

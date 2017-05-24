@@ -21,5 +21,6 @@ namespace Write2Congress.Droid.DomainModel.Constants
         public const string Committees = "Committees";
         public const string Bills = "Bills";
         public const string BillViewerFragmentType = "BillViewerFragmentType";
+        public const string Votes = "Votes";
     }
 }

@@ -144,6 +144,8 @@
     <Compile Include="Adapters\LegislatorViewPagerAdapter.cs" />
     <Compile Include="Adapters\LetterAdapter.cs" />
     <Compile Include="Adapters\LetterAdapterViewHolder.cs" />
+    <Compile Include="Adapters\VoteAdapter.cs" />
+    <Compile Include="Adapters\VoteAdapterViewHolder.cs" />
     <Compile Include="Code\LetterFileProvider.cs" />
     <Compile Include="CustomControls\BaseViewer.cs" />
     <Compile Include="CustomControls\CommitteeViewer.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Code\AndroidHelper.cs" />
     <Compile Include="Fragments\SettingsFragment.cs" />
     <Compile Include="Fragments\ViewLegislatorFragment.cs" />
+    <Compile Include="Fragments\VoteViewerFragmentCtrl.cs" />
     <Compile Include="Fragments\WriteLetterFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -238,6 +241,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ctrl_BaseViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ctrl_Vote.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -34,5 +34,24 @@ namespace Write2Congress.Shared.DomainModel
         /// The organization the nominee would be appointed to, if confirmed.
         /// </summary>
         public string Organization { get; set; }
+
+        public string GetDisplayTitle()
+        {
+            if(Nominees == null || Nominees.Count < 1)
+                return "Nomination " + GetOrganizationDisplay();
+
+            if (Nominees.Count == 1)
+                return $"{Nominees[0].Name} " + GetOrganizationDisplay();
+
+            return $"{Nominees[0].Name}, {Nominees[1].Name}..." + GetOrganizationDisplay();
+        }
+
+        private string GetOrganizationDisplay()
+        {
+            if (string.IsNullOrWhiteSpace(Organization))
+                return string.Empty;
+
+            return $"({Organization})";
+        }
     }
 }

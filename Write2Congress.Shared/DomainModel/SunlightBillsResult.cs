@@ -163,7 +163,7 @@ namespace Write2Congress.Shared.DomainModel
             /// <summary>
             /// An object with most simple legislator fields for the bill’s sponsor, if there is one.
             /// </summary>
-            public SunlightLegislatorResult.SunlightLegislator sponsor { get; set; }
+            public Legislator sponsor { get; set; }
 
             /// <summary>
             /// The bioguide ID of the bill’s sponsoring legislator, 

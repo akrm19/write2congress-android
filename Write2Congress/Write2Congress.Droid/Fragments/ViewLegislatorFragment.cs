@@ -28,6 +28,7 @@ namespace Write2Congress.Droid.Fragments
     {
         private Legislator _legislator;
         private LegislatorViewPagerAdapter _viewPagerAdapter;
+        private TypedValue _selectableItemBackground;
 
         //Note: Fragment sub-classes must have a public default no argument constructor.
         //TODO RM: FIXX!!!
@@ -59,6 +60,7 @@ namespace Write2Congress.Droid.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             HasOptionsMenu = true;
+            _selectableItemBackground = AppHelper.GetTypedValueFromActv(Activity);
 
             var fragmentView = inflater.Inflate(Resource.Layout.frag_ViewLegislator, container, false);
 
@@ -98,15 +100,15 @@ namespace Write2Congress.Droid.Fragments
 
         private void PopulateContactMethodsButtons(View fragment, Legislator legislator)
         {
-            var WriteLetter = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_writeLetter);
-            var Email = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_email);
-            var Phone = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_phone);
-            var Address = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_address);
+            var WriteLetter = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_writeLetter);
+            var Email = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_email);
+            var Phone = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_phone);
+            var Address = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_address);
 
-            var Facebook = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_facebook);
-            var Twitter = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_twitter);
-            var Webpage = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_webpage);
-            var YouTube = fragment.FindViewById<Button>(Resource.Id.viewLegislatorFrag_youtube);
+            var Facebook = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_facebook);
+            var Twitter = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_twitter);
+            var Webpage = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_webpage);
+            var YouTube = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_youtube);
 
             //Contact, social media, ect buttons
             SetupLegislatorContactMthdButton(WriteLetter, legislator.Email);
@@ -122,9 +124,10 @@ namespace Write2Congress.Droid.Fragments
 
         public void SetupLegislatorContactMthdButton(View button, ContactMethod contactMethod)
         {
-            button.Visibility = contactMethod.IsEmpty
-                ? ViewStates.Gone
-                : ViewStates.Visible;
+            AppHelper.SetLegislatorContactMthdVisibility(button, contactMethod, _selectableItemBackground);
+            //button.Visibility = contactMethod.IsEmpty
+            //    ? ViewStates.Gone
+            //    : ViewStates.Visible;
 
             button.Click += (sender, e) => ContactButton_Click(contactMethod);
         }
