@@ -23,7 +23,7 @@ namespace Write2Congress.Droid.Adapters
         public CommitteeAdapterViewHolder(View view, Action<int, int> actionButtonListner) : base(view)
         {
             Image = view.FindViewById<ImageView>(Resource.Id.committeeCtrl_image);
-            Image.SetBackgroundResource(Resource.Color.accent_purple);
+            Image.SetBackgroundResource(Resource.Color.primary_blue_dark);
             Image.SetImageResource(Resource.Drawable.ic_group_white_48dp);
 
             Name = view.FindViewById<TextView>(Resource.Id.committeeCtrl_name);

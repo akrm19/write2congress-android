@@ -105,7 +105,7 @@ namespace Write2Congress.Droid.Adapters
             var letter = _letters[position];
             var viewHolder = holder as LetterAdapterViewHolder;
 
-            viewHolder.Image.SetBackgroundResource(Resource.Color.accent_purple); 
+            viewHolder.Image.SetBackgroundResource(Resource.Color.primary_blue_dark); 
             viewHolder.Image.SetImageResource(letter.Sent
                 ? Resource.Drawable.ic_send_white_48dp
                 : Resource.Drawable.ic_drafts_white_48dp);

@@ -99,7 +99,7 @@ namespace Write2Congress.Droid.Adapters
                 case BillStatusKind.InCongress:
                 case BillStatusKind.Unknown:
                 default:
-                    viewHolder.Image.SetBackgroundResource(Resource.Color.accent_purple);
+                    viewHolder.Image.SetBackgroundResource(Resource.Color.primary_blue_dark);
                     break;
             }
 

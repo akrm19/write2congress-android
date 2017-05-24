@@ -26,7 +26,7 @@ namespace Write2Congress.Droid.Adapters
             //TODO RM: Find how to retain instance on rotation. Also ensure there are no memory leak if using
             //FragmentPagerAdapter (since it keeps the fragment instance) and all references to activites
             //context and ect are cleared 
-
+            viewers.Add(VoteViewerFragmentCtrl.CreateInstance(legislator));
             viewers.Add(CommitteeViewerFragmentCtrl.CreateInstance(legislator));
 
             //TODO RM: For some reason this cause issues, it could be the use of an async further 

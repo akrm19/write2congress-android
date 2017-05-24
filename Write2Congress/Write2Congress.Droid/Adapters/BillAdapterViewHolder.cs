@@ -30,7 +30,7 @@ namespace Write2Congress.Droid.Adapters
             view.Click += (sender, e) => billClickListner(base.AdapterPosition);
 
             Image = view.FindViewById<ImageView>(Resource.Id.billCtrl_image);
-            Image.SetBackgroundResource(Resource.Color.accent_purple);
+            Image.SetBackgroundResource(Resource.Color.primary_blue_dark);
             Image.SetImageResource(Resource.Drawable.ic_insert_drive_file_white_48dp);
 
             Name = view.FindViewById<TextView>(Resource.Id.billCtrl_name);
