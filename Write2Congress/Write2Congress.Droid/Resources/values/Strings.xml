@@ -13,7 +13,7 @@
   <string name="copyText">Copy Text</string>
   <string name="copyTextFail">Error: Unable to copy letter\'s text</string>
   <string name="copyTextSuccess">Copied letter\'s text</string>
-  <string name="copyTextToClipboard">Copy text to clipboard</string>
+  <string name="copyTextToClipboard">Copy to clipboard</string>
   <string name="cosponsorCount">Co-sponsors</string>
   <string name="date">Date</string>
   <string name="dateIntroduced">Date Introduced</string>

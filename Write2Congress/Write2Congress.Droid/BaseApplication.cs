@@ -51,7 +51,7 @@ namespace Write2Congress.Droid
             CommitteeManager = new CommitteeManager(_logger);
             VoteMngr = new VoteManager(_logger);
             BillMngr = new BillManager(_logger);
-            LegislatorManager = new LegislatorManager();
+            LegislatorManager = new LegislatorManager(_logger);
             _allLegislators = AppHelper.GetCachedLegislatorsFromFileStorage();
 
             if (_allLegislators.Count == 0 || _forceRetrieveAllLegislators)

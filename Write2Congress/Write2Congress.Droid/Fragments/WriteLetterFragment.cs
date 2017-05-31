@@ -143,7 +143,7 @@ namespace Write2Congress.Droid.Fragments
                 case Resource.Id.writeLetterMenu_delete:
                     DeleteCurrentLetter();
                     break;
-                case Resource.Id.writeLetterMenu_copyToClipboard:
+                case Resource.Id.writeLetterMenu_copyToClipboard://              writeLetterMenu_copyToClipboard:
                     CopyLetterTextToClipboard();
                     break;
                 default:

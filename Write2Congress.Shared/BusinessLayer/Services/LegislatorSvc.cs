@@ -1,17 +1,80 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.BusinessLayer.Services
 {
     public class LegislatorSvc : ServiceBase
     {
+        public LegislatorSvc(IMyLogger logger)
+        {
+            _logger = logger;
+        }
+
+        public Task<byte[]> GetLegislatorPortrait2(Legislator legislator)
+        {
+            //Possible options: 450x550 and original (typically 675x825, but can vary)
+            var imageSize = "225x275";
+            var uri = $@"http://theunitedstates.io/images/congress/{imageSize}/{legislator.BioguideId}.jpg";
+
+            byte[] result;
+
+            try
+            {
+                var httpClient = new HttpClient();
+                //{
+                    httpClient.MaxResponseContentBufferSize = 256000;
+                    //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tocken);
+
+                    return httpClient.GetByteArrayAsync(uri);
+
+                //}
+
+                //return result;
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Error encountured retrieving portrait from URL: {uri}. Error {e.ToString()}");
+                return null;
+            }
+        }
+
+        public async Task<byte[]> GetLegislatorPortrait(Legislator legislator)
+        {
+            //Possible options: 450x550 and original (typically 675x825, but can vary)
+            var imageSize = "225x275";
+            var uri = $@"http://theunitedstates.io/images/congress/{imageSize}/{legislator.BioguideId}.jpg";
+
+            byte[] result;
+
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    result = await httpClient.GetByteArrayAsync(uri);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Error encountured retrieving portrait from URL: {uri}. Error {e.ToString()}");
+                return null;
+            }
+        }
+
         public List<Legislator> GetAllAlegislators()
         {
             var allLegislatorsUri = "legislators?per_page=all";
@@ -24,43 +87,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             var legislatorsByZipUri = "legislators/locate?zip=" + zipCode;
 
             return GetLegislatorsBase(legislatorsByZipUri).Result;
-            /*
-            var legislators =  new List<Legislator>();
-
-            try
-            {
-                var client = CreateSunlightHttpClient();
-
-                // RestUrl = https://congress.api.sunlightfoundation.com/legislators/locate?zip={0}
-                var legislatorsByZipUri = "legislators/locate?zip=" + zipCode;
-
-                //TODO Ensure this is async
-                var response = client.GetAsync(legislatorsByZipUri).Result;
-
-                //var response = await client.GetAsync(legislatorsByZipUri); //TODO Find out why this fails
-                //http://stackoverflow.com/questions/10343632/httpclient-getasync-never-returns-when-using-await-async
-
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseText = response.Content.ReadAsStringAsync().Result;
-                    var results = JsonConvert.DeserializeObject<SunlightLegislatorResult>(responseText);
-
-                    legislators = Util.LegislatorsFromSunlightLegislatorResult(results);
-                }
-                else
-                {
-                    //TODO Add logging and handling
-                    legislators = legislators;
-                }
-            }
-            catch(Exception e)
-            {
-                var eMessage = e.Message;
-            }
-
-            return legislators;
-            */
         }
 
         private async Task<List<Legislator>> GetLegislatorsBase(string legislatorsUri)
@@ -89,13 +115,12 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 }
                 else
                 {
-                    //TODO Add logging and handling
-                    //legislators = legislators;
+                    _logger.Error($"Error occurred retrieving legislators using URI: {legislatorsUri}");
                 }
             }
             catch (Exception e)
             {
-                var eMessage = e.Message;
+                _logger.Error("Error retrieving legislators.", e);
             }
 
             return legislators;

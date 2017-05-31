@@ -14,6 +14,7 @@ using Write2Congress.Droid.Fragments;
 using Write2Congress.Shared.DomainModel;
 using Android.Support.V7.Widget;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Adapters
 {
@@ -82,12 +83,12 @@ namespace Write2Congress.Droid.Adapters
 
             var viewHolder = holder as VoteAdapterViewHolder;
             viewHolder.Question.Text = vote.Question;
-            viewHolder.VoteResult.Text = vote.Result;
-            viewHolder.VoteType.Text = vote.Type.Value; //TODO RM: Capitalize
-            viewHolder.VotedAt.Text = vote.VotedAt.ToShortDateString();
+            viewHolder.VoteResult.Text = $"{voteResult}: {vote.Result}";
+            viewHolder.VoteType.Text = $"{voteType}: {vote.Type.Value.Capitalize()}"; 
+            viewHolder.VotedAt.Text = $"{date}: {vote.VotedAt.ToShortDateString()}";
 
             if (vote.Bill != null)
-                viewHolder.MoreInfo.Text = vote.Bill.GetDisplayTitle;
+                viewHolder.MoreInfo.Text = vote.Bill.GetDisplayTitle();
 
             else if (vote.Nomination != null)
                 viewHolder.MoreInfo.Text = vote.Nomination.GetDisplayTitle();

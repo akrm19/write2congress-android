@@ -23,6 +23,10 @@ namespace Write2Congress.Droid.Code
         public Logger (string className)
         {
             _tag = Application.Context.GetString(Resource.String.app_name);
+
+            if (string.IsNullOrWhiteSpace(_tag))
+                _tag = "Write2Congress";
+
             _msgFormat = $"{className}: ";
         }
 

@@ -13,6 +13,16 @@ namespace Write2Congress.Shared.BusinessLayer
 {
     public static class Extensions
     {
+        public static string Capitalize(this string val)
+        {
+            if (val.Length > 1)
+                return char.ToUpper(val[0]) + val.Substring(1);
+
+            else if (val.Length == 1)
+                return char.ToUpper(val[0]).ToString();
+
+            return val;
+        }
 
         public static string GetDescription(this Enum enumVal)
         {

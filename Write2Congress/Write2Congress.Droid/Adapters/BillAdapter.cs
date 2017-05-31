@@ -82,9 +82,9 @@ namespace Write2Congress.Droid.Adapters
             }
 
             var viewHolder = holder as BillAdapterViewHolder;
-            viewHolder.Name.Text = bill.GetDisplayTitle;
+            viewHolder.Name.Text = bill.GetDisplayTitle();
                 
-            var billStatus = bill.GetBillStatus;
+            var billStatus = bill.GetBillStatus();
             switch (billStatus.Status)
             {
                 case BillStatusKind.Enacted:

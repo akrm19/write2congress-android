@@ -21,17 +21,14 @@
   
     <item
         android:id="@+id/writeLetterMenu_copyToClipboard"
+        android:title="@string/copyTextToClipboard"
+        android:icon="@drawable/ic_delete_white_48dp"
+        app:showAsAction="always"/>
+  <!--
+    <item
+        android:id="@+id/writeLetterMenu_copyToClipboard"
         android:title="@string/settings"
         android:icon="@drawable/ic_content_copy_white_48dp"
         android:showAsAction="always"/>
-<!--
-
-    <item android:id="@+id/writeLetterMenu_donate"
-        android:title="@string/donate"
-        android:showAsAction="never"/>
-
-    <item android:id="@+id/writeLetterMenu_exit"
-        android:title="@string/exit"
-        android:showAsAction="never"/>
--->
+  -->
 </menu>

@@ -36,7 +36,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return client;
         }
 
-        public static async Task<T> GetTypeAsync<T>(string resourceUrl)
+        public async Task<T> GetTypeAsync<T>(string resourceUrl)
         {
             T results = default(T);
 
@@ -53,7 +53,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 }
                 else
                 {
-                    //TODO Add logging and handling
+                    _logger.Error($"Error making call to {resourceUrl}");
                     return default(T);
                 }
             }

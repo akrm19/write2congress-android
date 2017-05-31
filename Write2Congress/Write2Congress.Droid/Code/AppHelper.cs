@@ -292,12 +292,12 @@ namespace Write2Congress.Droid.Code
         {
             var dialogBuilder = new Android.Support.V7.App.AlertDialog.Builder(fragment.Context);
             dialogBuilder
-                .SetTitle(bill.GetDisplayTitle)
+                .SetTitle(bill.GetDisplayTitle())
                 .SetMessage(bill.Summary)
                 .SetNegativeButton(Resource.String.dismiss, (sender, e) =>
                 {
                     //TODO RM: This does not work
-                    (sender as AlertDialog).Dismiss();
+                    (sender as Android.Support.V7.App.AlertDialog).Dismiss();
                 });
 
             if (bill.Urls.Count > 0)
@@ -403,8 +403,8 @@ namespace Write2Congress.Droid.Code
         private static Intent GetIntentForContactEmail(ContactMethod contactMethod)
         {
             var to = contactMethod.ContactInfo;
-            var subject = "TODO RM";
-            var body = "Hello legislator";
+            var subject = "";
+            var body = "";
 
             var intent = AndroidHelper.GetSendEmailIntent(to, subject, body, string.Empty);
 
