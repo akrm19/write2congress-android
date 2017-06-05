@@ -54,18 +54,23 @@ namespace Write2Congress.Shared.BusinessLayer
             var summary = "Bill Summary";
 
             var text = new StringBuilder();
-            text.Append(bill.GetDisplayTitleWithLabel())
+            text.AppendLine(bill.GetDisplayTitleWithLabel())
             .AppendLine()
             .AppendLine($"{dateIntroduced}: {bill.DateIntroduced.ToString("d")}")
             .AppendLine()
             .AppendLine($"{conSponsors}: {bill.CosponsorsCount}")
-            .AppendLine()
-            .AppendLine($"{billStatus}: {bill.GetBillStatus()}")
-            .AppendLine()
-            .AppendLine($"{statusDate}: {bill.DateOfLastVote.ToString("d")}")
             .AppendLine();
 
-            if(!string.IsNullOrWhiteSpace(bill.LastAction.Text))
+            if (!string.IsNullOrWhiteSpace(bill.GetBillStatus().StatusText))
+            {
+                text.AppendLine($"{billStatus}: {bill.GetBillStatus().StatusText}")
+                .AppendLine();
+
+                if(bill.DateOfLastVote != DateTime.MinValue)
+                    text.AppendLine($"{statusDate}: {bill.DateOfLastVote.ToString("d")}").AppendLine();
+            }
+
+            if(!string.IsNullOrWhiteSpace(bill.LastAction.Text) && bill.LastAction.Date != DateTime.MinValue)
             {
                 text.AppendLine($"Last Action: {bill.LastAction.Text}").AppendLine();
 

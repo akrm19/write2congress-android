@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="about">About</string>
+  <string name="age">Age</string>
   <string name="address">Address</string>
   <string name="app_name">Write2Congress.Droid</string>
   <string name="billsCosponsored">Bills Co-Sponsored</string>
   <string name="billInfo">Bill Info</string>
   <string name="billsSponsored">Bills Sponsored</string>
+  <string name="birthday">Birthday</string>
+  <string name="chamber">Chamber</string>
   <string name="committees">Committees</string>
   <string name="cannotSendLetterWithoutRecipient">Cannot send letter without a recipient</string>
   <string name="congress">Congress</string>

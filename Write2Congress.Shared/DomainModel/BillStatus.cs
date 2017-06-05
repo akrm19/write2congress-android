@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Shared.DomainModel.Enum;
 
 namespace Write2Congress.Shared.DomainModel
@@ -33,8 +34,8 @@ namespace Write2Congress.Shared.DomainModel
                     return _statusText;
 
                 else if (Status != BillStatusKind.Unknown)
-                    return Status.ToString();
-
+                    return Status.GetDescription(); // .ToString();
+                
                 return string.Empty;
             }
             set

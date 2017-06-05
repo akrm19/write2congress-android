@@ -123,10 +123,10 @@ namespace Write2Congress.Droid.Fragments
             AppHelper.SetLegislatorPortrait(legislator, _portrait);
 
             using (var chamber = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_chamber))
-                chamber.Text = $"{legislator.Chamber} ({legislator.State.ToString()})";
+                chamber.Text = $"{AndroidHelper.GetString(Resource.String.chamber)}: {legislator.Chamber} ({legislator.State.ToString()})";
 
-            using (var name = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_name))
-                name.Text = $"{AndroidHelper.GetString(Resource.String.party)}: {legislator.Party.ToString()}";
+            using (var party = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_party))
+                party.Text = $"{AndroidHelper.GetString(Resource.String.party)}: {legislator.Party.ToString()}";
 
             var termStartDateText = AndroidHelper.GetString(Resource.String.termStarted);
             using (var termStartDate = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_termStartDate))
@@ -135,6 +135,14 @@ namespace Write2Congress.Droid.Fragments
             var termEndDateText = AndroidHelper.GetString(Resource.String.termEnds);
             using (var termEndDate = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_termEndDate))
                 termEndDate.Text = AppHelper.GetLegislatorTermEndDate(legislator, termEndDateText);
+
+            using (var birthday = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_birthdate))
+            {
+                var bdayText = AndroidHelper.GetString(Resource.String.birthday);
+                birthday.Text = legislator.Birthday == DateTime.MinValue
+                    ? string.Empty
+                    : $"{bdayText}: {AppHelper.GetLegislatorBirthdateAndAge(legislator)}";
+            }
         }
 
         private async void SetPortrait(Legislator legislator)

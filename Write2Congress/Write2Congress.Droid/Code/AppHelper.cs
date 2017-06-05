@@ -90,6 +90,19 @@ namespace Write2Congress.Droid.Code
                 : $"{termEndDateText}: {legislator.TermEndDate.ToShortDateString()}";
         }
 
+        public static string GetLegislatorBirthdateAndAge(Legislator legislator)
+        {
+            if (legislator.Birthday.Equals(DateTime.MinValue))
+                return string.Empty;
+
+            return $"{legislator.Birthday.ToShortDateString()} ({GetLegislatorAge(legislator)})";
+        }
+
+        public static int GetLegislatorAge(Legislator legislator)
+        {
+            return DateTime.Today.AddYears(legislator.Birthday.Year * -1).Year;
+        }
+
         //public static void SetLegislatorContactMthdVisibility(ImageView imageButton, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
         //{
         //    imageButton.Visibility = contactMethod.IsEmpty

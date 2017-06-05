@@ -47,7 +47,7 @@ namespace Write2Congress.Shared.BusinessLayer
             var date = "Date";
             
             var text = new StringBuilder();
-            text.Append($"{question}: {vote.Question}")
+            text.AppendLine($"{question}: {vote.Question}")
             .AppendLine()
             .AppendLine($"{voteCasted}: {vote.VoteCastedByLegislator.GetDescription()}")
             .AppendLine()
