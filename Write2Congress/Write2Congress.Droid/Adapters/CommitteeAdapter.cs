@@ -71,7 +71,7 @@ namespace Write2Congress.Droid.Adapters
             var viewHolder = holder as CommitteeAdapterViewHolder;
             viewHolder.Name.Text = string.Format("{0}{1}",
                 committee.Name,
-                committee.IsSubcommittee ? $"({_subcommitte})" : string.Empty);
+                committee.IsSubcommittee ? $" ({_subcommitte})" : string.Empty);
 
             AppHelper.SetButtonTextAndHideifNecessary(viewHolder.Phone, committee.Phone);
             AppHelper.SetButtonTextAndHideifNecessary(viewHolder.Website, committee.Url);

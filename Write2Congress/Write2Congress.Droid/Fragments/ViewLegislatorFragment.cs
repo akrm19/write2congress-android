@@ -107,13 +107,14 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnStart();
             SetPortrait(_legislator);
+            GetBaseActivity().UpdateTitleBarText(_legislator.FullName());
         }
 
         private void PopulateViewPager(View fragmentView, Legislator legislator)
         {
             var viewPager = fragmentView.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
             viewPager.Adapter = _viewPagerAdapter;
-            viewPager.CurrentItem = 0;
+            viewPager.CurrentItem = 1;
         }
 
         private void PopulateBasicInfo(View fragment, Legislator legislator)
@@ -125,7 +126,7 @@ namespace Write2Congress.Droid.Fragments
                 chamber.Text = $"{legislator.Chamber} ({legislator.State.ToString()})";
 
             using (var name = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_name))
-                name.Text = legislator.FullName;
+                name.Text = $"{AndroidHelper.GetString(Resource.String.party)}: {legislator.Party.ToString()}";
 
             var termStartDateText = AndroidHelper.GetString(Resource.String.termStarted);
             using (var termStartDate = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_termStartDate))
@@ -138,62 +139,20 @@ namespace Write2Congress.Droid.Fragments
 
         private async void SetPortrait(Legislator legislator)
         {
-
-            var lm = new LegislatorManager(MyLogger);
             var ls = new Shared.BusinessLayer.Services.LegislatorSvc(MyLogger);
             try
             {
-                //var imageSize = "225x275";
-                //var uri = $@"https://theunitedstates.io/images/congress/{imageSize}/{legislator.BioguideId}.jpg";
                 Android.Graphics.Bitmap portraitAsBitmap;
-
                 var portraitAsByteArray = await ls.GetLegislatorPortrait2(legislator);
 
-                //if(portraitAsByteArray != null && portraitAsByteArray.Length > 0)
-                //{
-                portraitAsBitmap = Android.Graphics.BitmapFactory.DecodeByteArray(portraitAsByteArray, 0, portraitAsByteArray.Length);
-                //
+                if (portraitAsByteArray != null && portraitAsByteArray.Length > 0 && Activity != null && !Activity.IsFinishing)
+                {
+                    portraitAsBitmap = Android.Graphics.BitmapFactory.DecodeByteArray(portraitAsByteArray, 0, portraitAsByteArray.Length);
+
                     Activity.RunOnUiThread(
                         () => _portrait.SetImageBitmap(portraitAsBitmap));
+                }
 
-
-
-
-                //var getPortrait = new Task<byte[]>((u) =>
-                //{
-                //    using (var webClient = new System.Net.WebClient())
-                //    {
-                //        var imageBytes = webClient.DownloadData(uri);
-                //        return imageBytes;
-                //
-                //    }
-                //}, uri);
-                //
-                //getPortrait.ContinueWith((antedecent) =>
-                //{
-                //    if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
-                //        return;
-                //
-                //    var result = antedecent.Result;
-                //    if (result != null && result.Length > 0)
-                //    {
-                //        Android.Graphics.Bitmap portraitAsBitmap22 = Android.Graphics.BitmapFactory.DecodeByteArray(result, 0, result.Length);
-                //
-                //        Activity.RunOnUiThread(
-                //            () => _portrait.SetImageBitmap(portraitAsBitmap22));
-                //    }
-                //});
-                //getPortrait.Start();
-                //var portraitAsByteArray = await ls.GetLegislatorPortrait(legislator);
-                //
-                //if(portraitAsByteArray != null && portraitAsByteArray.Length > 0)
-                //{
-                //    var portraitAsBitmap = Android.Graphics.BitmapFactory.DecodeByteArray(portraitAsByteArray, 0, portraitAsByteArray.Length);
-                //
-                //    Activity.RunOnUiThread(
-                //        () => _portrait.SetImageBitmap(portraitAsBitmap));
-                //}
-            
             }
             catch (Exception e)
             {

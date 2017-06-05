@@ -62,8 +62,9 @@ namespace Write2Congress.Droid.Adapters
                 return;
             }
 
-            //TODO RM: look into doing something for OnClick for votes
-            //AppHelper.ShowBillDialog(vote, _fragment);
+            var title = vote.Type.Type.GetDescription();
+            var summary = VoteManager.GetVoteSummary(vote);
+            AppHelper.ShowDetailsDialog(_fragment, title, summary, vote.Source);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -87,13 +88,12 @@ namespace Write2Congress.Droid.Adapters
             viewHolder.VoteType.Text = $"{voteType}: {vote.Type.Value.Capitalize()}"; 
             viewHolder.VotedAt.Text = $"{date}: {vote.VotedAt.ToShortDateString()}";
 
-            if (vote.Bill != null)
-                viewHolder.MoreInfo.Text = vote.Bill.GetDisplayTitle();
+            var voteMoreInfo = VoteManager.GetVoteMoreInfoTitle(vote);
 
-            else if (vote.Nomination != null)
-                viewHolder.MoreInfo.Text = vote.Nomination.GetDisplayTitle();
-            else
-                viewHolder.MoreInfo.Visibility = ViewStates.Gone;
+            viewHolder.MoreInfo.Text = voteMoreInfo;
+            viewHolder.MoreInfo.Visibility = string.IsNullOrWhiteSpace(voteMoreInfo)
+                ? ViewStates.Gone
+                : ViewStates.Visible;
 
             viewHolder.Image.SetImageResource(GetImageResourceForVoteCastedType(vote.VoteCastedByLegislator));
         }

@@ -44,5 +44,39 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return _billSvc.GetBillsCosponsoredbyLegislator(legislatorBioguideId, page, resultsPerPage);
         }
+
+        public static string GetBillDetailedSummary(Bill bill)
+        {
+            var dateIntroduced = "Date Introduced";
+            var conSponsors = "Co-sponsors";
+            var billStatus = "Bill Status";
+            var statusDate = "Status Date";
+            var summary = "Bill Summary";
+
+            var text = new StringBuilder();
+            text.Append(bill.GetDisplayTitleWithLabel())
+            .AppendLine()
+            .AppendLine($"{dateIntroduced}: {bill.DateIntroduced.ToString("d")}")
+            .AppendLine()
+            .AppendLine($"{conSponsors}: {bill.CosponsorsCount}")
+            .AppendLine()
+            .AppendLine($"{billStatus}: {bill.GetBillStatus()}")
+            .AppendLine()
+            .AppendLine($"{statusDate}: {bill.DateOfLastVote.ToString("d")}")
+            .AppendLine();
+
+            if(!string.IsNullOrWhiteSpace(bill.LastAction.Text))
+            {
+                text.AppendLine($"Last Action: {bill.LastAction.Text}").AppendLine();
+
+                if (bill.LastAction.Date != DateTime.MinValue)
+                    text.AppendLine($"Last Action Date: {bill.LastAction.Date.ToString("d")}").AppendLine();
+            }
+
+            if (!string.IsNullOrWhiteSpace(bill.Summary))
+                text.AppendLine($"{summary}: {bill.Summary}").AppendLine();
+
+            return text.ToString();
+        }
     }
 }

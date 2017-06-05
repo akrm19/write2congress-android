@@ -50,6 +50,11 @@ namespace Write2Congress.Shared.DomainModel
             else
                 return Titles.OfficialTile;
         }
+
+        public string GetDisplayTitleWithLabel()
+        {
+            return "Bill: " + GetDisplayTitle();
+        }
         //END OF CUSTOM ADDED METHODS
 
 

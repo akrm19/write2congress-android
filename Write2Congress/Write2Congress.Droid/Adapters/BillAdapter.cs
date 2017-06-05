@@ -14,6 +14,7 @@ using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Fragments;
 using Write2Congress.Droid.Code;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Adapters
 {
@@ -33,7 +34,7 @@ namespace Write2Congress.Droid.Adapters
             dateIntroduced = AndroidHelper.GetString(Resource.String.dateIntroduced);
             cosponsors = AndroidHelper.GetString(Resource.String.cosponsorCount);
             status = AndroidHelper.GetString(Resource.String.status);
-            date = AndroidHelper.GetString(Resource.String.date);
+            date = AndroidHelper.GetString(Resource.String.statusDate);
             summary = AndroidHelper.GetString(Resource.String.summary);
             lastaction = AndroidHelper.GetString(Resource.String.lastAction);
             lastactionDate = AndroidHelper.GetString(Resource.String.lastActionDate);
@@ -63,7 +64,13 @@ namespace Write2Congress.Droid.Adapters
                 return;
             }
 
-            AppHelper.ShowBillDialog(bill, _fragment);
+            var title = bill.GetDisplayTitle();
+            var summary = BillManager.GetBillDetailedSummary(bill);
+            var link = bill.Urls.Count > 0
+                ? bill.Urls[0]
+                : string.Empty;
+
+            AppHelper.ShowDetailsDialog(_fragment, title, summary, link);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -82,7 +89,7 @@ namespace Write2Congress.Droid.Adapters
             }
 
             var viewHolder = holder as BillAdapterViewHolder;
-            viewHolder.Name.Text = bill.GetDisplayTitle();
+            viewHolder.Name.Text = bill.GetDisplayTitleWithLabel();
                 
             var billStatus = bill.GetBillStatus();
             switch (billStatus.Status)

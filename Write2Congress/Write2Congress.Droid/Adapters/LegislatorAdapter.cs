@@ -147,7 +147,7 @@ namespace Write2Congress.Droid.Adapters
 
             //Basic Info
             viewHolder.Chamber.Text = $"{legislator.Chamber} ({legislator.State.ToString()})";
-            viewHolder.Name.Text = legislator.FullName;
+            viewHolder.Name.Text = legislator.FullName();
             viewHolder.TermStartDate.Text = AppHelper.GetLegislatorTermStartDate(legislator, _termStartDate);
             viewHolder.TermEndDate.Text = AppHelper.GetLegislatorTermStartDate(legislator, _termEndDate);
 

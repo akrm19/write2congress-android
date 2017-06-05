@@ -144,7 +144,7 @@ namespace Write2Congress.Droid.Code
             }
             catch (System.Exception e)
             {
-                _logger.Error(string.Format("Unable to retrieve portrait for {0}. Error: {1}", legislator.FullName, e.Message));
+                _logger.Error(string.Format("Unable to retrieve portrait for {0}. Error: {1}", legislator.FullName(), e.Message));
                 imageBitmap = null;
             }
 
@@ -287,24 +287,22 @@ namespace Write2Congress.Droid.Code
 
 
         #region Intents Methods (ContactMethods & Actions)
-
-        public static void ShowBillDialog(Bill bill, BaseFragment fragment)
+        public static void ShowDetailsDialog(BaseFragment fragment, string title, string summary, string additionalInfoLink)
         {
             var dialogBuilder = new Android.Support.V7.App.AlertDialog.Builder(fragment.Context);
             dialogBuilder
-                .SetTitle(bill.GetDisplayTitle())
-                .SetMessage(bill.Summary)
+                .SetTitle(title)
+                .SetMessage(summary)
                 .SetNegativeButton(Resource.String.dismiss, (sender, e) =>
                 {
-                    //TODO RM: This does not work
                     (sender as Android.Support.V7.App.AlertDialog).Dismiss();
                 });
 
-            if (bill.Urls.Count > 0)
+            if (!string.IsNullOrWhiteSpace(additionalInfoLink))
             {
                 dialogBuilder.SetPositiveButton(Resource.String.moreInfo, (sender, e) =>
                 {
-                    var contact = new ContactMethod(ContactType.WebSite, bill.Urls[0]);
+                    var contact = new ContactMethod(ContactType.WebSite, additionalInfoLink);
                     AppHelper.PerformContactMethodIntent(fragment, contact, false);
                 });
             }

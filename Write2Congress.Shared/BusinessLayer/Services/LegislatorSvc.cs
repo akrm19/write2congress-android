@@ -31,16 +31,12 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
             try
             {
-                var httpClient = new HttpClient();
-                //{
+                using (var httpClient = new HttpClient())
+                {
                     httpClient.MaxResponseContentBufferSize = 256000;
-                    //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tocken);
 
                     return httpClient.GetByteArrayAsync(uri);
-
-                //}
-
-                //return result;
+                }
             }
             catch (Exception e)
             {

@@ -29,7 +29,7 @@ namespace Write2Congress.Shared.DomainModel
                 : legislator.Email.ContactInfo;
 
             Body = string.Format("Dear {0},{1}{1}", 
-                legislator.FormalAddressTitle, 
+                legislator.FormalAddressTitle(), 
                 Environment.NewLine);
         }
 

@@ -27,6 +27,7 @@ namespace Write2Congress.Droid.Activities
         protected Logger MyLogger;
         protected abstract int DrawerLayoutId { get; }
         private DrawerLayout _currentDrawerLayout;
+        private int _toolbarId;
 
         public DrawerLayout CurrentDrawerLayout
         {
@@ -48,6 +49,8 @@ namespace Write2Congress.Droid.Activities
 
         public void SetupToolbar(int toolbarResourceId, string title = "")
         {
+            _toolbarId = toolbarResourceId;
+
             using (var toolbar = FindViewById<Toolbar>(toolbarResourceId))
             {
                 //Unlike other attributes the toolbar title needs to be 
@@ -70,6 +73,16 @@ namespace Write2Congress.Droid.Activities
         }
 
         #region Helpers
+
+        public void UpdateTitleBarText(string newText)
+        {
+            //using (var toolbar = FindViewById<Toolbar>(_toolbarId))
+            //{
+                SupportActionBar.SetDisplayShowTitleEnabled(true);
+                SupportActionBar.Title = newText;
+            //}
+        }
+
         protected void ReplaceFragmentByTag(BaseActivity activity, BaseFragment newFragment, int containerId, string tag)
         {
             var transacton = activity.SupportFragmentManager.BeginTransaction();

@@ -13,6 +13,8 @@ namespace Write2Congress.Shared.BusinessLayer
 {
     public static class Extensions
     {
+
+
         public static string Capitalize(this string val)
         {
             if (val.Length > 1)

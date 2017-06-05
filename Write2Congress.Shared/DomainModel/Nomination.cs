@@ -41,9 +41,9 @@ namespace Write2Congress.Shared.DomainModel
                 return "Nomination " + GetOrganizationDisplay();
 
             if (Nominees.Count == 1)
-                return $"{Nominees[0].Name} " + GetOrganizationDisplay();
+                return $"Nomination: {Nominees[0].Name} " + GetOrganizationDisplay();
 
-            return $"{Nominees[0].Name}, {Nominees[1].Name}..." + GetOrganizationDisplay();
+            return $"Nomination: {Nominees[0].Name}, {Nominees[1].Name}..." + GetOrganizationDisplay();
         }
 
         private string GetOrganizationDisplay()

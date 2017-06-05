@@ -38,38 +38,32 @@ namespace Write2Congress.Shared.DomainModel
         public string Senority { get; set; }
         public string BioguideId { get; set; }
 
-        public string FullName
+        public string FullName()
         {
-            get
-            {
-                return string.Format("{0} {1}{2}",
-                    FirstName,
-                    string.IsNullOrWhiteSpace(MiddleName)
-                        ? string.Empty
-                        : $"{MiddleName} ",
-                    LastName);
-            }
+            return string.Format("{0} {1}{2}",
+                FirstName,
+                string.IsNullOrWhiteSpace(MiddleName)
+                    ? string.Empty
+                    : $"{MiddleName} ",
+                LastName);
         }
 
-        //TODO RM: rename
-        public string FormalAddressTitle
+  
+        public string FormalAddressTitle()
         {
-            get
+            switch (Chamber)
             {
-                switch (Chamber)
-                {
-                    case LegislativeBody.Senate:
-                        return $"Senator {LastName}";
-                    case LegislativeBody.House:
-                        return string.Format("{0} {1}",
-                            Gender == Gender.Female
-                                ? "Congresswoman"
-                                : "Congressman",
-                            LastName);
-                    case LegislativeBody.Unknown:
-                    default:
-                        return string.Empty;
-                }
+                case LegislativeBody.Senate:
+                    return $"Senator {LastName}";
+                case LegislativeBody.House:
+                    return string.Format("{0} {1}",
+                        Gender == Gender.Female
+                            ? "Congresswoman"
+                            : "Congressman",
+                        LastName);
+                case LegislativeBody.Unknown:
+                default:
+                    return string.Empty;
             }
         }
     }

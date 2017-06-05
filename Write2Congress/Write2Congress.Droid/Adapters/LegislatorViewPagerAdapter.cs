@@ -27,12 +27,12 @@ namespace Write2Congress.Droid.Adapters
             //FragmentPagerAdapter (since it keeps the fragment instance) and all references to activites
             //context and ect are cleared 
             viewers.Add(VoteViewerFragmentCtrl.CreateInstance(legislator));
-            viewers.Add(CommitteeViewerFragmentCtrl.CreateInstance(legislator));
 
             //TODO RM: For some reason this cause issues, it could be the use of an async further 
             //down in the BillViewerFragmentCtrl code that calls the web svc
-            viewers.Add(BillViewerFragmentCtrl.CreateInstance(legislator, BillViewerKind.CosponsoredBills));
             viewers.Add(BillViewerFragmentCtrl.CreateInstance(legislator, BillViewerKind.SponsoredBills));
+            viewers.Add(BillViewerFragmentCtrl.CreateInstance(legislator, BillViewerKind.CosponsoredBills));
+            viewers.Add(CommitteeViewerFragmentCtrl.CreateInstance(legislator));
         }
 
         public override Android.Support.V4.App.Fragment GetItem(int position)

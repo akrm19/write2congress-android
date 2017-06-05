@@ -49,6 +49,7 @@
   <string name="moreInfo">More Info</string>
   <string name="nominationInfo">Nomination Info</string>
   <string name="ok">OK</string>
+  <string name="party">Party</string>
   <string name="phone">Phone</string>
   <string name="refresh">Refresh</string>
   <string name="save">Save</string>
@@ -62,6 +63,7 @@
   <string name="signatureSummary">The signature used when writting letters to legislators.</string>
   <string name="signatureDefaultValue">Sincerely,</string>
   <string name="status">Status</string>
+  <string name="statusDate">Status Date</string>
   <string name="subcommitte">Subcommitte</string>
   <string name="subject">Subject</string>
   <string name="summary">Summary</string>

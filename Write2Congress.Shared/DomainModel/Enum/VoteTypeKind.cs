@@ -9,23 +9,23 @@ namespace Write2Congress.Shared.DomainModel.Enum
 {
     public enum VoteTypeKind
     {
-        [Description("passage")]
+        [Description("Passage")]
         Passage,
-        [Description("cloture")]
+        [Description("Cloture")]
         Cloture,
-        [Description("nomination")]
+        [Description("Nomination")]
         Nomination,
-        [Description("impeachment")]
+        [Description("Impeachment")]
         Impeachment,
-        [Description("treaty")]
+        [Description("Treaty")]
         Treaty,
-        [Description("recommit")]
+        [Description("Recommit")]
         Recommit,
-        [Description("quorum")]
+        [Description("Quorum")]
         Quorum,
-        [Description("leadership")]
+        [Description("Leadership")]
         Leadership,
-        [Description("other")]
+        [Description("Other")]
         Other
     }
 }
