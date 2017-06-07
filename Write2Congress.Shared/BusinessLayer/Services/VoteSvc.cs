@@ -19,7 +19,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         private static string _perPage = "&per_page=";
         private static string _page = "&page=";
 
-        private static int _defaultResultsPage = 40;
         private Util _util;
 
         public VoteSvc(IMyLogger logger)
@@ -38,6 +37,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 var uri = CreateUri(query, legislatorBioguideId, page, resultsPerPage);
 
                 var result = GetTypeAsync<SunlightVoteResult.Rootobject>(uri).Result;
+                PopulatePageInfoAndTotalResultCount(result);
 
                 votes = _util.VotesFromSunlightVoteResult(result, legislatorBioguideId);
 
@@ -62,7 +62,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 throw new ArgumentException($"Error: Cannot retrieve Votes for legislator ({legislatorBioguideId}) because of invalid page value: {page}");
 
             if (resultsPerPage < 1)
-                resultsPerPage = _defaultResultsPage;
+                resultsPerPage = defaultResultsPage;
 
             var uri = string.Format("{0}{1}{2}{3}{4}{5}",
                 _votesBase,

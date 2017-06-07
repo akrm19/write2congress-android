@@ -48,6 +48,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             {
                 var uri = CreateUri(query, page, resultsPerPage);
                 var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
+                PopulatePageInfoAndTotalResultCount(result);
 
                 bills = _util.BillsFromSunlightBillResult(result);
 

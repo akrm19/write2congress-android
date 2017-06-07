@@ -19,6 +19,11 @@ namespace Write2Congress.Shared.BusinessLayer
             _voteSvc = new VoteSvc(logger);
         }
 
+        public bool IsThereMoreResultsForLastCall()
+        {
+            return _voteSvc.IsThereMoreResults();
+        }
+
         public List<Vote> GetLegislatorVotes(string legislatorBioguideId, int page)
         {
             return GetLegislatorVotes(legislatorBioguideId, page, _defaultResultsPerPage);

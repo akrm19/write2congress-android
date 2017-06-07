@@ -22,8 +22,9 @@ namespace Write2Congress.Droid.Fragments
     public class VoteViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
         private VoteManager _voteManager;
-        private List<Vote> _votes;
+        private List<Vote> _votes= new List<Vote>();
         private Legislator _legislator;
+        private int _currentPage = 1;
 
         public VoteViewerFragmentCtrl() {}
 
@@ -36,7 +37,20 @@ namespace Write2Congress.Droid.Fragments
             newFragment.Arguments = args;
 
             return newFragment;
-        } 
+        }
+
+        public override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            if (_votes != null)
+            {
+                var serializedVotes = _votes.SerializeToJson();
+                outState.PutString(BundleType.Votes, serializedVotes);
+            }
+
+            outState.PutInt(BundleType.CurrentPage, _currentPage);
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -57,6 +71,9 @@ namespace Write2Congress.Droid.Fragments
 
             SetLoadingUi();
 
+            if(savedInstanceState!= null)
+                _currentPage = savedInstanceState.GetInt(BundleType.CurrentPage, 1);
+
             if (_votes != null && _votes.Count > 0)
                 ShowVotes(_votes);
             else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Votes, string.Empty)))
@@ -67,44 +84,55 @@ namespace Write2Congress.Droid.Fragments
             }
             else
             {
-                var getVotesTask = new Task<List<Vote>>((prms) =>
-                {
-                    var legislatorId = (prms as Tuple<string, VoteManager>).Item1;
-                    var vm = (prms as Tuple<string, VoteManager>).Item2;
-                    return vm.GetLegislatorVotes(legislatorId, 1);
-                }, new Tuple<string, VoteManager>(_legislator.BioguideId, _voteManager));
-
-                getVotesTask.ContinueWith((antecedent) =>
-                {
-                    if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
-                        return;
-
-                    Activity.RunOnUiThread(() =>
-                    {
-                        _votes = antecedent.Result;
-                        ShowVotes(_votes);
-                    });
-                });
-                getVotesTask.Start();
+                FetchLegislatorVotes(false);
             }
 
             return fragment;
         }
 
-        public override void OnResume()
+        private void FetchLegislatorVotes(bool isNextClick)
         {
-            base.OnResume();
-        }
+            _currentPage = isNextClick 
+                ? _currentPage + 1 
+                : _currentPage;
 
-        public override void OnSaveInstanceState(Bundle outState)
-        {
-            base.OnSaveInstanceState(outState);
-
-            if (_votes != null)
+            var getVotesTask = new Task<Tuple<List<Vote>, bool>>((prms) =>
+            //var getVotesTask = new Task<List<Vote>>((prms) =>
             {
-                var serializedVotes = _votes.SerializeToJson();
-                outState.PutString(BundleType.Votes, serializedVotes);
-            }
+                var passedParams = prms as Tuple<string, VoteManager, int>;
+
+                var legislatorId = passedParams.Item1;
+                var vm = passedParams.Item2;
+                var currentPage = passedParams.Item3;
+
+                var results = vm.GetLegislatorVotes(legislatorId, currentPage);
+                var isThereMoreVotes = vm.IsThereMoreResultsForLastCall();
+                //return results;
+                return new Tuple<List<Vote>, bool>(results, isThereMoreVotes);
+            }, new Tuple<string, VoteManager, int>(_legislator.BioguideId, _voteManager, _currentPage));
+
+            getVotesTask.ContinueWith((antecedent) =>
+            {
+                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
+                    return;
+
+                Activity.RunOnUiThread(() =>
+                {
+                    
+                    var isThereMoreVotes2 = antecedent.Result;
+                    var isThereMoreVotes = antecedent.Result.Item2;
+
+                    if (isThereMoreVotes)
+                        _votes.AddRange(antecedent.Result.Item1);
+                    else
+                        _votes = antecedent.Result.Item1;
+                    ShowRecyclerButtons(isThereMoreVotes);
+                        
+                    //_votes = antecedent.Result;
+                    ShowVotes(_votes);
+                });
+            });
+            getVotesTask.Start();
         }
 
         public void ShowVotes(List<Vote> votes)
@@ -112,6 +140,13 @@ namespace Write2Congress.Droid.Fragments
             (recyclerAdapter as VoteAdapter).UpdateVotes(votes);
 
             SetLoadingUiOff();
+        }
+
+        protected override void NextButon_Click(object sender, EventArgs e)
+        {
+            base.NextButon_Click(sender, e);
+
+            FetchLegislatorVotes(true);
         }
 
         protected override string EmptyText()

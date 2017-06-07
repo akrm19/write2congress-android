@@ -21,6 +21,7 @@ namespace Write2Congress.Droid.Fragments
         protected RecyclerView.Adapter recyclerAdapter;
         protected ViewSwitcher viewSwitcher;
         protected TextView header, emptyText;
+        protected LinearLayout recyclerButtonsParent;
 
         protected BaseFragment baseFragment;
 
@@ -34,6 +35,7 @@ namespace Write2Congress.Droid.Fragments
             header = null;
             emptyText = null;
             baseFragment = null;
+            recyclerButtonsParent = null;
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -58,8 +60,15 @@ namespace Write2Congress.Droid.Fragments
             recycler = fragment.FindViewById<RecyclerView>(Resource.Id.baseViewer_recycler);
             recycler.SetLayoutManager(layoutManager);
 
+            recyclerButtonsParent = fragment.FindViewById<LinearLayout>(Resource.Id.baseViewer_recyclerButtonsParent);
+
+            using (var nextButon = fragment.FindViewById<Button>(Resource.Id.baseViewer_recyclerNextButton))
+                nextButon.Click += NextButon_Click;
+
             return fragment;
         }
+
+        protected virtual void NextButon_Click(object sender, EventArgs e) { }
 
         protected void SetLoadingUiOff()
         {
@@ -80,14 +89,29 @@ namespace Write2Congress.Droid.Fragments
 
             if (viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
                 viewSwitcher.ShowNext();
+
+            ShowRecyclerButtons(false);
         }
 
         protected void ShowEmptyviewIfNecessary()
         {
             if (recyclerAdapter.ItemCount == 0 && viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
+            {
                 viewSwitcher.ShowNext();
+                ShowRecyclerButtons(false);
+            }
             else if (recyclerAdapter.ItemCount > 0 && viewSwitcher.CurrentView.Id != Resource.Id.baseViewer_recycler)
+            {
                 viewSwitcher.ShowNext();
+                ShowRecyclerButtons(true);
+            }
+        }
+
+        protected void ShowRecyclerButtons(bool showButtons)
+        {
+            recyclerButtonsParent.Visibility =  showButtons
+                ? ViewStates.Visible
+                : ViewStates.Gone;
         }
 
         protected abstract string EmptyText();
