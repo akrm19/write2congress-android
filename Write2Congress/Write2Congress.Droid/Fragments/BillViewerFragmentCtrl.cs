@@ -23,9 +23,9 @@ namespace Write2Congress.Droid.Fragments
     public class BillViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
         private BillManager _billManager;
-        private List<Bill> _bills;
+        private List<Bill> _bills = new List<Bill>();
         private Legislator _legislator;
-        private BillViewerKind _viewerMode; 
+        private BillViewerKind _viewerMode;
 
         public BillViewerFragmentCtrl() { }
 
@@ -63,6 +63,7 @@ namespace Write2Congress.Droid.Fragments
             recycler.SetAdapter(recyclerAdapter);
 
             SetLoadingUi();
+            RetrieveCurrentPageIfAvailable(savedInstanceState);
 
             if (_bills != null && _bills.Count > 0)
                 UpdateBills(_bills);
@@ -73,40 +74,54 @@ namespace Write2Congress.Droid.Fragments
                 UpdateBills(_bills);
             }
             else
-            {
-                var getBillsTask = new Task<List<Bill>>((prms) =>
-                {
-                    var paramsTuple = (prms as Tuple<string, BillManager, int>);
-                    var legislatorId = paramsTuple.Item1;
-                    var bm = paramsTuple.Item2;
-                    var mode = (BillViewerKind)((int)paramsTuple.Item3);
+                FetchMoreLegislatorContent(false);
 
-                    return mode == BillViewerKind.CosponsoredBills
-                        ? bm.GetBillsCosponsoredbyLegislator(legislatorId, 1)
-                        : bm.GetBillsSponsoredbyLegislator(legislatorId, 1);
-
-                }, new Tuple<string, BillManager, int>(_legislator.BioguideId, _billManager, (int)_viewerMode));
-
-                getBillsTask.ContinueWith((antecedent) =>
-                {
-                    if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
-                        return;
-
-                    Activity.RunOnUiThread(() =>
-                    {
-                        _bills = antecedent.Result;
-                        UpdateBills(_bills);
-                    });
-                });
-
-                getBillsTask.Start();
-            }
             return fragment;
         }
 
-                public override void OnResume()
+        protected override void FetchMoreLegislatorContent(bool isNextClick)
         {
-            base.OnResume();
+            base.FetchMoreLegislatorContent(isNextClick);
+
+            var getBillsTask = new Task< Tuple<List<Bill>, bool> >((prms) =>
+            {
+                var passedParams = (prms as Tuple<string, BillManager, int, int>);
+
+                var legislatorId = passedParams.Item1;
+                var bm = new BillManager(new Logger(Class.SimpleName));  //passedParams.Item2;
+                var currentPage = passedParams.Item3;
+                var mode = (BillViewerKind)((int)passedParams.Item4);
+
+                var results = mode == BillViewerKind.CosponsoredBills
+                    ? bm.GetBillsCosponsoredbyLegislator(legislatorId, currentPage)
+                    : bm.GetBillsSponsoredbyLegislator(legislatorId, currentPage);
+
+                var isThereMoreVotes = bm.IsThereMoreResultsForLastCall();
+
+                return new Tuple<List<Bill>, bool>(results, isThereMoreVotes);
+            }, new Tuple<string, BillManager, int, int>(_legislator.BioguideId, _billManager, currentPage, (int)_viewerMode));
+
+            getBillsTask.ContinueWith((antecedent) =>
+            {
+                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
+                    return;
+
+                Activity.RunOnUiThread(() =>
+                {
+                    var isThereMoreVotes = antecedent.Result.Item2;
+
+                    if (isThereMoreVotes)
+                        _bills.AddRange(antecedent.Result.Item1);
+                    else
+                        _bills = antecedent.Result.Item1;
+
+                    SetLoadMoreButtonAsLoading(false);
+                    ShowRecyclerButtons(isThereMoreVotes);
+                    UpdateBills(_bills);
+                });
+            });
+
+            getBillsTask.Start();
         }
 
         public override void OnSaveInstanceState(Bundle outState)
@@ -122,10 +137,13 @@ namespace Write2Congress.Droid.Fragments
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
         }
 
-        public void UpdateBills(List<Bill> bills)
+        protected override void CleanUp()
         {
-            (recyclerAdapter as BillAdapter).UpdateBill(bills);
-            SetLoadingUiOff();
+            base.CleanUp();
+
+            _billManager = null;
+            _bills = null;
+            _legislator = null;
         }
 
         protected override string EmptyText()
@@ -143,6 +161,12 @@ namespace Write2Congress.Droid.Fragments
                 case BillViewerKind.CosponsoredBills:
                     return AndroidHelper.GetString(Resource.String.billsCosponsored);
             }
+        }
+
+        public void UpdateBills(List<Bill> bills)
+        {
+            (recyclerAdapter as BillAdapter).UpdateBill(bills);
+            SetLoadingUiOff();
         }
     }
 }

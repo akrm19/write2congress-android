@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using Write2Congress.Droid.Code;
+using Write2Congress.Droid.DomainModel.Constants;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -22,6 +23,8 @@ namespace Write2Congress.Droid.Fragments
         protected ViewSwitcher viewSwitcher;
         protected TextView header, emptyText;
         protected LinearLayout recyclerButtonsParent;
+        protected Button loadMoreButton;
+        protected int currentPage = 1;
 
         protected BaseFragment baseFragment;
 
@@ -36,13 +39,16 @@ namespace Write2Congress.Droid.Fragments
             emptyText = null;
             baseFragment = null;
             recyclerButtonsParent = null;
+
+            if(loadMoreButton != null)
+                loadMoreButton.Click -= NextButon_Click;
+
+            loadMoreButton = null;
         }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -62,13 +68,62 @@ namespace Write2Congress.Droid.Fragments
 
             recyclerButtonsParent = fragment.FindViewById<LinearLayout>(Resource.Id.baseViewer_recyclerButtonsParent);
 
-            using (var nextButon = fragment.FindViewById<Button>(Resource.Id.baseViewer_recyclerNextButton))
-                nextButon.Click += NextButon_Click;
+            loadMoreButton = fragment.FindViewById<Button>(Resource.Id.baseViewer_recyclerNextButton);
+            loadMoreButton.Click += NextButon_Click;
 
             return fragment;
         }
 
-        protected virtual void NextButon_Click(object sender, EventArgs e) { }
+        protected virtual void NextButon_Click(object sender, EventArgs e)
+        {
+            FetchMoreLegislatorContent(true);
+        }
+
+        protected virtual void FetchMoreLegislatorContent(bool isNextClick)
+        {
+            if (isNextClick)
+            {
+                currentPage = isNextClick
+                    ? currentPage + 1
+                    : currentPage;
+
+                SetLoadMoreButtonAsLoading(true);
+            }
+        }
+
+        public override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            outState.PutInt(BundleType.CurrentPage, currentPage);
+        }
+
+        /// <summary>
+        /// Fragments in the FragmentPagerAdapter are only detached 
+        /// and never removed from the FragmentManager (unless the 
+        /// Activity is finished). When using FragmentPagerAdapter 
+        /// you must make sure to clear any references to the current 
+        /// View or Context in onDestroyView()
+        /// </summary>
+        public override void OnDestroyView()
+        {
+            base.OnDestroyView();
+
+            //CleanUp();
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            CleanUp();
+        }
+
+        protected void RetrieveCurrentPageIfAvailable(Bundle savedInstanceState)
+        {
+            if (savedInstanceState != null)
+                currentPage = savedInstanceState.GetInt(BundleType.CurrentPage, 1);
+        }
 
         protected void SetLoadingUiOff()
         {
@@ -98,12 +153,12 @@ namespace Write2Congress.Droid.Fragments
             if (recyclerAdapter.ItemCount == 0 && viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
             {
                 viewSwitcher.ShowNext();
-                ShowRecyclerButtons(false);
+                //ShowRecyclerButtons(false);
             }
             else if (recyclerAdapter.ItemCount > 0 && viewSwitcher.CurrentView.Id != Resource.Id.baseViewer_recycler)
             {
                 viewSwitcher.ShowNext();
-                ShowRecyclerButtons(true);
+                //ShowRecyclerButtons(true);
             }
         }
 
@@ -112,6 +167,19 @@ namespace Write2Congress.Droid.Fragments
             recyclerButtonsParent.Visibility =  showButtons
                 ? ViewStates.Visible
                 : ViewStates.Gone;
+
+            loadMoreButton.Visibility = showButtons
+                ? ViewStates.Visible
+                : ViewStates.Gone;
+        }
+
+        protected void SetLoadMoreButtonAsLoading(bool setAsLoading)
+        {
+            loadMoreButton.Text = AndroidHelper.GetString( setAsLoading
+                ? Resource.String.loading
+                : Resource.String.loadMore);
+
+            loadMoreButton.Enabled = !setAsLoading;
         }
 
         protected abstract string EmptyText();

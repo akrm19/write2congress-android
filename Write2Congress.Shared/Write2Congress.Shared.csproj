@@ -68,6 +68,7 @@
     <Compile Include="DomainModel\Enum\VoteTypeKind.cs" />
     <Compile Include="DomainModel\Interface\ILetterProvider.cs" />
     <Compile Include="DomainModel\Interface\IMyLogger.cs" />
+    <Compile Include="DomainModel\Interface\ISunlightResult.cs" />
     <Compile Include="DomainModel\Legislator.cs" />
     <Compile Include="DomainModel\Letter.cs" />
     <Compile Include="DomainModel\Nomination.cs" />
