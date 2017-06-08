@@ -19,6 +19,11 @@ namespace Write2Congress.Shared.BusinessLayer
             _billSvc = new BillSvc(logger);
         }
 
+        public bool IsThereMoreResultsForLastCall()
+        {
+            return _billSvc.IsThereMoreResults();
+        }
+
         public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page)
         {
             return GetBillsSponsoredbyLegislator(legislatorBioguideId, page, _defautlResultsPerPage);

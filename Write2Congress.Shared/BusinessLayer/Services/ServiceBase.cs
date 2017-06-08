@@ -16,7 +16,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         protected static string sunlighApiBaseUri = "https://congress.api.sunlightfoundation.com/";
         protected IMyLogger _logger;
         protected Page pageForLastResult = new Page();
-        protected int totalResultCount;
+        protected int totalResultCount = 0;
         protected static int defaultResultsPage = 40;
 
         protected void SetLogger(IMyLogger logger)

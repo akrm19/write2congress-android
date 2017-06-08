@@ -48,6 +48,7 @@
   <string name="letterRecipient">Letter Recipient</string>
   <string name="letterSaved">Letter saved</string>
   <string name="letterSaveFailed">Error: Unabled to save letter</string>
+  <string name="loadMore">Load More</string>
   <string name="loading">Loading...</string>
   <string name="moreInfo">More Info</string>
   <string name="nominationInfo">Nomination Info</string>

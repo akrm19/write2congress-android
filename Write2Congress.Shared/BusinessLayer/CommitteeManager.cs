@@ -26,5 +26,10 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return committees;
         }
+
+        public bool IsThereMoreResultsForLastCall()
+        {
+            return _committeeSvc.IsThereMoreResults();
+        }
     }
 }
