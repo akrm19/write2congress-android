@@ -26,6 +26,10 @@ namespace Write2Congress.Droid.Fragments
         protected Button loadMoreButton;
         protected int currentPage = 1;
 
+        protected bool IsBeingShown = false;
+        private bool listenerSet = false;
+        public Action<bool> LoadMoreClick;
+
         protected BaseFragment baseFragment;
 
         public BaseRecyclerViewerFragment() { }
@@ -44,6 +48,21 @@ namespace Write2Congress.Droid.Fragments
                 loadMoreButton.Click -= NextButon_Click;
 
             loadMoreButton = null;
+            LoadMoreClick = null;
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            IsBeingShown = true;
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+
+            IsBeingShown = false;
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -87,8 +106,16 @@ namespace Write2Congress.Droid.Fragments
                     ? currentPage + 1
                     : currentPage;
 
-                SetLoadMoreButtonAsLoading(true);
+                SetLoadMoreButtonTextAsLoading(true);
             }
+        }
+
+        public void SetOnClickListener(Action<bool> listener)
+        {
+            if (!listenerSet)
+                LoadMoreClick = listener;
+
+            listenerSet = true;
         }
 
         public override void OnSaveInstanceState(Bundle outState)
@@ -109,14 +136,14 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnDestroyView();
 
-            //CleanUp();
+            CleanUp();
         }
 
         public override void OnDestroy()
         {
             base.OnDestroy();
 
-            CleanUp();
+            //CleanUp();
         }
 
         protected void RetrieveCurrentPageIfAvailable(Bundle savedInstanceState)
@@ -146,6 +173,7 @@ namespace Write2Congress.Droid.Fragments
                 viewSwitcher.ShowNext();
 
             ShowRecyclerButtons(false);
+            //SetLoadMoreButtonAsLoading(true);
         }
 
         protected void ShowEmptyviewIfNecessary()
@@ -173,8 +201,11 @@ namespace Write2Congress.Droid.Fragments
                 : ViewStates.Gone;
         }
 
-        protected void SetLoadMoreButtonAsLoading(bool setAsLoading)
+        public void SetLoadMoreButtonTextAsLoading(bool setAsLoading)
         {
+            if (loadMoreButton == null)
+                return;
+
             loadMoreButton.Text = AndroidHelper.GetString( setAsLoading
                 ? Resource.String.loading
                 : Resource.String.loadMore);

@@ -154,6 +154,7 @@
     <Compile Include="DomainModel\Constants\ViewLettersFragmentType.cs" />
     <Compile Include="DomainModel\Enums\BillViewerKind.cs" />
     <Compile Include="DomainModel\Enums\BundleSenderKind.cs" />
+    <Compile Include="DomainModel\Enums\ViewPagerList.cs" />
     <Compile Include="DomainModel\Interfaces\ILegislatorViewerActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\LegislatorAdapter.cs" />

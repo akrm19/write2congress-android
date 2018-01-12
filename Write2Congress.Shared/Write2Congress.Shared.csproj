@@ -42,16 +42,24 @@
   <ItemGroup>
     <Compile Include="BusinessLayer\BillManager.cs" />
     <Compile Include="BusinessLayer\CommitteeManager.cs" />
+    <Compile Include="BusinessLayer\DataTransformationUtil.cs" />
     <Compile Include="BusinessLayer\Extensions.cs" />
     <Compile Include="BusinessLayer\LegislatorManager.cs" />
     <Compile Include="BusinessLayer\LetterManager.cs" />
+    <Compile Include="BusinessLayer\Services\APIs\ApiBase.cs" />
     <Compile Include="BusinessLayer\Services\BillSvc.cs" />
     <Compile Include="BusinessLayer\Services\CommitteeSvc.cs" />
     <Compile Include="BusinessLayer\Services\LegislatorSvc.cs" />
+    <Compile Include="BusinessLayer\Services\APIs\ProPublicaCongressApi.cs" />
+    <Compile Include="BusinessLayer\Services\APIs\SunlightApi.cs" />
     <Compile Include="BusinessLayer\Services\ServiceBase.cs" />
     <Compile Include="BusinessLayer\Services\VoteSvc.cs" />
     <Compile Include="BusinessLayer\Util.cs" />
     <Compile Include="BusinessLayer\VoteManager.cs" />
+    <Compile Include="DomainModel\ApiModels\ProPublica\BaseLegislatorsResult.cs" />
+    <Compile Include="DomainModel\ApiModels\ProPublica\BaseResult.cs" />
+    <Compile Include="DomainModel\ApiModels\ProPublica\CongressMembersResult.cs" />
+    <Compile Include="DomainModel\ApiModels\ProPublica\SenateMembersResult.cs" />
     <Compile Include="DomainModel\Bill.cs" />
     <Compile Include="DomainModel\BillStatus.cs" />
     <Compile Include="DomainModel\BillType.cs" />
@@ -66,6 +74,8 @@
     <Compile Include="DomainModel\Enum\Party.cs" />
     <Compile Include="DomainModel\Enum\State.cs" />
     <Compile Include="DomainModel\Enum\VoteTypeKind.cs" />
+    <Compile Include="DomainModel\Interface\ILegislator.cs" />
+    <Compile Include="DomainModel\Interface\ILegislatorResult.cs" />
     <Compile Include="DomainModel\Interface\ILetterProvider.cs" />
     <Compile Include="DomainModel\Interface\IMyLogger.cs" />
     <Compile Include="DomainModel\Interface\ISunlightResult.cs" />
@@ -84,6 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DomainModel\ApiModels\Sunlight\" />
     <Folder Include="DomainModel\Constants\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

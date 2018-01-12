@@ -24,6 +24,8 @@ using Write2Congress.Droid.Adapters;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
+using Android.Support.V7.Widget;
+using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -33,6 +35,33 @@ namespace Write2Congress.Droid.Fragments
         private LegislatorViewPagerAdapter _viewPagerAdapter;
         private TypedValue _selectableItemBackground;
         private ImageView _portrait;
+
+        //vote
+        private int _votesCurrentPage = 1;
+        private bool _votesIsThereMoreContent = false;
+        private List<Vote> _votes;
+        private VoteManager _voteManager;
+        protected RecyclerView.Adapter _voteRecyclerAdapter;
+
+        private BillManager _billManager;
+
+        //Sponsored Bills
+        private int _sponsoredBillsCurrentPage = 1;
+        private bool _sponsoredBillsIsThereMoreContent = false;
+        private List<Bill> _sponsoredBills;
+        protected RecyclerView.Adapter _sponsoredBillsRecyclerAdapter;
+
+        //Cosponsored Bills
+        private int _cosponsoredBillsCurrentPage = 1;
+        private bool _cosponsoredBillsIsThereMoreContent = false;
+        private List<Bill> _cosponsoredBills;
+        //private BillManager _cosponsoredBillManager;
+        protected RecyclerView.Adapter _cosponsoredBillsRecyclerAdapter;
+
+        //committee
+        private List<Committee> _committees;
+        private CommitteeManager _committeeManager;
+        protected RecyclerView.Adapter _committeeRecyclerAdapter;
 
         //Note: Fragment sub-classes must have a public default no argument constructor.
         //TODO RM: FIXX!!!
@@ -61,6 +90,9 @@ namespace Write2Congress.Droid.Fragments
             }
 
             _legislator = JsonConvert.DeserializeObject<Legislator>(serializedLegislator);
+            _voteManager = new VoteManager(MyLogger);
+            _billManager = new BillManager(MyLogger);
+            _committeeManager = new CommitteeManager(MyLogger);
             _viewPagerAdapter = new LegislatorViewPagerAdapter(ChildFragmentManager, _legislator);
         }
 
@@ -98,7 +130,7 @@ namespace Write2Congress.Droid.Fragments
 
             PopulateBasicInfo(fragmentView, _legislator);
             PopulateContactMethodsButtons(fragmentView, _legislator);
-            PopulateViewPager(fragmentView, _legislator);
+            PopulateViewPager(fragmentView, _legislator, savedInstanceState);
 
             return fragmentView;
         }
@@ -108,13 +140,327 @@ namespace Write2Congress.Droid.Fragments
             base.OnStart();
             SetPortrait(_legislator);
             GetBaseActivity().UpdateTitleBarText(_legislator.FullName());
+
+            if (_votes != null)
+                GetVoteViewFrag()?.SetVotes(_votes, _votesIsThereMoreContent);
+            else
+                FetchLegislatorVotes(false);
+
+            if (_sponsoredBills != null)
+                GetBillsSponsoredViewFrag()?.SetBills(_sponsoredBills, _sponsoredBillsIsThereMoreContent);
+            else
+                FetchLegislatorBills(false, BillViewerKind.SponsoredBills);
         }
 
-        private void PopulateViewPager(View fragmentView, Legislator legislator)
+        private void PopulateViewPager(View fragmentView, Legislator legislator, Bundle savedInstanceState)
         {
             var viewPager = fragmentView.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
             viewPager.Adapter = _viewPagerAdapter;
             viewPager.CurrentItem = 1;
+            //viewPager.OffscreenPageLimit = 3;
+
+
+            GetVoteViewFrag().SetOnClickListener((vc) => FetchLegislatorVotes(true));
+            PopulateVote(savedInstanceState);
+
+            //GetBillsSponsoredViewFrag().SetOnClickListener((bc) => FetchLegislatorBills(true, BillViewerKind.SponsoredBills));
+            //PopulateSponsoredBills(savedInstanceState);
+
+            //GetBillsCosponsoredViewFrag().SetOnClickListener((cc) => FetchLegislatorBills(true, BillViewerKind.CosponsoredBills));
+            //PopulateCosponsoredBills(savedInstanceState);
+
+            PopulateCommittees(savedInstanceState);
+        }
+
+        private void PopulateVote(Bundle savedInstanceState)
+        {
+            if(savedInstanceState != null)
+            {
+                _votesIsThereMoreContent = savedInstanceState.GetBoolean(BundleType.VotesIsThereMoreContent, false);
+                _votesCurrentPage = savedInstanceState.GetInt(BundleType.VotesCurrentPage, 1);
+
+                if(!string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Votes, string.Empty)))
+                {
+                    var serializedVotes = savedInstanceState.GetString(BundleType.Votes);
+                    _votes = new List<Vote>().DeserializeFromJson(serializedVotes) ?? null;
+                }
+            }
+
+            /*
+            if (_votes != null)
+                GetVoteViewFrag()?.SetVotes(_votes, _votesIsThereMoreContent);
+
+            else
+                FetchLegislatorVotes(false);
+                */
+        }
+
+        private void PopulateSponsoredBills(Bundle savedInstanceState)
+        {
+            if (savedInstanceState != null)
+            {
+                _sponsoredBillsIsThereMoreContent = savedInstanceState.GetBoolean(BundleType.SponsoredBillsIsThereMoreContent, false);
+                _sponsoredBillsCurrentPage = savedInstanceState.GetInt(BundleType.SponsoredBillsCurrentPage, 1);
+
+                if (!string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.SponsoredBills, string.Empty)))
+                {
+                    var sponsoredBills = savedInstanceState.GetString(BundleType.SponsoredBills);
+                    _sponsoredBills = new List<Bill>().DeserializeFromJson(sponsoredBills) ?? null;
+                }
+            }
+
+            /*
+            if (_sponsoredBills != null)
+                GetBillsSponsoredViewFrag()?.SetBills(_sponsoredBills, _sponsoredBillsIsThereMoreContent);
+
+            else
+                FetchLegislatorBills(false, BillViewerKind.SponsoredBills);
+            */
+        }
+
+        private void PopulateCosponsoredBills(Bundle savedInstanceState)
+        {
+            if (savedInstanceState != null)
+            {
+                _cosponsoredBillsIsThereMoreContent = savedInstanceState.GetBoolean(BundleType.CosponsoredBillsIsThereMoreContent, false);
+                _cosponsoredBillsCurrentPage = savedInstanceState.GetInt(BundleType.CosponsoredBillsCurrentPage, 1);
+
+                if (!string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.CosponsoredBills, string.Empty)))
+                {
+                    var cosponsoredBills = savedInstanceState.GetString(BundleType.CosponsoredBills);
+                    _cosponsoredBills = new List<Bill>().DeserializeFromJson(cosponsoredBills) ?? null;
+                }
+            }
+
+            if (_cosponsoredBills != null)
+                GetBillsCosponsoredViewFrag()?.SetBills(_cosponsoredBills, _cosponsoredBillsIsThereMoreContent);
+
+            else
+                FetchLegislatorBills(false, BillViewerKind.CosponsoredBills);
+        }
+
+        private void PopulateCommittees(Bundle savedInstanceState)
+        {
+            if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Committees, string.Empty)))
+            {
+                var serializedcomittees = savedInstanceState.GetString(BundleType.Committees);
+                _committees = new List<Committee>().DeserializeFromJson(serializedcomittees) ?? null;
+            }
+
+            if (_committees != null)// && _votes.Count > 0)
+                GetCommitteeViewFrag()?.SetCommittees(_committees);
+
+            else
+                FetchLegislatorCommittes();
+        }
+
+        public override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            outState.PutInt(BundleType.VotesCurrentPage, _votesCurrentPage);
+            outState.PutBoolean(BundleType.VotesIsThereMoreContent, _votesIsThereMoreContent);
+
+            outState.PutInt(BundleType.SponsoredBillsCurrentPage, _sponsoredBillsCurrentPage);
+            outState.PutBoolean(BundleType.SponsoredBillsIsThereMoreContent, _sponsoredBillsIsThereMoreContent);
+
+            outState.PutInt(BundleType.CosponsoredBillsCurrentPage, _cosponsoredBillsCurrentPage);
+            outState.PutBoolean(BundleType.CosponsoredBillsIsThereMoreContent, _cosponsoredBillsIsThereMoreContent);
+
+            if (_votes != null)
+            {
+                var serializedVotes = _votes.SerializeToJson();
+                outState.PutString(BundleType.Votes, serializedVotes);
+            }
+
+            if(_sponsoredBills != null)
+            {
+                var serializedSponsoredBills = _sponsoredBills.SerializeToJson();
+                outState.PutString(BundleType.SponsoredBills, serializedSponsoredBills);
+            }
+
+            if (_cosponsoredBills != null)
+            {
+                var serializedcosponsoredBills = _cosponsoredBills.SerializeToJson();
+                outState.PutString(BundleType.CosponsoredBills, serializedcosponsoredBills);
+            }
+
+            if (_committees != null)
+            {
+                var serializedCommittees = _committees.SerializeToJson();
+                outState.PutString(BundleType.Committees, serializedCommittees);
+            }
+        }
+
+        private VoteViewerFragmentCtrl GetVoteViewFrag()
+        {
+            //return _viewPagerAdapter.GetFragment(ViewPagerList.LegislatorVotes) as VoteViewerFragmentCtrl;
+            return _viewPagerAdapter.GetExitsingItem(ViewPagerList.LegislatorVotes) as VoteViewerFragmentCtrl;
+        }
+
+        private CommitteeViewerFragmentCtrl GetCommitteeViewFrag()
+        {
+            //return _viewPagerAdapter.GetFragment(ViewPagerList.LegislatorCommittees) as CommitteeViewerFragmentCtrl;
+            return _viewPagerAdapter.GetExitsingItem(ViewPagerList.LegislatorCommittees) as CommitteeViewerFragmentCtrl;
+        }
+
+        private BillViewerFragmentCtrl GetBillsSponsoredViewFrag()
+        {
+            //return _viewPagerAdapter.GetFragment(ViewPagerList.LegislatorBillsSponsored) as BillViewerFragmentCtrl;
+            return _viewPagerAdapter.GetExitsingItem(ViewPagerList.LegislatorBillsSponsored) as BillViewerFragmentCtrl;
+        }
+
+        private BillViewerFragmentCtrl GetBillsCosponsoredViewFrag()
+        {
+            return _viewPagerAdapter.GetExitsingItem(ViewPagerList.LegislatorBillsCosponsored) as BillViewerFragmentCtrl;
+        }
+
+        protected void FetchLegislatorCommittes()
+        {
+            var getCommitteesTask = new Task<List<Committee>>((prms) =>
+            {
+                var passedParams = prms as Tuple<string, CommitteeManager>;
+
+                var legislatorId = passedParams.Item1;
+                var cm = passedParams.Item2;
+
+                return cm.GetCommitteesForLegislator(legislatorId);
+            }, new Tuple<string, CommitteeManager>(_legislator.BioguideId, _committeeManager));
+
+            getCommitteesTask.ContinueWith((antecedent) =>
+            {
+                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
+                    return;
+
+                Activity.RunOnUiThread(() =>
+                {
+                    _committees = antecedent.Result;
+                    GetCommitteeViewFrag()?.ShowCommittees(_committees);
+                });
+            });
+            getCommitteesTask.Start();
+        }
+
+        protected void FetchLegislatorVotes(bool isNextClick)
+        {
+            if (isNextClick)
+            {
+                _votesCurrentPage++;
+                GetVoteViewFrag()?.SetLoadMoreButtonTextAsLoading(true);
+            }
+
+            var getVotesTask = new Task<Tuple<List<Vote>, bool>>((prms) =>
+            {
+                var passedParams = prms as Tuple<string, VoteManager, int>;
+
+                var legislatorId = passedParams.Item1;
+                var vm = passedParams.Item2;
+                var currentPage = passedParams.Item3;
+
+                var results = vm.GetLegislatorVotes(legislatorId, currentPage);
+                var isThereMoreVotes = vm.IsThereMoreResultsForLastCall();
+
+                return new Tuple<List<Vote>, bool>(results, isThereMoreVotes);
+            }, new Tuple<string, VoteManager, int>(_legislator.BioguideId, _voteManager, _votesCurrentPage));
+
+            getVotesTask.ContinueWith((antecedent) =>
+            {
+                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
+                    return;
+
+                Activity.RunOnUiThread(() =>
+                {
+                    _votesIsThereMoreContent = antecedent.Result.Item2;
+
+                    if (_votes == null || !_votesIsThereMoreContent)
+                        _votes = antecedent.Result.Item1;
+                    else
+                        _votes.AddRange(antecedent.Result.Item1);
+
+                    if(GetVoteViewFrag() != null)
+                        GetVoteViewFrag().ShowVotes(_votes, _votesIsThereMoreContent);
+
+                });
+            });
+            getVotesTask.Start();
+        }
+
+        protected void FetchLegislatorBills(bool isNextClick, BillViewerKind billViewerKind)
+        {
+            int currentPage = 1;
+            
+            if (isNextClick)
+            {
+                if (billViewerKind == BillViewerKind.SponsoredBills)
+                {
+                    _sponsoredBillsCurrentPage++;
+                    currentPage = _sponsoredBillsCurrentPage;
+                    GetBillsSponsoredViewFrag()?.SetLoadMoreButtonTextAsLoading(true);
+
+                    if (GetBillsSponsoredViewFrag() != null)
+                        GetBillsSponsoredViewFrag().ShowBills(_sponsoredBills, _sponsoredBillsIsThereMoreContent);
+                }
+                else if(billViewerKind == BillViewerKind.CosponsoredBills)
+                {
+                    _cosponsoredBillsCurrentPage++;
+                    currentPage = _cosponsoredBillsCurrentPage;
+
+                    if(GetBillsCosponsoredViewFrag() != null)
+                        GetBillsCosponsoredViewFrag().ShowBills(_cosponsoredBills, _cosponsoredBillsIsThereMoreContent);
+                }
+            }
+
+            var getBillsTask = new Task<Tuple<List<Bill>, bool, BillViewerKind>>((prms) =>
+            {
+                var passedParams = (prms as Tuple<string, BillManager, int, int>);
+
+                var legislatorId = passedParams.Item1;
+                var bm = new BillManager(new Logger(Class.SimpleName)); 
+                var currentPageVal = passedParams.Item3;
+                var mode = (BillViewerKind)((int)passedParams.Item4);
+
+                var results = mode == BillViewerKind.CosponsoredBills
+                    ? bm.GetBillsCosponsoredbyLegislator(legislatorId, currentPageVal)
+                    : bm.GetBillsSponsoredbyLegislator(legislatorId, currentPageVal);
+
+                var isThereMoreVotes = bm.IsThereMoreResultsForLastCall();
+
+                return new Tuple<List<Bill>, bool, BillViewerKind>(results, isThereMoreVotes, mode);
+            }, new Tuple<string, BillManager, int, int>(_legislator.BioguideId, _billManager, currentPage, (int)billViewerKind));
+
+            getBillsTask.ContinueWith((antecedent) =>
+            {
+                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
+                    return;
+
+                Activity.RunOnUiThread(() =>
+                {
+                    BillViewerKind mode =  antecedent.Result.Item3;
+
+                    var isThereMoreBills = antecedent.Result.Item2;
+                    List<Bill> currentBillsList = mode == BillViewerKind.SponsoredBills
+                        ? _sponsoredBills
+                        : _cosponsoredBills;
+
+                    if(currentBillsList == null || !isThereMoreBills)
+                        currentBillsList = antecedent.Result.Item1;
+                    else
+                        currentBillsList.AddRange(antecedent.Result.Item1);
+
+                    if(mode == BillViewerKind.SponsoredBills)
+                    {
+                        _sponsoredBillsIsThereMoreContent = isThereMoreBills;
+                        GetBillsSponsoredViewFrag()?.ShowBills(currentBillsList, isThereMoreBills);
+                    }
+                    else
+                    {
+                        _cosponsoredBillsIsThereMoreContent = isThereMoreBills;
+                        GetBillsCosponsoredViewFrag()?.ShowBills(currentBillsList, isThereMoreBills);
+                    }
+                });
+            });
+
+            getBillsTask.Start();
         }
 
         private void PopulateBasicInfo(View fragment, Legislator legislator)

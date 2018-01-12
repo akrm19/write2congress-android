@@ -20,9 +20,7 @@ namespace Write2Congress.Droid.Fragments
 {
     public class CommitteeViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
-        private CommitteeManager _committeeManager;
-        private List<Committee> _committees = new List<Committee>();
-        private Legislator _legislator;
+        private List<Committee> _committees;
 
         public CommitteeViewerFragmentCtrl() {}
 
@@ -30,21 +28,21 @@ namespace Write2Congress.Droid.Fragments
         {
             var newFragment = new CommitteeViewerFragmentCtrl();
 
-            var args = new Bundle();
-            args.PutString(BundleType.Legislator, legislator.SerializeToJson());
-            newFragment.Arguments = args;
+            //var args = new Bundle();
+            //args.PutString(BundleType.Legislator, legislator.SerializeToJson());
+            //newFragment.Arguments = args;
 
             return newFragment;
         }
 
-        public override void OnCreate(Bundle savedInstanceState)
+        public override void OnResume()
         {
-            base.OnCreate(savedInstanceState);
+            base.OnResume();
 
-            var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
-            _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
-
-            _committeeManager = new CommitteeManager(MyLogger);
+            if (_committees == null)
+                SetLoadingUi();
+            else
+                ShowCommittees(_committees);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -58,88 +56,30 @@ namespace Write2Congress.Droid.Fragments
             recyclerButtonsParent.Visibility = ViewStates.Gone;
             loadMoreButton.Visibility = ViewStates.Gone;
 
-            SetLoadingUi();
-
-            if (_committees != null && _committees.Count > 0)
-                ShowCommittees(_committees);
-            else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Committees, string.Empty)))
-            {
-                var serializedCommittees = savedInstanceState.GetString(BundleType.Committees);
-                _committees = new List<Committee>().DeserializeFromJson(serializedCommittees);
-                ShowCommittees(_committees);
-            }
+            if (_committees == null)
+                SetLoadingUi();
             else
-                FetchMoreLegislatorContent(false);
+                SetCommittees(_committees);
 
             return fragment;
-        }
-
-        protected override void NextButon_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        protected override void FetchMoreLegislatorContent(bool isNextClick)
-        {
-            //base.FetchMoreLegislatorContent(isNextClick);
-
-            var getCommitteesTask = new Task<List<Committee>>((prms) =>
-            {
-                var passedParams = prms as Tuple<string, CommitteeManager>;
-
-                var legislatorId = passedParams.Item1;
-                var cm = passedParams.Item2;
-
-                //var results = cm.GetCommitteesForLegislator(legislatorId);
-                //var isThereMoreVotes = cm.IsThereMoreResultsForLastCall();
-
-                //return new Tuple<List<Committee>, bool>(results, isThereMoreVotes);
-                //return new List<Committee>(results);
-                return cm.GetCommitteesForLegislator(legislatorId);
-            }, new Tuple<string, CommitteeManager>(_legislator.BioguideId, _committeeManager));
-            //}, new Tuple<string, CommitteeManager>(_legislator.BioguideId, _committeeManager));
-
-            getCommitteesTask.ContinueWith((antecedent) =>
-            {
-                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
-                    return;
-
-                Activity.RunOnUiThread(() =>
-                {
-                    //var isThereMove = antecedent.Result.Item2;
-                    //
-                    //if (isThereMove)
-                    //    _committees.AddRange(antecedent.Result.Item1);
-                    //else
-                    //    _committees = antecedent.Result.Item1;
-
-
-                    //ShowRecyclerButtons(isThereMove);
-                    _committees = antecedent.Result;
-                    ShowCommittees(_committees);
-                });
-            });
-            getCommitteesTask.Start();
         }
 
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
 
-            if(_committees != null)
-            {
-                var serializedCommittees = _committees.SerializeToJson();
-                outState.PutString(BundleType.Committees, serializedCommittees);
-            }
+            //if(_committees != null)
+            //{
+            //    var serializedCommittees = _committees.SerializeToJson();
+            //    outState.PutString(BundleType.Committees, serializedCommittees);
+            //}
         }
 
         protected override void CleanUp()
         {
             base.CleanUp();
 
-            _committeeManager = null;
             _committees = null;
-            _legislator = null;
         }
 
         protected override string EmptyText()
@@ -152,11 +92,28 @@ namespace Write2Congress.Droid.Fragments
             return AndroidHelper.GetString(Resource.String.committees);
         }
 
+        public void SetCommittees(List<Committee> committees)
+        {
+            _committees = committees;
+        }
+
         public void ShowCommittees(List<Committee> committees)
         {
-            (recyclerAdapter as CommitteeAdapter).UpdateCommittee(committees);
+            _committees = committees;
 
-            SetLoadingUiOff();
+            if (IsBeingShown)
+            {
+                (recyclerAdapter as CommitteeAdapter).UpdateCommittee(_committees);
+
+                SetLoadingUiOff();
+            }
+        }
+
+        
+
+        protected override void NextButon_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

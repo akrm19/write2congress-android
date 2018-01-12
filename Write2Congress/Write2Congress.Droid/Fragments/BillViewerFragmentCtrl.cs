@@ -22,9 +22,10 @@ namespace Write2Congress.Droid.Fragments
 {
     public class BillViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
-        private BillManager _billManager;
-        private List<Bill> _bills = new List<Bill>();
-        private Legislator _legislator;
+        //private BillManager _billManager;
+        private bool _isThereMoreVotes;
+        private List<Bill> _bills;
+        //private Legislator _legislator;
         private BillViewerKind _viewerMode;
 
         public BillViewerFragmentCtrl() { }
@@ -33,24 +34,34 @@ namespace Write2Congress.Droid.Fragments
         {
             var newFragment = new BillViewerFragmentCtrl();
 
-            var args = new Bundle();
-            args.PutString(BundleType.Legislator, legislator.SerializeToJson());
-            args.PutInt(BundleType.BillViewerFragmentType, (int)viewerMode);
-            newFragment.Arguments = args;
+            //var args = new Bundle();
+            //args.PutString(BundleType.Legislator, legislator.SerializeToJson());
+            //args.PutInt(BundleType.BillViewerFragmentType, (int)viewerMode);
+            //newFragment.Arguments = args;
 
             return newFragment;
         }
 
-        public override void OnCreate(Bundle savedInstanceState)
+        public override void OnResume()
         {
-            base.OnCreate(savedInstanceState);
+            base.OnResume();
 
-            var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
-            _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
-            _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
-
-            _billManager = new BillManager(MyLogger);
+            if (_bills == null)
+                SetLoadingUi();
+            else
+                ShowBills(_bills, _isThereMoreVotes);
         }
+
+        //public override void OnCreate(Bundle savedInstanceState)
+        //{
+        //    base.OnCreate(savedInstanceState);
+
+            //var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
+            //_legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
+            //_viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
+
+            //_billManager = new BillManager(MyLogger);
+        //}
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -62,23 +73,29 @@ namespace Write2Congress.Droid.Fragments
             recyclerAdapter = new BillAdapter(this);
             recycler.SetAdapter(recyclerAdapter);
 
-            SetLoadingUi();
-            RetrieveCurrentPageIfAvailable(savedInstanceState);
+            //SetLoadingUi();
+            //RetrieveCurrentPageIfAvailable(savedInstanceState);
 
-            if (_bills != null && _bills.Count > 0)
-                UpdateBills(_bills);
-            else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Bills, string.Empty)))
-            {
-                var serializedBills = savedInstanceState.GetString(BundleType.Bills);
-                _bills = new List<Bill>().DeserializeFromJson(serializedBills);
-                UpdateBills(_bills);
-            }
+            if (_bills == null)
+                SetLoadingUi();
             else
-                FetchMoreLegislatorContent(false);
+                SetBills(_bills, _isThereMoreVotes);
+
+            //if (_bills != null && _bills.Count > 0)
+            //    UpdateBills(_bills);
+            //else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Bills, string.Empty)))
+            //{
+            //    var serializedBills = savedInstanceState.GetString(BundleType.Bills);
+            //    _bills = new List<Bill>().DeserializeFromJson(serializedBills);
+            //    UpdateBills(_bills);
+            //}
+            //else
+            //    FetchMoreLegislatorContent(false);
 
             return fragment;
         }
 
+        /*
         protected override void FetchMoreLegislatorContent(bool isNextClick)
         {
             base.FetchMoreLegislatorContent(isNextClick);
@@ -115,35 +132,42 @@ namespace Write2Congress.Droid.Fragments
                     else
                         _bills = antecedent.Result.Item1;
 
-                    SetLoadMoreButtonAsLoading(false);
+                    SetLoadMoreButtonTextAsLoading(false);
                     ShowRecyclerButtons(isThereMoreVotes);
-                    UpdateBills(_bills);
+                    ShowBills(_bills);
                 });
             });
 
             getBillsTask.Start();
         }
+        */
 
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
 
-            if (_bills != null)
-            {
-                var serializedBills = _bills.SerializeToJson();
-                outState.PutString(BundleType.Bills, serializedBills);
-            }
+            //if (_bills != null)
+            //{
+            //    var serializedBills = _bills.SerializeToJson();
+            //    outState.PutString(BundleType.Bills, serializedBills);
+            //}
 
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
+
+            
+            outState.PutBoolean(_viewerMode == BillViewerKind.SponsoredBills 
+                ? BundleType.SponsoredBillsIsThereMoreContent
+                : BundleType.CosponsoredBillsIsThereMoreContent, _isThereMoreVotes);
+            //outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
         }
 
         protected override void CleanUp()
         {
             base.CleanUp();
 
-            _billManager = null;
+            //_billManager = null;
             _bills = null;
-            _legislator = null;
+            //_legislator = null;
         }
 
         protected override string EmptyText()
@@ -163,10 +187,30 @@ namespace Write2Congress.Droid.Fragments
             }
         }
 
-        public void UpdateBills(List<Bill> bills)
+        public void SetBills(List<Bill> bills, bool isThereMoreVotes)
         {
-            (recyclerAdapter as BillAdapter).UpdateBill(bills);
-            SetLoadingUiOff();
+            _bills = bills;
+            _isThereMoreVotes = isThereMoreVotes;
+        }
+
+        public void ShowBills(List<Bill> bills, bool isThereMoreVotes)
+        {
+            _bills = bills;
+            _isThereMoreVotes = isThereMoreVotes;
+
+            if (IsBeingShown)
+            {
+                SetLoadMoreButtonTextAsLoading(false);
+                ShowRecyclerButtons(_isThereMoreVotes);
+
+                (recyclerAdapter as BillAdapter).UpdateBill(bills);
+                SetLoadingUiOff();
+            }
+        }
+
+        protected override void FetchMoreLegislatorContent(bool isNextClick)
+        {
+            LoadMoreClick?.Invoke(true);
         }
     }
 }
