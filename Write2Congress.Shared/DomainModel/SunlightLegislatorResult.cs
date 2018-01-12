@@ -16,10 +16,10 @@ namespace Write2Congress.Shared.DomainModel
         public class SunlightLegislator
         {
             public bool in_office { get; set; }
-            public int? senate_class { get; set; }
-            public int? votesmart_id { get; set; }
             public int? district { get; set; }
             public int? icpsr_id { get; set; }
+            public int? senate_class { get; set; }
+            public int? votesmart_id { get; set; }
             public string bioguide_id { get; set; }
             public string birthday { get; set; }
             public string chamber { get; set; }

@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Write2Congress.Shared.DomainModel;
+using Write2Congress.Shared.DomainModel.ApiModels.ProPublica;
 using Write2Congress.Shared.DomainModel.Enum;
 using Write2Congress.Shared.DomainModel.Interface;
+using static Write2Congress.Shared.DomainModel.ApiModels.ProPublica.CongressMembersResult;
+using static Write2Congress.Shared.DomainModel.ApiModels.ProPublica.SenateMembersResult;
 
 namespace Write2Congress.Shared.BusinessLayer
 {
@@ -209,45 +212,6 @@ namespace Write2Congress.Shared.BusinessLayer
             }
         }
 
-        public static Party PartyFromString(string party)
-        {
-            switch (party.ToLower())
-            {
-                case "r":
-                case "republican":
-                    return Party.Republican;
-                case "d":
-                case "democrat":
-                    return Party.Democratic;
-                case "l":
-                case "libertarian":
-                    return Party.Libertarian;
-                case "g":
-                case "green":
-                    return Party.Green;
-                case "i":
-                case "independent":
-                    return Party.Independent;
-                default:
-                    return Party.Unknown;
-            }
-        }
-
-        public static Gender GenderFromString(string gender)
-        {
-            switch (gender.ToLower())
-            {
-                case "m":
-                case "male":
-                    return Gender.Male;
-                case "f":
-                case "female":
-                    return Gender.Female;
-                default:
-                    return Gender.NA;
-            }
-        }
-
         public bool ValidZipFormat(string zip)
         {
             if (zip.Length != 5)
@@ -272,13 +236,13 @@ namespace Write2Congress.Shared.BusinessLayer
                     FirstName = l.first_name ?? string.Empty,
                     MiddleName = l.middle_name ?? string.Empty,
                     LastName = l.last_name ?? string.Empty,
-                    Birthday = Util.DateFromSunlightTime(l.birthday),
-                    Party = Util.PartyFromString(l.party),
-                    Chamber = Util.LegislativeBodyFromSunlight(l.chamber),
-                    State = Util.GetStateOrTerritoryFromSunlight(l.state),
-                    Gender = Util.GenderFromString(l.gender),
-                    TermStartDate = Util.DateFromSunlightTime(l.term_start),
-                    TermEndDate = Util.DateFromSunlightTime(l.term_end),
+                    Birthday = DataTransformationUtil.DateFromSunlightTime(l.birthday),
+                    Party = DataTransformationUtil.PartyFromString(l.party),
+                    Chamber = DataTransformationUtil.LegislativeBodyFromSunlight(l.chamber),
+                    State = DataTransformationUtil.GetStateOrTerritoryFromSunlight(l.state),
+                    Gender = DataTransformationUtil.GenderFromString(l.gender),
+                    TermStartDate = DataTransformationUtil.DateFromSunlightTime(l.term_start),
+                    TermEndDate = DataTransformationUtil.DateFromSunlightTime(l.term_end),
                     BioguideId = l.bioguide_id ?? string.Empty,
 
                     OfficeAddress = string.IsNullOrWhiteSpace(l.office)
@@ -308,11 +272,84 @@ namespace Write2Congress.Shared.BusinessLayer
                         : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
 
 
-                    TotalVotes = 0, //TODO: get rid of the following or populate
+                    TotalVotes = 0, 
                     MissedVotesPercent = 0,
                     VotesWithPartyPercent = 0,
                     Senority = string.Empty
                 };
+
+                legislators.Add(legislator);
+            }
+
+            return legislators;
+        }
+
+        //public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(BaseLegislatorsResult.Rootobject legislatorResults)
+        public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(SenateMembersResult.Rootobject legislatorResults)
+        {
+            var legislators = new List<Legislator>();
+
+            var results = legislatorResults.results.FirstOrDefault();
+            if (results == null)
+                return legislators;
+
+            foreach (var l in results.members)
+            {
+                var legislator = new Legislator()
+                {
+                    FirstName = l.first_name ?? string.Empty,
+                    MiddleName = l.middle_name ?? string.Empty,
+                    LastName = l.last_name ?? string.Empty,
+                    Birthday = DataTransformationUtil.DateFromSunlightTime(l.date_of_birth),
+                    Party = DataTransformationUtil.PartyFromString(l.party),
+                    State = DataTransformationUtil.GetStateOrTerritoryFromSunlight(l.state),
+                    OfficeAddress = string.IsNullOrWhiteSpace(l.office)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Mail, l.office),
+                    OfficeNumber = string.IsNullOrWhiteSpace(l.phone)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Phone, l.phone),
+                    FacebookId = string.IsNullOrWhiteSpace(l.facebook_account)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Facebook, l.facebook_account),
+                    TwitterId = string.IsNullOrWhiteSpace(l.twitter_account)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.Twitter, l.twitter_account),
+                    YouTubeId = string.IsNullOrWhiteSpace(l.youtube_account)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.YouTube, l.youtube_account),
+                    Website = string.IsNullOrWhiteSpace(l.url)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSite, l.url),
+                    ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
+                        ? new ContactMethod(ContactType.NotSet, string.Empty)
+                        : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
+                    BioguideId = l.id ?? string.Empty, 
+
+
+                    //TODO RM: These do not exist in new ProPublica source
+                    Gender = Gender.NA,
+                    TermStartDate = DateTime.MinValue,
+                    TermEndDate = DateTime.MinValue,
+                    Email = new ContactMethod(ContactType.NotSet, string.Empty),
+
+                             
+                    //TODO Verify adn add checking for these values
+                    TotalVotes = l.total_votes ?? 0,
+                    MissedVotesPercent = l.missed_votes_pct ?? 0,
+                    VotesWithPartyPercent = l.votes_with_party_pct ?? 0,
+                    Senority = l.seniority ?? string.Empty
+                };
+                
+                //TODO RM: Newlsy added, verify this works
+                //TODO FIX: type will be root since it is serialized as such.
+                var typeOfMember = l.GetType();
+                if (typeOfMember == typeof(SenateMember))
+                    legislator.Chamber = LegislativeBody.Senate;
+                else if (typeOfMember == typeof(CongressMember))
+                    legislator.Chamber = LegislativeBody.House;
+                else
+                    legislator.Chamber = LegislativeBody.Unknown;
 
                 legislators.Add(legislator);
             }
@@ -330,7 +367,7 @@ namespace Write2Congress.Shared.BusinessLayer
                 {
                     Id = c.committee_id ?? string.Empty,
                     Name = c.name ?? string.Empty,
-                    Chamber = LegislativeBodyFromSunlight(c.chamber),
+                    Chamber = DataTransformationUtil.LegislativeBodyFromSunlight(c.chamber),
                     IsSubcommittee = c.subcommittee,
                     ParentCommitteeId = c.subcommittee
                         ? (c.parent_committee_id ?? string.Empty)
@@ -370,15 +407,15 @@ namespace Write2Congress.Shared.BusinessLayer
                         ? null
                         : BillFromSunlightBill(v.bill),
                     BillId = v.bill_id ?? string.Empty,
-                    Chamber = LegislativeBodyFromSunlight(v.chamber),
+                    Chamber = DataTransformationUtil.LegislativeBodyFromSunlight(v.chamber),
                     Question = v.question ?? string.Empty,
                     Result = v.result,
                     Source = v.source,
-                    Type = new VoteType( v.vote_type ?? string.Empty, 
-                        VoteTypeKindFromSunlightVoteType(v.vote_type)),
-                    VotedAt = DateFromSunlightTime(v.voted_at),
+                    Type = new VoteType( v.vote_type ?? string.Empty,
+                        DataTransformationUtil.VoteTypeKindFromSunlightVoteType(v.vote_type)),
+                    VotedAt = DataTransformationUtil.DateFromSunlightTime(v.voted_at),
                     Year = v.year ?? 0,
-                    VoteCastedByLegislator = VoteCasedTypeFromSunlight(v.voter_ids, legislatorBioguideId),
+                    VoteCastedByLegislator = DataTransformationUtil.VoteCasedTypeFromSunlight(v.voter_ids, legislatorBioguideId),
                     NominationId = v.nomination_id ?? string.Empty,
                     Nomination = NominationFromSunlightNomination(v.nomination)
                 };
@@ -399,8 +436,8 @@ namespace Write2Congress.Shared.BusinessLayer
 
             var nomination = new Nomination()
             {
-                DateOfLastAction = DateFromSunlightTime(n.last_action_at),
-                DateReceived = DateFromSunlightTime(n.received_on),
+                DateOfLastAction = DataTransformationUtil.DateFromSunlightTime(n.last_action_at),
+                DateReceived = DataTransformationUtil.DateFromSunlightTime(n.received_on),
                 Organization = n.organization ?? string.Empty,
                 Nominees = NomineesFromSunlightNominees(n.nominees)
             };
@@ -428,62 +465,7 @@ namespace Write2Congress.Shared.BusinessLayer
             return nominees;
         }
 
-        private VoteCastedType VoteCasedTypeFromSunlight(dynamic voter_ids, string legislatorBioguideId)
-        {
-            string legislatorsCastedVote = voter_ids[legislatorBioguideId];
 
-            if (string.IsNullOrWhiteSpace(legislatorsCastedVote))
-                return VoteCastedType.Unknown;
-
-            switch (legislatorsCastedVote.ToLower())
-            {
-                case "nay":
-                case "\"nay\"":
-                    return VoteCastedType.Nay;
-                case "yea":
-                case "\"yea\"":
-                    return VoteCastedType.Yea;
-                case "not voting":
-                case "notvoting":
-                case "\"not voting\"":
-                    return VoteCastedType.NotVoting;
-                case "present":
-                case "\"present\"":
-                    return VoteCastedType.Present;
-                default:
-                    return VoteCastedType.Unknown;
-            }
-        }
-
-        private VoteTypeKind VoteTypeKindFromSunlightVoteType(string voteType)
-        {
-            if (string.IsNullOrWhiteSpace(voteType))
-                return VoteTypeKind.Other;
-
-            switch (voteType.ToLower())
-            {
-                case "cloture":
-                    return VoteTypeKind.Cloture;
-                case "impeachmen":
-                    return VoteTypeKind.Impeachment;
-                case "leadership":
-                    return VoteTypeKind.Leadership;
-                case "nomination":
-                    return VoteTypeKind.Nomination;
-                case "other":
-                    return VoteTypeKind.Other;
-                case "passage":
-                    return VoteTypeKind.Passage;
-                case "quorum":
-                    return VoteTypeKind.Quorum;
-                case "recommit":
-                    return VoteTypeKind.Recommit;
-                case "treaty":
-                    return VoteTypeKind.Treaty;
-                default:
-                    return VoteTypeKind.Other;
-            }
-        }
 
         public List<Bill> BillsFromSunlightBillResult(SunlightBillResult.Rootobject billResults)
         {
@@ -506,11 +488,11 @@ namespace Write2Congress.Shared.BusinessLayer
             {
                 var bill = new Bill()
                 {
-                    Chamber = LegislativeBodyFromSunlight(b.chamber),
+                    Chamber = DataTransformationUtil.LegislativeBodyFromSunlight(b.chamber),
                     Congress = b.congress ?? 0,
                     CosponsorIds = b.cosponsor_ids ?? new string[0],
-                    DateIntroduced = DateFromSunlightTime(b.introduced_on),
-                    DateOfLastVote = DateFromSunlightTime(b.last_vote_at),
+                    DateIntroduced = DataTransformationUtil.DateFromSunlightTime(b.introduced_on),
+                    DateOfLastVote = DataTransformationUtil.DateFromSunlightTime(b.last_vote_at),
                     History = HistoryFromSunlight(b.history),
                     Id = b.bill_id ?? string.Empty,
                     LastAction = ActionFromSunlight(b.last_action),
@@ -569,9 +551,9 @@ namespace Write2Congress.Shared.BusinessLayer
             {
                 var upcomingAction = new UpcomingAction()
                 {
-                    Chamber = LegislativeBodyFromSunlight(ua.chamber),
+                    Chamber = DataTransformationUtil.LegislativeBodyFromSunlight(ua.chamber),
                     Context = ua.context ?? string.Empty,
-                    Date = DateFromSunlightTime(ua.scheduled_at),
+                    Date = DataTransformationUtil.DateFromSunlightTime(ua.scheduled_at),
                     Url = ua.url ?? string.Empty
                 };
 
@@ -634,45 +616,15 @@ namespace Write2Congress.Shared.BusinessLayer
 
             var billAction = new BillAction()
             {
-                Date = DateFromSunlightTime(action.acted_at),
+                Date = DataTransformationUtil.DateFromSunlightTime(action.acted_at),
                 Text = action.text ?? string.Empty,
-                Type = BillActionTypeFromSunlight(action.type)
+                Type = DataTransformationUtil.BillActionTypeFromSunlight(action.type)
             };
 
             return billAction;
         }
 
-        /// <summary>
-        /// The type of action. Always present. Can be “action” (generic), 
-        /// “vote” (passage vote), “vote-aux” (cloture vote), “vetoed”, 
-        /// “topresident”, and “enacted”. There can be other values, but 
-        /// these are the only ones we support.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private static BillActionType BillActionTypeFromSunlight(string type)
-        {
-            if (string.IsNullOrWhiteSpace(type))
-                return BillActionType.Unknown;
 
-            switch (type.ToLower())
-            {
-                case "action":
-                    return BillActionType.GenericAction;
-                case "vote":
-                    return BillActionType.PassageVote;
-                case "vote-aux":
-                    return BillActionType.ClotureVote;
-                case "vetoed":
-                    return BillActionType.Vetoed;
-                case "topresident":
-                    return BillActionType.ToPresident;
-                case "enacted":
-                    return BillActionType.Enacted;
-                default:
-                    return BillActionType.Unknown;
-            }
-        }
 
         private static BillHistory HistoryFromSunlight(SunlightBillResult.History billHistory)
         {
@@ -682,82 +634,115 @@ namespace Write2Congress.Shared.BusinessLayer
             var history = new BillHistory()
             {
                 AwaitingSignature = billHistory.awaiting_signature,
-                AwaitingSignatureSince = DateFromSunlightTime(billHistory.awaiting_signature_since),
-                DateHouseLastVotedOnPassage = DateFromSunlightTime(billHistory.house_passage_result_at),
-                DateSenateLastVotedOnPassage = DateFromSunlightTime(billHistory.senate_passage_result_at),
-                DateEnacted = DateFromSunlightTime(billHistory.enacted_at),
+                AwaitingSignatureSince = DataTransformationUtil.DateFromSunlightTime(billHistory.awaiting_signature_since),
+                DateHouseLastVotedOnPassage = DataTransformationUtil.DateFromSunlightTime(billHistory.house_passage_result_at),
+                DateSenateLastVotedOnPassage = DataTransformationUtil.DateFromSunlightTime(billHistory.senate_passage_result_at),
+                DateEnacted = DataTransformationUtil.DateFromSunlightTime(billHistory.enacted_at),
                 Enacted = billHistory.enacted,
-                DateVetoed = DateFromSunlightTime(billHistory.vetoed_at),
+                DateVetoed = DataTransformationUtil.DateFromSunlightTime(billHistory.vetoed_at),
                 Vetoed = billHistory.vetoed,
-                HousePassageResult = LegislativeBillVoteFromSunlight(billHistory.house_passage_result),
-                SenatePassageResult = LegislativeBillVoteFromSunlight(billHistory.senate_passage_result)
+                HousePassageResult = DataTransformationUtil.LegislativeBillVoteFromSunlight(billHistory.house_passage_result),
+                SenatePassageResult = DataTransformationUtil.LegislativeBillVoteFromSunlight(billHistory.senate_passage_result)
             };
 
             return history;
         }
 
-        private static LegislativeBillVote LegislativeBillVoteFromSunlight(string passageResult)
-        {
-            if (string.IsNullOrWhiteSpace(passageResult))
-                return LegislativeBillVote.Na;
 
-            switch (passageResult.ToLower())
-            {
-                case "pass":
-                    return LegislativeBillVote.Pass;
-                case "fail":
-                    return LegislativeBillVote.Fail;
-                default:
-                    return LegislativeBillVote.Na;
-            }
-        }
 
-        public static DateTime DateFromSunlightTime(string dateVal)
-        {
-            if (string.IsNullOrWhiteSpace(dateVal))
-                return DateTime.MinValue;
 
-            DateTime date;
-
-            if (DateTime.TryParseExact(dateVal, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date))
-                return date;
-
-            return DateTime.TryParseExact(dateVal, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date)
-                ? date
-                : DateTime.MinValue;
-        }
-
-        public static LegislativeBody LegislativeBodyFromSunlight(string chamber)
-        {
-            if (string.IsNullOrWhiteSpace(chamber))
-                return LegislativeBody.Unknown;
-
-            switch (chamber.ToLower())
-            {
-                case "senate":
-                    return LegislativeBody.Senate;
-                case "house":
-                    return LegislativeBody.House;
-                case "joint":
-                    return LegislativeBody.Joint;
-                default:
-                    return LegislativeBody.Unknown;
-            }
-        }
-
-        public static StateOrTerritory GetStateOrTerritoryFromSunlight(string stateOrTerritory)
-        {
-            StateOrTerritory result = StateOrTerritory.ALL;
-            //TODO RM: handle unkonw state or territory
-            if (string.IsNullOrWhiteSpace(stateOrTerritory))
-                return result;
-
-            if (Enum.TryParse<StateOrTerritory>(stateOrTerritory, true, out result))
-                return result;
-
-            //TODO RM: Handle errors
-            return result;
-        }
         #endregion
+    }
+
+    public static class TransformationExtension
+    {
+        public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(this SenateMembersResult.Rootobject legislatorResults)
+        {
+            var legislators = new List<Legislator>();
+
+            var results = legislatorResults.results.FirstOrDefault();
+            if (results == null)
+                return legislators;
+
+            foreach (var l in results.members)
+            {
+                var legislator = LegislatorFromPropublicCongressApi(l);
+                legislator.Chamber = LegislativeBody.Senate;
+
+                legislators.Add(legislator);
+            }
+
+            return legislators;
+        }
+
+        public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(this CongressMembersResult.Rootobject legislatorResults)
+        {
+            var legislators = new List<Legislator>();
+
+            var results = legislatorResults.results.FirstOrDefault();
+            if (results == null)
+                return legislators;
+
+            foreach (var l in results.members)
+            {
+                var legislator = LegislatorFromPropublicCongressApi(l);
+                legislator.Chamber = LegislativeBody.House;
+
+                legislators.Add(legislator);
+            }
+
+            return legislators;
+        }
+
+        private static Legislator LegislatorFromPropublicCongressApi(BaseLegislatorsResult.Member l)
+        {
+            var legislator = new Legislator()
+            {
+                FirstName = l.first_name ?? string.Empty,
+                MiddleName = l.middle_name ?? string.Empty,
+                LastName = l.last_name ?? string.Empty,
+                Birthday = DataTransformationUtil.DateFromSunlightTime(l.date_of_birth),
+                Party = DataTransformationUtil.PartyFromString(l.party),
+                State = DataTransformationUtil.GetStateOrTerritoryFromSunlight(l.state),
+                OfficeAddress = string.IsNullOrWhiteSpace(l.office)
+                     ? new ContactMethod(ContactType.NotSet, string.Empty)
+                     : new ContactMethod(ContactType.Mail, l.office),
+                OfficeNumber = string.IsNullOrWhiteSpace(l.phone)
+                     ? new ContactMethod(ContactType.NotSet, string.Empty)
+                     : new ContactMethod(ContactType.Phone, l.phone),
+                FacebookId = string.IsNullOrWhiteSpace(l.facebook_account)
+                     ? new ContactMethod(ContactType.NotSet, string.Empty)
+                     : new ContactMethod(ContactType.Facebook, l.facebook_account),
+                TwitterId = string.IsNullOrWhiteSpace(l.twitter_account)
+                     ? new ContactMethod(ContactType.NotSet, string.Empty)
+                     : new ContactMethod(ContactType.Twitter, l.twitter_account),
+                YouTubeId = string.IsNullOrWhiteSpace(l.youtube_account)
+                     ? new ContactMethod(ContactType.NotSet, string.Empty)
+                     : new ContactMethod(ContactType.YouTube, l.youtube_account),
+                Website = string.IsNullOrWhiteSpace(l.url)
+                     ? new ContactMethod(ContactType.NotSet, string.Empty)
+                     : new ContactMethod(ContactType.WebSite, l.url),
+                ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
+                     ? new ContactMethod(ContactType.NotSet, string.Empty)
+                     : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
+                BioguideId = l.id ?? string.Empty,
+
+
+                //TODO RM: These do not exist in new ProPublica source
+                Gender = Gender.NA,
+                TermStartDate = DateTime.MinValue,
+                TermEndDate = DateTime.MinValue,
+                Email = new ContactMethod(ContactType.NotSet, string.Empty),
+
+
+                //TODO Verify adn add checking for these values
+                TotalVotes = l.total_votes ?? 0,
+                MissedVotesPercent = l.missed_votes_pct ?? 0,
+                VotesWithPartyPercent = l.votes_with_party_pct ?? 0,
+                Senority = l.seniority ?? string.Empty
+            };
+
+            return legislator;
+        }
     }
 }

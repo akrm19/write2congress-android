@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class Legislator
+    public class Legislator : ILegislator
     {
+        public Legislator() { }
+
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthday { get; set; }
 
-        public Party Party;
-        public LegislativeBody Chamber;
-        public StateOrTerritory State;
-        public Gender Gender;
+        public Party Party { get; set; }
+        public LegislativeBody Chamber { get; set; }
+        public StateOrTerritory State { get; set; }
+        public Gender Gender { get; set; }
 
         public DateTime TermStartDate { get; set; }
         public DateTime TermEndDate { get; set; }
@@ -32,8 +35,8 @@ namespace Write2Congress.Shared.DomainModel
         public ContactMethod ContactSite { get; set; }
 
         public int TotalVotes { get; set; }
-        public int MissedVotesPercent { get; set; }
-        public int VotesWithPartyPercent { get; set; }
+        public float MissedVotesPercent { get; set; }
+        public float VotesWithPartyPercent { get; set; }
 
         public string Senority { get; set; }
         public string BioguideId { get; set; }
@@ -48,7 +51,6 @@ namespace Write2Congress.Shared.DomainModel
                 LastName);
         }
 
-  
         public string FormalAddressTitle()
         {
             switch (Chamber)
@@ -65,6 +67,38 @@ namespace Write2Congress.Shared.DomainModel
                 default:
                     return string.Empty;
             }
+        }
+
+        public static Legislator TranformToLegislator(ILegislator legislitor)
+        {
+            var newLegislator = new Legislator()
+            {
+                BioguideId = legislitor.BioguideId,
+                Birthday = legislitor.Birthday,
+                Chamber = legislitor.Chamber,
+                ContactSite = legislitor.ContactSite,
+                Email = legislitor.Email,
+                FacebookId = legislitor.FacebookId,
+                FirstName = legislitor.FirstName,
+                Gender = legislitor.Gender,
+                LastName = legislitor.LastName,
+                MiddleName = legislitor.MiddleName,
+                MissedVotesPercent = legislitor.MissedVotesPercent,
+                OfficeAddress = legislitor.OfficeAddress,
+                OfficeNumber = legislitor.OfficeNumber,
+                Party = legislitor.Party,
+                Senority = legislitor.Senority,
+                State = legislitor.State,
+                TermEndDate = legislitor.TermEndDate,
+                TermStartDate = legislitor.TermStartDate,
+                TotalVotes = legislitor.TotalVotes,
+                TwitterId = legislitor.TwitterId,
+                VotesWithPartyPercent = legislitor.VotesWithPartyPercent,
+                Website = legislitor.Website,
+                YouTubeId = legislitor.YouTubeId
+            };
+
+            return newLegislator;
         }
     }
 }

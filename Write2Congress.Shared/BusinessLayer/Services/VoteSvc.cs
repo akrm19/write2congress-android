@@ -10,7 +10,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 {
     //https://congress.api.sunlightfoundation.com/votes?voter_ids.M001153__exists=true&fields=roll_id,chamber,number,year,congress,voted_at,vote_type,roll_type,question,required,result,source,bill_id,bill,nomination,nomination_id,breakdown,voter_ids.M001153&per_page=50&page=3
     
-    public class VoteSvc : ServiceBase
+    public class VoteSvc : SunlightApi
     {
         //https://congress.api.sunlightfoundation.com/voter_ids.M001153__exists=true
         private static string _votesBase = "votes?";

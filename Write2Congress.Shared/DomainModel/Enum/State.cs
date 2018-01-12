@@ -7,8 +7,11 @@ namespace Write2Congress.Shared.DomainModel.Enum
 {
     public enum StateOrTerritory
     {
+        //Default
         [Description("All States & Territories")]
         ALL,
+
+        //States
         [Description("Alabama")]
         AL,
         [Description("Alaska")]
@@ -110,15 +113,17 @@ namespace Write2Congress.Shared.DomainModel.Enum
         [Description("Wyoming")]
         WY,
 
-        //TODO RM: Look into ordering this or fixing it
-        //Unincorporated
-        //GUAM	
+        //Territories
+        [Description("American Samoa")]
+        AS,
+        [Description("District of Columbia")]
+        DC, 
         [Description("Guam")]
         GU,
-        //PUERTO RICO	
+        [Description("Northern Mariana Islands")]
+        MP,
         [Description("Puerto Rico")]
         PR,
-        //VIRGIN ISLANDS	
         [Description("Virgin Islands")]
         VI
     }

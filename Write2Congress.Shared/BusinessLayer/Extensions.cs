@@ -13,7 +13,11 @@ namespace Write2Congress.Shared.BusinessLayer
 {
     public static class Extensions
     {
-
+        public static int GetNumberOfEnums(this Enum enumToCount)// where T : Enum
+        {
+            var numberOfEnums = Enum.GetNames(enumToCount.GetType()).Length;
+            return numberOfEnums;
+        }
 
         public static string Capitalize(this string val)
         {

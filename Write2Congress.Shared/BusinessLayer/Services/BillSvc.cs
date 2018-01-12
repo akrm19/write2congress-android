@@ -8,7 +8,7 @@ using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.BusinessLayer.Services
 {
-    public class BillSvc : ServiceBase
+    public class BillSvc : SunlightApi
     {
         private static int _defaultResultsPage = 30;
         private static string _billsBase = "bills?";

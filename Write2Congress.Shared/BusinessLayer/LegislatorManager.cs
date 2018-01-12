@@ -25,6 +25,7 @@ namespace Write2Congress.Shared.BusinessLayer
             _legislatorSvc = new LegislatorSvc(logger);
         }
 
+        /*
         public Task<byte[]> GetLegislatorPortrait(Legislator legislator)
         {
             if (legislator == null || string.IsNullOrWhiteSpace(legislator.BioguideId))
@@ -35,8 +36,10 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return _legislatorSvc.GetLegislatorPortrait(legislator);
         }
+        */
 
         #region Get Legislator Methods
+        /*
         public List<Legislator> GetLegislatorByZipcode(string zipcode)
         {
             var legislators = new List<Legislator>();
@@ -45,6 +48,7 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return legislators;
         }
+        */
 
         public List<Legislator> GetAllLegislators()
         {
