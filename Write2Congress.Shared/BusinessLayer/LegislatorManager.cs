@@ -39,20 +39,15 @@ namespace Write2Congress.Shared.BusinessLayer
         */
 
         #region Get Legislator Methods
-        /*
-        public List<Legislator> GetLegislatorByZipcode(string zipcode)
-        {
-            var legislators = new List<Legislator>();
-
-            legislators = _legislatorSvc.GetLegislatorsByZipCode(zipcode).Result;
-
-            return legislators;
-        }
-        */
-
         public List<Legislator> GetAllLegislators()
         {
-            return _legislatorSvc.GetAllAlegislators();
+            var legislators = new List<Legislator>();
+            var iLegislators = _legislatorSvc.GetAllAlegislators();
+
+            foreach (var legislator in iLegislators)
+                legislators.Add(Legislator.TranformToLegislator(legislator));
+
+            return legislators;
         }
 
         public bool SaveLegislatorToFile(string filePath, List<Legislator> legislators)

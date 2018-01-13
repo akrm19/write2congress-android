@@ -26,15 +26,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         }
 
         /*
-        public async Task<List<Legislator>> GetLegislatorsByZipCode(string zipCode)
-        {
-            var legislatorsByZipUri = "legislators/locate?zip=" + zipCode;
-        
-            return GetLegislatorsBase(legislatorsByZipUri).Result;
-        }
-        */
-
-        /*
         public async Task<byte[]> GetLegislatorPortrait(Legislator legislator)
         {
             //Possible options: 450x550 and original (typically 675x825, but can vary)
@@ -86,69 +77,18 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             }
         }
 
-        public List<Legislator> GetAllAlegislators()
+        public List<ILegislator> GetAllAlegislators()
         {
             var senateMembersUri = "115/senate/members.json";
             var houseMembersUri = "115/house/members.json";
 
-            //TODO RM: Decide between the option below, or creating a new interface for Legislators
-            //and have all other types implement it
-            //OPTION 1: 
-            /*
-            var senators = new List<Legislator>();
-            var senatorsResult = GetMemberResults<SenateMembersResult.Rootobject>(senateMembersUri, _congressApiSvc).Result;
-            if (senatorsResult != null && senatorsResult.results != null)
-                senators = senatorsResult.LegislatorsFromPropublicaLegislatorsResult();
 
-            var houseMembers = new List<Legislator>();
-            var houseResult = GetMemberResults<CongressMembersResult.Rootobject>(houseMembersUri, _congressApiSvc).Result;
-            if (houseResult != null && houseResult.results != null)
-                houseMembers = houseResult.LegislatorsFromPropublicaLegislatorsResult();
-            */
+            var houseMembers = GetLegislatorsBase<CongressMembersResult.Rootobject>(houseMembersUri, _congressApiSvc).Result;
+            var senators = GetLegislatorsBase<SenateMembersResult.Rootobject>(senateMembersUri, _congressApiSvc).Result;
 
-            //OPTION2;
-            var houseMembers2 = GetLegislatorsBase<CongressMembersResult.Rootobject>(houseMembersUri, _congressApiSvc).Result;
-            var senators2 = GetLegislatorsBase<SenateMembersResult.Rootobject>(senateMembersUri, _congressApiSvc).Result;
-            houseMembers2.AddRange(senators2);
+            houseMembers.AddRange(senators);
 
-            var results = new List<Legislator>();
-            foreach (var l in houseMembers2)
-                results.Add(Legislator.TranformToLegislator(l));
-            return results;
-        }
-
-        private async Task<T> GetMemberResults<T>(string legislatorsUri, ApiBase apiSvc) where T : class
-        {
-            try
-            {
-                var client = apiSvc.CreateHttpClient();
-
-                //TODO Ensure this is async
-                var response = client.GetAsync(legislatorsUri).Result;
-                //var response = await client.GetAsync(legislatorsByZipUri); //TODO Find out why this fails
-                //http://stackoverflow.com/questions/10343632/httpclient-getasync-never-returns-when-using-await-async
-
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseText = response.Content.ReadAsStringAsync().Result;
-                    //var responseText = await response.Content.ReadAsStringAsync();
-
-                    var results = JsonConvert.DeserializeObject<T>(responseText);
-
-                    return results;
-                }
-                else
-                {
-                    _logger.Error($"Error occurred retrieving legislators using URI: {legislatorsUri}");
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error("Error retrieving legislators.", e);
-            }
-
-            return null;
+            return houseMembers;
         }
 
         private async Task<List<ILegislator>> GetLegislatorsBase<T>(string legislatorsUri, ApiBase apiSvc) where T : ILegislatorResult
