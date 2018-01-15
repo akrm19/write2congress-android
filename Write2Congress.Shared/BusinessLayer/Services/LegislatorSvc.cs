@@ -19,10 +19,12 @@ namespace Write2Congress.Shared.BusinessLayer.Services
     public class LegislatorSvc : ServiceBase
     {
         private ProPublicaCongressApi _congressApiSvc;
+        private UnitedStatesIoApi _usIoApiSvc;
 
         public LegislatorSvc(IMyLogger logger) : base(logger)
         {
             _congressApiSvc = new ProPublicaCongressApi(logger);
+            _usIoApiSvc = new UnitedStatesIoApi(logger);
         }
 
         /*
@@ -57,7 +59,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         {
             //Possible options: 450x550 and original (typically 675x825, but can vary)
             var imageSize = "225x275";
-            var uri = $@"http://theunitedstates.io/images/congress/{imageSize}/{legislator.BioguideId}.jpg";
+            var uri = $@"http://theunitedstates.io/images/congress/{imageSize}/{legislator.IdBioguide}.jpg";
 
             byte[] result;
 
@@ -82,13 +84,33 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             var senateMembersUri = "115/senate/members.json";
             var houseMembersUri = "115/house/members.json";
 
-
             var houseMembers = GetLegislatorsBase<CongressMembersResult.Rootobject>(houseMembersUri, _congressApiSvc).Result;
             var senators = GetLegislatorsBase<SenateMembersResult.Rootobject>(senateMembersUri, _congressApiSvc).Result;
 
             houseMembers.AddRange(senators);
 
+
             return houseMembers;
+        }
+
+        public List<ILegislator> GetLegislatorsFromUsIoApi()
+        {
+            var usIoLegislators = "congress-legislators/legislators-current.json";
+            Func<string, string> updateResult = r => string.Format("{{\"results\":{0}}}", r);
+
+            var legislators = new List<ILegislator>();
+
+            try
+            {
+                var legislatorsResults = GetMemberResults<DomainModel.ApiModels.UnitedStatesIo.CongressLegislatorsResult.Rootobject>(usIoLegislators, _usIoApiSvc, updateResult).Result;
+                legislators = (legislatorsResults as ILegislatorResult).GetLegislatorsResult();
+            }
+            catch(Exception e)
+            {
+                _logger.Error("Error occurred retrieving Legislators from UnitedStatesIo API", e);
+            }
+
+            return legislators;
         }
 
         private async Task<List<ILegislator>> GetLegislatorsBase<T>(string legislatorsUri, ApiBase apiSvc) where T : ILegislatorResult

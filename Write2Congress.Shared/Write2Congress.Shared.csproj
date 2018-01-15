@@ -47,6 +47,7 @@
     <Compile Include="BusinessLayer\LegislatorManager.cs" />
     <Compile Include="BusinessLayer\LetterManager.cs" />
     <Compile Include="BusinessLayer\Services\APIs\ApiBase.cs" />
+    <Compile Include="BusinessLayer\Services\APIs\UnitedStatesIoApi.cs" />
     <Compile Include="BusinessLayer\Services\BillSvc.cs" />
     <Compile Include="BusinessLayer\Services\CommitteeSvc.cs" />
     <Compile Include="BusinessLayer\Services\LegislatorSvc.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="DomainModel\ApiModels\ProPublica\BaseResult.cs" />
     <Compile Include="DomainModel\ApiModels\ProPublica\CongressMembersResult.cs" />
     <Compile Include="DomainModel\ApiModels\ProPublica\SenateMembersResult.cs" />
+    <Compile Include="DomainModel\ApiModels\UnitedStatesIo\CongressLegislatorsResult.cs" />
     <Compile Include="DomainModel\Bill.cs" />
     <Compile Include="DomainModel\BillStatus.cs" />
     <Compile Include="DomainModel\BillType.cs" />

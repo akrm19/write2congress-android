@@ -87,7 +87,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             DateTime ILegislator.Birthday
             {
                 get { return DataTransformationUtil.DateFromSunlightTime(date_of_birth); }
-                set { }
+                set {}
             }
             Party ILegislator.Party
             {
@@ -96,11 +96,6 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             }
 
             LegislativeBody ILegislator.Chamber { get; set; }
-            //{
-            //    get { }// return _chamber; }
-            //    set { }//                _chamber }
-            //}
-            //protected LegislativeBody _chamber = LegislativeBody.Unknown;
 
             StateOrTerritory ILegislator.State
             {
@@ -196,10 +191,27 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                 get { return seniority ?? string.Empty; }
                 set { seniority = value; }
             }
-            string ILegislator.BioguideId
+            string ILegislator.IdBioguide
             {
                 get { return id ?? string.Empty; }
                 set { id = value; }
+            }
+            string ILegislator.IdGovTrack
+            {
+                get { return govtrack_id ?? string.Empty; }
+                set { govtrack_id = value; }
+            }
+            string ILegislator.IdThomas
+            {
+                get;  set;
+            }
+            string ILegislator.IdVoteSmart
+            {
+                get; set;
+            }
+            string ILegislator.IdOpenSecrets
+            {
+                get; set;
             }
         }
     }

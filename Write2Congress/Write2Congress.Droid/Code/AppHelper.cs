@@ -140,10 +140,10 @@ namespace Write2Congress.Droid.Code
         {
             Bitmap imageBitmap = null;
 
-            if (string.IsNullOrWhiteSpace(legislator.BioguideId))
+            if (string.IsNullOrWhiteSpace(legislator.IdBioguide))
                 return imageBitmap;
 
-            var url = string.Format("https://theunitedstates.io/images/congress/225x275/{0}.jpg", legislator.BioguideId);
+            var url = string.Format("https://theunitedstates.io/images/congress/225x275/{0}.jpg", legislator.IdBioguide);
             try
             {
                 using (var webClient = new WebClient())

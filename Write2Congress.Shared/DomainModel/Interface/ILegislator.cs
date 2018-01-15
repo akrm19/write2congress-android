@@ -37,6 +37,10 @@ namespace Write2Congress.Shared.DomainModel.Interface
         float VotesWithPartyPercent { get; set; }
 
         string Senority { get; set; }
-        string BioguideId { get; set; }
+        string IdBioguide { get; set; }
+        string IdGovTrack { get; set; }
+        string IdThomas { get; set; }
+        string IdVoteSmart { get; set; }
+        string IdOpenSecrets { get; set; }
     }
 }

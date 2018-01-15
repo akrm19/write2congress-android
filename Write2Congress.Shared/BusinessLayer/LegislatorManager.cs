@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -47,7 +49,47 @@ namespace Write2Congress.Shared.BusinessLayer
             foreach (var legislator in iLegislators)
                 legislators.Add(Legislator.TranformToLegislator(legislator));
 
+            var legislatorFromUsIoApi = _legislatorSvc.GetLegislatorsFromUsIoApi();
+
+            if(legislatorFromUsIoApi != null && legislatorFromUsIoApi.Count > 0)
+                AddMissingDataToLegislatorGroup(legislators, legislatorFromUsIoApi);
+
             return legislators;
+        }
+
+        private void AddMissingDataToLegislatorGroup(List<Legislator> toAddTo, List<ILegislator> source)
+        {
+            foreach(var legislator in toAddTo)
+            {
+                var legislatorMatch = source.Where
+                    (l => 
+                        l.IdBioguide.Equals(legislator.IdBioguide, StringComparison.CurrentCultureIgnoreCase)
+                        && legislator.FirstName.Equals(l.FirstName, StringComparison.CurrentCultureIgnoreCase)
+                        && legislator.LastName.Equals(l.LastName, StringComparison.CurrentCultureIgnoreCase)
+                    ).FirstOrDefault();
+
+                if (legislatorMatch == null) continue;
+
+                AddMissingDataToLegislator(legislator, legislatorMatch);
+            }
+        }
+
+        private void AddMissingDataToLegislator(Legislator legislator, ILegislator legistlatorWithNewData)
+        {
+            if (legislator.Gender == Gender.NA && legistlatorWithNewData.Gender != Gender.NA)
+                legislator.Gender = legistlatorWithNewData.Gender;
+
+            if (legislator.TermStartDate == DateTime.MinValue && legistlatorWithNewData.TermStartDate != DateTime.MinValue)
+                legislator.TermStartDate = legistlatorWithNewData.TermStartDate;
+
+            if (legislator.TermEndDate == DateTime.MinValue && legistlatorWithNewData.TermEndDate != DateTime.MinValue)
+                legislator.TermEndDate = legistlatorWithNewData.TermEndDate;
+
+            if (string.IsNullOrWhiteSpace(legislator.IdVoteSmart) && !string.IsNullOrWhiteSpace(legistlatorWithNewData.IdVoteSmart))
+                legislator.IdVoteSmart = legistlatorWithNewData.IdVoteSmart;
+
+            if (string.IsNullOrWhiteSpace(legislator.IdOpenSecrets) && !string.IsNullOrWhiteSpace(legistlatorWithNewData.IdOpenSecrets))
+                legislator.IdOpenSecrets = legistlatorWithNewData.IdOpenSecrets;
         }
 
         public bool SaveLegislatorToFile(string filePath, List<Legislator> legislators)

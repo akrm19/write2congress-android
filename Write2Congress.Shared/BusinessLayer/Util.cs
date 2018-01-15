@@ -243,7 +243,7 @@ namespace Write2Congress.Shared.BusinessLayer
                     Gender = DataTransformationUtil.GenderFromString(l.gender),
                     TermStartDate = DataTransformationUtil.DateFromSunlightTime(l.term_start),
                     TermEndDate = DataTransformationUtil.DateFromSunlightTime(l.term_end),
-                    BioguideId = l.bioguide_id ?? string.Empty,
+                    IdBioguide = l.bioguide_id ?? string.Empty,
 
                     OfficeAddress = string.IsNullOrWhiteSpace(l.office)
                         ? new ContactMethod(ContactType.NotSet, string.Empty)
@@ -324,7 +324,7 @@ namespace Write2Congress.Shared.BusinessLayer
                     ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
                         ? new ContactMethod(ContactType.NotSet, string.Empty)
                         : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
-                    BioguideId = l.id ?? string.Empty, 
+                    IdBioguide = l.id ?? string.Empty, 
 
 
                     //TODO RM: These do not exist in new ProPublica source
@@ -725,7 +725,7 @@ namespace Write2Congress.Shared.BusinessLayer
                 ContactSite = string.IsNullOrWhiteSpace(l.contact_form)
                      ? new ContactMethod(ContactType.NotSet, string.Empty)
                      : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
-                BioguideId = l.id ?? string.Empty,
+                IdBioguide = l.id ?? string.Empty,
 
 
                 //TODO RM: These do not exist in new ProPublica source

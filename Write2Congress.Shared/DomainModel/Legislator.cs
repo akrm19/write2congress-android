@@ -39,7 +39,12 @@ namespace Write2Congress.Shared.DomainModel
         public float VotesWithPartyPercent { get; set; }
 
         public string Senority { get; set; }
-        public string BioguideId { get; set; }
+
+        public string IdBioguide { get; set; }
+        public string IdGovTrack { get; set; }
+        public string IdThomas { get; set; }
+        public string IdVoteSmart { get; set; }
+        public string IdOpenSecrets { get; set; }
 
         public string FullName()
         {
@@ -73,7 +78,7 @@ namespace Write2Congress.Shared.DomainModel
         {
             var newLegislator = new Legislator()
             {
-                BioguideId = legislitor.BioguideId,
+                IdBioguide = legislitor.IdBioguide,
                 Birthday = legislitor.Birthday,
                 Chamber = legislitor.Chamber,
                 ContactSite = legislitor.ContactSite,
@@ -95,7 +100,12 @@ namespace Write2Congress.Shared.DomainModel
                 TwitterId = legislitor.TwitterId,
                 VotesWithPartyPercent = legislitor.VotesWithPartyPercent,
                 Website = legislitor.Website,
-                YouTubeId = legislitor.YouTubeId
+                YouTubeId = legislitor.YouTubeId,
+
+                IdGovTrack  = legislitor.IdGovTrack,
+                IdThomas = legislitor.IdThomas,
+                IdVoteSmart = legislitor.IdVoteSmart,
+                IdOpenSecrets = legislitor.IdOpenSecrets
             };
 
             return newLegislator;

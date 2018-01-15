@@ -325,7 +325,7 @@ namespace Write2Congress.Droid.Fragments
                 var cm = passedParams.Item2;
 
                 return cm.GetCommitteesForLegislator(legislatorId);
-            }, new Tuple<string, CommitteeManager>(_legislator.BioguideId, _committeeManager));
+            }, new Tuple<string, CommitteeManager>(_legislator.IdBioguide, _committeeManager));
 
             getCommitteesTask.ContinueWith((antecedent) =>
             {
@@ -361,7 +361,7 @@ namespace Write2Congress.Droid.Fragments
                 var isThereMoreVotes = vm.IsThereMoreResultsForLastCall();
 
                 return new Tuple<List<Vote>, bool>(results, isThereMoreVotes);
-            }, new Tuple<string, VoteManager, int>(_legislator.BioguideId, _voteManager, _votesCurrentPage));
+            }, new Tuple<string, VoteManager, int>(_legislator.IdBioguide, _voteManager, _votesCurrentPage));
 
             getVotesTask.ContinueWith((antecedent) =>
             {
@@ -426,7 +426,7 @@ namespace Write2Congress.Droid.Fragments
                 var isThereMoreVotes = bm.IsThereMoreResultsForLastCall();
 
                 return new Tuple<List<Bill>, bool, BillViewerKind>(results, isThereMoreVotes, mode);
-            }, new Tuple<string, BillManager, int, int>(_legislator.BioguideId, _billManager, currentPage, (int)billViewerKind));
+            }, new Tuple<string, BillManager, int, int>(_legislator.IdBioguide, _billManager, currentPage, (int)billViewerKind));
 
             getBillsTask.ContinueWith((antecedent) =>
             {

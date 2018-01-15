@@ -72,8 +72,10 @@ namespace Write2Congress.Shared.BusinessLayer
 
             switch (chamber.ToLower())
             {
+                case "sen":
                 case "senate":
                     return LegislativeBody.Senate;
+                case "rep":
                 case "house":
                     return LegislativeBody.House;
                 case "joint":
