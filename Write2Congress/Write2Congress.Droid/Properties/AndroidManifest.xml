@@ -9,6 +9,7 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/MyAppTheme"></application>
 	<!--
+  <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal">
   <application android:name="afhcan.mobile.androidapp.BaseApplication" android:label="AFHCAN" android:icon="@drawable/ic_launcher" android:theme="@style/tConsultAppTheme" android:enabled="true" android:largeHeap="true"></application>
   -->
 </manifest>
