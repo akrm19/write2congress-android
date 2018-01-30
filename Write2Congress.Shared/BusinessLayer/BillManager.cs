@@ -21,7 +21,9 @@ namespace Write2Congress.Shared.BusinessLayer
 
         public bool IsThereMoreResultsForLastCall()
         {
-            return _billSvc.IsThereMoreResults();
+            return false;
+            //TODO RM: Implement
+            //return _billSvc.IsThereMoreResults();
         }
 
         public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page)
@@ -34,7 +36,10 @@ namespace Write2Congress.Shared.BusinessLayer
             if (resultsPerPage < 1)
                 resultsPerPage = _defautlResultsPerPage;
 
-            return _billSvc.GetBillsSponsoredbyLegislator(legislatorBioguideId, page, resultsPerPage);
+            //TODO RM: Change IBills to bills
+            var billsResult = _billSvc.GetBillsIntroducedByLegislator(legislatorBioguideId, page, resultsPerPage);
+
+            return new List<Bill>();
         }
 
         public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page)

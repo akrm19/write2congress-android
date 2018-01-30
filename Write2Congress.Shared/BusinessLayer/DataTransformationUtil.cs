@@ -202,5 +202,41 @@ namespace Write2Congress.Shared.BusinessLayer
                     return LegislativeBillVote.Na;
             }
         }
+
+        public static BillStatus LastBillActionFromProPublicaBill(DomainModel.ApiModels.ProPublica.BillResult.Bill bill)
+        {
+            var lastMajorActionText = bill.latest_major_action;
+            var lastMajorActionDate = DateFromSunlightTime(bill.latest_major_action_date);
+
+            return new BillStatus(BillStatusKind.Unknown, lastMajorActionDate, lastMajorActionText);
+        }
+
+        public static BillStatusKind BillStatusFromProPublicaBill(DomainModel.ApiModels.ProPublica.BillResult.Bill bill)
+        {
+            if (!string.IsNullOrWhiteSpace(bill.vetoed))
+            {
+                var vetoedDate = DateFromSunlightTime(bill.vetoed);
+
+                if (vetoedDate != DateTime.MinValue)
+                    return BillStatusKind.Vetoed;
+            }
+
+            if (!string.IsNullOrWhiteSpace(bill.enacted))
+            {
+                var billPassed = bill.latest_major_action.StartsWith("Became Public Law", StringComparison.OrdinalIgnoreCase);
+                if (billPassed)
+                    return BillStatusKind.Passed;
+
+                var enactedDate = DateFromSunlightTime(bill.enacted);
+                if (enactedDate != DateTime.MinValue)
+                    return BillStatusKind.Enacted;
+            }
+
+
+            if (bill.active)
+                return BillStatusKind.InCongress;
+
+            return BillStatusKind.Unknown;
+        }
     }
 }

@@ -59,8 +59,10 @@
     <Compile Include="BusinessLayer\VoteManager.cs" />
     <Compile Include="DomainModel\ApiModels\ProPublica\BaseLegislatorsResult.cs" />
     <Compile Include="DomainModel\ApiModels\ProPublica\BaseResult.cs" />
+    <Compile Include="DomainModel\ApiModels\ProPublica\BillResult.cs" />
     <Compile Include="DomainModel\ApiModels\ProPublica\CongressMembersResult.cs" />
     <Compile Include="DomainModel\ApiModels\ProPublica\SenateMembersResult.cs" />
+    <Compile Include="DomainModel\ApiModels\ProPublica\VotesResult.cs" />
     <Compile Include="DomainModel\ApiModels\UnitedStatesIo\CongressLegislatorsResult.cs" />
     <Compile Include="DomainModel\Bill.cs" />
     <Compile Include="DomainModel\BillStatus.cs" />
@@ -76,6 +78,8 @@
     <Compile Include="DomainModel\Enum\Party.cs" />
     <Compile Include="DomainModel\Enum\State.cs" />
     <Compile Include="DomainModel\Enum\VoteTypeKind.cs" />
+    <Compile Include="DomainModel\Interface\IBill.cs" />
+    <Compile Include="DomainModel\Interface\IBillResult.cs" />
     <Compile Include="DomainModel\Interface\ILegislator.cs" />
     <Compile Include="DomainModel\Interface\ILegislatorResult.cs" />
     <Compile Include="DomainModel\Interface\ILetterProvider.cs" />

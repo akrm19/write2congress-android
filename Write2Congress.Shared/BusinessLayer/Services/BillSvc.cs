@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Write2Congress.Shared.BusinessLayer.Services.APIs;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.BusinessLayer.Services
 {
-    public class BillSvc : SunlightApi
+    public class BillSvc : ServiceBase
     {
         private static int _defaultResultsPage = 30;
         private static string _billsBase = "bills?";
@@ -17,16 +18,71 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         private static string _page = "&page=";
         private Util _util;
 
-        public BillSvc(IMyLogger logger)
+        private ProPublicaCongressApi _congressApiSvc;
+
+        public BillSvc(IMyLogger logger) : base(logger)
         {
-            SetLogger(logger);
+            _congressApiSvc = new ProPublicaCongressApi(logger);
             _util = new Util(logger);
         }
 
-        public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage)
+
+        //TODO RM: Update method call, the resutls per page has to be 20 
+        public List<IBill> GetBillsIntroducedByLegislator(string legislatorBioguideId, int page = 1, int resultsPerPage = 20)
         {
-            var query = "sponsor_id__in=" + legislatorBioguideId;
-            var bills = GetBillsFromQuery(query, page, resultsPerPage);
+            var resultsperPageForSvc = 20;
+
+            page = page <= 1
+                ? page = 0
+                : page - 1;
+
+            var resultsOffset = page * resultsperPageForSvc;
+
+            //https://api.propublica.org/congress/v1/members/{member-id}/bills/{type}.json
+            //var query = "sponsor_id__in=" + legislatorBioguideId;
+            var query = $"members/{legislatorBioguideId}/bills/introduced.json?offset={resultsOffset}";
+
+            //var bills = GetBillsFromQuery222(query, page, resultsPerPage);
+            //
+            //return bills;
+
+            Func<string, string> updateResult = r => string.Format("{{\"results\":{0}}}", r);
+
+            var bills = new List<IBill>();
+
+            try
+            {
+                var legislatorsResults = GetMemberResults<DomainModel.ApiModels.ProPublica.BillResult.Rootobject>(query, _congressApiSvc, updateResult).Result;
+                bills = (legislatorsResults as IBillResult).GeBillResult();
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Error occurred retrieving Legislators from UnitedStatesIo API", e);
+            }
+
+            return bills;
+        }
+
+        //private List<IBill> GetBillsFromQuery222(string query, int page, int resultsPerPage)
+        private List<IBill> GetBillsFromQuery222(string query, ApiBase apiSvc)
+        {
+
+            var bills = new List<IBill>();
+
+            try
+            {
+                var uri = CreateUri(query, page, resultsPerPage);
+                var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
+                PopulatePageInfoAndTotalResultCount(result);
+
+                bills = _util.BillsFromSunlightBillResult(result);
+
+                return bills;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error: Could not retrieve Bills from query {query}", ex);
+            }
 
             return bills;
         }
