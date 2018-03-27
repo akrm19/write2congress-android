@@ -156,6 +156,53 @@ namespace Write2Congress.Shared.BusinessLayer
         }
 
         /// <summary>
+        ///  The type for this bill. For the bill “H.R. 4921”, the bill_type represents the 
+        /// “H.R.” part. Bill types can be: hr, hres, hjres, hconres, s, sres, sjres, sconres.
+        /// </summary>
+        /// <param name="bill_type"></param>
+        /// <returns></returns>
+        public static BillType BillTypeFromText(string type)
+        {
+            if (string.IsNullOrWhiteSpace(type))
+                return new BillType(BillTypeKind.Empty, string.Empty);
+
+            var billTypeKind = BillTypeKind.Empty;
+
+            switch (type.ToLower())
+            {
+                case "hr":
+                    billTypeKind = BillTypeKind.hr;
+                    break;
+                case "hres":
+                    billTypeKind = BillTypeKind.hres;
+                    break;
+                case "hjres":
+                    billTypeKind = BillTypeKind.hjres;
+                    break;
+                case "hconres":
+                    billTypeKind = BillTypeKind.hconres;
+                    break;
+                case "s":
+                    billTypeKind = BillTypeKind.s;
+                    break;
+                case "sres":
+                    billTypeKind = BillTypeKind.sres;
+                    break;
+                case "sjres":
+                    billTypeKind = BillTypeKind.sjres;
+                    break;
+                case "sconres":
+                    billTypeKind = BillTypeKind.sconres;
+                    break;
+                default:
+                    break;
+            }
+
+            return new BillType(billTypeKind, type);
+        }
+
+        /*
+        /// <summary>
         /// The type of action. Always present. Can be “action” (generic), 
         /// “vote” (passage vote), “vote-aux” (cloture vote), “vetoed”, 
         /// “topresident”, and “enacted”. There can be other values, but 
@@ -186,6 +233,7 @@ namespace Write2Congress.Shared.BusinessLayer
                     return BillActionType.Unknown;
             }
         }
+        */
 
         public static LegislativeBillVote LegislativeBillVoteFromSunlight(string passageResult)
         {
@@ -202,41 +250,83 @@ namespace Write2Congress.Shared.BusinessLayer
                     return LegislativeBillVote.Na;
             }
         }
+        public static LegislativeBody ChamberFromBillProPublica(DomainModel.ApiModels.ProPublica.BillResult.Bill bill)
+        {
+            if (bill == null || string.IsNullOrWhiteSpace(bill.sponsor_title))
+                return LegislativeBody.Unknown;
 
-        public static BillStatus LastBillActionFromProPublicaBill(DomainModel.ApiModels.ProPublica.BillResult.Bill bill)
+            if (bill.sponsor_title.StartsWith("rep", StringComparison.OrdinalIgnoreCase))
+                return LegislativeBody.House;
+
+            else if (bill.sponsor_title.StartsWith("sen", StringComparison.OrdinalIgnoreCase))
+                return LegislativeBody.Senate;
+
+            else
+                return LegislativeBody.Unknown;
+        }
+
+        public static BillAction LastBillActionFromProPublicaBill(DomainModel.ApiModels.ProPublica.BillResult.Bill bill)
         {
             var lastMajorActionText = bill.latest_major_action;
             var lastMajorActionDate = DateFromSunlightTime(bill.latest_major_action_date);
+            var lastMajorActionType = BillActionTypeFromText(lastMajorActionText);
 
-            return new BillStatus(BillStatusKind.Unknown, lastMajorActionDate, lastMajorActionText);
+            return new BillAction(lastMajorActionDate, lastMajorActionText, lastMajorActionType);
         }
 
-        public static BillStatusKind BillStatusFromProPublicaBill(DomainModel.ApiModels.ProPublica.BillResult.Bill bill)
+        public static BillActionType BillActionTypeFromText(string text)
+        {
+            text = text.ToLower();
+
+            if (text.Contains("became public law"))
+                return BillActionType.Enacted;
+
+            if (text.Contains("reffered to"))
+            {
+                if (text.Contains("subcommittee"))
+                    return BillActionType.ReferredToSubcommittee;
+
+                if (text.Contains("committee"))
+                    return BillActionType.ReferrdToCommittee;
+            }
+
+            if (text.Contains("hearings held"))
+                return BillActionType.HearingsHeld;
+
+            return BillActionType.Unknown;
+        }
+
+        public static BillStatus BillStatusFromProPublicaBill(DomainModel.ApiModels.ProPublica.BillResult.Bill bill)
         {
             if (!string.IsNullOrWhiteSpace(bill.vetoed))
             {
                 var vetoedDate = DateFromSunlightTime(bill.vetoed);
 
                 if (vetoedDate != DateTime.MinValue)
-                    return BillStatusKind.Vetoed;
+                    return new BillStatus(BillStatusKind.Vetoed, vetoedDate);
             }
 
             if (!string.IsNullOrWhiteSpace(bill.enacted))
             {
-                var billPassed = bill.latest_major_action.StartsWith("Became Public Law", StringComparison.OrdinalIgnoreCase);
-                if (billPassed)
-                    return BillStatusKind.Passed;
-
                 var enactedDate = DateFromSunlightTime(bill.enacted);
+                var billPassedTextIsOk = bill.latest_major_action.StartsWith("Became Public Law", StringComparison.OrdinalIgnoreCase);
+
                 if (enactedDate != DateTime.MinValue)
-                    return BillStatusKind.Enacted;
+                {
+                    return billPassedTextIsOk
+                        ? new BillStatus(BillStatusKind.Enacted, enactedDate, bill.latest_major_action)
+                        : new BillStatus(BillStatusKind.Enacted, enactedDate);
+
+                }
             }
 
+            if (DateFromSunlightTime(bill.senate_passage) != DateTime.MinValue && DateFromSunlightTime(bill.house_passage) != DateTime.MinValue)
+                return new BillStatus(BillStatusKind.AwaitingSignature);
 
             if (bill.active)
-                return BillStatusKind.InCongress;
+                return new BillStatus(BillStatusKind.InCongress);
 
-            return BillStatusKind.Unknown;
+            return new BillStatus(BillStatusKind.Unknown);
         }
     }
 }

@@ -5,13 +5,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class Bill
+    public class Bill 
     {
-        //CUSTOM ADDED METHODS
-        public BillStatus GetBillStatus()
+        public Bill() { }
+
+        public static Bill TransformToBill(IBill bill)
+        {
+            var newBill = new Bill
+            {
+                Chamber = bill.Chamber,
+                Congress = bill.Congress,
+                CosponsorsCount = bill.CoSponsorCount,
+                GetBillStatus = bill.Status,
+                DateIntroduced = bill.DateIntroduced,
+                DateOfLastVote = bill.DateLastVoted,
+                Id = bill.BillId,
+                //TODO RM: <<<Continue Work Here >>>> 
+                //Try to do History. Or modify it. 
+                //Continue to create a Bill from IBill so it can
+                // be used in the services
+                //History = CreateHistoryFromIBill(bill),
+                LastAction = bill.LastAction,
+                Nicknames = new string[0],
+                Number = bill.BillNumber,
+                SponsorId = bill.SponsorBioId,
+                Summary = bill.Summary,
+                Titles = bill.Titles,
+                Type = bill.Type,
+                Urls = UrlsFromIBill(bill)
+            };
+
+            return newBill;
+        }
+
+        private static List<string> UrlsFromIBill(IBill bill)
+        {
+            var result = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(bill.CongressDotGovUrl))
+                result.Add(bill.CongressDotGovUrl);
+
+            if (!string.IsNullOrWhiteSpace(bill.GovTrackUrl))
+                result.Add(bill.GovTrackUrl);
+
+            return result;
+        }
+
+
+        public BillStatus GetBillStatus { get; set; }
         {
             if (History.AwaitingSignature)
                 return new BillStatus(BillStatusKind.AwaitingSignature, History.AwaitingSignatureSince);
@@ -94,19 +139,14 @@ namespace Write2Congress.Shared.DomainModel
         /// An array of bioguide IDs for each cosponsor of the bill. 
         /// Bills do not always have cosponsors.
         /// </summary>
-        public string[] CosponsorIds { get; set; }
+        //public string[] CosponsorIds { get; set; }
 
         /// <summary>
         /// The number of active cosponsors of the bill.
         /// </summary>
         public int CosponsorsCount
         {
-            get
-            {
-                return CosponsorIds != null
-                    ? CosponsorIds.Count()
-                    : 0;
-            }
+            get; set;
         }
 
         /// <summary>
@@ -123,7 +163,7 @@ namespace Write2Congress.Shared.DomainModel
         /// Time fields can hold either dates or times - Congress is 
         /// inconsistent about providing specific timestamps
         /// </summary>
-        public BillHistory History { get; set; }
+        //public BillHistory History { get; set; }
 
         /// <summary>
         /// The date this bill was introduced.
@@ -170,9 +210,9 @@ namespace Write2Congress.Shared.DomainModel
         //public DateTime DateLastVersionPublished { get; set; }
 
         /// <summary>
-        /// The number for this bill. For the bill “H.R. 4921”, the number is 4921.
+        /// The number for this bill. Example bill number “H.R. 4921”.
         /// </summary>
-        public int Number { get; set; }
+        public string Number { get; set; }
 
         /// <summary>
         /// An array of common nicknames for a bill that don’t appear in official data. 
@@ -218,7 +258,7 @@ namespace Write2Congress.Shared.DomainModel
         /// Useful when you want to show only the first part of a bill’s summary, 
         /// but don’t want to download a potentially large amount of text.
         /// </summary>
-        public string SummaryCappedAt1k { get; set; }
+        //public string SummaryCappedAt1k { get; set; }
         
         /// <summary>
         /// An object with URLs for this bill’s landing page on Congress.gov, GovTrack.us, and OpenCongress.org.
@@ -231,11 +271,12 @@ namespace Write2Congress.Shared.DomainModel
         /// An array of bioguide IDs for each legislator who has 
         /// withdrawn their cosponsorship of the bill.
         /// </summary>
-        public List<string> WithdrawnCosponsorIds { get; set; }
+        //public List<string> WithdrawnCosponsorIds { get; set; }
 
         /// <summary>
         /// The number of withdrawn cosponsors of the bill.
         /// </summary>
+        /*
         public int WithdrawnCosponsorIdsCount
         {
             get
@@ -245,6 +286,7 @@ namespace Write2Congress.Shared.DomainModel
                     : 0;
             }
         }
+        */
 
         /// <summary>
         /// The upcoming field has an array of objects describing 
@@ -257,8 +299,8 @@ namespace Write2Congress.Shared.DomainModel
         /// what is scheduled on the floor, and it can change at any time.
         /// We do our best to automatically remove entries when a bill has 
         /// been yanked from the floor schedule.
-        /// </summary>
-        public List<UpcomingAction> UpcomingActions { get; set; }
+        /// <//summary>
+        //public List<UpcomingAction> UpcomingActions { get; set; }
     }
 
     /// <summary>
@@ -384,10 +426,42 @@ namespace Write2Congress.Shared.DomainModel
 
     public class BillAction
     {
+        public BillAction(DateTime date, string text, BillActionType type = BillActionType.Unknown)
+        {
+            Date = date;
+            Text = text;
+            Type = type;
+        }
+
+        public BillAction()
+        {
+            Date = DateTime.MinValue;
+            Text = string.Empty;
+            Type = BillActionType.Unknown;
+        }
+
+        public bool IsEmpty()
+        {
+            return (string.IsNullOrWhiteSpace(Text) || Date == null);
+        }
+
         /// <summary>
         /// The date or time the action occurred. Always present.
         /// </summary>
         public DateTime Date { get; set; }
+
+        /// <summary>
+        /// The official text that describes this action. Always present.
+        /// </summary>
+        public string Text { get; set; }
+
+        /// <summary>
+        /// The type of action. Always present. Can be “action” (generic), 
+        /// “vote” (passage vote), “vote-aux” (cloture vote), “vetoed”, 
+        /// “topresident”, and “enacted”. There can be other values, but 
+        /// these are the only ones we support.
+        /// </summary>
+        public BillActionType Type { get; set; }
 
         //public string action_code { get; set; }
 
@@ -426,19 +500,6 @@ namespace Write2Congress.Shared.DomainModel
         /// </summary>
         //public string result { get; set; }
 
-        /// <summary>
-        /// The official text that describes this action. Always present.
-        /// </summary>
-        public string Text { get; set; }
-
-        /// <summary>
-        /// The type of action. Always present. Can be “action” (generic), 
-        /// “vote” (passage vote), “vote-aux” (cloture vote), “vetoed”, 
-        /// “topresident”, and “enacted”. There can be other values, but 
-        /// these are the only ones we support.
-        /// </summary>
-        public BillActionType Type { get; set; }
-
         ///public string under { get; set; }
 
         /// <summary>
@@ -470,10 +531,16 @@ namespace Write2Congress.Shared.DomainModel
         ClotureVote,
         [Description("Vetoed")]
         Vetoed,
-        [Description("topresident")]
+        [Description("To President")]
         ToPresident,
-        [Description("enacted")]
+        [Description("Enacted")]
         Enacted,
+        [Description("Referred to Subcommittee")]
+        ReferredToSubcommittee,
+        [Description("Referred to Committee")]
+        ReferrdToCommittee,
+        [Description("Hearings Held")]
+        HearingsHeld,
         Unknown
     }
 

@@ -490,29 +490,30 @@ namespace Write2Congress.Shared.BusinessLayer
                 {
                     Chamber = DataTransformationUtil.LegislativeBodyFromSunlight(b.chamber),
                     Congress = b.congress ?? 0,
-                    CosponsorIds = b.cosponsor_ids ?? new string[0],
+                    //CosponsorIds = b.cosponsor_ids ?? new string[0],
                     DateIntroduced = DataTransformationUtil.DateFromSunlightTime(b.introduced_on),
                     DateOfLastVote = DataTransformationUtil.DateFromSunlightTime(b.last_vote_at),
-                    History = HistoryFromSunlight(b.history),
+                    //History = HistoryFromSunlight(b.history),
                     Id = b.bill_id ?? string.Empty,
                     LastAction = ActionFromSunlight(b.last_action),
                     Nicknames = b.Nicknames ?? new string[0],
-                    Number = b.number ?? 0,
+                    Number = b.number.ToString() ?? b.number.ToString(),
                     SponsorId = b.sponsor_id ?? string.Empty,
                     Summary = b.summary ?? string.Empty,
-                    SummaryCappedAt1k = b.summary_short ?? string.Empty,
+                    //SummaryCappedAt1k = b.summary_short ?? string.Empty,
                     Titles = new BillTitles()
                     {
                         OfficialTile = b.official_title ?? string.Empty,
                         PopularTitlePerLoc = b.popular_title ?? string.Empty,
                         ShortTitle = b.short_title ?? string.Empty
-                    },
-                    Type = BillTypeFromSunlight(b.bill_type),
-                    UpcomingActions = UpcomingBillActionFromSunlight(b.upcoming),
-                    Urls = UrlsFromSunlightBillUrls(b.urls),
-                    WithdrawnCosponsorIds = b.withdrawn_cosponsor_ids == null
-                        ? new List<string>()
-                        : new List<string>(b.withdrawn_cosponsor_ids)
+                    }
+                    //,
+                    //Type = BillTypeFromSunlight(b.bill_type),
+                    //UpcomingActions = UpcomingBillActionFromSunlight(b.upcoming),
+                    //Urls = UrlsFromSunlightBillUrls(b.urls),
+                    //WithdrawnCosponsorIds = b.withdrawn_cosponsor_ids == null
+                    //    ? new List<string>()
+                    //    : new List<string>(b.withdrawn_cosponsor_ids)
                 };
 
                 return bill;
@@ -522,22 +523,6 @@ namespace Write2Congress.Shared.BusinessLayer
                 _logger.Error("Error encoutnered creating Bill from SunlightBill.", ex);
                 return null;
             }
-        }
-
-        private static List<string> UrlsFromSunlightBillUrls(SunlightBillResult.Urls urls)
-        {
-            var result = new List<string>();
-
-            if (urls == null)
-                return result;
-
-            if (!string.IsNullOrWhiteSpace(urls.congress))
-                result.Add(urls.congress);
-
-            if (!string.IsNullOrWhiteSpace(urls.govtrack))
-                result.Add(urls.govtrack);
-
-            return result;
         }
 
         private static List<UpcomingAction> UpcomingBillActionFromSunlight(SunlightBillResult.Upcoming[] upcoming)
@@ -563,52 +548,6 @@ namespace Write2Congress.Shared.BusinessLayer
             return upcomingActions;
         }
 
-        /// <summary>
-        ///  The type for this bill. For the bill “H.R. 4921”, the bill_type represents the 
-        /// “H.R.” part. Bill types can be: hr, hres, hjres, hconres, s, sres, sjres, sconres.
-        /// </summary>
-        /// <param name="bill_type"></param>
-        /// <returns></returns>
-        private static BillType BillTypeFromSunlight(string type)
-        {
-            if (string.IsNullOrWhiteSpace(type))
-                return new BillType(BillTypeKind.Empty, string.Empty);
-
-            var billTypeKind = BillTypeKind.Empty;
-
-            switch (type.ToLower())
-            {
-                case "hr":
-                    billTypeKind = BillTypeKind.hr;
-                    break;
-                case "hres":
-                    billTypeKind = BillTypeKind.hres;
-                    break;
-                case "hjres":
-                    billTypeKind = BillTypeKind.hjres;
-                    break;
-                case "hconres":
-                    billTypeKind = BillTypeKind.hconres;
-                    break;
-                case "s":
-                    billTypeKind = BillTypeKind.s;
-                    break;
-                case "sres":
-                    billTypeKind = BillTypeKind.sres;
-                    break;
-                case "sjres":
-                    billTypeKind = BillTypeKind.sjres;
-                    break;
-                case "sconres":
-                    billTypeKind = BillTypeKind.sconres;
-                    break;
-                default:
-                    break;
-            }
-
-            return new BillType(billTypeKind, type);
-        }
-
         private static BillAction ActionFromSunlight(SunlightBillResult.Action action)
         {
             if (action == null)
@@ -617,8 +556,7 @@ namespace Write2Congress.Shared.BusinessLayer
             var billAction = new BillAction()
             {
                 Date = DataTransformationUtil.DateFromSunlightTime(action.acted_at),
-                Text = action.text ?? string.Empty,
-                Type = DataTransformationUtil.BillActionTypeFromSunlight(action.type)
+                Text = action.text ?? string.Empty
             };
 
             return billAction;

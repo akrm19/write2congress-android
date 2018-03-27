@@ -33,13 +33,19 @@ namespace Write2Congress.Shared.BusinessLayer
 
         public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage)
         {
+            var billResult = new List<Bill>();
+
             if (resultsPerPage < 1)
                 resultsPerPage = _defautlResultsPerPage;
 
-            //TODO RM: Change IBills to bills
-            var billsResult = _billSvc.GetBillsIntroducedByLegislator(legislatorBioguideId, page, resultsPerPage);
+            var ibillsResult = _billSvc.GetBillsIntroducedByLegislator(legislatorBioguideId, page, resultsPerPage);
 
-            return new List<Bill>();
+
+            //TODO RM: <<<<<<CONTINUE HERE: Test is this works>>>>>>
+            foreach (var ibill in ibillsResult)
+                billResult.Add(Bill.TransformToBill(ibill));
+
+            return billResult;
         }
 
         public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page)
@@ -71,9 +77,9 @@ namespace Write2Congress.Shared.BusinessLayer
             .AppendLine($"{conSponsors}: {bill.CosponsorsCount}")
             .AppendLine();
 
-            if (!string.IsNullOrWhiteSpace(bill.GetBillStatus().StatusText))
+            if (!string.IsNullOrWhiteSpace(bill.GetBillStatus.StatusText))
             {
-                text.AppendLine($"{billStatus}: {bill.GetBillStatus().StatusText}")
+                text.AppendLine($"{billStatus}: {bill.GetBillStatus.StatusText}")
                 .AppendLine();
 
                 if(bill.DateOfLastVote != DateTime.MinValue)

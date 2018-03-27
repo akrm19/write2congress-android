@@ -18,8 +18,6 @@ namespace Write2Congress.Shared.DomainModel.Enum
         [Description("In Congress")]
         InCongress,
         [Description("Unknown")]
-        Unknown,
-        [Description("Passed")]
-        Passed
+        Unknown
     }
 }
