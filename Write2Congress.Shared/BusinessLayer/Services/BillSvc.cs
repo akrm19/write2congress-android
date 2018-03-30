@@ -71,11 +71,11 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
             try
             {
-                var uri = CreateUri(query, page, resultsPerPage);
-                var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
-                PopulatePageInfoAndTotalResultCount(result);
-
-                bills = _util.BillsFromSunlightBillResult(result);
+                //var uri = CreateUri(query, page, resultsPerPage);
+                //var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
+                //PopulatePageInfoAndTotalResultCount(result);
+                //
+                //bills = _util.BillsFromSunlightBillResult(result);
 
                 return bills;
             }
@@ -103,10 +103,10 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             try
             {
                 var uri = CreateUri(query, page, resultsPerPage);
-                var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
-                PopulatePageInfoAndTotalResultCount(result);
+                //var result = GetTypeAsync<SunlightBillResult.Rootobject>(uri).Result;
+                //PopulatePageInfoAndTotalResultCount(result);
 
-                bills = _util.BillsFromSunlightBillResult(result);
+                //bills = _util.BillsFromSunlightBillResult(result);
 
                 return bills;
             }
