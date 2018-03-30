@@ -46,13 +46,14 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             //
             //return bills;
 
-            Func<string, string> updateResult = r => string.Format("{{\"results\":{0}}}", r);
+            //Seems like this is no longer needed, as latest returns from ProPublica contain result
+            //Func<string, string> updateResult = r => string.Format("{{\"results\":{0}}}", r);
 
             var bills = new List<IBill>();
 
             try
             {
-                var legislatorsResults = GetMemberResults<DomainModel.ApiModels.ProPublica.BillResult.Rootobject>(query, _congressApiSvc, updateResult).Result;
+                var legislatorsResults = GetMemberResults<DomainModel.ApiModels.ProPublica.BillResult.Rootobject>(query, _congressApiSvc).Result;
                 bills = (legislatorsResults as IBillResult).GeBillResult();
             }
             catch (Exception e)

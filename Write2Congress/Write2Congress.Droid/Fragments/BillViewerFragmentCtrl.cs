@@ -22,10 +22,10 @@ namespace Write2Congress.Droid.Fragments
 {
     public class BillViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
-        //private BillManager _billManager;
+        private BillManager _billManager;
         private bool _isThereMoreVotes;
         private List<Bill> _bills;
-        //private Legislator _legislator;
+        private Legislator _legislator;
         private BillViewerKind _viewerMode;
 
         public BillViewerFragmentCtrl() { }
@@ -34,10 +34,13 @@ namespace Write2Congress.Droid.Fragments
         {
             var newFragment = new BillViewerFragmentCtrl();
 
-            //var args = new Bundle();
-            //args.PutString(BundleType.Legislator, legislator.SerializeToJson());
-            //args.PutInt(BundleType.BillViewerFragmentType, (int)viewerMode);
-            //newFragment.Arguments = args;
+            if (legislator != null)
+            {
+                var args = new Bundle();
+                args.PutString(BundleType.Legislator, legislator.SerializeToJson());
+                args.PutInt(BundleType.BillViewerFragmentType, (int)viewerMode);
+                newFragment.Arguments = args;
+            }
 
             return newFragment;
         }
@@ -52,16 +55,16 @@ namespace Write2Congress.Droid.Fragments
                 ShowBills(_bills, _isThereMoreVotes);
         }
 
-        //public override void OnCreate(Bundle savedInstanceState)
-        //{
-        //    base.OnCreate(savedInstanceState);
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
 
-            //var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
-            //_legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
-            //_viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
+            var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
+            _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
+            _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
 
-            //_billManager = new BillManager(MyLogger);
-        //}
+            _billManager = new BillManager(MyLogger);
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -81,21 +84,20 @@ namespace Write2Congress.Droid.Fragments
             else
                 SetBills(_bills, _isThereMoreVotes);
 
-            //if (_bills != null && _bills.Count > 0)
-            //    UpdateBills(_bills);
-            //else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Bills, string.Empty)))
-            //{
-            //    var serializedBills = savedInstanceState.GetString(BundleType.Bills);
-            //    _bills = new List<Bill>().DeserializeFromJson(serializedBills);
-            //    UpdateBills(_bills);
-            //}
-            //else
-            //    FetchMoreLegislatorContent(false);
+            if (_bills != null && _bills.Count > 0)
+                SetBills(_bills, true);
+            else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Bills, string.Empty)))
+            {
+                var serializedBills = savedInstanceState.GetString(BundleType.Bills);
+                _bills = new List<Bill>().DeserializeFromJson(serializedBills);
+                SetBills(_bills, true);
+            }
+            else
+                FetchMoreLegislatorContent(false);
 
             return fragment;
         }
 
-        /*
         protected override void FetchMoreLegislatorContent(bool isNextClick)
         {
             base.FetchMoreLegislatorContent(isNextClick);
@@ -116,7 +118,7 @@ namespace Write2Congress.Droid.Fragments
                 var isThereMoreVotes = bm.IsThereMoreResultsForLastCall();
 
                 return new Tuple<List<Bill>, bool>(results, isThereMoreVotes);
-            }, new Tuple<string, BillManager, int, int>(_legislator.BioguideId, _billManager, currentPage, (int)_viewerMode));
+            }, new Tuple<string, BillManager, int, int>(_legislator.IdBioguide, _billManager, currentPage, (int)_viewerMode));
 
             getBillsTask.ContinueWith((antecedent) =>
             {
@@ -134,13 +136,12 @@ namespace Write2Congress.Droid.Fragments
 
                     SetLoadMoreButtonTextAsLoading(false);
                     ShowRecyclerButtons(isThereMoreVotes);
-                    ShowBills(_bills);
+                    ShowBills(_bills, isThereMoreVotes);
                 });
             });
 
             getBillsTask.Start();
         }
-        */
 
         public override void OnSaveInstanceState(Bundle outState)
         {
@@ -158,7 +159,6 @@ namespace Write2Congress.Droid.Fragments
             outState.PutBoolean(_viewerMode == BillViewerKind.SponsoredBills 
                 ? BundleType.SponsoredBillsIsThereMoreContent
                 : BundleType.CosponsoredBillsIsThereMoreContent, _isThereMoreVotes);
-            //outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
         }
 
         protected override void CleanUp()
@@ -208,9 +208,11 @@ namespace Write2Congress.Droid.Fragments
             }
         }
 
+		/*
         protected override void FetchMoreLegislatorContent(bool isNextClick)
         {
             LoadMoreClick?.Invoke(true);
         }
+		*/
     }
 }
