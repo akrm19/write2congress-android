@@ -20,7 +20,7 @@ namespace Write2Congress.Shared.DomainModel
                 Chamber = bill.Chamber,
                 Congress = bill.Congress,
                 CosponsorsCount = bill.CoSponsorCount,
-                GetBillStatus = bill.Status,
+                BillStatus = bill.Status,
                 DateIntroduced = bill.DateIntroduced,
                 DateOfLastVote = bill.DateLastVoted,
                 Id = bill.BillId,
@@ -55,8 +55,10 @@ namespace Write2Congress.Shared.DomainModel
             return result;
         }
 
+        public BillStatus BillStatus { get; set; }
 
-        public BillStatus GetBillStatus { get; set; }
+        /*
+        public BillStatus GetBillStatus()
         {
             if (History.AwaitingSignature)
                 return new BillStatus(BillStatusKind.AwaitingSignature, History.AwaitingSignatureSince);
@@ -82,6 +84,7 @@ namespace Write2Congress.Shared.DomainModel
                     return new BillStatus(BillStatusKind.Unknown, DateTime.MinValue);
             }
         }
+        */
 
         public string GetDisplayTitle()
         {

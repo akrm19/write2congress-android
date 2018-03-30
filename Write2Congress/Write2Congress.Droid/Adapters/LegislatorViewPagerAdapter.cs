@@ -168,10 +168,13 @@ namespace Write2Congress.Droid.Adapters
 
         public override Java.Lang.Object InstantiateItem(ViewGroup container, int position)
         {
-            var frag = (Fragment)base.InstantiateItem(container, position);
+            //var frag = (Fragment)base.InstantiateItem(container, position);
 
-            _frags[position] = frag as BaseRecyclerViewerFragment;
-
+            //TODO RM: THIS will THROW AN ERROR BECAUSE THE _frags list is empty
+			//_frags could be used lated to store created fragmetns instead of instantiating them each time
+            //_frags[position] = frag as BaseRecyclerViewerFragment;
+            //var baseFrag = frag as BaseRecyclerViewerFragment;
+            //_frags.Insert(position, baseFrag);
             return base.InstantiateItem(container, position);
         }
 

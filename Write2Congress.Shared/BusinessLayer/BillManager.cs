@@ -77,9 +77,9 @@ namespace Write2Congress.Shared.BusinessLayer
             .AppendLine($"{conSponsors}: {bill.CosponsorsCount}")
             .AppendLine();
 
-            if (!string.IsNullOrWhiteSpace(bill.GetBillStatus.StatusText))
+            if (!string.IsNullOrWhiteSpace(bill.BillStatus.StatusText))
             {
-                text.AppendLine($"{billStatus}: {bill.GetBillStatus.StatusText}")
+                text.AppendLine($"{billStatus}: {bill.BillStatus.StatusText}")
                 .AppendLine();
 
                 if(bill.DateOfLastVote != DateTime.MinValue)
