@@ -54,10 +54,11 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             if (string.IsNullOrWhiteSpace(dateVal))
                 return DateTime.MinValue;
-
+			
             DateTime date;
 
-            if (DateTime.TryParseExact(dateVal, "yyyy-mm-dd", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date))
+            var expectedProPublicaFormatFormat = "yyyy-MM-dd";
+            if (DateTime.TryParseExact(dateVal, expectedProPublicaFormatFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                 return date;
 
             return DateTime.TryParseExact(dateVal, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date)
