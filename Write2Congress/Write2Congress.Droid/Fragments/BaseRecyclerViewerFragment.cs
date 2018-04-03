@@ -24,8 +24,8 @@ namespace Write2Congress.Droid.Fragments
         protected TextView header, emptyText;
         protected LinearLayout recyclerButtonsParent;
         protected Button loadMoreButton;
-        protected int currentPage = 1;
 
+        protected int currentPage = 1;
         protected bool IsBeingShown = false;
         private bool listenerSet = false;
         public Action<bool> LoadMoreClick;

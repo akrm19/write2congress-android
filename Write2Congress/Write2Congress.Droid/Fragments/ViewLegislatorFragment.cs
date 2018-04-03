@@ -138,19 +138,9 @@ namespace Write2Congress.Droid.Fragments
         public override void OnStart()
         {
             base.OnStart();
+
             SetPortrait(_legislator);
             GetBaseActivity().UpdateTitleBarText(_legislator.FullName());
-            /*
-            if (_votes != null)
-                GetVoteViewFrag()?.SetVotes(_votes, _votesIsThereMoreContent);
-            else
-                FetchLegislatorVotes(false);
-
-            if (_sponsoredBills != null)
-                GetBillsSponsoredViewFrag()?.SetBills(_sponsoredBills, _sponsoredBillsIsThereMoreContent);
-            else
-                FetchLegislatorBills(false, BillViewerKind.SponsoredBills);
-                */
         }
 
         private void PopulateViewPager(View fragmentView, Legislator legislator, Bundle savedInstanceState)
@@ -158,6 +148,11 @@ namespace Write2Congress.Droid.Fragments
             var viewPager = fragmentView.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
             viewPager.Adapter = _viewPagerAdapter;
             viewPager.CurrentItem = 1;
+
+            //Set the number of pages that should be retained to either 
+            //side of the current page in the view hierarchy in an idle 
+            //state. Pages beyond this limit will be recreated from the 
+            //adapter when needed.
             //viewPager.OffscreenPageLimit = 3;
 
 
@@ -173,6 +168,7 @@ namespace Write2Congress.Droid.Fragments
             //PopulateCommittees(savedInstanceState);
         }
 
+        /*
         private void PopulateVote(Bundle savedInstanceState)
         {
             if(savedInstanceState != null)
@@ -187,15 +183,15 @@ namespace Write2Congress.Droid.Fragments
                 }
             }
 
-            /*
             if (_votes != null)
                 GetVoteViewFrag()?.SetVotes(_votes, _votesIsThereMoreContent);
 
             else
-                FetchLegislatorVotes(false);
-                */
+                FetchLegislatorVotes(false);            
         }
+        */
 
+        /*
         private void PopulateSponsoredBills(Bundle savedInstanceState)
         {
             if (savedInstanceState != null)
@@ -210,13 +206,12 @@ namespace Write2Congress.Droid.Fragments
                 }
             }
 
-            /*
+
             if (_sponsoredBills != null)
                 GetBillsSponsoredViewFrag()?.SetBills(_sponsoredBills, _sponsoredBillsIsThereMoreContent);
 
             else
                 FetchLegislatorBills(false, BillViewerKind.SponsoredBills);
-            */
         }
 
         private void PopulateCosponsoredBills(Bundle savedInstanceState)
@@ -254,6 +249,7 @@ namespace Write2Congress.Droid.Fragments
             else
                 FetchLegislatorCommittes();
         }
+        */
 
         public override void OnSaveInstanceState(Bundle outState)
         {

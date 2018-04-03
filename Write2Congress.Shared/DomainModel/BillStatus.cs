@@ -14,6 +14,8 @@ namespace Write2Congress.Shared.DomainModel
         public DateTime StatusDate;
         private string _statusText;
 
+        public BillStatus(){}
+
         public BillStatus(BillStatusKind status)
             : this(status, DateTime.MinValue)
         {

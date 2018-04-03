@@ -23,7 +23,7 @@ namespace Write2Congress.Droid.Fragments
     public class BillViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
         private BillManager _billManager;
-        private bool _isThereMoreVotes;
+        private bool _isThereMoreVotes = true;
         private List<Bill> _bills;
         private Legislator _legislator;
         private BillViewerKind _viewerMode;
@@ -68,29 +68,28 @@ namespace Write2Congress.Droid.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            if (savedInstanceState != null && savedInstanceState.ContainsKey(BundleType.BillViewerFragmentType))
-                _viewerMode = (BillViewerKind)savedInstanceState.GetInt(BundleType.BillViewerFragmentType);
+            if (savedInstanceState != null)
+            {
+                if (savedInstanceState.ContainsKey(BundleType.BillViewerFragmentType))
+                    _viewerMode = (BillViewerKind)savedInstanceState.GetInt(BundleType.BillViewerFragmentType);
+            
+                RetrieveCurrentPageIfAvailable((savedInstanceState));
+            }
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
             recyclerAdapter = new BillAdapter(this);
             recycler.SetAdapter(recyclerAdapter);
 
-            //SetLoadingUi();
-            //RetrieveCurrentPageIfAvailable(savedInstanceState);
-
-            if (_bills == null)
-                SetLoadingUi();
-            else
-                SetBills(_bills, _isThereMoreVotes);
+            SetLoadingUi();
 
             if (_bills != null && _bills.Count > 0)
-                SetBills(_bills, true);
+                SetBills(_bills, _isThereMoreVotes);
             else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Bills, string.Empty)))
             {
                 var serializedBills = savedInstanceState.GetString(BundleType.Bills);
                 _bills = new List<Bill>().DeserializeFromJson(serializedBills);
-                SetBills(_bills, true);
+                SetBills(_bills, _isThereMoreVotes);
             }
             else
                 FetchMoreLegislatorContent(false);
@@ -102,22 +101,24 @@ namespace Write2Congress.Droid.Fragments
         {
             base.FetchMoreLegislatorContent(isNextClick);
 
-            var getBillsTask = new Task< Tuple<List<Bill>, bool> >((prms) =>
+            var getBillsTask = new Task< Tuple<List<Bill>, bool, int> >((prms) =>
             {
                 var passedParams = (prms as Tuple<string, BillManager, int, int>);
 
                 var legislatorId = passedParams.Item1;
                 var bm = new BillManager(new Logger(Class.SimpleName));  //passedParams.Item2;
-                var currentPage = passedParams.Item3;
+                var localCurrentPage = passedParams.Item3;
                 var mode = (BillViewerKind)((int)passedParams.Item4);
 
                 var results = mode == BillViewerKind.CosponsoredBills
-                    ? bm.GetBillsCosponsoredbyLegislator(legislatorId, currentPage)
-                    : bm.GetBillsSponsoredbyLegislator(legislatorId, currentPage);
+                    ? bm.GetBillsCosponsoredbyLegislator(legislatorId, localCurrentPage)
+                    : bm.GetBillsSponsoredbyLegislator(legislatorId, localCurrentPage);
 
-                var isThereMoreVotes = bm.IsThereMoreResultsForLastCall();
+                //TODO RM: Verify that ProPublica API does not indicate if there are more results
+                //setting to true for now, since it seems ProPublica does not indicate that there are more results
+                var isThereMoreVotes = true;//bm.IsThereMoreResultsForLastCall();
 
-                return new Tuple<List<Bill>, bool>(results, isThereMoreVotes);
+                return new Tuple<List<Bill>, bool, int>(results, isThereMoreVotes, localCurrentPage);
             }, new Tuple<string, BillManager, int, int>(_legislator.IdBioguide, _billManager, currentPage, (int)_viewerMode));
 
             getBillsTask.ContinueWith((antecedent) =>
@@ -127,12 +128,13 @@ namespace Write2Congress.Droid.Fragments
 
                 Activity.RunOnUiThread(() =>
                 {
+                    //currentPage = antecedent.Result.Item3 + 1;
                     var isThereMoreVotes = antecedent.Result.Item2;
 
-                    if (isThereMoreVotes)
-                        _bills.AddRange(antecedent.Result.Item1);
+                    if (_bills == null || !_bills.Any())
+						_bills = antecedent.Result.Item1;
                     else
-                        _bills = antecedent.Result.Item1;
+						_bills.AddRange(antecedent.Result.Item1);
 
                     SetLoadMoreButtonTextAsLoading(false);
                     ShowRecyclerButtons(isThereMoreVotes);
@@ -147,11 +149,11 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnSaveInstanceState(outState);
 
-            //if (_bills != null)
-            //{
-            //    var serializedBills = _bills.SerializeToJson();
-            //    outState.PutString(BundleType.Bills, serializedBills);
-            //}
+            if (_bills != null)
+            {
+                var serializedBills = _bills.SerializeToJson();
+                outState.PutString(BundleType.Bills, serializedBills);
+            }
 
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
 

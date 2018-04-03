@@ -11,7 +11,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 {
     public class BillSvc : ServiceBase
     {
-        private static int _defaultResultsPage = 30;
+        private static int _defaultResultsPage = 20;
         private static string _billsBase = "bills?";
         private static string _fields = "&fields=bill_id,bill_type,number,congress,chamber,introduced_on,last_vote_at,official_title,short_title,popular_title,nicknames,summary,summary_short,urls,history,last_action,cosponsor_ids,withdrawn_cosponsor_ids,upcoming";
         private static string _perPage = "&per_page=";
@@ -28,10 +28,8 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
 
         //TODO RM: Update method call, the resutls per page has to be 20 
-        public List<IBill> GetBillsIntroducedByLegislator(string legislatorBioguideId, int page = 1, int resultsPerPage = 20)
+        public List<IBill> GetBillsIntroducedByLegislator(string legislatorBioguideId, int page = 1, int resultsperPageForSvc = 20)
         {
-            var resultsperPageForSvc = 20;
-
             page = page <= 1
                 ? page = 0
                 : page - 1;
@@ -61,7 +59,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 _logger.Error("Error occurred retrieving Legislators from UnitedStatesIo API", e);
             }
 
-            return bills;
+            return bills.OrderByDescending(b => b.DateIntroduced).ToList();
         }
 
         //private List<IBill> GetBillsFromQuery222(string query, int page, int resultsPerPage)

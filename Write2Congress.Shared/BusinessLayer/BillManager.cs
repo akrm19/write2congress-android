@@ -12,7 +12,7 @@ namespace Write2Congress.Shared.BusinessLayer
     public class BillManager
     {
         private BillSvc _billSvc;
-        private int _defautlResultsPerPage = 40;
+        private int _defautlResultsPerPage = 20;
 
         public  BillManager(IMyLogger logger)
         {
@@ -41,7 +41,8 @@ namespace Write2Congress.Shared.BusinessLayer
             var ibillsResult = _billSvc.GetBillsIntroducedByLegislator(legislatorBioguideId, page, resultsPerPage);
 
 
-            //TODO RM: <<<<<<CONTINUE HERE: Test is this works>>>>>>
+            //TODO RM: <<<<<<CONTINUE HERE: Look into why 
+            //returned Introduced dates are wrong (the month always seems to be jan)>>>>>>
             foreach (var ibill in ibillsResult)
                 billResult.Add(Bill.TransformToBill(ibill));
 
