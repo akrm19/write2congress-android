@@ -73,10 +73,12 @@
   <string name="summary">Summary</string>
   <string name="termEnds">Term Ends</string>
   <string name="termStarted">Term Started</string>
+  <string name="tryAgain">Try Again</string>
   <string name="unableToCopyLetter">Unable to copy letter</string>
   <string name="unableToCopyLetterToClipboard">Unable to copy letter to clipboard</string>
   <string name="unableToDeleteLetter">Unable to delete letter</string>
   <string name="unableToProcessAction">Unable to process action</string>
+  <string name="unableToRetrieveData">Error Encountered: Unable to retrieve data</string>
   <string name="unableToUpdateLegislatorData">Error Encountered: Unable to update legislator data</string>
   <string name="unknown">Unknown</string>
   <string name="updatedDraftLetters">Updated Draft Letters</string>

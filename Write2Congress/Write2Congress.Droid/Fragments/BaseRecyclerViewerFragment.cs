@@ -28,6 +28,7 @@ namespace Write2Congress.Droid.Fragments
         protected int currentPage = 1;
         protected bool IsBeingShown = false;
         private bool listenerSet = false;
+        protected bool errorOccurred = false;
         public Action<bool> LoadMoreClick;
 
         protected BaseFragment baseFragment;
@@ -50,6 +51,23 @@ namespace Write2Congress.Droid.Fragments
             loadMoreButton = null;
             LoadMoreClick = null;
         }
+
+        protected virtual void HandleErrorRetrievingData()
+        {
+            errorOccurred = true;
+
+            if (loadMoreButton != null)
+                loadMoreButton.Text = AndroidHelper.GetString(Resource.String.tryAgain);
+
+            if (emptyText != null)
+                emptyText.Text = AndroidHelper.GetString(Resource.String.unableToRetrieveData);
+        }
+
+        protected virtual void HandleSuccessfullDataRetrieval()
+        {
+            errorOccurred = false;
+        }
+        
 
         public override void OnResume()
         {
@@ -102,9 +120,9 @@ namespace Write2Congress.Droid.Fragments
         {
             if (isNextClick)
             {
-                currentPage = isNextClick
-                    ? currentPage + 1
-                    : currentPage;
+                //currentPage = isNextClick
+                //    ? currentPage + 1
+                //    : currentPage;
 
                 SetLoadMoreButtonTextAsLoading(true);
             }
@@ -192,9 +210,9 @@ namespace Write2Congress.Droid.Fragments
 
         protected void ShowRecyclerButtons(bool showButtons)
         {
-            recyclerButtonsParent.Visibility =  showButtons
-                ? ViewStates.Visible
-                : ViewStates.Gone;
+            //recyclerButtonsParent.Visibility =  showButtons
+            //    ? ViewStates.Visible
+            //    : ViewStates.Gone;
 
             loadMoreButton.Visibility = showButtons
                 ? ViewStates.Visible

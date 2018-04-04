@@ -49,7 +49,9 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnResume();
 
-            if (_bills == null)
+            if (errorOccurred)
+                HandleErrorRetrievingData();
+            else if (_bills == null)
                 SetLoadingUi();
             else
                 ShowBills(_bills, _isThereMoreVotes);
@@ -128,17 +130,26 @@ namespace Write2Congress.Droid.Fragments
 
                 Activity.RunOnUiThread(() =>
                 {
-                    //currentPage = antecedent.Result.Item3 + 1;
-                    var isThereMoreVotes = antecedent.Result.Item2;
-
-                    if (_bills == null || !_bills.Any())
-						_bills = antecedent.Result.Item1;
+                    if (antecedent.IsFaulted || antecedent.IsCanceled)
+                    {
+                        HandleErrorRetrievingData();
+                    }
                     else
-						_bills.AddRange(antecedent.Result.Item1);
+                    {
+                        HandleSuccessfullDataRetrieval();
 
-                    SetLoadMoreButtonTextAsLoading(false);
-                    ShowRecyclerButtons(isThereMoreVotes);
-                    ShowBills(_bills, isThereMoreVotes);
+                        currentPage = antecedent.Result.Item3 + 1;
+                        var isThereMoreVotes = antecedent.Result.Item2;
+
+                        if (_bills == null || !_bills.Any())
+                            _bills = antecedent.Result.Item1;
+                        else
+                            _bills.AddRange(antecedent.Result.Item1);
+
+                        SetLoadMoreButtonTextAsLoading(false);
+                        ShowRecyclerButtons(isThereMoreVotes);
+                        ShowBills(_bills, isThereMoreVotes);
+                    }
                 });
             });
 
@@ -156,7 +167,6 @@ namespace Write2Congress.Droid.Fragments
             }
 
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
-
             
             outState.PutBoolean(_viewerMode == BillViewerKind.SponsoredBills 
                 ? BundleType.SponsoredBillsIsThereMoreContent
@@ -167,9 +177,9 @@ namespace Write2Congress.Droid.Fragments
         {
             base.CleanUp();
 
-            //_billManager = null;
+            _billManager = null;
             _bills = null;
-            //_legislator = null;
+            _legislator = null;
         }
 
         protected override string EmptyText()
@@ -197,8 +207,7 @@ namespace Write2Congress.Droid.Fragments
 
         public void ShowBills(List<Bill> bills, bool isThereMoreVotes)
         {
-            _bills = bills;
-            _isThereMoreVotes = isThereMoreVotes;
+            SetBills(bills, isThereMoreVotes);
 
             if (IsBeingShown)
             {
@@ -209,12 +218,5 @@ namespace Write2Congress.Droid.Fragments
                 SetLoadingUiOff();
             }
         }
-
-		/*
-        protected override void FetchMoreLegislatorContent(bool isNextClick)
-        {
-            LoadMoreClick?.Invoke(true);
-        }
-		*/
     }
 }

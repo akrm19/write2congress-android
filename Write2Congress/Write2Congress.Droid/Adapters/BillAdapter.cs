@@ -65,12 +65,12 @@ namespace Write2Congress.Droid.Adapters
             }
 
             var title = bill.GetDisplayTitle();
-            var summary = BillManager.GetBillDetailedSummary(bill);
+            var billSummary = BillManager.GetBillDetailedSummary(bill);
             var link = bill.Urls.Count > 0
                 ? bill.Urls[0]
                 : string.Empty;
 
-            AppHelper.ShowDetailsDialog(_fragment, title, summary, link);
+            AppHelper.ShowDetailsDialog(_fragment, title, billSummary, link);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

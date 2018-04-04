@@ -4423,28 +4423,34 @@ namespace Write2Congress.Droid
 			public const int termStarted = 2131361924;
 			
 			// aapt resource value: 0x7f0a0085
-			public const int unableToCopyLetter = 2131361925;
+			public const int tryAgain = 2131361925;
 			
 			// aapt resource value: 0x7f0a0086
-			public const int unableToCopyLetterToClipboard = 2131361926;
+			public const int unableToCopyLetter = 2131361926;
 			
 			// aapt resource value: 0x7f0a0087
-			public const int unableToDeleteLetter = 2131361927;
+			public const int unableToCopyLetterToClipboard = 2131361927;
 			
 			// aapt resource value: 0x7f0a0088
-			public const int unableToProcessAction = 2131361928;
+			public const int unableToDeleteLetter = 2131361928;
 			
 			// aapt resource value: 0x7f0a0089
-			public const int unableToUpdateLegislatorData = 2131361929;
+			public const int unableToProcessAction = 2131361929;
 			
 			// aapt resource value: 0x7f0a008a
-			public const int unknown = 2131361930;
+			public const int unableToRetrieveData = 2131361930;
 			
 			// aapt resource value: 0x7f0a008b
-			public const int updatedDraftLetters = 2131361931;
+			public const int unableToUpdateLegislatorData = 2131361931;
 			
 			// aapt resource value: 0x7f0a008c
-			public const int updatedSentLetters = 2131361932;
+			public const int unknown = 2131361932;
+			
+			// aapt resource value: 0x7f0a008d
+			public const int updatedDraftLetters = 2131361933;
+			
+			// aapt resource value: 0x7f0a008e
+			public const int updatedSentLetters = 2131361934;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int v7_preference_off = 2131361792;
@@ -4452,35 +4458,35 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0a0001
 			public const int v7_preference_on = 2131361793;
 			
-			// aapt resource value: 0x7f0a008d
-			public const int verifyUpdateOfLegislatorData = 2131361933;
-			
-			// aapt resource value: 0x7f0a008e
-			public const int verifyUpdateOfLegislatorDataLastUpdate = 2131361934;
-			
 			// aapt resource value: 0x7f0a008f
-			public const int verifyUpdateOfLegislatorDataWarning = 2131361935;
+			public const int verifyUpdateOfLegislatorData = 2131361935;
 			
 			// aapt resource value: 0x7f0a0090
-			public const int voteResult = 2131361936;
-			
-			// aapt resource value: 0x7f0a0092
-			public const int voteType = 2131361938;
+			public const int verifyUpdateOfLegislatorDataLastUpdate = 2131361936;
 			
 			// aapt resource value: 0x7f0a0091
-			public const int votes = 2131361937;
+			public const int verifyUpdateOfLegislatorDataWarning = 2131361937;
 			
-			// aapt resource value: 0x7f0a0093
-			public const int website = 2131361939;
+			// aapt resource value: 0x7f0a0092
+			public const int voteResult = 2131361938;
 			
 			// aapt resource value: 0x7f0a0094
-			public const int writeLetter = 2131361940;
+			public const int voteType = 2131361940;
 			
-			// aapt resource value: 0x7f0a0096
-			public const int writeNew = 2131361942;
+			// aapt resource value: 0x7f0a0093
+			public const int votes = 2131361939;
 			
 			// aapt resource value: 0x7f0a0095
-			public const int writeNewLetterTitle = 2131361941;
+			public const int website = 2131361941;
+			
+			// aapt resource value: 0x7f0a0096
+			public const int writeLetter = 2131361942;
+			
+			// aapt resource value: 0x7f0a0098
+			public const int writeNew = 2131361944;
+			
+			// aapt resource value: 0x7f0a0097
+			public const int writeNewLetterTitle = 2131361943;
 			
 			static String()
 			{

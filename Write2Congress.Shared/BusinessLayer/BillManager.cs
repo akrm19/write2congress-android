@@ -12,7 +12,7 @@ namespace Write2Congress.Shared.BusinessLayer
     public class BillManager
     {
         private BillSvc _billSvc;
-        private int _defautlResultsPerPage = 20;
+        private const int _defautlResultsPerPage = 20;
 
         public  BillManager(IMyLogger logger)
         {
@@ -26,40 +26,26 @@ namespace Write2Congress.Shared.BusinessLayer
             //return _billSvc.IsThereMoreResults();
         }
 
-        public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page)
-        {
-            return GetBillsSponsoredbyLegislator(legislatorBioguideId, page, _defautlResultsPerPage);
-        }
-
-        public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage)
+        public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
         {
             var billResult = new List<Bill>();
-
-            if (resultsPerPage < 1)
-                resultsPerPage = _defautlResultsPerPage;
-
             var ibillsResult = _billSvc.GetBillsIntroducedByLegislator(legislatorBioguideId, page, resultsPerPage);
 
-
-            //TODO RM: <<<<<<CONTINUE HERE: Look into why 
-            //returned Introduced dates are wrong (the month always seems to be jan)>>>>>>
             foreach (var ibill in ibillsResult)
                 billResult.Add(Bill.TransformToBill(ibill));
 
             return billResult;
         }
 
-        public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page)
+        public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
         {
-            return GetBillsCosponsoredbyLegislator(legislatorBioguideId, page, _defautlResultsPerPage);
-        }
+			var billResult = new List<Bill>();
+            var iBillsResult =  _billSvc.GetBillsCosponsoredbyLegislator(legislatorBioguideId, page, resultsPerPage);
+        
+            foreach (var ibill in iBillsResult)
+                billResult.Add(Bill.TransformToBill(ibill));
 
-        public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage)
-        {
-            if (resultsPerPage < 1)
-                resultsPerPage = _defautlResultsPerPage;
-
-            return _billSvc.GetBillsCosponsoredbyLegislator(legislatorBioguideId, page, resultsPerPage);
+            return billResult;
         }
 
         public static string GetBillDetailedSummary(Bill bill)
