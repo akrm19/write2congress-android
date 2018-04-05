@@ -12,7 +12,7 @@ namespace Write2Congress.Shared.BusinessLayer
     public class VoteManager
     {
         private VoteSvc _voteSvc;
-        private int _defaultResultsPerPage = 40;
+        private const int _defaultResultsPerPage = 20;
 
         public VoteManager(IMyLogger logger)
         {
@@ -21,19 +21,12 @@ namespace Write2Congress.Shared.BusinessLayer
 
         public bool IsThereMoreResultsForLastCall()
         {
-            return _voteSvc.IsThereMoreResults();
+            //TODO R<: Fix
+            return true;//_voteSvc.IsThereMoreResults();
         }
 
-        public List<Vote> GetLegislatorVotes(string legislatorBioguideId, int page)
+        public List<Vote> GetLegislatorVotes(string legislatorBioguideId, int page, int resultsPerPage = _defaultResultsPerPage)
         {
-            return GetLegislatorVotes(legislatorBioguideId, page, _defaultResultsPerPage);
-        }
-
-        public List<Vote> GetLegislatorVotes(string legislatorBioguideId, int page, int resultsPerPage)
-        {
-            if (resultsPerPage < 1)
-                resultsPerPage = _defaultResultsPerPage;
-
             var votes = _voteSvc.GetVotesByLegislator(legislatorBioguideId, page, resultsPerPage);
 
             return votes;

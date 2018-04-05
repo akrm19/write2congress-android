@@ -13,6 +13,8 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Constants;
+using Write2Congress.Shared.DomainModel;
+using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -164,10 +166,22 @@ namespace Write2Congress.Droid.Fragments
             //CleanUp();
         }
 
-        protected void RetrieveCurrentPageIfAvailable(Bundle savedInstanceState)
+        protected Legislator RetrieveLegislatorIfAvailable(Bundle savedInstanceState)
         {
-            if (savedInstanceState != null)
-                currentPage = savedInstanceState.GetInt(BundleType.CurrentPage, 1);
+            if (savedInstanceState == null)
+                return null;
+
+            var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
+            var legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
+
+            return legislator;
+        }
+
+        protected int RetrieveCurrentPageIfAvailable(Bundle savedInstanceState)
+        {
+            return savedInstanceState != null
+                ? savedInstanceState.GetInt(BundleType.CurrentPage, 0) 
+                : 0;
         }
 
         protected void SetLoadingUiOff()
@@ -210,9 +224,9 @@ namespace Write2Congress.Droid.Fragments
 
         protected void ShowRecyclerButtons(bool showButtons)
         {
-            //recyclerButtonsParent.Visibility =  showButtons
-            //    ? ViewStates.Visible
-            //    : ViewStates.Gone;
+            recyclerButtonsParent.Visibility =  showButtons
+                ? ViewStates.Visible
+                : ViewStates.Gone;
 
             loadMoreButton.Visibility = showButtons
                 ? ViewStates.Visible
