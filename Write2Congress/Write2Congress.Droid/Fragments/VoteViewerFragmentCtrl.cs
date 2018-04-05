@@ -40,63 +40,21 @@ namespace Write2Congress.Droid.Fragments
             return newFragment;
         }
 
-        /*
-        public static VoteViewerFragmentCtrl CreateInstance(Legislator legislator, List<Vote> votes, Action loadMoreClicked)
-        {
-            var newFragment = new VoteViewerFragmentCtrl();
-
-            var args = new Bundle();
-
-            if(legislator != null)
-                args.PutString(BundleType.Legislator, legislator.SerializeToJson());
-
-            if (votes != null)
-                args.PutString(BundleType.Votes, votes.SerializeToJson());
-
-            newFragment.Arguments = args;
-
-            return newFragment;
-        }
-
-        public static VoteViewerFragmentCtrl CreateInstance(List<Vote> votes)
-        {
-            var newFragment = new VoteViewerFragmentCtrl();
-
-            var args = new Bundle();
-            args.PutString(BundleType.Votes, votes.SerializeToJson());
-            newFragment.Arguments = args;
-
-            return newFragment;
-        }
-        */
-
-        //public void SetOnClickListener(Action<bool> listener)
-        //{
-        //    if(!listenerSet)
-        //        LoadMoreVoteClick = listener;
-        //
-        //    listenerSet = true;
-        //}
-
-        //public override void OnCreate(Bundle savedInstanceState)
-        //{
-        //    base.OnCreate(savedInstanceState);
-        //}
-
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            _voteManager = new VoteManager(MyLogger);
-
             var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
             _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
 
+			_voteManager = new VoteManager(MyLogger);
             currentPage = RetrieveCurrentPageIfAvailable(savedInstanceState);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            currentPage = RetrieveCurrentPageIfAvailable(savedInstanceState);
+
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
             
             recyclerAdapter = new VoteAdapter(this);
@@ -116,71 +74,6 @@ namespace Write2Congress.Droid.Fragments
                 FetchMoreLegislatorContent(false);
 
             return fragment;
-        }
-
-        public override void OnResume()
-        {
-            base.OnResume();
-
-            if (errorOccurred)
-                HandleErrorRetrievingData();
-            if (_votes == null)
-                SetLoadingUi();
-            else
-                ShowVotes(_votes, _isThereMoreVotes);
-        }
-
-        public override void OnSaveInstanceState(Bundle outState)
-        {
-            base.OnSaveInstanceState(outState);
-        
-            if(_votes != null)
-            {
-                var serializedVotes = _votes.SerializeToJson();
-                outState.PutString(BundleType.Votes, serializedVotes);
-            }
-
-			outState.PutBoolean(BundleType.VotesIsThereMoreContent, _isThereMoreVotes);
-        }
-
-        protected override void CleanUp()
-        {
-            base.CleanUp();
-
-            _votes = null;
-            _voteManager = null;
-            _legislator = null;
-            //LoadMoreClick = null;
-        }
-
-        protected override string EmptyText()
-        {
-            return AndroidHelper.GetString(Resource.String.emptyVotesText);
-        }
-
-        public override string ViewerTitle()
-        {
-            return AndroidHelper.GetString(Resource.String.votes);
-        }
-
-        public void SetVotes(List<Vote> votes, bool isThereMoreVotes)
-        {
-            _votes = votes;
-            _isThereMoreVotes = isThereMoreVotes;
-        }
-
-        public void ShowVotes(List<Vote> votes, bool isThereMoreVotes)
-        {
-            SetVotes(votes, isThereMoreVotes);
-
-            if (IsBeingShown || recyclerAdapter !=  null)
-            {
-                SetLoadMoreButtonTextAsLoading(false);
-                ShowRecyclerButtons(_isThereMoreVotes);
-
-                (recyclerAdapter as VoteAdapter).UpdateVotes(_votes);
-                SetLoadingUiOff();
-            }
         }
 
         protected override void FetchMoreLegislatorContent(bool isNextClick)
@@ -234,7 +127,114 @@ namespace Write2Congress.Droid.Fragments
                 });
             });
 
-            getVotesTask.Start();            
+            getVotesTask.Start();
         }
+
+        public override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            if (_votes != null)
+            {
+                var serializedVotes = _votes.SerializeToJson();
+                outState.PutString(BundleType.Votes, serializedVotes);
+            }
+
+            outState.PutBoolean(BundleType.VotesIsThereMoreContent, _isThereMoreVotes);
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            if (errorOccurred)
+                HandleErrorRetrievingData();
+            else if (_votes == null)
+                SetLoadingUi();
+            else
+                ShowVotes(_votes, _isThereMoreVotes);
+        }
+
+        protected override void CleanUp()
+        {
+            base.CleanUp();
+
+            _votes = null;
+            _voteManager = null;
+            _legislator = null;
+        }
+
+        protected override string EmptyText()
+        {
+            return AndroidHelper.GetString(Resource.String.emptyVotesText);
+        }
+
+        public override string ViewerTitle()
+        {
+            return AndroidHelper.GetString(Resource.String.votes);
+        }
+
+        public void SetVotes(List<Vote> votes, bool isThereMoreVotes)
+        {
+            _votes = votes;
+            _isThereMoreVotes = isThereMoreVotes;
+        }
+
+        public void ShowVotes(List<Vote> votes, bool isThereMoreVotes)
+        {
+            SetVotes(votes, isThereMoreVotes);
+
+            if (IsBeingShown || recyclerAdapter !=  null)
+            {
+                SetLoadMoreButtonTextAsLoading(false);
+                ShowRecyclerButtons(_isThereMoreVotes);
+
+                (recyclerAdapter as VoteAdapter).UpdateVotes(_votes);
+                SetLoadingUiOff();
+            }
+        }
+
+        /*
+        public static VoteViewerFragmentCtrl CreateInstance(Legislator legislator, List<Vote> votes, Action loadMoreClicked)
+        {
+            var newFragment = new VoteViewerFragmentCtrl();
+
+            var args = new Bundle();
+
+            if(legislator != null)
+                args.PutString(BundleType.Legislator, legislator.SerializeToJson());
+
+            if (votes != null)
+                args.PutString(BundleType.Votes, votes.SerializeToJson());
+
+            newFragment.Arguments = args;
+
+            return newFragment;
+        }
+
+        public static VoteViewerFragmentCtrl CreateInstance(List<Vote> votes)
+        {
+            var newFragment = new VoteViewerFragmentCtrl();
+
+            var args = new Bundle();
+            args.PutString(BundleType.Votes, votes.SerializeToJson());
+            newFragment.Arguments = args;
+
+            return newFragment;
+        }
+        */
+
+        //public void SetOnClickListener(Action<bool> listener)
+        //{
+        //    if(!listenerSet)
+        //        LoadMoreVoteClick = listener;
+        //
+        //    listenerSet = true;
+        //}
+
+        //public override void OnCreate(Bundle savedInstanceState)
+        //{
+        //    base.OnCreate(savedInstanceState);
+        //}
     }
 }
