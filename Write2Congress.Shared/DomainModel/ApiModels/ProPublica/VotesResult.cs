@@ -8,7 +8,6 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
 {
     public class VotesResult
     {
-
         public class Rootobject
         {
             public string status { get; set; }
@@ -71,6 +70,13 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
 
         public class Amendment
         {
+            public string number { get; set; }
+            public string api_uri { get; set; }
+            public string sponsor_id { get; set; }
+            public string sponsor { get; set; }
+            public string sponsor_uri { get; set; }
+            public string sponsor_party { get; set; }
+            public string sponsor_state { get; set; }
         }
     }
 }
