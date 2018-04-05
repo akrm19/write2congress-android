@@ -45,38 +45,27 @@ namespace Write2Congress.Droid.Fragments
             return newFragment;
         }
 
-        public override void OnResume()
-        {
-            base.OnResume();
-
-            if (errorOccurred)
-                HandleErrorRetrievingData();
-            else if (_bills == null)
-                SetLoadingUi();
-            else
-                ShowBills(_bills, _isThereMoreVotes);
-        }
-
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
-            _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
-            _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
+			var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
+			_legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
 
             _billManager = new BillManager(MyLogger);
+            _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            if (savedInstanceState != null)
-            {
-                if (savedInstanceState.ContainsKey(BundleType.BillViewerFragmentType))
-                    _viewerMode = (BillViewerKind)savedInstanceState.GetInt(BundleType.BillViewerFragmentType);
-            
-                RetrieveCurrentPageIfAvailable((savedInstanceState));
-            }
+			currentPage = RetrieveCurrentPageIfAvailable(savedInstanceState);
+
+            if (savedInstanceState != null && savedInstanceState.ContainsKey(BundleType.BillViewerFragmentType))
+                _viewerMode = (BillViewerKind)savedInstanceState.GetInt(BundleType.BillViewerFragmentType);
+
+            if(_legislator == null)
+				_legislator = RetrieveLegislatorIfAvailable(savedInstanceState);
+            //_viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
@@ -85,7 +74,7 @@ namespace Write2Congress.Droid.Fragments
 
             SetLoadingUi();
 
-            if (_bills != null && _bills.Count > 0)
+            if (_bills != null && _bills.Count >= 0)
                 SetBills(_bills, _isThereMoreVotes);
             else if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Bills, string.Empty)))
             {
@@ -139,7 +128,7 @@ namespace Write2Congress.Droid.Fragments
                         HandleSuccessfullDataRetrieval();
 
                         currentPage = antecedent.Result.Item3 + 1;
-                        var isThereMoreVotes = antecedent.Result.Item2;
+                        _isThereMoreVotes = antecedent.Result.Item2;
 
                         if (_bills == null || !_bills.Any())
                             _bills = antecedent.Result.Item1;
@@ -147,8 +136,8 @@ namespace Write2Congress.Droid.Fragments
                             _bills.AddRange(antecedent.Result.Item1);
 
                         SetLoadMoreButtonTextAsLoading(false);
-                        ShowRecyclerButtons(isThereMoreVotes);
-                        ShowBills(_bills, isThereMoreVotes);
+                        ShowRecyclerButtons(_isThereMoreVotes);
+                        ShowBills(_bills, _isThereMoreVotes);
                     }
                 });
             });
@@ -171,6 +160,18 @@ namespace Write2Congress.Droid.Fragments
             outState.PutBoolean(_viewerMode == BillViewerKind.SponsoredBills 
                 ? BundleType.SponsoredBillsIsThereMoreContent
                 : BundleType.CosponsoredBillsIsThereMoreContent, _isThereMoreVotes);
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            if (errorOccurred)
+                HandleErrorRetrievingData();
+            else if (_bills == null)
+                SetLoadingUi();
+            else
+                ShowBills(_bills, _isThereMoreVotes);
         }
 
         protected override void CleanUp()
