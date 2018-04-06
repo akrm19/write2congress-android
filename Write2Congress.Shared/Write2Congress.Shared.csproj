@@ -98,6 +98,8 @@
     <Compile Include="DomainModel\Vote.cs" />
     <Compile Include="DomainModel\VoteType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DomainModel\Interface\IVoteResult.cs" />
+    <Compile Include="DomainModel\Interface\IVote.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DomainModel\ApiModels\Sunlight\" />
