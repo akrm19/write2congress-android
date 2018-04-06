@@ -32,7 +32,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             _util = new Util(logger);
         }
 
-        public List<Vote> GetVotesByLegislator(string legislatorBioguideId, int page, int resultsPerPage)
+        public List<IVote> GetVotesByLegislator(string legislatorBioguideId, int page, int resultsPerPage)
         {
             if (string.IsNullOrWhiteSpace(legislatorBioguideId))
                 throw new ArgumentException("Error: Cannot retrieve Votes for legislator due to an invalid or empty BioguideId");
@@ -69,10 +69,31 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             */
         }
 
-        private List<Vote> GetVotesFromQuery(string query)
+        private List<IVote> GetVotesFromQuery(string query)
         {
-            return new List<Vote>();
+            //return new List<Vote>();
             //throw new NotImplementedException();
+
+
+
+            var votes = new List<IVote>();
+
+            try
+            {
+                var votesResults = GetMemberResults<DomainModel.ApiModels.ProPublica.VotesResult.Rootobject>(query, _congressApiSvc).Result;
+                votes = (votesResults as IVoteResult).GetVoteResult();
+
+                return votes;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error: Could not retrieve Bills from query {query}", ex);
+            }
+
+            return votes;
+
+
+
 
             //TODO RM: <<<CONTINUE HERE>>> Implement IVote and return a list of IVotes
             /*

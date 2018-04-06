@@ -126,6 +126,30 @@ namespace Write2Congress.Shared.BusinessLayer
             }
         }
 
+        public static VoteCastedType VoteCastedTypeFromProublicaString(string votePosition)
+        {
+            switch (votePosition.ToLower())
+            {
+                case "no":
+                case "nay":
+                case "\"nay\"":
+                    return VoteCastedType.Nay;
+                case "yes":
+                case "yea":
+                case "\"yea\"":
+                    return VoteCastedType.Yea;
+                case "not voting":
+                case "notvoting":
+                case "\"not voting\"":
+                    return VoteCastedType.NotVoting;
+                case "present":
+                case "\"present\"":
+                    return VoteCastedType.Present;
+                default:
+                    return VoteCastedType.Unknown;
+            }            
+        }
+
         public static VoteTypeKind VoteTypeKindFromSunlightVoteType(string voteType)
         {
             if (string.IsNullOrWhiteSpace(voteType))

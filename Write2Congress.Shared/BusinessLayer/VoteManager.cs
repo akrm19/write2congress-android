@@ -27,7 +27,13 @@ namespace Write2Congress.Shared.BusinessLayer
 
         public List<Vote> GetLegislatorVotes(string legislatorBioguideId, int page, int resultsPerPage = _defaultResultsPerPage)
         {
-            var votes = _voteSvc.GetVotesByLegislator(legislatorBioguideId, page, resultsPerPage);
+            var votes = new List<Vote>();
+
+            var votesResult = _voteSvc.GetVotesByLegislator(legislatorBioguideId, page, resultsPerPage);
+
+            foreach (var iVote in votesResult)
+                votes.Add(Vote.TransformToVote(iVote));
+
 
             return votes;
         }

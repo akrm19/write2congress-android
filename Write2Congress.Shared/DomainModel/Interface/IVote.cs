@@ -1,41 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Write2Congress.Shared.DomainModel.Enum;
-using Write2Congress.Shared.DomainModel.Interface;
 
-namespace Write2Congress.Shared.DomainModel
+namespace Write2Congress.Shared.DomainModel.Interface
 {
-    public class Vote
+    public interface IVote
     {
-        public VoteCastedType VoteCastedByLegislator { get; set; }
+        VoteCastedType VoteCastedByLegislator { get; }
 
         /// <summary>
         /// The Bill, if the vote was for a bill.
         /// </summary>
-        public Bill Bill { get; set; }
+        IBill Bill { get; }
 
         /// <summary>
         /// If a vote is related to a bill, the bill’s ID.
         /// </summary>
-        public string BillId { get; set; }
+        string BillId { get; set; }
 
         /// <summary>
         /// The chamber the vote was taken in. “house” or “senate”.
         /// </summary>
-        public LegislativeBody Chamber { get; set; }
+        LegislativeBody Chamber { get; set; }
 
         /// <summary>
         /// NominationId if vote is for a nomination
         /// </summary>
-        public string NominationId { get; set; }
+        string NominationId { get; set; }
 
         /// <summary>
         /// The nomination, if the vote was for a Nomination
         /// </summary>
-        public Nomination Nomination { get; set; }
+        Nomination Nomination { get; set; }
 
         /// <summary>
         /// The Congress this vote was taken in.
@@ -50,7 +45,7 @@ namespace Write2Congress.Shared.DomainModel
         /// <summary>
         /// The official full question that the vote is addressing.
         /// </summary>
-        public string Question { get; set; }
+        string Question { get; set; }
 
         /// <summary>
         /// The required ratio of Aye votes necessary to pass the 
@@ -67,7 +62,7 @@ namespace Write2Congress.Shared.DomainModel
         /// In the case of a vote for Speaker of the House, the result 
         /// field contains the name of the victor.
         /// </summary>
-        public string Result { get; set; }
+        string Result { get; set; }
 
         /// <summary>
         /// A unique identifier for a roll call vote. Made from the first 
@@ -83,7 +78,7 @@ namespace Write2Congress.Shared.DomainModel
         /// <summary>
         /// The original, official source XML for this vote information.
         /// </summary>
-        public string Source { get; set; }
+        string Source { get; set; }
 
 
         /// <summary>
@@ -92,12 +87,12 @@ namespace Write2Congress.Shared.DomainModel
         /// Valid types are “passage”, “cloture”, “nomination”, “impeachment”, 
         /// “treaty”, “recommit”, “quorum”, “leadership”, and “other”.
         /// </summary>
-        public VoteType Type { get; set; }
+        VoteType Type { get; set; }
 
         /// <summary>
         /// The time the vote was taken.
         /// </summary>
-        public DateTime VotedAt { get; set; }
+        DateTime VotedAt { get; set; }
 
         /// <summary>
         /// The “legislative year” of the vote. This is not quite the 
@@ -105,30 +100,6 @@ namespace Write2Congress.Shared.DomainModel
         /// at noon EST on January 3rd. A vote taken on January 1, 2013 
         /// has a “legislative year” of 2012.
         /// </summary>
-        public int Year { get; set; }
-
-
-        public Vote(){}
-
-        public static Vote TransformToVote(IVote vote)
-        {
-            var newVote = new Vote
-            {
-                Bill = Bill.TransformToBill(vote.Bill),
-                BillId = vote.BillId,
-                Chamber = vote.Chamber,
-                Nomination = vote.Nomination,
-                NominationId = vote.NominationId,
-                Question = vote.Question,
-                Result = vote.Result,
-                Source = vote.Source,
-                Type = vote.Type,
-                VoteCastedByLegislator = vote.VoteCastedByLegislator,
-                VotedAt = vote.VotedAt,
-                Year = vote.Year
-            };
-
-            return newVote;
-        }
+        int Year { get; set; }
     }
 }
