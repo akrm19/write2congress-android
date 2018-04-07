@@ -103,9 +103,14 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
 
             DomainModel.Nomination IVote.Nomination 
             {
-                //TODO RM: update nomination used currently
-                get => null;// throw new NotImplementedException(); 
-                set {}// => throw new NotImplementedException(); 
+                get
+                {
+                    if (nomination == null || string.IsNullOrWhiteSpace(nomination.name))
+                        return null;
+
+                    return new DomainModel.Nomination(nomination.name, nomination.agency);
+                }
+                set {}
             }
 
             string IVote.Question 
@@ -139,6 +144,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                 set {}// => throw new NotImplementedException(); 
             }
 
+            //TODO RM: Get rid of year
             int IVote.Year 
             {
                 get => 0;// throw new NotImplementedException(); 

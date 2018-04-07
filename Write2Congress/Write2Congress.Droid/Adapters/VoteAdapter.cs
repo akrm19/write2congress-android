@@ -62,7 +62,7 @@ namespace Write2Congress.Droid.Adapters
                 return;
             }
 
-            var title = vote.Type.Type.GetDescription();
+            var title = vote.Type?.Type.GetDescription();
             var summary = VoteManager.GetVoteSummary(vote);
             AppHelper.ShowDetailsDialog(_fragment, title, summary, vote.Source);
         }
@@ -84,9 +84,31 @@ namespace Write2Congress.Droid.Adapters
 
             var viewHolder = holder as VoteAdapterViewHolder;
             viewHolder.Question.Text = vote.Question;
-            viewHolder.VoteResult.Text = $"{voteResult}: {vote.Result}";
-            viewHolder.VoteType.Text = $"{voteType}: {vote.Type.Value.Capitalize()}"; 
-            viewHolder.VotedAt.Text = $"{date}: {vote.VotedAt.ToShortDateString()}";
+
+            if (string.IsNullOrWhiteSpace(vote.Result))
+                viewHolder.VoteResult.Visibility = ViewStates.Gone;
+            else
+            {
+                viewHolder.VoteResult.Visibility = ViewStates.Visible;
+                viewHolder.VoteResult.Text = $"{voteResult}: {vote.Result}";
+            }
+
+
+            if (string.IsNullOrWhiteSpace(vote?.Type?.Value))
+                viewHolder.VoteType.Visibility = ViewStates.Gone;
+            else
+            {
+                viewHolder.VoteType.Visibility = ViewStates.Visible;
+				viewHolder.VoteType.Text = $"{voteType}: {vote.Type.Value.Capitalize()}"; 
+            }
+
+            if (vote?.VotedAt == DateTime.MinValue)
+                viewHolder.VotedAt.Visibility = ViewStates.Gone;
+            else
+            {
+                viewHolder.VotedAt.Visibility = ViewStates.Visible;
+				viewHolder.VotedAt.Text = $"{date}: {vote.VotedAt.ToShortDateString()}";
+            }
 
             var voteMoreInfo = VoteManager.GetVoteMoreInfoTitle(vote);
 

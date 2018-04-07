@@ -8,6 +8,9 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class Nominee
     {
+        public Nominee()
+        {
+        }
 
         public Nominee(string name, string position, string state = "") 
         {

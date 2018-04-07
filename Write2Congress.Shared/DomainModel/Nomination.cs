@@ -8,6 +8,30 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class Nomination
     {
+        public Nomination(){}
+
+        public Nomination(string name, string organization = "")
+        {
+            DateReceived = DateTime.MinValue;
+            DateOfLastAction = DateTime.MinValue;
+
+            Nominees = new List<Nominee>() 
+            { 
+                new Nominee() 
+                { 
+                    Name = name,
+                    Position = string.Empty,
+                    State = string.Empty
+                } 
+            };
+
+            if (!string.IsNullOrWhiteSpace(organization))
+                Organization = organization;
+            else
+                organization = string.Empty;
+        }
+
+
         /// <summary>
         /// The date this nomination was received in the Senate.
         /// </summary>
@@ -37,13 +61,16 @@ namespace Write2Congress.Shared.DomainModel
 
         public string GetDisplayTitle()
         {
-            if(Nominees == null || Nominees.Count < 1)
+            if(!string.IsNullOrWhiteSpace(GetOrganizationDisplay()) 
+               && (Nominees == null || Nominees.Count < 1))
                 return "Nomination " + GetOrganizationDisplay();
 
-            if (Nominees.Count == 1)
+            if (Nominees.Count > 1)
+				return $"Nomination: {Nominees[0].Name}, {Nominees[1].Name}..." + GetOrganizationDisplay();
+            else if(Nominees.Count == 1)    
                 return $"Nomination: {Nominees[0].Name} " + GetOrganizationDisplay();
 
-            return $"Nomination: {Nominees[0].Name}, {Nominees[1].Name}..." + GetOrganizationDisplay();
+            return string.Empty;
         }
 
         private string GetOrganizationDisplay()
