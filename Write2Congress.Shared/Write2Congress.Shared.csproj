@@ -89,17 +89,17 @@
     <Compile Include="DomainModel\Letter.cs" />
     <Compile Include="DomainModel\Nomination.cs" />
     <Compile Include="DomainModel\Nominee.cs" />
-    <Compile Include="DomainModel\SunlightBaseResult.cs" />
-    <Compile Include="DomainModel\SunlightBillsResult.cs" />
-    <Compile Include="DomainModel\SunlightCommitteeResult.cs" />
-    <Compile Include="DomainModel\SunlightLegislatorResult.cs" />
-    <Compile Include="DomainModel\SunlightVotesResult.cs" />
     <Compile Include="DomainModel\Test.cs" />
     <Compile Include="DomainModel\Vote.cs" />
     <Compile Include="DomainModel\VoteType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DomainModel\Interface\IVoteResult.cs" />
     <Compile Include="DomainModel\Interface\IVote.cs" />
+    <Compile Include="DomainModel\ApiModels\Sunlight\SunlightVotesResult.cs" />
+    <Compile Include="DomainModel\ApiModels\Sunlight\SunlightBillsResult.cs" />
+    <Compile Include="DomainModel\ApiModels\Sunlight\SunlightBaseResult.cs" />
+    <Compile Include="DomainModel\ApiModels\Sunlight\SunlightLegislatorResult.cs" />
+    <Compile Include="DomainModel\ApiModels\Sunlight\SunlightCommitteeResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DomainModel\ApiModels\Sunlight\" />
