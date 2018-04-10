@@ -411,13 +411,13 @@ namespace Write2Congress.Shared.BusinessLayer
                     Question = v.question ?? string.Empty,
                     Result = v.result,
                     Source = v.source,
-                    Type = new VoteType( v.vote_type ?? string.Empty,
-                        DataTransformationUtil.VoteTypeKindFromSunlightVoteType(v.vote_type)),
+                    //Type = new VoteType( v.vote_type ?? string.Empty,
+                    //    DataTransformationUtil.VoteTypeKindFromSunlightVoteType(v.vote_type)),
                     VotedAt = DataTransformationUtil.DateFromSunlightTime(v.voted_at),
-                    Year = v.year ?? 0,
+                    //Year = v.year ?? 0,
                     VoteCastedByLegislator = DataTransformationUtil.VoteCasedTypeFromSunlight(v.voter_ids, legislatorBioguideId),
                     NominationId = v.nomination_id ?? string.Empty,
-                    Nomination = NominationFromSunlightNomination(v.nomination)
+                    //Nomination = NominationFromSunlightNomination(v.nomination)
                 };
 
                 return vote;

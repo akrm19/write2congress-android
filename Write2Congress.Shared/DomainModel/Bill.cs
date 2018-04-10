@@ -95,13 +95,18 @@ namespace Write2Congress.Shared.DomainModel
                         ? $"({Titles.OfficialTile})"
                         : string.Empty);
 
-            else
+            else if (!string.IsNullOrWhiteSpace(Titles.OfficialTile))
                 return Titles.OfficialTile;
+
+            else
+                return string.Empty;
         }
 
         public string GetDisplayTitleWithLabel()
         {
-            return "Bill: " + GetDisplayTitle();
+            return string.IsNullOrWhiteSpace(GetDisplayTitle())
+                         ? string.Empty
+                         : "Bill: " + GetDisplayTitle();
         }
         //END OF CUSTOM ADDED METHODS
 

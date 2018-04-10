@@ -62,9 +62,11 @@ namespace Write2Congress.Droid.Adapters
                 return;
             }
 
-            var title = vote.Type?.Type.GetDescription();
+            var title = VoteManager.GetVoteDisplayTitle(vote);// $"{vote.Question} - {vote.Question}"; 
             var summary = VoteManager.GetVoteSummary(vote);
-            AppHelper.ShowDetailsDialog(_fragment, title, summary, vote.Source);
+
+            //Not passing voter.source as additionalInfoLink since it is a JSON date link
+            AppHelper.ShowDetailsDialog(_fragment, title, summary, string.Empty);// vote.Source);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -83,7 +85,7 @@ namespace Write2Congress.Droid.Adapters
             }
 
             var viewHolder = holder as VoteAdapterViewHolder;
-            viewHolder.Question.Text = vote.Question;
+            viewHolder.Question.Text = VoteManager.GetVoteDisplayTitle(vote);
 
             if (string.IsNullOrWhiteSpace(vote.Result))
                 viewHolder.VoteResult.Visibility = ViewStates.Gone;
@@ -93,14 +95,16 @@ namespace Write2Congress.Droid.Adapters
                 viewHolder.VoteResult.Text = $"{voteResult}: {vote.Result}";
             }
 
-
-            if (string.IsNullOrWhiteSpace(vote?.Type?.Value))
+            //TODO RM: Remove VoteType
+            //if (string.IsNullOrWhiteSpace(vote?.Type?.Value))
                 viewHolder.VoteType.Visibility = ViewStates.Gone;
+            /*
             else
             {
                 viewHolder.VoteType.Visibility = ViewStates.Visible;
 				viewHolder.VoteType.Text = $"{voteType}: {vote.Type.Value.Capitalize()}"; 
             }
+            */
 
             if (vote?.VotedAt == DateTime.MinValue)
                 viewHolder.VotedAt.Visibility = ViewStates.Gone;

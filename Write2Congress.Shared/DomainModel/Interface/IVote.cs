@@ -5,6 +5,10 @@ namespace Write2Congress.Shared.DomainModel.Interface
 {
     public interface IVote
     {
+        string Description { get; set; }
+
+        DomainModel.VoteResults VoteResult { get; }
+
         VoteCastedType VoteCastedByLegislator { get; }
 
         /// <summary>
@@ -87,7 +91,7 @@ namespace Write2Congress.Shared.DomainModel.Interface
         /// Valid types are “passage”, “cloture”, “nomination”, “impeachment”, 
         /// “treaty”, “recommit”, “quorum”, “leadership”, and “other”.
         /// </summary>
-        VoteType Type { get; set; }
+        //VoteType Type { get; set; }
 
         /// <summary>
         /// The time the vote was taken.
@@ -100,6 +104,6 @@ namespace Write2Congress.Shared.DomainModel.Interface
         /// at noon EST on January 3rd. A vote taken on January 1, 2013 
         /// has a “legislative year” of 2012.
         /// </summary>
-        int Year { get; set; }
+        //int Year { get; set; }
     }
 }

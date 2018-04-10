@@ -56,6 +56,46 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
 
 
 			#region IVote Implementation
+            string IVote.Description 
+            {
+                get => string.IsNullOrWhiteSpace(description)
+                             ? string.Empty
+                             : description;
+
+                set
+                {
+                    description = value;
+                }
+            }
+
+            DomainModel.VoteResults IVote.VoteResult
+            {
+                get
+                {
+                    if (total == null)
+                        return null;
+
+                    var voteResult = new DomainModel.VoteResults();
+                    voteResult.No = total.no == null
+                        ? -1
+                        : (int)total.no;
+
+                    voteResult.NotVoting = total.not_voting == null
+                        ? -1
+                        : (int)total.not_voting;
+
+                    voteResult.Present = total.present == null
+                        ? -1
+                        : (int)total.present;
+
+                    voteResult.Yes = total.yes == null
+                        ? -1
+                        : (int)total.yes;
+
+                    return voteResult;
+                }
+            }
+
             VoteCastedType IVote.VoteCastedByLegislator 
             { 
                 get
@@ -131,23 +171,18 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                 set =>vote_uri = value; 
             }
 
+            /*
             VoteType IVote.Type 
             {
                 //TODO RM: look if it is used and update/remove if needed
                 get => null;//new VoteType(string.Empty, VoteTypeKind.Other); 
                 set {} 
             }
+            */
 
             DateTime IVote.VotedAt 
             { 
                 get => DataTransformationUtil.DateFromSunlightTime(date); 
-                set {}// => throw new NotImplementedException(); 
-            }
-
-            //TODO RM: Get rid of year
-            int IVote.Year 
-            {
-                get => 0;// throw new NotImplementedException(); 
                 set {}// => throw new NotImplementedException(); 
             }
             #endregion
@@ -162,6 +197,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             public string number { get; set; }
             public string sponsor_id { get; set; }
             public string title { get; set; }
+
 
             string IBill.BillId 
             {

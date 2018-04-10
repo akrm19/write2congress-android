@@ -10,6 +10,12 @@ namespace Write2Congress.Shared.DomainModel
 {
     public class Vote
     {
+        #region New properties from ProPublica
+        public string Description { get; set; }
+
+        public DomainModel.VoteResults VoteResults { get; set; }
+        #endregion
+
         public VoteCastedType VoteCastedByLegislator { get; set; }
 
         /// <summary>
@@ -92,7 +98,7 @@ namespace Write2Congress.Shared.DomainModel
         /// Valid types are “passage”, “cloture”, “nomination”, “impeachment”, 
         /// “treaty”, “recommit”, “quorum”, “leadership”, and “other”.
         /// </summary>
-        public VoteType Type { get; set; }
+        //public VoteType Type { get; set; }
 
         /// <summary>
         /// The time the vote was taken.
@@ -105,10 +111,10 @@ namespace Write2Congress.Shared.DomainModel
         /// at noon EST on January 3rd. A vote taken on January 1, 2013 
         /// has a “legislative year” of 2012.
         /// </summary>
-        public int Year { get; set; }
+        //public int Year { get; set; }
 
 
-        public Vote(){}
+        public Vote() { }
 
         public static Vote TransformToVote(IVote vote)
         {
@@ -117,15 +123,16 @@ namespace Write2Congress.Shared.DomainModel
                 Bill = Bill.TransformToBill(vote.Bill),
                 BillId = vote.BillId,
                 Chamber = vote.Chamber,
+                Description = vote.Description,
                 Nomination = vote.Nomination,
                 NominationId = vote.NominationId,
                 Question = vote.Question,
                 Result = vote.Result,
                 Source = vote.Source,
-                Type = vote.Type,
+                //Type = vote.Type,
                 VoteCastedByLegislator = vote.VoteCastedByLegislator,
                 VotedAt = vote.VotedAt,
-                Year = vote.Year
+                VoteResults = vote.VoteResult
             };
 
             return newVote;
