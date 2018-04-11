@@ -62,7 +62,7 @@
                 android:src="@drawable/ic_create_blue_48dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_writeLetter"/>
+                android:id="@+id/viewLegislatorFrag_writeLetter" />
             <ImageButton
                 android:src="@drawable/facebook_button"
                 android:layout_width="wrap_content"
@@ -77,12 +77,12 @@
                 android:src="@drawable/ic_action_social_twitter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_twitter"/>
+                android:id="@+id/viewLegislatorFrag_twitter" />
             <ImageButton
                 android:src="@drawable/ic_action_local_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_phone"/>
+                android:id="@+id/viewLegislatorFrag_phone" />
             <ImageButton
                 android:src="@drawable/ic_action_social_youtube"
                 android:layout_width="wrap_content"
@@ -102,29 +102,25 @@
     </HorizontalScrollView>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewLegislatorFrag_scrollview" >
-      
+        android:layout_height="fill_parent"
+        android:id="@+id/viewLegislatorFrag_scrollview"
+        android:fillViewport="true">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewLegislatorFrag_scrollviewChild">
-     
             <android.support.v4.view.ViewPager
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/viewLegislatorFrag_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 android:minHeight="300dp">
                 <android.support.v4.view.PagerTabStrip
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>            
+                    android:paddingTop="10dp" />
             </android.support.v4.view.ViewPager>
-      
         </LinearLayout>
-      
     </ScrollView>
 </LinearLayout>
