@@ -27,35 +27,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             _usIoApiSvc = new UnitedStatesIoApi(logger);
         }
 
-
-        /*
-        public async Task<byte[]> GetLegislatorPortrait(Legislator legislator)
-        {
-            //Possible options: 450x550 and original (typically 675x825, but can vary)
-            var imageSize = "225x275";
-            var uri = $@"http://theunitedstates.io/images/congress/{imageSize}/{legislator.BioguideId}.jpg";
-
-            byte[] result;
-
-            try
-            {
-                using (var httpClient = new HttpClient())
-                {
-                    httpClient.DefaultRequestHeaders.Accept.Clear();
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    result = await httpClient.GetByteArrayAsync(uri);
-                }
-
-                return result;
-            }
-            catch (Exception e)
-            {
-                _logger.Error($"Error encountured retrieving portrait from URL: {uri}. Error {e.ToString()}");
-                return null;
-            }
-        }
-        */
-
         public Task<byte[]> GetLegislatorPortrait2(Legislator legislator)
         {
             //Possible options: 450x550 and original (typically 675x825, but can vary)

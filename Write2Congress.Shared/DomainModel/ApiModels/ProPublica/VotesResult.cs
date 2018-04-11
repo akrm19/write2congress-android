@@ -171,19 +171,10 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                 set =>vote_uri = value; 
             }
 
-            /*
-            VoteType IVote.Type 
-            {
-                //TODO RM: look if it is used and update/remove if needed
-                get => null;//new VoteType(string.Empty, VoteTypeKind.Other); 
-                set {} 
-            }
-            */
-
             DateTime IVote.VotedAt 
             { 
                 get => DataTransformationUtil.DateFromSunlightTime(date); 
-                set {}// => throw new NotImplementedException(); 
+                set {}
             }
             #endregion
         }
@@ -267,14 +258,6 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                 get => new BillAction(DateTime.MinValue, latest_action ?? string.Empty, BillActionType.Unknown); 
                 set {}
             }
-
-            /*
-            int IBill.NumberOfCoSponsors 
-            { 
-                get => 0; 
-                set {} 
-            }
-            */
 
             string IBill.SponsorBioId 
             { 

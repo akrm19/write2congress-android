@@ -177,13 +177,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                         PopularTitlePerLoc = string.Empty
                     };
                 }
-            }/*
-            int IBill.NumberOfCoSponsors
-            {
-                get { return cosponsors ?? 0; }
-                set { cosponsors = value; }
             }
-            */
             DateTime IBill.DateIntroduced
             {
                 get { return DataTransformationUtil.DateFromSunlightTime(introduced_date); }

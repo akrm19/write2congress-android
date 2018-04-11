@@ -27,19 +27,6 @@ namespace Write2Congress.Shared.BusinessLayer
             _legislatorSvc = new LegislatorSvc(logger);
         }
 
-        /*
-        public Task<byte[]> GetLegislatorPortrait(Legislator legislator)
-        {
-            if (legislator == null || string.IsNullOrWhiteSpace(legislator.BioguideId))
-            {
-                MyLogger.Error("Cannot retrieve portrait for empty legislator. Returning NULL");
-                return null;
-            }
-
-            return _legislatorSvc.GetLegislatorPortrait(legislator);
-        }
-        */
-
         #region Get Legislator Methods
         public List<ICommittee> GetLegislatorsCommittees(string bioId)
         {

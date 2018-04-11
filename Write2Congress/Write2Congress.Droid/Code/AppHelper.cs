@@ -103,16 +103,6 @@ namespace Write2Congress.Droid.Code
             return DateTime.Today.AddYears(legislator.Birthday.Year * -1).Year;
         }
 
-        //public static void SetLegislatorContactMthdVisibility(ImageView imageButton, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
-        //{
-        //    imageButton.Visibility = contactMethod.IsEmpty
-        //        ? ViewStates.Gone
-        //        : ViewStates.Visible;
-        //
-        //    if (selectableItemBackground != null)
-        //        imageButton.SetBackgroundResource(selectableItemBackground.ResourceId);
-        //}
-
         public static void SetLegislatorContactMthdVisibility(View imageButton, ContactMethod contactMethod, Android.Util.TypedValue selectableItemBackground)
         {
             imageButton.Visibility = contactMethod.IsEmpty

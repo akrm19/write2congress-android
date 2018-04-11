@@ -12,7 +12,6 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
         {
             public string status { get; set; }
             public string copyright { get; set; }
-            //public Result[] results { get; set; }
         }
     }
 }

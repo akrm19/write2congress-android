@@ -193,48 +193,5 @@ namespace Write2Congress.Droid.Fragments
                 SetLoadingUiOff();
             }
         }
-
-        /*
-        public static VoteViewerFragmentCtrl CreateInstance(Legislator legislator, List<Vote> votes, Action loadMoreClicked)
-        {
-            var newFragment = new VoteViewerFragmentCtrl();
-
-            var args = new Bundle();
-
-            if(legislator != null)
-                args.PutString(BundleType.Legislator, legislator.SerializeToJson());
-
-            if (votes != null)
-                args.PutString(BundleType.Votes, votes.SerializeToJson());
-
-            newFragment.Arguments = args;
-
-            return newFragment;
-        }
-
-        public static VoteViewerFragmentCtrl CreateInstance(List<Vote> votes)
-        {
-            var newFragment = new VoteViewerFragmentCtrl();
-
-            var args = new Bundle();
-            args.PutString(BundleType.Votes, votes.SerializeToJson());
-            newFragment.Arguments = args;
-
-            return newFragment;
-        }
-        */
-
-        //public void SetOnClickListener(Action<bool> listener)
-        //{
-        //    if(!listenerSet)
-        //        LoadMoreVoteClick = listener;
-        //
-        //    listenerSet = true;
-        //}
-
-        //public override void OnCreate(Bundle savedInstanceState)
-        //{
-        //    base.OnCreate(savedInstanceState);
-        //}
     }
 }
