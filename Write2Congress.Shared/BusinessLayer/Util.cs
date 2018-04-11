@@ -38,22 +38,29 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             var result = new List<T>();
 
-            var letterFiles = Util.GetAllFilesInDir
-                (path, $"*.{extension}", SearchOption.AllDirectories);
-
-            foreach (var letterFilePath in letterFiles)
+            try
             {
-                if (!File.Exists(letterFilePath))
-                    continue;
+                var letterFiles = Util.GetAllFilesInDir
+                    (path, $"*.{extension}", SearchOption.AllDirectories);
 
-                var letterContent = File.ReadAllText(letterFilePath);
+                foreach (var letterFilePath in letterFiles)
+                {
+                    if (!File.Exists(letterFilePath))
+                        continue;
 
-                if (string.IsNullOrWhiteSpace(letterContent))
-                    continue;
+                    var letterContent = File.ReadAllText(letterFilePath);
 
-                var letter = DeserializeFromJson<T>(letterContent);
+                    if (string.IsNullOrWhiteSpace(letterContent))
+                        continue;
 
-                result.Add(letter);
+                    var letter = DeserializeFromJson<T>(letterContent);
+
+                    result.Add(letter);
+                }
+            }
+            catch(Exception ex)
+            {
+                //logger.Error($"Error encountered deserializing {typeof(T).Name} objects from {path}");
             }
 
             return result;
@@ -64,12 +71,10 @@ namespace Write2Congress.Shared.BusinessLayer
             if (File.Exists(filePath))
                 return File.ReadAllText(filePath);
 
-            //TOD RM: Add logging
-            //_logger.Error($"File does not exist, cannot retrieve file contents. Filepath: {filePath}");
             return string.Empty;
         }
 
-        public static bool DeleteFile(string filePath)
+        public static bool DeleteFile(string filePath, IMyLogger logger)
         {
 
             if (!File.Exists(filePath))
@@ -82,13 +87,12 @@ namespace Write2Congress.Shared.BusinessLayer
             }
             catch (Exception ex)
             {
+                logger.Error($"Unable to delete file in path {filePath}.", ex);
                 return false;
-                //TODO RM: Add loggin
-                //
             }
         }
 
-        public static bool CreateFileContent(string filePath, string content)
+        public static bool CreateFileContent(string filePath, string content, IMyLogger logger)
         {
             try
             {
@@ -97,8 +101,7 @@ namespace Write2Congress.Shared.BusinessLayer
             }
             catch (Exception ex)
             {
-                // TODO RM: Add logging
-                //_logger.Error($"Cannot write file content to file ({filePath}). Error: {ex.Message}");
+                logger.Error($"Cannot write file content to file ({filePath}). Error: {ex.Message}");
                 return false;
             }
         }
@@ -106,12 +109,7 @@ namespace Write2Congress.Shared.BusinessLayer
         public static string[] GetAllFilesInDir(string dirPath, string pattern = "", SearchOption searOptions = SearchOption.TopDirectoryOnly)
         {
             if (!Directory.Exists(dirPath))
-            {
-
-                //TODO RM: Add logging
-                //_logger.Error($"Directory does not exist. Cannot retrive files, returning empty array. Directory: {dirPath}");
-                return new string[] { };
-            }
+                throw new DirectoryNotFoundException($"Directory does not exist. Cannot retrive files, returning empty array. Directory: {dirPath}");
 
             var dir = new DirectoryInfo(dirPath);
 
