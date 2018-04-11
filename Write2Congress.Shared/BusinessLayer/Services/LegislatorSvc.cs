@@ -126,7 +126,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             try
             {
                 var committees  = GetLegislatorBase<DomainModel.ApiModels.ProPublica.SingleLegislatorResult.Rootobject>(getMembersUri, _congressApiSvc).Result;
-                return committees;
+                return committees.OrderBy(c => c.Name).ToList();
             }
             catch(Exception e)
             {
