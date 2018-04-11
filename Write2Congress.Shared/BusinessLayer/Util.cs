@@ -118,7 +118,7 @@ namespace Write2Congress.Shared.BusinessLayer
                 : Directory.GetFiles(dirPath, pattern, searOptions);
         }
 
-        public void CreateDir(string dirPath)
+        public static void CreateDir(string dirPath)
         {
             if (Directory.Exists(dirPath))
                 return;
@@ -129,7 +129,7 @@ namespace Write2Congress.Shared.BusinessLayer
             }
             catch (Exception ex)
             {
-                _logger.Error($"Error creating directory: {dirPath}. {ex.Message}", ex);
+                //_logger.Error($"Error creating directory: {dirPath}. {ex.Message}", ex);
             }
         }
 
