@@ -46,7 +46,7 @@ namespace Write2Congress.Shared.DomainModel.Interface
         
         BillAction LastAction { get; set; }
 
-        int NumberOfCoSponsors { get; set; }
+        //int NumberOfCoSponsors { get; set; }
 
         string SponsorBioId { get; set; }
         

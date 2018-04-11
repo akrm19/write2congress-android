@@ -268,11 +268,13 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                 set {}
             }
 
+            /*
             int IBill.NumberOfCoSponsors 
             { 
                 get => 0; 
                 set {} 
             }
+            */
 
             string IBill.SponsorBioId 
             { 

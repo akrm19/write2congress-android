@@ -46,7 +46,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             },
             */
             public Cosponsors_By_Party cosponsors_by_party { get; set; }
-            public int cosponsors { get; set; }
+            public int? cosponsors { get; set; }
             //"s1441-115"
             public string bill_id { get; set; }
             //"s",
@@ -177,12 +177,13 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
                         PopularTitlePerLoc = string.Empty
                     };
                 }
-            }
+            }/*
             int IBill.NumberOfCoSponsors
             {
-                get { return cosponsors; }
+                get { return cosponsors ?? 0; }
                 set { cosponsors = value; }
             }
+            */
             DateTime IBill.DateIntroduced
             {
                 get { return DataTransformationUtil.DateFromSunlightTime(introduced_date); }
@@ -235,7 +236,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             {
                 get
                 {
-                    return cosponsors;
+                    return cosponsors ?? 0;
                 }
             }
 
