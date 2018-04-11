@@ -27,6 +27,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             _usIoApiSvc = new UnitedStatesIoApi(logger);
         }
 
+
         /*
         public async Task<byte[]> GetLegislatorPortrait(Legislator legislator)
         {
@@ -81,6 +82,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
         public List<ILegislator> GetAllAlegislators()
         {
+            //https://api.propublica.org/congress/v1/{congress}/{chamber}/members.json
             var senateMembersUri = "115/senate/members.json";
             var houseMembersUri = "115/house/members.json";
 
@@ -111,6 +113,58 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             }
 
             return legislators;
+        }
+
+        internal List<ICommittee> GetLegislatorsCommitteesFromProPublica(string bioId)
+        {
+            if (string.IsNullOrWhiteSpace(bioId))
+                return null;
+
+            //https://api.propublica.org/congress/v1/members/{member-id}.json
+            var getMembersUri = $"members/{bioId}.json";
+
+            try
+            {
+                var committees  = GetLegislatorBase<DomainModel.ApiModels.ProPublica.SingleLegislatorResult.Rootobject>(getMembersUri, _congressApiSvc).Result;
+                return committees;
+            }
+            catch(Exception e)
+            {
+                _logger.Error($"Error occured retrieving legislator with bioId {bioId}", e);
+                return null;
+            }
+
+        }
+
+        private async Task<List<ICommittee>> GetLegislatorBase<T1>(string legislatorsUri, ApiBase apiSvc) where T1 : ICommitteeResult
+        {
+            try
+            {
+                var client = apiSvc.CreateHttpClient();
+                var response = client.GetAsync(legislatorsUri).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseText = response.Content.ReadAsStringAsync().Result;
+                    //var responseText = await response.Content.ReadAsStringAsync();
+
+                    var results = JsonConvert.DeserializeObject<T1>(responseText);
+
+                    var legislator = results.GetCommitteeResult();
+
+                    return legislator;
+                }
+                else
+                {
+                    _logger.Error($"Error occurred retrieving legislators using URI: {legislatorsUri}");
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Error retrieving legislators.", e);
+            }
+
+            return null;
         }
 
         private async Task<List<ILegislator>> GetLegislatorsBase<T>(string legislatorsUri, ApiBase apiSvc) where T : ILegislatorResult

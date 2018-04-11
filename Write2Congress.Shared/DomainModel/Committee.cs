@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Write2Congress.Shared.DomainModel.Enum;
+using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.DomainModel
 {
-    public class Committee
+    public class Committee : ICommittee
     {
         /// <summary>
         /// Official ID of the committee, as it appears in various official sources (Senate, House, and Library of Congress).
@@ -44,5 +45,21 @@ namespace Write2Congress.Shared.DomainModel
         /// Whether or not the committee is a subcommittee.
         /// </summary>
         public bool IsSubcommittee { get; set; }
+
+        public static Committee FromICommittee(ICommittee committee)
+        {
+            var newCommittee = new Committee
+            {
+                Chamber = committee.Chamber,
+                Id = committee.Id,
+                IsSubcommittee = committee.IsSubcommittee,
+                Name = committee.Name,
+                ParentCommitteeId = committee.ParentCommitteeId,
+                Phone = committee.Phone,
+                Url = committee.Url
+            };
+
+            return newCommittee;
+        }
     }
 }

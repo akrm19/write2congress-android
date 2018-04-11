@@ -20,7 +20,10 @@ namespace Write2Congress.Droid.Fragments
 {
     public class CommitteeViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
+        private bool _isThereMoteVotes = false;
         private List<Committee> _committees;
+        private Legislator _legislator;
+        private LegislatorManager _legislatorManager;
 
         public CommitteeViewerFragmentCtrl() {}
 
@@ -28,51 +31,131 @@ namespace Write2Congress.Droid.Fragments
         {
             var newFragment = new CommitteeViewerFragmentCtrl();
 
-            //var args = new Bundle();
-            //args.PutString(BundleType.Legislator, legislator.SerializeToJson());
-            //newFragment.Arguments = args;
+            var args = new Bundle();
+            args.PutString(BundleType.Legislator, legislator.SerializeToJson());
+            newFragment.Arguments = args;
 
             return newFragment;
         }
 
-        public override void OnResume()
+        public override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnResume();
+            base.OnCreate(savedInstanceState);
 
-            if (_committees == null)
-                SetLoadingUi();
-            else
-                ShowCommittees(_committees);
+            var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
+            _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
+
+            _legislatorManager = new LegislatorManager(MyLogger);
+            currentPage = RetrieveCurrentPageIfAvailable(savedInstanceState);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            currentPage = RetrieveCurrentPageIfAvailable(savedInstanceState);
+
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
             recyclerAdapter = new CommitteeAdapter(this);
             recycler.SetAdapter(recyclerAdapter);
 
+            SetLoadingUi();
+
             //We load all committees, so no need for more buttons
             recyclerButtonsParent.Visibility = ViewStates.Gone;
             loadMoreButton.Visibility = ViewStates.Gone;
 
-            if (_committees == null)
-                SetLoadingUi();
-            else
+            if (_committees != null && _committees.Count() >= 0)
                 SetCommittees(_committees);
+            else if(savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Committees, string.Empty)))
+            {
+                var serializedCommittees = savedInstanceState.GetString(BundleType.Committees);
+                _committees = new List<Committee>().DeserializeFromJson(serializedCommittees);
+                SetCommittees(_committees);
+            }
+            else
+                FetchMoreLegislatorContent(false);
 
             return fragment;
+        }
+
+        protected override void FetchMoreLegislatorContent(bool isNextClick)
+        {
+            base.FetchMoreLegislatorContent(isNextClick);
+
+            var getVotesTask = new Task<Tuple<List<Committee>>>((prms) =>
+            {
+                var passedParams = prms as Tuple<string, LegislatorManager>;
+
+                var legislatorId = passedParams.Item1;
+                var lm = passedParams.Item2;
+
+                var results = lm.GetLegislatorsCommittees(legislatorId);
+
+                var resultsAsICommittee = new List<Committee>();
+
+                foreach (var c in results)
+                    resultsAsICommittee.Add(Committee.FromICommittee(c));
+
+                //TODO RM: Verify that ProPublica API does not indicate if there are more results
+                //setting to true for now, since it seems ProPublica does not indicate that there are more results
+                //_isThereMoreVotes = false;// vm.IsThereMoreResultsForLastCall();
+
+                return new Tuple<List<Committee>>(resultsAsICommittee);
+            }, new Tuple<string, LegislatorManager>(_legislator.IdBioguide, _legislatorManager));
+
+            getVotesTask.ContinueWith((antecedent) =>
+            {
+                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
+                    return;
+
+                Activity.RunOnUiThread(() =>
+                {
+                    if (antecedent.IsFaulted || antecedent.IsCanceled)
+                        HandleErrorRetrievingData();
+                    else
+                    {
+                        HandleSuccessfullDataRetrieval();
+
+                        //currentPage = antecedent.Result.Item3 + 1;
+
+                        if (_committees == null || !_committees.Any())
+                            _committees = antecedent.Result.Item1;
+                        else
+                            _committees.AddRange(antecedent.Result.Item1);
+
+                        //TODO RM: Consolidate these two methods or rename them
+                        //SetLoadMoreButtonTextAsLoading(false);
+                        //ShowRecyclerButtons(false);
+
+                        ShowCommittees(_committees);
+                    }
+                });
+            });
+
+            getVotesTask.Start();
         }
 
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
 
-            //if(_committees != null)
-            //{
-            //    var serializedCommittees = _committees.SerializeToJson();
-            //    outState.PutString(BundleType.Committees, serializedCommittees);
-            //}
+            if(_committees != null)
+            {
+                var serializedCommittees = _committees.SerializeToJson();
+                outState.PutString(BundleType.Committees, serializedCommittees);
+            }
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            if (errorOccurred)
+                HandleErrorRetrievingData();
+            else if (_committees == null)
+                SetLoadingUi();
+            else
+                ShowCommittees(_committees);
         }
 
         protected override void CleanUp()
@@ -80,6 +163,8 @@ namespace Write2Congress.Droid.Fragments
             base.CleanUp();
 
             _committees = null;
+            _legislatorManager = null;
+            _legislator = null;
         }
 
         protected override string EmptyText()
@@ -101,15 +186,13 @@ namespace Write2Congress.Droid.Fragments
         {
             _committees = committees;
 
-            if (IsBeingShown)
+            if (IsBeingShown && recyclerAdapter != null)
             {
                 (recyclerAdapter as CommitteeAdapter).UpdateCommittee(_committees);
 
                 SetLoadingUiOff();
             }
         }
-
-        
 
         protected override void NextButon_Click(object sender, EventArgs e)
         {

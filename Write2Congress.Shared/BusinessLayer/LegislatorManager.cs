@@ -41,6 +41,16 @@ namespace Write2Congress.Shared.BusinessLayer
         */
 
         #region Get Legislator Methods
+        public List<ICommittee> GetLegislatorsCommittees(string bioId)
+        {
+            if (string.IsNullOrWhiteSpace(bioId))
+                return null;
+
+            var legislator = _legislatorSvc.GetLegislatorsCommitteesFromProPublica(bioId);
+
+            return legislator;
+        }
+
         public List<Legislator> GetAllLegislators()
         {
             var legislators = new List<Legislator>();
