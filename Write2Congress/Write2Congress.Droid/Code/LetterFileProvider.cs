@@ -40,7 +40,7 @@ namespace Write2Congress.Droid.Code
             var serializedLetter = letter.SerializeToJson<Letter>();
             var path = Path.Combine(_lettersDirectory, $"{letter.Id}.{_lettersExtension}");
 
-            return Util.CreateFileContent(path, serializedLetter, _logger);
+            return Util.CreateFileContent(path, serializedLetter);
         }
 
         private void CreateLetttersDirIfNeeded()
@@ -52,7 +52,7 @@ namespace Write2Congress.Droid.Code
         {
             var letterPath = Path.Combine(_lettersDirectory, $"{letterId}.{_lettersExtension}");
 
-            return Util.DeleteFile(letterPath, _logger);
+            return Util.DeleteFile(letterPath);
         }
     }
 }

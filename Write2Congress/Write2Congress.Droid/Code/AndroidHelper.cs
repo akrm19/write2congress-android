@@ -83,7 +83,7 @@ namespace Write2Congress.Droid.Code
             }
             catch (Exception ex)
             {
-                _logger.Error($"Error encountered trying to retrieve and deserialize Type from intent using extraName {extraName}. Returning default for Type {typeof(T).Name}", ex);
+                //TODO RM: adding logging
                 return default(T);
             }
         }
@@ -112,12 +112,6 @@ namespace Write2Congress.Droid.Code
         {
             var path = Path.Combine(GetInternalAppDirPath(), filename);
 
-            if(!File.Exists(path))
-            {
-                _logger.Error($"File does not exist, cannot retrieve file contents. Filepath: {filename}");
-                return string.Empty;
-            }
-
             return Util.GetFileContents(path);
         }
 
@@ -125,7 +119,7 @@ namespace Write2Congress.Droid.Code
         {
             var path = Path.Combine(GetInternalAppDirPath(), filename);
 
-            return Util.CreateFileContent(path, content, _logger);
+            return Util.CreateFileContent(path, content);
         }
 
         public static void CreateInternalDir(string dirName)

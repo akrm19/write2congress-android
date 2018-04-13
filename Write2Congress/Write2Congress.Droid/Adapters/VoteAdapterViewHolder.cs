@@ -18,6 +18,7 @@ namespace Write2Congress.Droid.Adapters
         public ImageView Image;
         public TextView Question;
         public TextView VoteResult;
+        public TextView VoteType;
         public TextView VotedAt;
         public TextView MoreInfo;
 
@@ -31,6 +32,7 @@ namespace Write2Congress.Droid.Adapters
 
             Question = view.FindViewById<TextView>(Resource.Id.voteCtrl_question);
             VoteResult = view.FindViewById<TextView>(Resource.Id.voteCtrl_voteResult);
+            VoteType = view.FindViewById<TextView>(Resource.Id.voteCtrl_voteType);
             VotedAt = view.FindViewById<TextView>(Resource.Id.voteCtrl_votedAt);
             MoreInfo = view.FindViewById<TextView>(Resource.Id.voteCtrl_moreInfo);
         }

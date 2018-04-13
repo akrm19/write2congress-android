@@ -24,6 +24,11 @@ namespace Write2Congress.Shared.DomainModel
                 DateIntroduced = bill.DateIntroduced,
                 DateOfLastVote = bill.DateLastVoted,
                 Id = bill.BillId,
+                //TODO RM: <<<Continue Work Here >>>> 
+                //Try to do History. Or modify it. 
+                //Continue to create a Bill from IBill so it can
+                // be used in the services
+                //History = CreateHistoryFromIBill(bill),
                 LastAction = bill.LastAction,
                 Nicknames = new string[0],
                 Number = bill.BillNumber,
@@ -51,6 +56,35 @@ namespace Write2Congress.Shared.DomainModel
         }
 
         public BillStatus BillStatus { get; set; }
+
+        /*
+        public BillStatus GetBillStatus()
+        {
+            if (History.AwaitingSignature)
+                return new BillStatus(BillStatusKind.AwaitingSignature, History.AwaitingSignatureSince);
+
+            if (History.Enacted)
+                return new BillStatus(BillStatusKind.Enacted, History.DateEnacted);
+
+            if (History.Vetoed)
+                return new BillStatus(BillStatusKind.Vetoed, History.DateVetoed);
+
+            else
+            {
+                if (History.DateHouseLastVotedOnPassage != DateTime.MinValue && History.HousePassageResult != LegislativeBillVote.Na)
+                    return new BillStatus(BillStatusKind.InCongress, History.DateHouseLastVotedOnPassage, History.HousePassageResult.ToString());
+
+                else if (History.DateSenateLastVotedOnPassage != DateTime.MinValue && History.SenatePassageResult != LegislativeBillVote.Na)
+                    return new BillStatus(BillStatusKind.InCongress, History.DateSenateLastVotedOnPassage, History.SenatePassageResult.ToString());
+
+                else if (LastAction.Date != DateTime.MinValue && !string.IsNullOrWhiteSpace(LastAction.Text))
+                    return new BillStatus(BillStatusKind.InCongress, LastAction.Date, LastAction.Text);
+
+                else
+                    return new BillStatus(BillStatusKind.Unknown, DateTime.MinValue);
+            }
+        }
+        */
 
         public string GetDisplayTitle()
         {
@@ -205,6 +239,13 @@ namespace Write2Congress.Shared.DomainModel
         /// use this field with caution.
         /// </summary>
         //public string[] RelatedBillIds { get; set; }
+
+
+        //TODO RM: This is a Legislator Result, update it so it uses that instead
+        /// <summary>
+        /// An object with most simple legislator fields for the bill’s sponsor, if there is one.
+        /// </summary>
+        //public Legislator Sponsor { get; set; }
 
         /// <summary>
         /// The bioguide ID of the bill’s sponsoring legislator, 
