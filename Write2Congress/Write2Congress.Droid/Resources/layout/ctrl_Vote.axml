@@ -52,13 +52,6 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:scrollHorizontally="true"
-                    android:id="@+id/voteCtrl_voteType" />
-                <TextView
-                    android:text="Name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
                     android:id="@+id/voteCtrl_votedAt" />
                 <TextView
                     android:text="Name"
