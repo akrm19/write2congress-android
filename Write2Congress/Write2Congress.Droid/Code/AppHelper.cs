@@ -29,7 +29,6 @@ namespace Write2Congress.Droid.Code
     {
         private static Logger _logger = new Logger("AppHelper");
         private static string _cachedLegislatorsFileName = "Legislators.json";
-        private static AndroidHelper _androidHelper = new AndroidHelper(_logger);
 
         //TODO RM: Ensure this works with pre 5.0 like 4.4
         public static Android.Util.TypedValue GetTypedValueFromActv(ContextThemeWrapper activity)
@@ -225,7 +224,7 @@ namespace Write2Congress.Droid.Code
             try
             {
                 var serializedLegislators = JsonConvert.SerializeObject(legistlators);
-                _androidHelper.SetInternalAppFileContent(_cachedLegislatorsFileName, serializedLegislators);
+                AndroidHelper.SetInternalAppFileContent(_cachedLegislatorsFileName, serializedLegislators);
                 SetDefaultPreferenceString(SharedPreference.LegislatorsLastUpdate, DateTime.UtcNow.ToString());
             }
             catch (Exception e)

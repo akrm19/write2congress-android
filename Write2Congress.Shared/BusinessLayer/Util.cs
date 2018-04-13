@@ -34,7 +34,7 @@ namespace Write2Congress.Shared.BusinessLayer
             return JsonConvert.DeserializeObject<T>(jsonSerializedContent);
         }
 
-        public List<T> GetJsonSerializedObjsFromFile<T>(string path, string extension = "", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        public static List<T> GetJsonSerializedObjsFromFile<T>(string path, string extension = "", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
         {
             var result = new List<T>();
 
@@ -60,7 +60,7 @@ namespace Write2Congress.Shared.BusinessLayer
             }
             catch(Exception ex)
             {
-                _logger.Error($"Error encountered deserializing {typeof(T).Name} objects from {path}", ex);
+                //logger.Error($"Error encountered deserializing {typeof(T).Name} objects from {path}");
             }
 
             return result;
@@ -92,7 +92,7 @@ namespace Write2Congress.Shared.BusinessLayer
             }
         }
 
-        public bool CreateFileContent(string filePath, string content)
+        public static bool CreateFileContent(string filePath, string content, IMyLogger logger)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Write2Congress.Shared.BusinessLayer
             }
             catch (Exception ex)
             {
-                _logger.Error($"Cannot write file content to file ({filePath}). Error: {ex.Message}");
+                logger.Error($"Cannot write file content to file ({filePath}). Error: {ex.Message}");
                 return false;
             }
         }
@@ -118,7 +118,7 @@ namespace Write2Congress.Shared.BusinessLayer
                 : Directory.GetFiles(dirPath, pattern, searOptions);
         }
 
-        public void CreateDir(string dirPath)
+        public static void CreateDir(string dirPath)
         {
             if (Directory.Exists(dirPath))
                 return;
@@ -129,7 +129,8 @@ namespace Write2Congress.Shared.BusinessLayer
             }
             catch (Exception ex)
             {
-                _logger.Error($"Error creating directory: {dirPath}. {ex.Message}", ex);
+                //TODO RM Add logging
+                //_logger.Error($"Error creating directory: {dirPath}. {ex.Message}");
             }
         }
 
@@ -208,6 +209,17 @@ namespace Write2Congress.Shared.BusinessLayer
                     return string.Empty;
             }
         }
+
+        public bool ValidZipFormat(string zip)
+        {
+            if (zip.Length != 5)
+                return false; //TODO Add logging
+
+            int zipNumber = 0;
+
+            //TODO RM: handle errors, logging or exception
+            return int.TryParse(zip, out zipNumber);            
+        }
         #endregion
 
         #region Sunlight Api Helper Methods
@@ -270,6 +282,7 @@ namespace Write2Congress.Shared.BusinessLayer
             return legislators;
         }
 
+        //public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(BaseLegislatorsResult.Rootobject legislatorResults)
         public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(SenateMembersResult.Rootobject legislatorResults)
         {
             var legislators = new List<Legislator>();
@@ -649,10 +662,10 @@ namespace Write2Congress.Shared.BusinessLayer
                      ? new ContactMethod(ContactType.NotSet, string.Empty)
                      : new ContactMethod(ContactType.WebSiteContact, l.contact_form),
                 IdBioguide = l.id ?? string.Empty,
-				Gender = Gender.NA,
 
 
                 //TODO RM: These do not exist in new ProPublica source
+                Gender = Gender.NA,
                 TermStartDate = DateTime.MinValue,
                 TermEndDate = DateTime.MinValue,
                 Email = new ContactMethod(ContactType.NotSet, string.Empty),

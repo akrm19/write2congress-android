@@ -21,20 +21,18 @@ namespace Write2Congress.Droid.Code
         private readonly string _lettersExtension = "w2cltrs";
         private string _lettersDirectory;
         private Logger _logger;
-        private Util _util;
 
         public LetterFileProvider()
         {
             _lettersDirectory = Path.Combine(AndroidHelper.GetInternalAppDirPath(), "Letters");
             _logger = new Logger("LetterFileProvider");
-            _util = new Util(_logger);
 
             CreateLetttersDirIfNeeded();
         }
 
         public List<Letter> GetAllLetters()
         {
-            return _util.GetJsonSerializedObjsFromFile<Letter>(_lettersDirectory, _lettersExtension, SearchOption.AllDirectories);
+            return Util.GetJsonSerializedObjsFromFile<Letter>(_lettersDirectory, _lettersExtension, SearchOption.AllDirectories);
         }
 
         public bool SaveLetter(Letter letter)
@@ -42,7 +40,7 @@ namespace Write2Congress.Droid.Code
             var serializedLetter = letter.SerializeToJson<Letter>();
             var path = Path.Combine(_lettersDirectory, $"{letter.Id}.{_lettersExtension}");
 
-            return _util.CreateFileContent(path, serializedLetter);
+            return Util.CreateFileContent(path, serializedLetter, _logger);
         }
 
         private void CreateLetttersDirIfNeeded()
