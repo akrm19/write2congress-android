@@ -140,7 +140,7 @@ namespace Write2Congress.Droid.Code
         {
             var dirPath = Path.Combine(GetInternalAppDirPath(), dirName);
 
-            _util.CreateDir(dirPath);
+            Util.CreateDir(dirPath);
         }
         
         public static string GetInternalAppDirPath()
