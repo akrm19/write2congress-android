@@ -95,17 +95,6 @@ namespace Write2Congress.Droid.Adapters
                 viewHolder.VoteResult.Text = $"{voteResult}: {vote.Result}";
             }
 
-            //TODO RM: Remove VoteType
-            //if (string.IsNullOrWhiteSpace(vote?.Type?.Value))
-                viewHolder.VoteType.Visibility = ViewStates.Gone;
-            /*
-            else
-            {
-                viewHolder.VoteType.Visibility = ViewStates.Visible;
-				viewHolder.VoteType.Text = $"{voteType}: {vote.Type.Value.Capitalize()}"; 
-            }
-            */
-
             if (vote?.VotedAt == DateTime.MinValue)
                 viewHolder.VotedAt.Visibility = ViewStates.Gone;
             else
