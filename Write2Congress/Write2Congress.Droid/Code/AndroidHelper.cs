@@ -22,6 +22,14 @@ namespace Write2Congress.Droid.Code
     public class AndroidHelper
     {
         private static Logger _logger = new Logger("AndroidHelper");
+        private Util _util = new Util(_logger);
+
+        public AndroidHelper(Logger logger)
+        {
+            _logger = logger;
+            _util = new Util(_logger);
+        }
+
 
         #region General Android Helpers
 
@@ -103,7 +111,7 @@ namespace Write2Congress.Droid.Code
             }
             catch (Exception e)
             {
-                _logger.Error($"Unable to copy text to clipboard");
+                _logger.Error($"Unable to copy text to clipboard", e);
             }
         }
 
@@ -121,18 +129,18 @@ namespace Write2Congress.Droid.Code
             return Util.GetFileContents(path);
         }
 
-        public static bool SetInternalAppFileContent(string filename, string content)
+        public bool SetInternalAppFileContent(string filename, string content)
         {
             var path = Path.Combine(GetInternalAppDirPath(), filename);
 
-            return Util.CreateFileContent(path, content, _logger);
+            return _util.CreateFileContent(path, content);
         }
 
-        public static void CreateInternalDir(string dirName)
+        public void CreateInternalDir(string dirName)
         {
             var dirPath = Path.Combine(GetInternalAppDirPath(), dirName);
 
-            Util.CreateDir(dirPath);
+            _util.CreateDir(dirPath);
         }
         
         public static string GetInternalAppDirPath()
