@@ -52,7 +52,10 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:scrollHorizontally="true"
-                    android:id="@+id/voteCtrl_voteType" />
+                    android:id="@+id/voteCtrl_voteType"
+                    android:visibility="gone" />
+            <!-- TODO RM: remove voteType without breaking the app -->
+            <!-- TODO RM: Fix images not laodin for legislator img -->
                 <TextView
                     android:text="Name"
                     android:layout_width="wrap_content"
