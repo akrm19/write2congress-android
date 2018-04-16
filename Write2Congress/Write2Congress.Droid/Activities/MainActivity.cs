@@ -117,7 +117,7 @@ namespace Write2Congress.Droid.Activities
         {
             var lastUpdate = AppHelper.GetLastLegislatorUpdate();
 
-            var message = string.Format("{0}{1}{1}{2}{1}{3}",
+            var message = string.Format("{0}{1}{1}{2}{1}{1}{3}",
                 AndroidHelper.GetString(Resource.String.verifyUpdateOfLegislatorData),
                 System.Environment.NewLine,
                 AndroidHelper.GetString(Resource.String.verifyUpdateOfLegislatorDataWarning),
@@ -125,8 +125,7 @@ namespace Write2Congress.Droid.Activities
                     ? string.Empty
                     : $"{AndroidHelper.GetString(Resource.String.verifyUpdateOfLegislatorDataLastUpdate)}: {lastUpdate.ToString("G")}");
 
-            //TODO RM: Further prettify dialog
-            var verifyPrompt = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.VerifyDialogTheme);
+            var verifyPrompt = new Android.Support.V7.App.AlertDialog.Builder(this);//, Resource.Style.VerifyDialogTheme);
             verifyPrompt.SetTitle(AndroidHelper.GetString(Resource.String.confirmRefresh));
             verifyPrompt.SetMessage(message);
             verifyPrompt.SetNegativeButton(Resource.String.dismiss,

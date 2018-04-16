@@ -177,8 +177,7 @@ namespace Write2Congress.Droid.Fragments
                 var portraitAsByteArray = lm.GetLegislatorPortraitAsByteArray(legislatorId);
 
                 return portraitAsByteArray;
-                //TODO RM: Use legislator.idBioGuide below
-            }, new Tuple<string, LegislatorManager>(_legislator.IdBioguide, _legistorManager));
+            }, new Tuple<string, LegislatorManager>(legislator.IdBioguide, _legistorManager));
 
             getLegislatorPortraitTask.ContinueWith((antecedent) =>
             {
