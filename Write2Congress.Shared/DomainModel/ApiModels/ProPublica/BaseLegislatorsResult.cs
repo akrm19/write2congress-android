@@ -41,6 +41,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             public string fax { get; set; }
             public string fec_candidate_id { get; set; }
             public string first_name { get; set; }
+			public string gender { get; set; }
             //public string geoid { get; set; }
             public string google_entity_id { get; set; }
             public string govtrack_id { get; set; }
@@ -67,6 +68,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             public string url { get; set; }
             public string votesmart_id { get; set; }
             public string youtube_account { get; set; }
+
 
 
             string ILegislator.FirstName
@@ -104,7 +106,7 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
             }
             Gender ILegislator.Gender
             {
-                get { return Gender.NA; }
+                get { return DataTransformationUtil.GenderFromString(gender); }
                 set { }
             }
             DateTime ILegislator.TermStartDate

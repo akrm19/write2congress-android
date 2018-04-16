@@ -35,8 +35,11 @@ namespace Write2Congress.Shared.BusinessLayer
             }
         }
 
-        public static Gender GenderFromString(string gender)
+        public static Gender GenderFromString(string gender = null)
         {
+            if (string.IsNullOrWhiteSpace(gender))
+                return Gender.NA;
+
             switch (gender.ToLower())
             {
                 case "m":
