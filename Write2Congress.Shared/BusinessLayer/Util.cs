@@ -577,6 +577,7 @@ namespace Write2Congress.Shared.BusinessLayer
         #endregion
     }
 
+	/*
     public static class TransformationExtension
     {
         public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(this SenateMembersResult.Rootobject legislatorResults)
@@ -664,8 +665,8 @@ namespace Write2Congress.Shared.BusinessLayer
                 VotesWithPartyPercent = l.votes_with_party_pct ?? 0,
                 Senority = l.seniority ?? string.Empty
             };
-
             return legislator;
         }
     }
+	*/
 }
