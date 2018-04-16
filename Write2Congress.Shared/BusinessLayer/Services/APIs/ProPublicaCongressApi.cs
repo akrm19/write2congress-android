@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http;
 using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.BusinessLayer.Services.APIs
 {
     public class ProPublicaCongressApi : ApiBase
     {
-        /*
-         * TODO RM:
-         * Make ServiceBase more generic, so it can be
-         * used by several different APIs. Create ProPublicServiceAPI
-         * that adds APi key to calls and ads version and also updates 
-         * current congress (curennt congress is 115, but that will change)
-         * https://projects.propublica.org/api-docs/congress-api/#requests
-        */
         private string _congressApiKey = "PCuqpNcKuIudgm6zslBcTsRA24v7ARcsRN94aOa5";
         private string _congressApiUrl = "https://api.propublica.org/congress/{0}/";
         //TODO RM: Add mechanism to update API version

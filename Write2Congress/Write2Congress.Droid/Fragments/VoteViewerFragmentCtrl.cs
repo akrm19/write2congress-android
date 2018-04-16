@@ -118,7 +118,6 @@ namespace Write2Congress.Droid.Fragments
                         else
                             _votes.AddRange(antecedent.Result.Item1);
 
-                        //TODO RM: Consolidate these two methods or rename them
                         SetLoadMoreButtonTextAsLoading(false);
                         ShowRecyclerButtons(_isThereMoreVotes);
 

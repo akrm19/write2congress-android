@@ -20,7 +20,6 @@ namespace Write2Congress.Droid.Fragments
 {
     public class CommitteeViewerFragmentCtrl : BaseRecyclerViewerFragment
     {
-        private bool _isThereMoteVotes = false;
         private List<Committee> _committees;
         private Legislator _legislator;
         private LegislatorManager _legislatorManager;
@@ -96,10 +95,6 @@ namespace Write2Congress.Droid.Fragments
                 foreach (var c in results)
                     resultsAsICommittee.Add(Committee.FromICommittee(c));
 
-                //TODO RM: Verify that ProPublica API does not indicate if there are more results
-                //setting to true for now, since it seems ProPublica does not indicate that there are more results
-                //_isThereMoreVotes = false;// vm.IsThereMoreResultsForLastCall();
-
                 return new Tuple<List<Committee>>(resultsAsICommittee);
             }, new Tuple<string, LegislatorManager>(_legislator.IdBioguide, _legislatorManager));
 
@@ -122,10 +117,6 @@ namespace Write2Congress.Droid.Fragments
                             _committees = antecedent.Result.Item1;
                         else
                             _committees.AddRange(antecedent.Result.Item1);
-
-                        //TODO RM: Consolidate these two methods or rename them
-                        //SetLoadMoreButtonTextAsLoading(false);
-                        //ShowRecyclerButtons(false);
 
                         ShowCommittees(_committees);
                     }
