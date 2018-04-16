@@ -226,40 +226,6 @@ namespace Write2Congress.Shared.BusinessLayer
             return new BillType(billTypeKind, type);
         }
 
-        /*
-        /// <summary>
-        /// The type of action. Always present. Can be “action” (generic), 
-        /// “vote” (passage vote), “vote-aux” (cloture vote), “vetoed”, 
-        /// “topresident”, and “enacted”. There can be other values, but 
-        /// these are the only ones we support.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static BillActionType BillActionTypeFromSunlight(string type)
-        {
-            if (string.IsNullOrWhiteSpace(type))
-                return BillActionType.Unknown;
-
-            switch (type.ToLower())
-            {
-                case "action":
-                    return BillActionType.GenericAction;
-                case "vote":
-                    return BillActionType.PassageVote;
-                case "vote-aux":
-                    return BillActionType.ClotureVote;
-                case "vetoed":
-                    return BillActionType.Vetoed;
-                case "topresident":
-                    return BillActionType.ToPresident;
-                case "enacted":
-                    return BillActionType.Enacted;
-                default:
-                    return BillActionType.Unknown;
-            }
-        }
-        */
-
         public static LegislativeBillVote LegislativeBillVoteFromSunlight(string passageResult)
         {
             if (string.IsNullOrWhiteSpace(passageResult))

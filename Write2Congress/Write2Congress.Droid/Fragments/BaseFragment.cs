@@ -74,7 +74,6 @@ namespace Write2Congress.Droid.Fragments
 
         public List<Legislator> GetCachedLegislators()
         {
-            //var legislators = (Activity.Application as BaseApplication).GetCachedLegislators();
             return AppHelper.GetCachedLegislators();
         }
 

@@ -163,108 +163,7 @@ namespace Write2Congress.Droid.Fragments
             var viewPager = fragmentView.FindViewById<ViewPager>(Resource.Id.viewLegislatorFrag_viewPager);
             viewPager.Adapter = _viewPagerAdapter;
             viewPager.CurrentItem = 1;
-
-            //Set the number of pages that should be retained to either 
-            //side of the current page in the view hierarchy in an idle 
-            //state. Pages beyond this limit will be recreated from the 
-            //adapter when needed.
-            //viewPager.OffscreenPageLimit = 3;
-
-
-            //GetVoteViewFrag().SetOnClickListener((vc) => FetchLegislatorVotes(true));
-            //PopulateVote(savedInstanceState);
-
-            //GetBillsSponsoredViewFrag().SetOnClickListener((bc) => FetchLegislatorBills(true, BillViewerKind.SponsoredBills));
-            //PopulateSponsoredBills(savedInstanceState);
-
-            //GetBillsCosponsoredViewFrag().SetOnClickListener((cc) => FetchLegislatorBills(true, BillViewerKind.CosponsoredBills));
-            //PopulateCosponsoredBills(savedInstanceState);
-
-            //PopulateCommittees(savedInstanceState);
         }
-
-        /*
-        private void PopulateVote(Bundle savedInstanceState)
-        {
-            if(savedInstanceState != null)
-            {
-                _votesIsThereMoreContent = savedInstanceState.GetBoolean(BundleType.VotesIsThereMoreContent, false);
-                _votesCurrentPage = savedInstanceState.GetInt(BundleType.VotesCurrentPage, 1);
-
-                if(!string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Votes, string.Empty)))
-                {
-                    var serializedVotes = savedInstanceState.GetString(BundleType.Votes);
-                    _votes = new List<Vote>().DeserializeFromJson(serializedVotes) ?? null;
-                }
-            }
-
-            if (_votes != null)
-                GetVoteViewFrag()?.SetVotes(_votes, _votesIsThereMoreContent);
-
-            else
-                FetchLegislatorVotes(false);            
-        }
-        */
-
-        /*
-        private void PopulateSponsoredBills(Bundle savedInstanceState)
-        {
-            if (savedInstanceState != null)
-            {
-                _sponsoredBillsIsThereMoreContent = savedInstanceState.GetBoolean(BundleType.SponsoredBillsIsThereMoreContent, false);
-                _sponsoredBillsCurrentPage = savedInstanceState.GetInt(BundleType.SponsoredBillsCurrentPage, 1);
-
-                if (!string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.SponsoredBills, string.Empty)))
-                {
-                    var sponsoredBills = savedInstanceState.GetString(BundleType.SponsoredBills);
-                    _sponsoredBills = new List<Bill>().DeserializeFromJson(sponsoredBills) ?? null;
-                }
-            }
-
-
-            if (_sponsoredBills != null)
-                GetBillsSponsoredViewFrag()?.SetBills(_sponsoredBills, _sponsoredBillsIsThereMoreContent);
-
-            else
-                FetchLegislatorBills(false, BillViewerKind.SponsoredBills);
-        }
-
-        private void PopulateCosponsoredBills(Bundle savedInstanceState)
-        {
-            if (savedInstanceState != null)
-            {
-                _cosponsoredBillsIsThereMoreContent = savedInstanceState.GetBoolean(BundleType.CosponsoredBillsIsThereMoreContent, false);
-                _cosponsoredBillsCurrentPage = savedInstanceState.GetInt(BundleType.CosponsoredBillsCurrentPage, 1);
-
-                if (!string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.CosponsoredBills, string.Empty)))
-                {
-                    var cosponsoredBills = savedInstanceState.GetString(BundleType.CosponsoredBills);
-                    _cosponsoredBills = new List<Bill>().DeserializeFromJson(cosponsoredBills) ?? null;
-                }
-            }
-
-            if (_cosponsoredBills != null)
-                GetBillsCosponsoredViewFrag()?.SetBills(_cosponsoredBills, _cosponsoredBillsIsThereMoreContent);
-
-            else
-                FetchLegislatorBills(false, BillViewerKind.CosponsoredBills);
-        }
-
-        private void PopulateCommittees(Bundle savedInstanceState)
-        {
-            if (savedInstanceState != null && !string.IsNullOrWhiteSpace(savedInstanceState.GetString(BundleType.Committees, string.Empty)))
-            {
-                var serializedcomittees = savedInstanceState.GetString(BundleType.Committees);
-                _committees = new List<Committee>().DeserializeFromJson(serializedcomittees) ?? null;
-            }
-
-            if (_committees != null)// && _votes.Count > 0)
-                GetCommitteeViewFrag()?.SetCommittees(_committees);
-
-            else
-                FetchLegislatorCommittes();
-        }
-        */
 
         public override void OnSaveInstanceState(Bundle outState)
         {
@@ -578,9 +477,6 @@ namespace Write2Congress.Droid.Fragments
         public void SetupLegislatorContactMthdButton(View button, ContactMethod contactMethod)
         {
             AppHelper.SetLegislatorContactMthdVisibility(button, contactMethod, _selectableItemBackground);
-            //button.Visibility = contactMethod.IsEmpty
-            //    ? ViewStates.Gone
-            //    : ViewStates.Visible;
 
             button.Click += (sender, e) => ContactButton_Click(contactMethod);
         }

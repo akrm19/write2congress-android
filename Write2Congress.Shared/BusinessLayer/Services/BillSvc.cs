@@ -8,13 +8,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 {
     public class BillSvc : ServiceBase
     {
-        /* Old Sunlight params
-        private static string _billsBase = "bills?";
-        private static string _fields = "&fields=bill_id,bill_type,number,congress,chamber,introduced_on,last_vote_at,official_title,short_title,popular_title,nicknames,summary,summary_short,urls,history,last_action,cosponsor_ids,withdrawn_cosponsor_ids,upcoming";
-        private static string _perPage = "&per_page=";
-        private static string _page = "&page=";
-        */
-
 		private const int _defaultResultsPage = 20;
         private Util _util;
         private ProPublicaCongressApi _congressApiSvc;
@@ -35,21 +28,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             var bills = GetBillsFromQuery(query);
 
             return bills.OrderByDescending(b => b.DateIntroduced).ToList();
-            /*
-            var bills = new List<IBill>();
-
-            try
-            {
-                var legislatorsResults = GetMemberResults<DomainModel.ApiModels.ProPublica.BillResult.Rootobject>(query, _congressApiSvc).Result;
-                bills = (legislatorsResults as IBillResult).GeBillResult();
-            }
-            catch (Exception e)
-            {
-                _logger.Error("Error occurred retrieving Legislators from UnitedStatesIo API", e);
-            }
-
-            return bills.OrderByDescending(b => b.DateIntroduced).ToList();
-            */
         }
 
         public List<IBill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page = 1, int resultsperPageForSvc = 20)

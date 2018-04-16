@@ -93,15 +93,5 @@ namespace Write2Congress.Droid.Activities
 
             return letter;
         }
-
-        //private Legislator GetLegislatorFromIntent()
-        //{
-        //    var legislator = AndroidHelper.GetSerializedTypeFromIntent<Legislator>(Intent, BundleType.Legislator);
-        //
-        //    if (legislator == null)
-        //        MyLogger.Error($"Unable to retrieve legislator from intent's {BundleType.Legislator} extra.");
-        //
-        //    return legislator;
-        //}
     }
 }

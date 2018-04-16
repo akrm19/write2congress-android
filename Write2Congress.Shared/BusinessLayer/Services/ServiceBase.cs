@@ -17,12 +17,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         {
             _logger = logger;
         }
-
-
-        //protected async Task<T> GetMemberResults<T>(string legislatorsUri, ApiBase apiSvc) where T : class
-        //{
-        //    return GetMemberResults<T>(legislatorsUri, apiSvc, null).Result;
-        //}
             
         protected async Task<T> GetMemberResults<T>(string legislatorsUri, ApiBase apiSvc, Func<string, string> actionToPerformOnJsonOutput = null) where T : class
         {
