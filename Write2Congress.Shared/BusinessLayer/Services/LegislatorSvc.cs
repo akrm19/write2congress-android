@@ -27,13 +27,13 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             _usIoApiSvc = new UnitedStatesIoApi(logger);
         }
 
-        public Task<byte[]> GetLegislatorPortrait2(Legislator legislator)
+        public byte[] GetLegislatorPortrait2(string legislatorBioID)
         {
             //Possible options: 450x550 and original (typically 675x825, but can vary)
             var imageSize = "225x275";
-            var uri = $@"http://theunitedstates.io/images/congress/{imageSize}/{legislator.IdBioguide}.jpg";
+            var uri = $@"http://theunitedstates.io/images/congress/{imageSize}/{legislatorBioID}.jpg";
 
-            byte[] result;
+            //byte[] result;
 
             try
             {
@@ -41,7 +41,8 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 {
                     httpClient.MaxResponseContentBufferSize = 256000;
 
-                    return httpClient.GetByteArrayAsync(uri);
+                    //return httpClient.GetByteArrayAsync(uri);
+                    return httpClient.GetByteArrayAsync(uri).Result;
                 }
             }
             catch (Exception e)

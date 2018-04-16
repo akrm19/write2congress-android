@@ -27,6 +27,12 @@ namespace Write2Congress.Shared.BusinessLayer
             _legislatorSvc = new LegislatorSvc(logger);
         }
 
+        public byte[] GetLegislatorPortraitAsByteArray(string legislatorBioId)
+        {
+            var portraitAsByteArray = _legislatorSvc.GetLegislatorPortrait2(legislatorBioId);
+            return portraitAsByteArray;
+        }
+
         #region Get Legislator Methods
         public List<ICommittee> GetLegislatorsCommittees(string bioId)
         {

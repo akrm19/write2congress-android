@@ -33,8 +33,11 @@ namespace Write2Congress.Droid.Fragments
     {
         private Legislator _legislator;
         private LegislatorViewPagerAdapter _viewPagerAdapter;
+        //private Shared.BusinessLayer.Services.LegislatorSvc ls;
+        private LegislatorManager _legistorManager;
         private TypedValue _selectableItemBackground;
         private ImageView _portrait;
+        Android.Graphics.Bitmap portraitAsBitmap;
 
         //vote
         private int _votesCurrentPage = 1;
@@ -90,6 +93,8 @@ namespace Write2Congress.Droid.Fragments
             }
 
             _legislator = JsonConvert.DeserializeObject<Legislator>(serializedLegislator);
+            _legistorManager = new LegislatorManager(MyLogger);
+            //ls = new Shared.BusinessLayer.Services.LegislatorSvc(MyLogger);
             _voteManager = new VoteManager(MyLogger);
             _billManager = new BillManager(MyLogger);
             _committeeManager = new CommitteeManager(MyLogger);
@@ -139,8 +144,18 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnStart();
 
-            SetPortrait(_legislator);
+            //SetPortrait(_legislator);
             GetBaseActivity().UpdateTitleBarText(_legislator.FullName());
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            if(portraitAsBitmap == null)
+                SetPortrait(_legislator);
+            else if(_portrait != null)
+                _portrait.SetImageBitmap(portraitAsBitmap);
         }
 
         private void PopulateViewPager(View fragmentView, Legislator legislator, Bundle savedInstanceState)
@@ -488,27 +503,52 @@ namespace Write2Congress.Droid.Fragments
             }
         }
 
-        private async void SetPortrait(Legislator legislator)
+        private void SetPortrait(Legislator legislator)
         {
-            var ls = new Shared.BusinessLayer.Services.LegislatorSvc(MyLogger);
-            try
+            var getLegislatorPortraitTask = new Task<byte[]>((prms) =>
             {
-                Android.Graphics.Bitmap portraitAsBitmap;
-                var portraitAsByteArray = await ls.GetLegislatorPortrait2(legislator);
+                var passedParams = prms as Tuple<string, LegislatorManager>;
 
-                if (portraitAsByteArray != null && portraitAsByteArray.Length > 0 && Activity != null && !Activity.IsFinishing)
+                var legislatorId = passedParams.Item1;
+                var lm = passedParams.Item2;
+
+                var portraitAsByteArray = lm.GetLegislatorPortraitAsByteArray(legislatorId);
+
+                return portraitAsByteArray;
+            }, new Tuple<string, LegislatorManager>(_legislator.IdBioguide, _legistorManager));
+
+            getLegislatorPortraitTask.ContinueWith((antecedent) =>
+            {
+                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
+                    return;
+
+                Activity.RunOnUiThread(() =>
                 {
-                    portraitAsBitmap = Android.Graphics.BitmapFactory.DecodeByteArray(portraitAsByteArray, 0, portraitAsByteArray.Length);
+                    if (!antecedent.IsFaulted || !antecedent.IsCanceled)
+                    {
+                        try
+                        {
+                            var portraitByteArray = antecedent.Result;
+                            if (portraitByteArray != null && portraitByteArray.Length > 0 && Activity != null && !Activity.IsFinishing)
+                            {
+								
+                                portraitAsBitmap = Android.Graphics.BitmapFactory.DecodeByteArray(portraitByteArray, 0, portraitByteArray.Length);
 
-                    Activity.RunOnUiThread(
-                        () => _portrait.SetImageBitmap(portraitAsBitmap));
-                }
+                                Activity.RunOnUiThread(
+                                    () => _portrait.SetImageBitmap(portraitAsBitmap));
+                            }
 
-            }
-            catch (Exception e)
-            {
-                MyLogger.Error("Error retrieving and setting legislator portrait", e);
-            }
+                        }
+                        catch (Exception e)
+                        {
+                            MyLogger.Error("Error retrieving and setting legislator portrait", e);
+                        }
+                    }
+                });
+            });
+
+            getLegislatorPortraitTask.Start();
+
         }
 
         private void PopulateContactMethodsButtons(View fragment, Legislator legislator)
