@@ -55,8 +55,10 @@ namespace Write2Congress.Droid.CustomControls
             SetLoadingUi();
 
             //TODO RM:Make async task
-            var committees = _committeeManager.GetCommitteesForLegislator(legislator.IdBioguide);
-            (recyclerAdapter as CommitteeAdapter).UpdateCommittee(committees);
+            if(_committees == null)
+                _committees = _committeeManager.GetCommitteesForLegislator(legislator.IdBioguide);
+            
+            (recyclerAdapter as CommitteeAdapter).UpdateCommittee(_committees);
             
             SetLoadingUiOff();
         }
