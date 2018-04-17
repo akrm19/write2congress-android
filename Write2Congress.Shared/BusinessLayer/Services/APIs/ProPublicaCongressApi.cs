@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using Write2Congress.Shared.DomainModel.Interface;
 
 namespace Write2Congress.Shared.BusinessLayer.Services.APIs
@@ -7,7 +8,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services.APIs
     {
         private string _congressApiKey = "PCuqpNcKuIudgm6zslBcTsRA24v7ARcsRN94aOa5";
         private string _congressApiUrl = "https://api.propublica.org/congress/{0}/";
-        //TODO RM: Add mechanism to update API version
         private static string _apiVersion = "v1";
 
         public ProPublicaCongressApi(IMyLogger logger)
@@ -30,10 +30,21 @@ namespace Write2Congress.Shared.BusinessLayer.Services.APIs
             httpClient.DefaultRequestHeaders.Add("X-API-Key", _congressApiKey);
         }
 
-        //TODO RM: Make this dynamic so it get the current congress number for the current date time
+        //TODO RM (low priority): Make this dynamic so it get the current congress number for the current date time
         protected string GetCurrentCongressNum()
         {
-            return "115";
+            var currentDate = DateTime.Now;
+
+            if (currentDate < new DateTime(2019, 01, 04))
+                return "115";
+            else if (currentDate < new DateTime(2021, 01, 04))
+                return "116";
+            else if (currentDate < new DateTime(2023, 01, 04))
+                return "117";
+            else if (currentDate < new DateTime(2025, 01, 04))
+                return "118";
+            else
+                return "119";
         }
     }
 }
