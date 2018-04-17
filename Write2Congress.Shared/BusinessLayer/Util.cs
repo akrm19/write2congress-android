@@ -24,8 +24,6 @@ namespace Write2Congress.Shared.BusinessLayer
         }
 
         #region App Agnostic
-
-        //TODO RM: This also exist in extensions. Pick one.
         public static T DeserializeFromJson<T>(string jsonSerializedContent)
         {
             if (string.IsNullOrWhiteSpace(jsonSerializedContent))
@@ -270,6 +268,7 @@ namespace Write2Congress.Shared.BusinessLayer
             return legislators;
         }
 
+        /*
         public static List<Legislator> LegislatorsFromPropublicaLegislatorsResult(SenateMembersResult.Rootobject legislatorResults)
         {
             var legislators = new List<Legislator>();
@@ -341,6 +340,7 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return legislators;
         }
+        */
 
         public static List<Committee> CommitteesFromSunlightCommitteeResult(SunlightCommitteeResult.Rootobject committeeResults)
         {
