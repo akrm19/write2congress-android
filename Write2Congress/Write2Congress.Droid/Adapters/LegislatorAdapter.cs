@@ -138,7 +138,6 @@ namespace Write2Congress.Droid.Adapters
         /// <param name="position"></param>
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            //TODO RM: Since position is not zero base, do we need to decrease 1 from it?
             var legislator = _legislators[position];
             var viewHolder = holder as LegislatorAdapterViewHolder;
 

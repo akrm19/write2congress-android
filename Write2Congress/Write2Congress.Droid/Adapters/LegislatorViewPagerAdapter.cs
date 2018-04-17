@@ -62,37 +62,27 @@ namespace Write2Congress.Droid.Adapters
             set { _committees = value; }
         }
 
-        //public override int GetItemPosition(Java.Lang.Object @object)
-        //{
-        //    return PositionNone;
-        //    //return base.GetItemPosition(@object);
-        //}
-
         public LegislatorViewPagerAdapter(Android.Support.V4.App.FragmentManager fm, Legislator legislator)
             : base(fm)
         {
             _legislator = legislator;
 
-            //TODO RM: look into having these automatically 
-            /////var numberOfViewers = Enum.GetNames(typeof(ViewPagerList)).Length;
-
-            /////viewers = new List<BaseRecyclerViewerFragment>(numberOfViewers);
-
-            //TODO RM: Find how to retain instance on rotation. Also ensure there are no memory leak if using
+            /*
+             * Find how to retain instance on rotation. Also ensure there are no memory leak if using
             //FragmentPagerAdapter (since it keeps the fragment instance) and all references to activites
             //context and ect are cleared 
             //viewers.Insert((int)ViewPagerList.LegislatorVotes, VoteViewerFragmentCtrl.CreateInstance(legislator, LoadMoreVotesClicked));
 
-            //TODO RM Look into
+            ////// Look into
             ////viewers.Insert(0, VoteViewerFragmentCtrl.CreateInstance(legislator, LoadMoreVotesClicked));
 
 
-            //TODO: move back to last place
+            /////// Move back to last place
             //viewers[(int)ViewPagerList.LegislatorCommittees] = CommitteeViewerFragmentCtrl.CreateInstance(legislator);
             //viewers[(int)ViewPagerList.LegislatorCommittees] = CommitteeViewerFragmentCtrl.CreateInstance(legislator);
             //viewers.Add(CommitteeViewerFragmentCtrl.CreateInstance(legislator));
 
-            //TODO RM: For some reason this cause issues, it could be the use of an async further 
+            /////// For some reason this cause issues, it could be the use of an async further 
             //down in the BillViewerFragmentCtrl code that calls the web svc
             ////viewers.Insert((int)ViewPagerList.LegislatorBillsSponsored, BillViewerFragmentCtrl.CreateInstance(legislator, BillViewerKind.SponsoredBills));
             //viewers.Insert(1, BillViewerFragmentCtrl.CreateInstance(legislator, BillViewerKind.SponsoredBills));
@@ -104,8 +94,9 @@ namespace Write2Congress.Droid.Adapters
 
 
             ////viewers.Insert((int)ViewPagerList.LegislatorCommittees, CommitteeViewerFragmentCtrl.CreateInstance(legislator));
-            //TODO RM Look into
+            /////// RM Look into
             ////viewers.Insert(1, CommitteeViewerFragmentCtrl.CreateInstance(legislator));
+            */
         }
 
         public override Fragment GetItem(int position)
@@ -162,7 +153,6 @@ namespace Write2Congress.Droid.Adapters
             get
             {
                 return System.Enum.GetNames(typeof(ViewPagerList)).Length;
-                //return viewers.Count;
             }
         }
 

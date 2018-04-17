@@ -159,8 +159,6 @@ namespace Write2Congress.Shared.DomainModel
             /// </summary>
             public string short_title { get; set; }
 
-
-            //TODO RM: This is a Legislator Result, update it so it uses that instead
             /// <summary>
             /// An object with most simple legislator fields for the bill’s sponsor, if there is one.
             /// </summary>

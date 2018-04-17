@@ -14,7 +14,6 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
         {
             public Result[] results { get; set; }
 
-            //TODO RM: look into redoing this, maybe add more inheritance
             List<ILegislator> ILegislatorResult.GetLegislatorsResult()
             {
                 var legislators = new List<ILegislator>();

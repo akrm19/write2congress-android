@@ -11,10 +11,12 @@ namespace Write2Congress.Shared.BusinessLayer
     public class LetterManager
     {
         private ILetterProvider _provider;
+        private IMyLogger _logger;
 
-        public LetterManager(ILetterProvider letterProvider)
+        public LetterManager(ILetterProvider letterProvider, IMyLogger logger)
         {
             _provider = letterProvider;
+            _logger = logger;
         }
 
         public List<Letter> GetAllSentLetterByRecipient(Legislator legislator)
@@ -50,7 +52,7 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             if(string.IsNullOrWhiteSpace(letterId))
             {
-                //TODO add logging
+                _logger.Error("Cannot delete letter,  letterId is null or empty.");
                 return true;
             }
 

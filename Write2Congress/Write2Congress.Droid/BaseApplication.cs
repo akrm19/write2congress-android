@@ -46,7 +46,7 @@ namespace Write2Congress.Droid
             base.OnCreate();
             _logger = new Logger("BaseApplication");
 
-            LetterManager = new LetterManager(new LetterFileProvider());
+            LetterManager = new LetterManager(new LetterFileProvider(), _logger);
 
             CommitteeManager = new CommitteeManager(_logger);
             VoteMngr = new VoteManager(_logger);
@@ -73,7 +73,7 @@ namespace Write2Congress.Droid
             }
             catch (Exception e)
             {
-                //TODO RM: Add logging
+                _logger.Error("An error occured updating legislator data", e);
                 return false;
             }
         }
