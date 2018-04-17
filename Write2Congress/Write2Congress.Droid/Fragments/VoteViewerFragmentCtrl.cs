@@ -23,7 +23,6 @@ namespace Write2Congress.Droid.Fragments
     {
         private bool _isThereMoreVotes = true;
         private List<Vote> _votes;
-        private LegislatorViewPagerAdapter _adapter;
         private Legislator _legislator;
         private VoteManager _voteManager;
 

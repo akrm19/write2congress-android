@@ -122,20 +122,6 @@ namespace Write2Congress.Droid.CustomControls
             }
 
             AppHelper.StartViewLegislatorIntent(_fragment.GetBaseActivity(), legislator);
-            //var committeesForLegislator = _fragment.GetBaseApp().CommitteeManager.GetCommitteesForLegislator(legislator.BioguideId);
-            //if (committeesForLegislator.Count == 0)
-            //    return;
-            //
-            //var billsForLegislator = _fragment.GetBaseApp().BillMngr.GetBillsSponsoredbyLegislator(legislator.BioguideId, 1);
-            //
-            //var votesForLegislator = _fragment.GetBaseApp().VoteMngr.GetLegislatorVotes(legislator.BioguideId, 1);
-            //
-            //
-            //var results = new StringBuilder();
-            //
-            //foreach (var c in committeesForLegislator)
-            //    results.Append($"{c.Name}{System.Environment.NewLine}");
-            //TODO RM: Add code to open legislator details
         }
 
         void WriteNewLetterItemClicked(object sender, int position)
@@ -167,7 +153,6 @@ namespace Write2Congress.Droid.CustomControls
                 _statesAndTerrSpinner.SetSelection(position);
         }
 
-        //TODO RM: Change to generic extension
         private int GetStateOrTerritoryPosition(List<string> stateOrTerritories, StateOrTerritory lookupItem)
         {
             var stringVal = _statesAndTerrWithDescription[(int)lookupItem].Item2;

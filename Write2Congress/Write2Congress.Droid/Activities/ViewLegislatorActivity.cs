@@ -45,7 +45,7 @@ namespace Write2Congress.Droid.Activities
 
                 _viewLegislatorFragment = new ViewLegislatorFragment();
 
-                //TODO RM:
+                //TODO RM (Low Priority):
                 //http://stackoverflow.com/questions/9245408/best-practice-for-instantiating-a-new-android-fragment
 
                 if(_viewLegislatorFragment.Arguments == null)
