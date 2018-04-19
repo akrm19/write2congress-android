@@ -23,8 +23,8 @@ namespace Write2Congress.Droid.CustomControls
     //NOT IN USE, FOR REFERENCE ONLY
     public class CommitteeViewer : BaseViewer
     {
-        private CommitteeManager _committeeManager; 
-        private List<Committee> _committees;
+        //private CommitteeManager _committeeManager; 
+        //private List<Committee> _committees;
 
         public CommitteeViewer(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -38,6 +38,7 @@ namespace Write2Congress.Droid.CustomControls
             Initialize();
         }
 
+        /*
         public override void SetupCtrl(BaseFragment fragment)
         {
             base.SetupCtrl(fragment);
@@ -54,14 +55,14 @@ namespace Write2Congress.Droid.CustomControls
         {
             SetLoadingUi();
 
-            //TODO RM:Make async task
             if(_committees == null)
-                _committees = _committeeManager.GetCommitteesForLegislator(legislator.IdBioguide);
+               _committees = _committeeManager.GetCommitteesForLegislator(legislator.IdBioguide);
             
             (recyclerAdapter as CommitteeAdapter).UpdateCommittee(_committees);
             
             SetLoadingUiOff();
         }
+        */
 
         protected override string EmptyText()
         {

@@ -12,10 +12,12 @@ namespace Write2Congress.Shared.BusinessLayer.Services
     {
         private static string _committeesForLegislatorsUri = "committees?member_ids={0}&fields=name,committee_id,chamber,url,office,subcommittee,phone&per_page=all";
 
+        /*
         public CommitteeSvc(IMyLogger logger)
         {
             SetLogger(logger);
         }
+
 
         public List<Committee> GetCommitteesForLegislator(string legislatorBioguideId)
         {
@@ -42,5 +44,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
             return committees;
         }
+        */
     }
 }

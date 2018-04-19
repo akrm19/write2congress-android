@@ -11,15 +11,16 @@ namespace Write2Congress.Shared.BusinessLayer
 {
     public class CommitteeManager
     {
-        CommitteeSvc _committeeSvc;
+        //CommitteeSvc _committeeSvc;
         IMyLogger _logger; 
 
         public CommitteeManager(IMyLogger logger)
         {
             _logger = logger;
-            _committeeSvc = new CommitteeSvc(logger);
+            //_committeeSvc = new CommitteeSvc(logger);
         }
 
+        /*
         public List<Committee> GetCommitteesForLegislator(string legislatorBioguideId)
         {
             var committees = _committeeSvc.GetCommitteesForLegislator(legislatorBioguideId);
@@ -31,5 +32,6 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             return _committeeSvc.IsThereMoreResults();
         }
+        */
     }
 }
