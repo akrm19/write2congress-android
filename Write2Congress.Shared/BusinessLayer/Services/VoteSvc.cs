@@ -22,21 +22,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             _util = new Util(logger);
         }
 
-        public List<IVote> GetVotesByLegislator(string legislatorBioguideId, int page, int resultsPerPage)
-        {
-            if (string.IsNullOrWhiteSpace(legislatorBioguideId))
-                throw new ArgumentException("Error: Cannot retrieve Votes for legislator due to an invalid or empty BioguideId");
-
-            //Original query format
-            //https://api.propublica.org/congress/v1/members/{member-id}/votes.json
-            var query = $"members/{legislatorBioguideId}/votes.json";
-            query = AppendPageAndOffsetToQuery(query, page, resultsPerPage);
-
-            var votes = GetVotesFromQuery(query);
-
-            return votes;
-        }
-
         public ApiResultWithMoreResultIndicator<IVote> GetVotesByLegislator2(string legislatorBioguideId, int page, int expectedResultsPerPage)
         {
             if (string.IsNullOrWhiteSpace(legislatorBioguideId))
@@ -75,6 +60,22 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return null;
         }
 
+        /*
+        public List<IVote> GetVotesByLegislator(string legislatorBioguideId, int page, int resultsPerPage)
+        {
+            if (string.IsNullOrWhiteSpace(legislatorBioguideId))
+                throw new ArgumentException("Error: Cannot retrieve Votes for legislator due to an invalid or empty BioguideId");
+
+            //Original query format
+            //https://api.propublica.org/congress/v1/members/{member-id}/votes.json
+            var query = $"members/{legislatorBioguideId}/votes.json";
+            query = AppendPageAndOffsetToQuery(query, page, resultsPerPage);
+
+            var votes = GetVotesFromQuery(query);
+
+            return votes;
+        }
+
         private List<IVote> GetVotesFromQuery(string query)
         {
             var votes = new List<IVote>();
@@ -93,6 +94,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
             return votes;
         }
+        */
 
         private string AppendPageAndOffsetToQuery(string query, int page, int resultsPerPage)
         {

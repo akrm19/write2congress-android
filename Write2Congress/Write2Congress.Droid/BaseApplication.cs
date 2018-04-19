@@ -48,7 +48,7 @@ namespace Write2Congress.Droid
 
             LetterManager = new LetterManager(new LetterFileProvider(), _logger);
 
-            CommitteeManager = new CommitteeManager(_logger);
+            //CommitteeManager = new CommitteeManager(_logger);
             VoteMngr = new VoteManager(_logger);
             BillMngr = new BillManager(_logger);
             LegislatorManager = new LegislatorManager(_logger);
