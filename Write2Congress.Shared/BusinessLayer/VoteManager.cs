@@ -25,17 +25,19 @@ namespace Write2Congress.Shared.BusinessLayer
             return true;//_voteSvc.IsThereMoreResults();
         }
 
-        public List<Vote> GetLegislatorVotes(string legislatorBioguideId, int page, int resultsPerPage = _defaultResultsPerPage)
+        public ApiResultWithMoreResultIndicator<Vote> GetLegislatorVotes(string legislatorBioguideId, int page, int resultsPerPage = _defaultResultsPerPage)
         {
             var votes = new List<Vote>();
 
-            var votesResult = _voteSvc.GetVotesByLegislator(legislatorBioguideId, page, resultsPerPage);
+            var votesResult = _voteSvc.GetVotesByLegislator2(legislatorBioguideId, page, resultsPerPage);
 
-            foreach (var iVote in votesResult)
+            foreach (var iVote in votesResult.Results)
                 votes.Add(Vote.TransformToVote(iVote));
 
 
-            return votes;
+            var results = new ApiResultWithMoreResultIndicator<Vote>(votes, votesResult.IsThereMoreResults);
+
+            return results;
         }
 
         #region Vote Helper Methods

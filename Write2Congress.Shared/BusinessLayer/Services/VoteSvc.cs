@@ -16,7 +16,6 @@ namespace Write2Congress.Shared.BusinessLayer.Services
         private Util _util;
         private ProPublicaCongressApi _congressApiSvc;
 
-
         public VoteSvc(IMyLogger logger) : base (logger)
         {
             _congressApiSvc = new ProPublicaCongressApi(logger);
@@ -36,6 +35,44 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             var votes = GetVotesFromQuery(query);
 
             return votes;
+        }
+
+        public ApiResultWithMoreResultIndicator<IVote> GetVotesByLegislator2(string legislatorBioguideId, int page, int expectedResultsPerPage)
+        {
+            if (string.IsNullOrWhiteSpace(legislatorBioguideId))
+                throw new ArgumentException("Error: Cannot retrieve Votes for legislator due to an invalid or empty BioguideId");
+
+			//Original query format
+			//https://api.propublica.org/congress/v1/members/{member-id}/votes.json
+			var query = $"members/{legislatorBioguideId}/votes.json";
+			query = AppendPageAndOffsetToQuery(query, page, expectedResultsPerPage);
+   
+            try
+            {
+                var votesResults = GetMemberResults<DomainModel.ApiModels.ProPublica.VotesResult.Rootobject>(query, _congressApiSvc).Result;
+                var votes = (votesResults as IVoteResult).GetVoteResult();
+
+                var firstResult = votesResults.results.FirstOrDefault();
+                var moreResults = false;
+
+                if (firstResult == null)
+                    moreResults = false;
+                else if (votes.Count < expectedResultsPerPage)
+                    moreResults = false;
+                else
+                    moreResults = true;
+
+
+                var newResult = new ApiResultWithMoreResultIndicator<IVote>(votes, moreResults);
+
+                return newResult;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error: Could not retrieve Bills from query {query}", ex);
+            }
+
+            return null;
         }
 
         private List<IVote> GetVotesFromQuery(string query)

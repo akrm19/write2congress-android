@@ -104,6 +104,7 @@
     <Compile Include="DomainModel\Interface\ICommittee.cs" />
     <Compile Include="DomainModel\Interface\ICommitteeResult.cs" />
     <Compile Include="DomainModel\ApiModels\ProPublica\SingleLegislatorResult.cs" />
+    <Compile Include="DomainModel\ApiResultWithMoreResultIndicator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DomainModel\ApiModels\Sunlight\" />

@@ -89,11 +89,7 @@ namespace Write2Congress.Droid.Fragments
 
                 var results = vm.GetLegislatorVotes(legislatorId, localCurrentPage);
 
-                //TODO RM: Verify that ProPublica API does not indicate if there are more results
-                //setting to true for now, since it seems ProPublica does not indicate that there are more results
-                _isThereMoreVotes = true;// vm.IsThereMoreResultsForLastCall();
-
-                return new Tuple<List<Vote>, bool, int>(results, _isThereMoreVotes, localCurrentPage);
+                return new Tuple<List<Vote>, bool, int>(results.Results, results.IsThereMoreResults, localCurrentPage);
             }, new Tuple<string, VoteManager, int>(_legislator.IdBioguide, _voteManager, currentPage));
 
             getVotesTask.ContinueWith((antecedent) =>
