@@ -77,7 +77,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             try
             {
                 var legislatorsResults = GetMemberResults<DomainModel.ApiModels.UnitedStatesIo.CongressLegislatorsResult.Rootobject>(usIoLegislators, _usIoApiSvc, updateResult).Result;
-                legislators = (legislatorsResults as ILegislatorResult).GetLegislatorsResult();
+                legislators = (legislatorsResults as IServiceResult<ILegislator>).GetResults();
             }
             catch(Exception e)
             {
@@ -108,7 +108,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
         }
 
-        private async Task<List<ICommittee>> GetLegislatorBase<T1>(string legislatorsUri, ApiBase apiSvc) where T1 : ICommitteeResult
+        private async Task<List<ICommittee>> GetLegislatorBase<T1>(string legislatorsUri, ApiBase apiSvc) where T1 : IServiceResult<ICommittee>
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
                     var results = JsonConvert.DeserializeObject<T1>(responseText);
 
-                    var legislator = results.GetCommitteeResult();
+                    var legislator = results.GetResults();
 
                     return legislator;
                 }
@@ -139,7 +139,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return null;
         }
 
-        private async Task<List<ILegislator>> GetLegislatorsBase<T>(string legislatorsUri, ApiBase apiSvc) where T : ILegislatorResult
+        private async Task<List<ILegislator>> GetLegislatorsBase<T>(string legislatorsUri, ApiBase apiSvc) where T : IServiceResult<ILegislator>
         {
             var legislators = new List<ILegislator>();
 
@@ -160,7 +160,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
                     var results = JsonConvert.DeserializeObject<T>(responseText);
 
-                    legislators = results.GetLegislatorsResult();
+                    legislators = results.GetResults();
                 }
                 else
                 {

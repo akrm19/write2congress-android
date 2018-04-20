@@ -10,15 +10,15 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
 {
     public class SenateMembersResult : BaseLegislatorsResult
     {
-        public class Rootobject : BaseRootObject, ILegislatorResult
+        public class Rootobject : BaseRootObject, IServiceResult<ILegislator>
         {
             public Result[] results { get; set; }
 
-            List<ILegislator> ILegislatorResult.GetLegislatorsResult()
+            List<ILegislator> IServiceResult<ILegislator>.GetResults()
             {
                 var legislators = new List<ILegislator>();
 
-                foreach(var result in results.Where(r => r.members != null && r.members.Count() > 0))
+                foreach (var result in results.Where(r => r.members != null && r.members.Count() > 0))
                     legislators.AddRange(result.members);
 
                 return legislators;

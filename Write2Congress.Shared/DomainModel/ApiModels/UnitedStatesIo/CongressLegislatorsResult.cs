@@ -11,11 +11,22 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.UnitedStatesIo
 {
     public class CongressLegislatorsResult
     {
-        public class Rootobject: ILegislatorResult
+        public class Rootobject: IServiceResult<ILegislator>
         {
             public Results[] results { get; set; }
 
+            /*
             List<ILegislator> ILegislatorResult.GetLegislatorsResult()
+            {
+                var legislators = new List<ILegislator>();
+
+                legislators.AddRange(results);
+
+                return legislators;
+            }
+            */
+
+            List<ILegislator> IServiceResult<ILegislator>.GetResults()
             {
                 var legislators = new List<ILegislator>();
 

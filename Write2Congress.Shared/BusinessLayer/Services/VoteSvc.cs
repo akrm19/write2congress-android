@@ -35,7 +35,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             try
             {
                 var votesResults = GetMemberResults<DomainModel.ApiModels.ProPublica.VotesResult.Rootobject>(query, _congressApiSvc).Result;
-                var votes = (votesResults as IVoteResult).GetVoteResult();
+                var votes = (votesResults as IServiceResult<IVote>).GetResults();
 
                 var firstResult = votesResults.results.FirstOrDefault();
                 var moreResults = false;

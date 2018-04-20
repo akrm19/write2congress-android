@@ -12,11 +12,11 @@ namespace Write2Congress.Shared.DomainModel.ApiModels.ProPublica
 {
     public class VotesResult
     {
-        public class Rootobject : BaseRootObject, IVoteResult
+        public class Rootobject : BaseRootObject, IServiceResult<IVote>
         {
             public Result[] results { get; set; }
 
-            List<IVote> IVoteResult.GetVoteResult()
+            List<IVote> IServiceResult<IVote>.GetResults()
             {
                 var votes = new List<IVote>();
 
