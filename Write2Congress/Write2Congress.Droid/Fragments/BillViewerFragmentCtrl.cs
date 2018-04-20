@@ -102,14 +102,12 @@ namespace Write2Congress.Droid.Fragments
                 var mode = (BillViewerKind)((int)passedParams.Item4);
 
                 var results = mode == BillViewerKind.CosponsoredBills
-                    ? bm.GetBillsCosponsoredbyLegislator(legislatorId, localCurrentPage)
-                    : bm.GetBillsSponsoredbyLegislator(legislatorId, localCurrentPage);
+                    ? bm.GetBillsCosponsoredbyLegislator2(legislatorId, localCurrentPage)
+                    : bm.GetBillsSponsoredbyLegislator2(legislatorId, localCurrentPage);
 
-                //TODO RM: Verify that ProPublica API does not indicate if there are more results
-                //setting to true for now, since it seems ProPublica does not indicate that there are more results
-                var isThereMoreVotes = true;//bm.IsThereMoreResultsForLastCall();
+                var isThereMoreVotes = results.IsThereMoreResults;
 
-                return new Tuple<List<Bill>, bool, int>(results, isThereMoreVotes, localCurrentPage);
+                return new Tuple<List<Bill>, bool, int>(results.Results, isThereMoreVotes, localCurrentPage);
             }, new Tuple<string, BillManager, int, int>(_legislator.IdBioguide, _billManager, currentPage, (int)_viewerMode));
 
             getBillsTask.ContinueWith((antecedent) =>

@@ -37,6 +37,30 @@ namespace Write2Congress.Shared.BusinessLayer
             return billResult;
         }
 
+        public ApiResultWithMoreResultIndicator<Bill> GetBillsSponsoredbyLegislator2(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
+        {
+            var bills = new List<Bill>();
+
+            var billsServiceResults = _billSvc.GetBillsIntroducedByLegislator2(legislatorBioguideId, page, resultsPerPage);
+
+            foreach (var ibill in billsServiceResults.Results)
+                bills.Add(Bill.TransformToBill(ibill));
+
+            return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
+        }
+
+        public ApiResultWithMoreResultIndicator<Bill> GetBillsCosponsoredbyLegislator2(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
+        {
+            var bills = new List<Bill>();
+
+            var billsServiceResults = _billSvc.GetBillsCosponsoredbyLegislator2(legislatorBioguideId, page, resultsPerPage);
+
+            foreach (var ibill in billsServiceResults.Results)
+                bills.Add(Bill.TransformToBill(ibill));
+
+            return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
+        }
+
         public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
         {
 			var billResult = new List<Bill>();
