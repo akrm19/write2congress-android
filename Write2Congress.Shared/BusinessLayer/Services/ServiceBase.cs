@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Write2Congress.Shared.BusinessLayer.Services.APIs;
 using Write2Congress.Shared.DomainModel.Interface;
+using Write2Congress.Shared.DomainModel;
 
 namespace Write2Congress.Shared.BusinessLayer.Services
 {
@@ -53,6 +54,56 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             }
 
             return null;
+        }
+
+        protected ApiResultWithMoreResultIndicator<T> GetApiResultFromQuery<T, T2>(ApiBase apiSvc, string query, int page, int expectedResultsPerPage) where T2 : class, IServiceResult<T>
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                throw new ArgumentException("Error: Cannot retrieve results due to an invalid or empty query");
+
+            try
+            {
+                //update query
+                query = CreateUriForProPublica(query, page, expectedResultsPerPage);
+
+                //var votesResults = GetMemberResults<DomainModel.ApiModels.ProPublica.VotesResult.Rootobject>(query, _congressApiSvc).Result;
+                var votesResults = GetMemberResults<T2>(query, apiSvc).Result;
+                var results = (votesResults as IServiceResult<T>).GetResults();
+
+                var isThereMoreResults = true;
+
+                if (results.Count < expectedResultsPerPage)
+                    isThereMoreResults = false;
+                else
+                    isThereMoreResults = true;
+
+
+                var apiResults = new ApiResultWithMoreResultIndicator<T>(results, isThereMoreResults);
+
+                return apiResults;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error: Could not retrieve Bills from query {query}", ex);
+            }
+
+            return null;
+        }
+
+        protected string CreateUriForProPublica(string query, int page, int resultsPerPage)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                throw new ArgumentException($"Error: Cannot retrieve Bills for legislator because of empty query: {query}");
+
+            page = page <= 1
+                ? page = 0
+                : page - 1;
+
+            var resultsOffset = page * resultsPerPage;
+
+            var uri = $"{query}?offset={resultsOffset}";
+
+            return uri;
         }
     }
 }

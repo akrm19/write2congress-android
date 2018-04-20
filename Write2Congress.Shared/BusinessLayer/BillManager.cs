@@ -19,13 +19,7 @@ namespace Write2Congress.Shared.BusinessLayer
             _billSvc = new BillSvc(logger);
         }
 
-        public bool IsThereMoreResultsForLastCall()
-        {
-            return false;
-            //TODO RM: Implement
-            //return _billSvc.IsThereMoreResults();
-        }
-
+        /*
         public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
         {
             var billResult = new List<Bill>();
@@ -36,6 +30,7 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return billResult;
         }
+        */
 
         public ApiResultWithMoreResultIndicator<Bill> GetBillsSponsoredbyLegislator2(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
         {
@@ -61,6 +56,7 @@ namespace Write2Congress.Shared.BusinessLayer
             return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
         }
 
+        /*
         public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
         {
 			var billResult = new List<Bill>();
@@ -71,6 +67,7 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return billResult;
         }
+        */
 
         public static string GetBillDetailedSummary(Bill bill)
         {

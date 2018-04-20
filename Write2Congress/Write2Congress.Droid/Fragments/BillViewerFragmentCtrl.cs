@@ -97,7 +97,7 @@ namespace Write2Congress.Droid.Fragments
                 var passedParams = (prms as Tuple<string, BillManager, int, int>);
 
                 var legislatorId = passedParams.Item1;
-                var bm = new BillManager(new Logger(Class.SimpleName));  //passedParams.Item2;
+                var bm = new BillManager(new Logger(Class.SimpleName));
                 var localCurrentPage = passedParams.Item3;
                 var mode = (BillViewerKind)((int)passedParams.Item4);
 
