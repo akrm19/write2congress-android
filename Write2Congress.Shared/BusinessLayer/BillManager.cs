@@ -54,30 +54,46 @@ namespace Write2Congress.Shared.BusinessLayer
             var text = new StringBuilder();
             text.AppendLine(bill.GetDisplayTitleWithLabel())
             .AppendLine()
-            .AppendLine($"{dateIntroduced}: {bill.DateIntroduced.ToString("d")}")
+            .AppendLine($"{dateIntroduced}:")
+            .AppendLine($"{bill.DateIntroduced.ToString("d")}")
             .AppendLine()
-            .AppendLine($"{conSponsors}: {bill.CosponsorsCount}")
+            .AppendLine($"{conSponsors}:")
+            .AppendLine($"{bill.CosponsorsCount}")
             .AppendLine();
 
             if (!string.IsNullOrWhiteSpace(bill.BillStatus.StatusText))
             {
-                text.AppendLine($"{billStatus}: {bill.BillStatus.StatusText}")
+                text.AppendLine($"{billStatus}:")
+                .AppendLine($"{bill.BillStatus.StatusText}")
                 .AppendLine();
 
-                if(bill.DateOfLastVote != DateTime.MinValue)
-                    text.AppendLine($"{statusDate}: {bill.DateOfLastVote.ToString("d")}").AppendLine();
+                if(bill.DateOfLastVote != DateTime.MinValue){
+                    text.AppendLine($"{statusDate}:")
+                    .AppendLine($"{bill.DateOfLastVote.ToString("d")}")
+                    .AppendLine();
+                }
             }
 
             if(!string.IsNullOrWhiteSpace(bill.LastAction.Text) && bill.LastAction.Date != DateTime.MinValue)
             {
-                text.AppendLine($"Last Action: {bill.LastAction.Text}").AppendLine();
+                text.AppendLine($"Last Action:")
+                .AppendLine($"{bill.LastAction.Text}")
+                .AppendLine();
 
                 if (bill.LastAction.Date != DateTime.MinValue)
-                    text.AppendLine($"Last Action Date: {bill.LastAction.Date.ToString("d")}").AppendLine();
+                {
+                    text.AppendLine($"Last Action Date:")
+                    .AppendLine($"{bill.LastAction.Date.ToString("d")}")
+                    .AppendLine();
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(bill.Summary))
-                text.AppendLine($"{summary}: {bill.Summary}").AppendLine();
+            {
+                text.AppendLine($"{summary}:")
+                .AppendLine($"{bill.Summary}")
+                .AppendLine();
+            }
 
             return text.ToString();
         }

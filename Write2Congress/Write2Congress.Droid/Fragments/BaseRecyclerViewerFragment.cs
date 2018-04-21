@@ -68,8 +68,9 @@ namespace Write2Congress.Droid.Fragments
         protected virtual void HandleSuccessfullDataRetrieval()
         {
             errorOccurred = false;
+
+            //ShowToast(GetSuccessfullDataRetrievalMessage(), ToastLength.Short);
         }
-        
 
         public override void OnResume()
         {
@@ -121,13 +122,7 @@ namespace Write2Congress.Droid.Fragments
         protected virtual void FetchMoreLegislatorContent(bool isNextClick)
         {
             if (isNextClick)
-            {
-                //currentPage = isNextClick
-                //    ? currentPage + 1
-                //    : currentPage;
-
                 SetLoadMoreButtonTextAsLoading(true);
-            }
         }
 
         public void SetOnClickListener(Action<bool> listener)
@@ -162,8 +157,6 @@ namespace Write2Congress.Droid.Fragments
         public override void OnDestroy()
         {
             base.OnDestroy();
-
-            //CleanUp();
         }
 
         protected Legislator RetrieveLegislatorIfAvailable(Bundle savedInstanceState)
@@ -243,6 +236,11 @@ namespace Write2Congress.Droid.Fragments
                 : Resource.String.loadMore);
 
             loadMoreButton.Enabled = !setAsLoading;
+        }
+
+        protected virtual string GetSuccessfullDataRetrievalMessage()
+        {
+            return AndroidHelper.GetString(Resource.String.dataRetrievedSuccessfully);
         }
 
         protected abstract string EmptyText();

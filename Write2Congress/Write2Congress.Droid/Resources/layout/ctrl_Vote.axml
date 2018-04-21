@@ -22,20 +22,21 @@
                 android:layout_height="match_parent"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/voteCtrl_image" />
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="1dp"
-                android:paddingLeft="4dp"
+                android:paddingLeft="2dp"
                 android:paddingBottom="1dp"
                 android:id="@+id/voteCtrl_basicInfoParent">
+            <!-- android:maxLines="1" -->
                 <TextView
                     android:text="Name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
                     android:scrollHorizontally="true"
                     style="@style/BillCommitteeVoteCrlTitle"
                     android:id="@+id/voteCtrl_question" />

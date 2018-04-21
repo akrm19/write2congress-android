@@ -10,7 +10,7 @@
         card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true"
         card_view:cardCornerRadius="5dp"
-        android:id="@+id/committeeCtrl_cardview">      
+        android:id="@+id/committeeCtrl_cardview">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,18 +20,20 @@
                 android:src="@android:drawable/ic_menu_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/committeeCtrl_image" />
+                android:id="@+id/committeeCtrl_image"
+                android:layout_marginRight="10dp" />
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="1dp"
+                android:paddingLeft="2dp"
                 android:id="@+id/committeeCtrl_basicInfoParent">
+            <!-- android:maxLines="1" -->
                 <TextView
                     android:text="Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
                     style="@style/BillCommitteeVoteCrlTitle"
                     android:scrollHorizontally="true"
                     android:id="@+id/committeeCtrl_name" />
@@ -52,8 +54,8 @@
                     android:id="@+id/committeeCtrl_webpage"
                     android:gravity="left|center"
                     android:textAllCaps="false"
-                    android:text="@string/website"/>
-            </LinearLayout>   
+                    android:text="@string/website" />
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>
