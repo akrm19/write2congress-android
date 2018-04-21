@@ -70,9 +70,9 @@ namespace Write2Congress.Droid.Activities
         {
             switch (item.ItemId)
             {
-                case Resource.Id.mainMenu_writeNew:
-                    AppHelper.StartWriteNewLetterIntent(this, BundleSenderKind.LegislatorViewer);
-                    return true;
+                //case Resource.Id.mainMenu_writeNew:
+                //    AppHelper.StartWriteNewLetterIntent(this, BundleSenderKind.LegislatorViewer);
+                //    return true;
                 case Resource.Id.mainMenu_refresh:
                     UpdateLegislatorsWithPrompt();
                     return true;
