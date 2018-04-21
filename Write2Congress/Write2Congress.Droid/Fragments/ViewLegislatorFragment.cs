@@ -163,6 +163,36 @@ namespace Write2Congress.Droid.Fragments
                     ? string.Empty
                     : $"{bdayText}: {AppHelper.GetLegislatorBirthdateAndAge(legislator)}";
             }
+
+			UpdateTextview(fragment,
+			               Resource.Id.viewLegislatorFrag_votesTotal,
+			               Resource.String.votesTotal,
+			               legislator.TotalVotes.ToString());
+
+            UpdateTextview(fragment, 
+                           Resource.Id.viewLegislatorFrag_voteWithPartyPrct, 
+                           Resource.String.votesWithPartyPercent, 
+                           legislator.VotesWithPartyPercent.ToString());
+
+            UpdateTextview(fragment,
+                           Resource.Id.viewLegislatorFrag_voteMissedPrct,
+                           Resource.String.votesMissedPercent,
+                           legislator.MissedVotesPercent.ToString());
+        }
+
+        private void UpdateTextview(View fragment, int textviewResId, int labelTextId, string text)
+        {
+            using(var textView = fragment.FindViewById<TextView>(textviewResId))
+            {
+                if (string.IsNullOrWhiteSpace(text))
+                    textView.Visibility = ViewStates.Gone;
+                else
+                {
+                    var labelText = AndroidHelper.GetString(labelTextId);
+					textView.Text = $"{labelText}: {text}";
+                    textView.Visibility = ViewStates.Visible;
+                }
+            }
         }
 
         private void SetPortrait(Legislator legislator)

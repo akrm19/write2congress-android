@@ -89,6 +89,9 @@
   <string name="verifyUpdateOfLegislatorDataWarning">Updates are only needed if you think your legislator data is out of date.</string>
   <string name="voteResult">Vote Result</string>
   <string name="votes">Votes</string>
+  <string name="votesMissedPercent">Votes Missed (%)</string>
+  <string name="votesTotal">Total Votes</string>
+  <string name="votesWithPartyPercent">Votes With party (%)</string>
   <string name="voteType">Vote Type</string>
   <string name="website">Web Site</string>
   <string name="writeLetter">Write Letter</string>
