@@ -56,7 +56,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return null;
         }
 
-        protected ApiResultWithMoreResultIndicator<T> GetApiResultFromQuery<T, T2>(ApiBase apiSvc, string query, int page, int expectedResultsPerPage) where T2 : class, IServiceResult<T>
+        protected ApiResultWithMoreResultIndicator<T> GetApiResultFromQuery<T, T2>(ApiBase apiSvc, string query, int? page = null, int? expectedResultsPerPage = null) where T2 : class, IServiceResult<T>
         {
             if (string.IsNullOrWhiteSpace(query))
                 throw new ArgumentException("Error: Cannot retrieve results due to an invalid or empty query");
@@ -64,7 +64,8 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             try
             {
                 //update query
-                query = CreateUriForProPublica(query, page, expectedResultsPerPage);
+                if(page != null && expectedResultsPerPage != null)
+                    query = AppendOffsetToProPublicaQuery(query, (int)page, (int)expectedResultsPerPage);
 
                 //var votesResults = GetMemberResults<DomainModel.ApiModels.ProPublica.VotesResult.Rootobject>(query, _congressApiSvc).Result;
                 var votesResults = GetMemberResults<T2>(query, apiSvc).Result;
@@ -72,7 +73,9 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
                 var isThereMoreResults = true;
 
-                if (results.Count < expectedResultsPerPage)
+                if (expectedResultsPerPage == null)
+                    isThereMoreResults = false;
+                else if (results.Count < (int)expectedResultsPerPage)
                     isThereMoreResults = false;
                 else
                     isThereMoreResults = true;
@@ -90,7 +93,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return null;
         }
 
-        protected string CreateUriForProPublica(string query, int page, int resultsPerPage)
+        protected string AppendOffsetToProPublicaQuery(string query, int page, int resultsPerPage)
         {
             if (string.IsNullOrWhiteSpace(query))
                 throw new ArgumentException($"Error: Cannot retrieve Bills for legislator because of empty query: {query}");

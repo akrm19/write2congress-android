@@ -39,9 +39,9 @@ namespace Write2Congress.Shared.BusinessLayer
             if (string.IsNullOrWhiteSpace(bioId))
                 return null;
 
-            var legislator = _legislatorSvc.GetLegislatorsCommitteesFromProPublica(bioId);
+            var results = _legislatorSvc.GetLegislatorsCommitteesFromProPublica2(bioId);
 
-            return legislator;
+            return results.Results.OrderBy(c => c.Name).ToList();
         }
 
         public List<Legislator> GetAllLegislators()
