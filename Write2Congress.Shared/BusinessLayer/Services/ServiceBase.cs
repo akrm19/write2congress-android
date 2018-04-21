@@ -25,7 +25,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             {
                 var client = apiSvc.CreateHttpClient();
 
-                //TODO RM (Low Priority) Ensure this is async
+                //TODO RM (Low Priority): Ensure this is async
                 var response = client.GetAsync(legislatorsUri).Result;
                 //var response = await client.GetAsync(legislatorsByZipUri); //TODO Find out why this fails
                 //http://stackoverflow.com/questions/10343632/httpclient-getasync-never-returns-when-using-await-async

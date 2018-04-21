@@ -38,8 +38,8 @@ namespace Write2Congress.Droid.Fragments
         private ImageView _portrait;
         Android.Graphics.Bitmap portraitAsBitmap;
 
+		//TODO RM: (Note):
         //Note: Fragment sub-classes must have a public default no argument constructor.
-        //TODO RM: FIXX!!!
         //Empty construct needed due to:
         //http://stackoverflow.com/questions/33309926/android-app-crash-after-taking-picture-unable-to-find-the-default-constructor
         public ViewLegislatorFragment()

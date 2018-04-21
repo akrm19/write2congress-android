@@ -30,7 +30,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services.APIs
             httpClient.DefaultRequestHeaders.Add("X-API-Key", _congressApiKey);
         }
 
-        //TODO RM (low priority): Make this dynamic so it get the current congress number for the current date time
+        //TODO RM (Low Priority): Make this dynamic so it get the current congress number for the current date time
         protected string GetCurrentCongressNum()
         {
             var currentDate = DateTime.Now;

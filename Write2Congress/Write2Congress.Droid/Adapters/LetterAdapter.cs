@@ -114,7 +114,7 @@ namespace Write2Congress.Droid.Adapters
                 ? string.Empty
                 : letter.Subject;
 
-            //TODO RM (low priority): This logic might be wring if they free write the subject
+            //TODO RM (Low Priority): This logic might be wring if they free write the subject
             viewHolder.Recipient.Text = (letter.Recipient == null ||letter.Recipient.Email.IsEmpty)
                 ? letter.RecipientEmail
                 : letter.Recipient.Email.ContactInfo;
