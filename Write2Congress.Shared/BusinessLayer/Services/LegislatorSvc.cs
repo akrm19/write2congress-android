@@ -56,16 +56,13 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             var senateMembersUri = "115/senate/members.json";
             var houseMembersUri = "115/house/members.json";
 
-            //var houseMembers = GetLegislatorsBase<CongressMembersResult.Rootobject>(houseMembersUri, _congressApiSvc).Result;
             var houseMembers = GetLegislatorsBase2<CongressMembersResult.Rootobject>(houseMembersUri).Results;
-
             var senators = GetLegislatorsBase2<SenateMembersResult.Rootobject>(senateMembersUri).Results;
-            //var senators = GetLegislatorsBase<SenateMembersResult.Rootobject>(senateMembersUri, _congressApiSvc).Result;
 
             houseMembers.AddRange(senators);
 
 
-            return houseMembers;
+            return houseMembers.OrderBy(l => l.LastName).ToList();
         }
 
         private ApiResultWithMoreResultIndicator<ILegislator> GetLegislatorsBase2<T>(string membersUri) where T : class, IServiceResult<ILegislator>
@@ -103,95 +100,5 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
             return results;
         }
-
-        /*
-        private async Task<List<ILegislator>> GetLegislatorsBase<T>(string legislatorsUri, ApiBase apiSvc) where T : IServiceResult<ILegislator>
-        {
-            var legislators = new List<ILegislator>();
-
-            try
-            {
-                var client = apiSvc.CreateHttpClient();
-
-                //TODO RM (low priority) Ensure this is async
-                var response = client.GetAsync(legislatorsUri).Result;
-                //var response = await client.GetAsync(legislatorsByZipUri); //TODO Find out why this fails
-                //http://stackoverflow.com/questions/10343632/httpclient-getasync-never-returns-when-using-await-async
-
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseText = response.Content.ReadAsStringAsync().Result;
-                    //var responseText = await response.Content.ReadAsStringAsync();
-
-                    var results = JsonConvert.DeserializeObject<T>(responseText);
-
-                    legislators = results.GetResults();
-                }
-                else
-                {
-                    _logger.Error($"Error occurred retrieving legislators using URI: {legislatorsUri}");
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error("Error retrieving legislators.", e);
-            }
-
-            return legislators;
-        }
-
-        internal List<ICommittee> GetLegislatorsCommitteesFromProPublica(string bioId)
-        {
-            if (string.IsNullOrWhiteSpace(bioId))
-                return null;
-
-            //https://api.propublica.org/congress/v1/members/{member-id}.json
-            var getMembersUri = $"members/{bioId}.json";
-
-            try
-            {
-                var committees  = GetLegislatorBase<DomainModel.ApiModels.ProPublica.SingleLegislatorResult.Rootobject>(getMembersUri, _congressApiSvc).Result;
-                return committees.OrderBy(c => c.Name).ToList();
-            }
-            catch(Exception e)
-            {
-                _logger.Error($"Error occured retrieving legislator with bioId {bioId}", e);
-                return null;
-            }
-
-        }
-
-        private async Task<List<ICommittee>> GetLegislatorBase<T1>(string legislatorsUri, ApiBase apiSvc) where T1 : IServiceResult<ICommittee>
-        {
-            try
-            {
-                var client = apiSvc.CreateHttpClient();
-                var response = client.GetAsync(legislatorsUri).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseText = response.Content.ReadAsStringAsync().Result;
-                    //var responseText = await response.Content.ReadAsStringAsync();
-
-                    var results = JsonConvert.DeserializeObject<T1>(responseText);
-
-                    var legislator = results.GetResults();
-
-                    return legislator;
-                }
-                else
-                {
-                    _logger.Error($"Error occurred retrieving legislators using URI: {legislatorsUri}");
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error("Error retrieving legislators.", e);
-            }
-
-            return null;
-        }
-        */
     }
 }
