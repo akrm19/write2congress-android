@@ -2852,8 +2852,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c009e
 			public const int billCtrl_cardview = 2131493022;
 			
-			// aapt resource value: 0x7f0c00a4
-			public const int billCtrl_cosponsors = 2131493028;
+			// aapt resource value: 0x7f0c00a5
+			public const int billCtrl_cosponsors = 2131493029;
 			
 			// aapt resource value: 0x7f0c00a3
 			public const int billCtrl_dateIntroduced = 2131493027;
@@ -2876,8 +2876,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c009d
 			public const int billCtrl_parent = 2131493021;
 			
-			// aapt resource value: 0x7f0c00a5
-			public const int billCtrl_status = 2131493029;
+			// aapt resource value: 0x7f0c00a4
+			public const int billCtrl_status = 2131493028;
 			
 			// aapt resource value: 0x7f0c00a6
 			public const int billCtrl_statusDate = 2131493030;

@@ -53,13 +53,10 @@ namespace Write2Congress.Shared.BusinessLayer
 
             var text = new StringBuilder();
             text.AppendLine(bill.GetDisplayTitleWithLabel())
-            .AppendLine()
-            .AppendLine($"{dateIntroduced}:")
-            .AppendLine($"{bill.DateIntroduced.ToString("d")}")
-            .AppendLine()
-            .AppendLine($"{conSponsors}:")
-            .AppendLine($"{bill.CosponsorsCount}")
-            .AppendLine();
+                .AppendLine()
+                .AppendLine($"{dateIntroduced}:")
+                .AppendLine($"{bill.DateIntroduced.ToString("d")}")
+                .AppendLine();
 
             if (!string.IsNullOrWhiteSpace(bill.BillStatus.StatusText))
             {
@@ -87,6 +84,10 @@ namespace Write2Congress.Shared.BusinessLayer
                     .AppendLine();
                 }
             }
+                
+            text.AppendLine($"{conSponsors}:")
+                .AppendLine($"{bill.CosponsorsCount}")
+                .AppendLine();
 
             if (!string.IsNullOrWhiteSpace(bill.Summary))
             {

@@ -50,15 +50,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:id="@+id/billCtrl_cosponsors" />
+                    android:ellipsize="end"
+                    android:id="@+id/billCtrl_status" />
                 <TextView
                     android:text="Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    android:id="@+id/billCtrl_status" />
+                    android:scrollHorizontally="true"
+                    android:id="@+id/billCtrl_cosponsors" />
                 <TextView
                     android:text="Name"
                     android:layout_width="wrap_content"
