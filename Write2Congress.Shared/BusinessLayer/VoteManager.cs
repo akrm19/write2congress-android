@@ -19,17 +19,11 @@ namespace Write2Congress.Shared.BusinessLayer
             _voteSvc = new VoteSvc(logger);
         }
 
-        public bool IsThereMoreResultsForLastCall()
-        {
-            //TODO R<: Fix
-            return true;//_voteSvc.IsThereMoreResults();
-        }
-
         public ApiResultWithMoreResultIndicator<Vote> GetLegislatorVotes(string legislatorBioguideId, int page, int resultsPerPage = _defaultResultsPerPage)
         {
             var votes = new List<Vote>();
 
-            var votesResult = _voteSvc.GetVotesByLegislator2(legislatorBioguideId, page, resultsPerPage);
+            var votesResult = _voteSvc.GetVotesByLegislator(legislatorBioguideId, page, resultsPerPage);
 
             foreach (var iVote in votesResult.Results)
                 votes.Add(Vote.TransformToVote(iVote));

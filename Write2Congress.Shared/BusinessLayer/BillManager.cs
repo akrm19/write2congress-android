@@ -19,19 +19,6 @@ namespace Write2Congress.Shared.BusinessLayer
             _billSvc = new BillSvc(logger);
         }
 
-        /*
-        public List<Bill> GetBillsSponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
-        {
-            var billResult = new List<Bill>();
-            var ibillsResult = _billSvc.GetBillsIntroducedByLegislator(legislatorBioguideId, page, resultsPerPage);
-
-            foreach (var ibill in ibillsResult)
-                billResult.Add(Bill.TransformToBill(ibill));
-
-            return billResult;
-        }
-        */
-
         public ApiResultWithMoreResultIndicator<Bill> GetBillsSponsoredbyLegislator2(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
         {
             var bills = new List<Bill>();
@@ -55,19 +42,6 @@ namespace Write2Congress.Shared.BusinessLayer
 
             return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
         }
-
-        /*
-        public List<Bill> GetBillsCosponsoredbyLegislator(string legislatorBioguideId, int page, int resultsPerPage = _defautlResultsPerPage)
-        {
-			var billResult = new List<Bill>();
-            var iBillsResult =  _billSvc.GetBillsCosponsoredbyLegislator(legislatorBioguideId, page, resultsPerPage);
-        
-            foreach (var ibill in iBillsResult)
-                billResult.Add(Bill.TransformToBill(ibill));
-
-            return billResult;
-        }
-        */
 
         public static string GetBillDetailedSummary(Bill bill)
         {

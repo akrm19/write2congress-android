@@ -42,6 +42,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return apiResult;
         }
 
+        //Not used, but left for reference
         private List<IBill> GetBillsFromQuery(string query)
         {
             var bills = new List<IBill>();
