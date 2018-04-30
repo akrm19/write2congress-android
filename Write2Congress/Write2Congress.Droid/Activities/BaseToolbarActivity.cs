@@ -67,11 +67,23 @@ namespace Write2Congress.Droid.Activities
                 case Resource.Id.actionMenu_exit:
                     ExitButtonPressed();
                     break;
+                case Resource.Id.actionMenu_bills:
+                    OpenBillsSearch();
+                    break;
                 default:
                     break;
             }
 
             CurrentDrawerLayout.CloseDrawers();
+        }
+
+        private void OpenBillsSearch()
+        {
+            if (GetType() == typeof(ViewBillsActivity))
+                return;
+
+            var intent = new Intent(this, typeof(ViewBillsActivity));
+            StartActivity(intent);
         }
 
         private void OpenWriteNewLetter()
