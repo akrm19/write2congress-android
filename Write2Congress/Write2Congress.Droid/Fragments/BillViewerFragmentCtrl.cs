@@ -34,15 +34,20 @@ namespace Write2Congress.Droid.Fragments
         {
             var newFragment = new BillViewerFragmentCtrl();
 
-            if (legislator != null)
-            {
-                var args = new Bundle();
-                args.PutString(BundleType.Legislator, legislator.SerializeToJson());
-                args.PutInt(BundleType.BillViewerFragmentType, (int)viewerMode);
-                newFragment.Arguments = args;
-            }
+			var args = new Bundle();
 
+            if (legislator != null)
+                args.PutString(BundleType.Legislator, legislator.SerializeToJson());
+
+            args.PutInt(BundleType.BillViewerFragmentType, (int)viewerMode);
+
+			newFragment.Arguments = args;
             return newFragment;
+        }
+
+        public static BillViewerFragmentCtrl CreateInstance(BillViewerKind viewerMode)
+        {
+            return CreateInstance(null, viewerMode);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -50,7 +55,9 @@ namespace Write2Congress.Droid.Fragments
             base.OnCreate(savedInstanceState);
 
 			var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
-			_legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
+
+            if(!string.IsNullOrWhiteSpace(serialziedLegislator))
+			    _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
 
             _billManager = new BillManager(MyLogger);
             _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
@@ -65,7 +72,6 @@ namespace Write2Congress.Droid.Fragments
 
             if(_legislator == null)
 				_legislator = RetrieveLegislatorIfAvailable(savedInstanceState);
-            //_viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
@@ -91,7 +97,10 @@ namespace Write2Congress.Droid.Fragments
         protected override void FetchMoreLegislatorContent(bool isNextClick)
         {
             base.FetchMoreLegislatorContent(isNextClick);
-
+            var getBillsTask = (_viewerMode == BillViewerKind.AllBillsOfEveryone)
+                ? GetAllBillsTasks()
+                : GetLegislatorsBillsTask();
+            /*
             var getBillsTask = new Task< Tuple<List<Bill>, bool, int> >((prms) =>
             {
                 var passedParams = (prms as Tuple<string, BillManager, int, int>);
@@ -109,7 +118,8 @@ namespace Write2Congress.Droid.Fragments
 
                 return new Tuple<List<Bill>, bool, int>(results.Results, isThereMoreVotes, localCurrentPage);
             }, new Tuple<string, BillManager, int, int>(_legislator.IdBioguide, _billManager, currentPage, (int)_viewerMode));
-
+            */
+            
             getBillsTask.ContinueWith((antecedent) =>
             {
                 if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
@@ -142,6 +152,51 @@ namespace Write2Congress.Droid.Fragments
 
             getBillsTask.Start();
         }
+
+        private Task<Tuple<List<Bill>, bool, int>> GetLegislatorsBillsTask()
+        {
+            var getBillsTask = new Task<Tuple<List<Bill>, bool, int>>((prms) =>
+            {
+                var passedParams = (prms as Tuple<string, BillManager, int, int>);
+
+                var legislatorId = passedParams.Item1;
+                var bm = new BillManager(new Logger(Class.SimpleName));
+                var localCurrentPage = passedParams.Item3;
+                var mode = (BillViewerKind)((int)passedParams.Item4);
+
+                var results = mode == BillViewerKind.CosponsoredBills
+                    ? bm.GetBillsCosponsoredbyLegislator2(legislatorId, localCurrentPage)
+                    : bm.GetBillsSponsoredbyLegislator2(legislatorId, localCurrentPage);
+
+                var isThereMoreVotes = results.IsThereMoreResults;
+
+                return new Tuple<List<Bill>, bool, int>(results.Results, isThereMoreVotes, localCurrentPage);
+            }, new Tuple<string, BillManager, int, int>(_legislator.IdBioguide, _billManager, currentPage, (int)_viewerMode));
+
+            return getBillsTask;
+        }
+
+        private Task<Tuple<List<Bill>, bool, int>> GetAllBillsTasks()
+        {
+            var getBillsTask = new Task<Tuple<List<Bill>, bool, int>>((prms) =>
+            {
+                var passedParams = (prms as Tuple<string, BillManager, int, int>);
+
+                var legislatorId = passedParams.Item1;
+                var bm = new BillManager(new Logger(Class.SimpleName));
+                var localCurrentPage = passedParams.Item3;
+                var mode = (BillViewerKind)((int)passedParams.Item4);
+
+                var results = bm.GetBillsIntroduced(localCurrentPage);
+
+                var isThereMoreVotes = results.IsThereMoreResults;
+
+                return new Tuple<List<Bill>, bool, int>(results.Results, isThereMoreVotes, localCurrentPage);
+            }, new Tuple<string, BillManager, int, int>("search term goes here", _billManager, currentPage, (int)_viewerMode));
+
+            return getBillsTask;
+        }
+
 
         public override void OnSaveInstanceState(Bundle outState)
         {

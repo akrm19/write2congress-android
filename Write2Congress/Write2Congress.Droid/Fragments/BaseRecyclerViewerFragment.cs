@@ -165,9 +165,10 @@ namespace Write2Congress.Droid.Fragments
                 return null;
 
             var serialziedLegislator = Arguments.GetString(BundleType.Legislator);
-            var legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
 
-            return legislator;
+            return string.IsNullOrWhiteSpace(serialziedLegislator)
+                         ? null
+                         : new Legislator().DeserializeFromJson(serialziedLegislator);
         }
 
         protected int RetrieveCurrentPageIfAvailable(Bundle savedInstanceState)

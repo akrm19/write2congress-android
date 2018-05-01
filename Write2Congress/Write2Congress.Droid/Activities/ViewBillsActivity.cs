@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Constants;
+using Write2Congress.Droid.DomainModel.Enums;
 using Write2Congress.Droid.Fragments;
 
 namespace Write2Congress.Droid.Activities
@@ -38,12 +39,13 @@ namespace Write2Congress.Droid.Activities
             SetupNavigationMenu(Resource.Id.viewLBillsActv_navigationDrawer);
 
             _viewBillsFragCtrl = SupportFragmentManager.FindFragmentByTag(TagsType.SponsoredBillsFragment) as BillViewerFragmentCtrl;
-        /*
+        
             if(_viewBillsFragCtrl == null)
             {
                 var serializedLegislator = AndroidHelper.GetStringFromIntent(Intent, BundleType.Legislator);
 
-                _viewBillsFragCtrl = new BillViewerFragmentCtrl();
+                //TODO RM: Finish implementing BillViewerFragmentCtrl for AllBillsOfEveryone
+                _viewBillsFragCtrl = BillViewerFragmentCtrl.CreateInstance(BillViewerKind.AllBillsOfEveryone);
 
                 if (_viewBillsFragCtrl.Arguments == null)
                     _viewBillsFragCtrl.Arguments = new Bundle();
@@ -52,7 +54,6 @@ namespace Write2Congress.Droid.Activities
 
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);                
             }
-            */
         }
     }
 }

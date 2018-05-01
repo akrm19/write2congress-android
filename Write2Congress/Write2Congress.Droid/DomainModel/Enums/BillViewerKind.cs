@@ -15,6 +15,7 @@ namespace Write2Congress.Droid.DomainModel.Enums
     public enum BillViewerKind
     {
         SponsoredBills,
-        CosponsoredBills
+        CosponsoredBills, 
+        AllBillsOfEveryone
     }
 }

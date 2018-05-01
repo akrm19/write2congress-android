@@ -42,6 +42,28 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return apiResult;
         }
 
+        public ApiResultWithMoreResultIndicator<IBill> GetBillsIntroduced(int page = 1, int resultsperPageForSvc = 20)
+        {
+            //Original query format
+            //https://api.propublica.org/congress/v1/{congress}/{chamber}/bills/{type}.json
+            //https://api.propublica.org/congress/v1/115/both/bills/introduced.json?sort=introduced_date
+            /*  Type:           Sort Field:
+             *  introduced      introduced_date
+                updated         latest_major_action_date
+                active          latest_major_action_date
+                passed          latest_major_action_date
+                enacted         enacted
+                vetoed          vetoed
+             */
+            //TODO RM: make congress # dynamic
+            var query = $"115/both/bills/introduced.json";
+
+            var apiResult = GetApiResultFromQuery<IBill, DomainModel.ApiModels.ProPublica.BillResult.Rootobject>(_congressApiSvc, query, page, resultsperPageForSvc);
+
+
+            return apiResult;
+        }
+
         //Not used, but left for reference
         private List<IBill> GetBillsFromQuery(string query)
         {

@@ -43,6 +43,31 @@ namespace Write2Congress.Shared.BusinessLayer
             return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
         }
 
+        public ApiResultWithMoreResultIndicator<Bill>GetBillsIntroduced(int page, int resultsPerPage = _defautlResultsPerPage)
+        {
+            var bills = new List<Bill>();
+
+            var billsServiceResults = _billSvc.GetBillsIntroduced(page, resultsPerPage);
+
+            foreach (var ibill in billsServiceResults.Results)
+                bills.Add(Bill.TransformToBill(ibill));
+
+            return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
+        }
+
+        public ApiResultWithMoreResultIndicator<Bill> GetBillsBySubject(string searchTerm, int page, int resultsPerPage = _defautlResultsPerPage)
+        {
+            var bills = new List<Bill>();
+
+            var billsServiceResults = _billSvc.GetBillsIntroduced(page, resultsPerPage);
+
+            foreach (var ibill in billsServiceResults.Results)
+                bills.Add(Bill.TransformToBill(ibill));
+
+            return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
+        }
+
+
         public static string GetBillDetailedSummary(Bill bill)
         {
             var dateIntroduced = "Date Introduced";
