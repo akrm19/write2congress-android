@@ -92,7 +92,8 @@ namespace Write2Congress.Droid.Fragments
             else
                 FetchMoreLegislatorContent(false);
 
-            HookupToActivitySearchTextChangedDelegate(GetBaseActivity() as IActivityWithToolbarSearch);
+            if(_viewerMode == BillViewerKind.AllBillsOfEveryone)
+                HookupToActivitySearchTextChangedDelegate(GetBaseActivity() as IActivityWithToolbarSearch);
 
             return fragment;
         }
