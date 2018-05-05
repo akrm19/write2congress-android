@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
 using Write2Congress.Droid.Code;
@@ -18,7 +19,7 @@ using Write2Congress.Droid.Fragments;
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "ViewBillsActivity")]
-    public class ViewBillsActivity : BaseToolbarActivity
+    public class ViewBillsActivity : BaseToolbarActivityWithSearch
     {
         private BillViewerFragmentCtrl _viewBillsFragCtrl;
 
@@ -55,5 +56,9 @@ namespace Write2Congress.Droid.Activities
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);                
             }
         }
+
+        protected override int MenuItemId => Resource.Menu.menu_viewBills;
+
+        protected override int SearchItemId => Resource.Id.viewBills_search;
     }
 }

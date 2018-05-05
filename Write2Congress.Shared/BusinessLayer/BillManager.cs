@@ -67,6 +67,21 @@ namespace Write2Congress.Shared.BusinessLayer
             return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
         }
 
+        //TODO RM Finsih filtering logic
+        public List<Bill> FilterBillsByQuery(List<Bill> billsToQuery, string query)
+        {
+            query = query.ToLower();
+
+            //TODO RM: make sure title.popular & title.short are always availalbe 
+            //or check for nulls
+            return billsToQuery.Where(
+                b => b.Summary.ToLower().Contains(query)
+                || b.Titles.OfficialTile.ToLower().Contains(query)
+                || b.Titles.PopularTitlePerLoc.ToLower().Contains(query)
+                || b.Titles.ShortTitle.ToLower().Contains(query)
+            ).OrderBy(br => br.GetDisplayTitle()).ToList();
+        }
+
 
         public static string GetBillDetailedSummary(Bill bill)
         {

@@ -162,7 +162,6 @@
     <Compile Include="DomainModel\Enums\BillViewerKind.cs" />
     <Compile Include="DomainModel\Enums\BundleSenderKind.cs" />
     <Compile Include="DomainModel\Enums\ViewPagerList.cs" />
-    <Compile Include="DomainModel\Interfaces\ILegislatorViewerActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapters\LegislatorAdapter.cs" />
     <Compile Include="Adapters\LegislatorAdapterViewHolder.cs" />
@@ -186,6 +185,8 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\ViewBillsActivity.cs" />
+    <Compile Include="Activities\BaseToolbarActivityWithSearch.cs" />
+    <Compile Include="DomainModel\Interfaces\IActivityWithToolbarSearch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -259,6 +260,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\actv_ViewBills.axml" />
+    <AndroidResource Include="Resources\menu\menu_viewBills.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">

@@ -17,8 +17,8 @@ using Write2Congress.Shared.DomainModel.Enum;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Fragments;
 using Write2Congress.Shared.BusinessLayer;
-using Write2Congress.Droid.Interfaces;
 using Write2Congress.Droid.DomainModel.Enums;
+using Write2Congress.Droid.DomainModel.Interfaces;
 
 namespace Write2Congress.Droid.CustomControls
 {
@@ -139,9 +139,15 @@ namespace Write2Congress.Droid.CustomControls
 
         private void HookupToActivitySearchTextChangedDelegate()
         {
-            var par = _fragment.Activity as ILegislatorViewerActivity;
+            var par = _fragment.Activity as IActivityWithToolbarSearch;
 
             par.LegislatorSearchTextChanged += FilterLegislatorsByFirstMiddleOrLastName;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            //TODO RM: look into unregistering LegislatorSearchTextChanged
+            base.Dispose(disposing);
         }
 
 

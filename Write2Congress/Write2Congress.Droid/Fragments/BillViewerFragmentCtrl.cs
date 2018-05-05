@@ -17,6 +17,7 @@ using Write2Congress.Droid.Adapters;
 using System.Threading.Tasks;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.DomainModel.Enums;
+using Write2Congress.Droid.DomainModel.Interfaces;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -91,7 +92,27 @@ namespace Write2Congress.Droid.Fragments
             else
                 FetchMoreLegislatorContent(false);
 
+            HookupToActivitySearchTextChangedDelegate(GetBaseActivity() as IActivityWithToolbarSearch);
+
             return fragment;
+        }
+
+        private void HookupToActivitySearchTextChangedDelegate(IActivityWithToolbarSearch fragment)
+        {
+            fragment.LegislatorSearchTextChanged += FilterBills;
+        }
+
+        public void FilterBills(string filter)
+        {
+            try
+            {
+                var filteredBills = _billManager.FilterBillsByQuery(_bills, filter);
+                (recyclerAdapter as BillAdapter).UpdateBill(filteredBills);
+            }
+            catch(Exception e)
+            {
+                MyLogger.Error("An error occured filtering bills in BillViewer", e);
+            }
         }
 
         protected override void FetchMoreLegislatorContent(bool isNextClick)

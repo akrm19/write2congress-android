@@ -1,10 +1,11 @@
-﻿namespace Write2Congress.Droid.Interfaces
+﻿using System;
+namespace Write2Congress.Droid.DomainModel.Interfaces
 {
-    public interface ILegislatorViewerActivity
+    public interface IActivityWithToolbarSearch
     {
         SearchTextChangedDelegate LegislatorSearchTextChanged { get; set; }
 
-        void ClearLegislatorSearchTextChangedDelegate();
+        void ClearLegislatorSearchTextChangedDelegate();        
     }
 
     //Create new delegate type

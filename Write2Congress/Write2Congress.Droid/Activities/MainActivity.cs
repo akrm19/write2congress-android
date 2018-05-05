@@ -18,18 +18,17 @@ using Write2Congress.Droid.Code;
 using Android.Support.V4.View;
 using SearchView = Android.Support.V7.Widget.SearchView;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
-using Write2Congress.Droid.Interfaces;
 using Android.Support.Design.Widget;
 using Write2Congress.Droid.DomainModel.Enums;
 using Android.Support.V7.App;
+using Write2Congress.Droid.DomainModel.Interfaces;
 
 namespace Write2Congress.Droid.Activities
 {
     [Activity(MainLauncher =true)]
-    public class MainActivity : BaseToolbarActivity, ILegislatorViewerActivity
+    public class MainActivity : BaseToolbarActivityWithSearch, IActivityWithToolbarSearch
     {
         private MainFragment _mainFragment;
-        private SearchTextChangedDelegate _legislatorSearchTextChanged;
 
         protected override int DrawerLayoutId
         {
@@ -142,52 +141,20 @@ namespace Write2Congress.Droid.Activities
             verifyPrompt.Create().Show();
         }
 
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-
-            using (var searchMenuitem = menu.FindItem(Resource.Id.mainMenu_search))
-            using (var searchView = MenuItemCompat.GetActionView(searchMenuitem))
-            using (var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>())
-            {
-                searchViewJavaObj.QueryTextChange += (s, e) =>
-                {
-                    _legislatorSearchTextChanged?.Invoke(e.NewText);
-                };
-
-                searchViewJavaObj.QueryTextSubmit += (s, e) =>
-                {
-                    _legislatorSearchTextChanged?.Invoke(e.Query);
-                    e.Handled = true;
-                };
-            }
-
-            return base.OnCreateOptionsMenu(menu);
-        }
-
-        protected override void OnDestroy()
-        {
-            _legislatorSearchTextChanged = null;
-
-            base.OnDestroy();
-        }
-
-        public SearchTextChangedDelegate LegislatorSearchTextChanged
+        protected override int MenuItemId
         {
             get
             {
-                return _legislatorSearchTextChanged;
-            }
-            set
-            {
-                _legislatorSearchTextChanged += value;
+                return Resource.Menu.menu_main;
             }
         }
 
-        public void ClearLegislatorSearchTextChangedDelegate()
+        protected override int SearchItemId
         {
-            _legislatorSearchTextChanged = null;
+            get
+            {
+                return Resource.Id.mainMenu_search;
+            }
         }
     }
 }
