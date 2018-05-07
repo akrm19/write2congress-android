@@ -149,7 +149,7 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
-        protected override int SearchItemId
+        protected override int FilterDataItemId
         {
             get
             {

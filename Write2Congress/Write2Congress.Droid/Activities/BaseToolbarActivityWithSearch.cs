@@ -19,10 +19,10 @@ namespace Write2Congress.Droid.Activities
     [Activity(Label = "BaseToolbarActivityWithSearch")]
     public abstract class BaseToolbarActivityWithSearch : BaseToolbarActivity, IActivityWithToolbarSearch
     {
-        protected SearchTextChangedDelegate _searchTextChanged;
+        protected FilterDataTextChangedDelegate _filterDataTextChanged;
 
 		protected abstract int MenuItemId { get; }
-		protected abstract int SearchItemId { get; }		
+		protected abstract int FilterDataItemId { get; }		
         protected override int DrawerLayoutId => throw new NotImplementedException();
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -36,22 +36,22 @@ namespace Write2Congress.Droid.Activities
         {
             MenuInflater.Inflate(MenuItemId, menu);
 
-            using (var searchMenuitem = menu.FindItem(SearchItemId))
-            using (var searchView = MenuItemCompat.GetActionView(searchMenuitem))
-            using (var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>())
+            using (var filterMenuItem = menu.FindItem(FilterDataItemId))
+            using (var filterView = MenuItemCompat.GetActionView(filterMenuItem))
+            using (var filterViewJavaObj = filterView.JavaCast<Android.Support.V7.Widget.SearchView>())
             {
-                searchViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
+                filterViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
 
-                searchViewJavaObj.QueryTextChange += (s, e) =>
+                filterViewJavaObj.QueryTextChange += (s, e) =>
                 {
                     //TODO RM: Convert _legislatorSearchTextChanged in 
                     //MainActivity into _searchTextChanged
-                    _searchTextChanged?.Invoke(e.NewText);
+                    _filterDataTextChanged?.Invoke(e.NewText);
                 };
 
-                searchViewJavaObj.QueryTextSubmit += (s, e) =>
+                filterViewJavaObj.QueryTextSubmit += (s, e) =>
                 {
-                    _searchTextChanged?.Invoke(e.Query);
+                    _filterDataTextChanged?.Invoke(e.Query);
                     e.Handled = true;
                 };
             }
@@ -61,25 +61,25 @@ namespace Write2Congress.Droid.Activities
 
         protected override void OnDestroy()
         {
-            _searchTextChanged = null;
+            _filterDataTextChanged = null;
 
             base.OnDestroy();
         }
 
         public virtual void ClearLegislatorSearchTextChangedDelegate()
         {
-            _searchTextChanged = null;
+            _filterDataTextChanged = null;
         }
 
-        public virtual SearchTextChangedDelegate LegislatorSearchTextChanged
+        public virtual FilterDataTextChangedDelegate LegislatorSearchTextChanged
         {
             get
             {
-                return _searchTextChanged;
+                return _filterDataTextChanged;
             }
             set
             {
-                _searchTextChanged += value;
+                _filterDataTextChanged += value;
             }
         }
     }
