@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
+using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Interfaces;
 
 namespace Write2Congress.Droid.Activities
@@ -39,6 +40,8 @@ namespace Write2Congress.Droid.Activities
             using (var searchView = MenuItemCompat.GetActionView(searchMenuitem))
             using (var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>())
             {
+                searchViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
+
                 searchViewJavaObj.QueryTextChange += (s, e) =>
                 {
                     //TODO RM: Convert _legislatorSearchTextChanged in 

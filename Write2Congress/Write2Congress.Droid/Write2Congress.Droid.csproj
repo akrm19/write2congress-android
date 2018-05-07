@@ -261,6 +261,11 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\actv_ViewBills.axml" />
     <AndroidResource Include="Resources\menu\menu_viewBills.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_filter_list_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_filter_list_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_filter_list_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_filter_list_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_filter_list_white_48dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">

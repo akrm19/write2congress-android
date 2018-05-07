@@ -26,6 +26,8 @@
   <string name="dismiss">Dismiss</string>
   <string name="donate">Donate</string>
   <string name="drafts">Drafts</string>
+  <string name="enterSearchCriteria">Enter Search Criteria</string>
+  <string name="enterFilterCriteria">Enter Filter Criteria</string>
   <string name="email">Email</string>
   <string name="emptyBodyText">Letter content</string>
   <string name="emptyBillsText">No bills</string>
