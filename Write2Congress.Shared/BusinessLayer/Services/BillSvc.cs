@@ -64,6 +64,23 @@ namespace Write2Congress.Shared.BusinessLayer.Services
             return apiResult;
         }
 
+        public ApiResultWithMoreResultIndicator<IBill> GetBillsBySubject(string searchTerm, int page = 1, int resultsPerPageForSvc = 20)
+        {
+            //https://api.propublica.org/congress/v1/bills/search.json?query={query}
+
+            if(string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return new ApiResultWithMoreResultIndicator<IBill>(new List<IBill>(), false);
+            }
+
+            var query = $"bills/search.json?query=" + searchTerm;
+
+            var apiResult = GetApiResultFromQuery<IBill, DomainModel.ApiModels.ProPublica.BillResult.Rootobject>(_congressApiSvc, query, page, resultsPerPageForSvc);
+
+
+            return apiResult;
+        }
+
         //Not used, but left for reference
         private List<IBill> GetBillsFromQuery(string query)
         {

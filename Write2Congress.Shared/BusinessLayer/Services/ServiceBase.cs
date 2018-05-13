@@ -104,7 +104,9 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
             var resultsOffset = page * resultsPerPage;
 
-            var uri = $"{query}?offset={resultsOffset}";
+            var uri = query.Contains("?")
+                           ? $"{query}&offset={resultsOffset}"
+                           : $"{query}?offset={resultsOffset}";
 
             return uri;
         }

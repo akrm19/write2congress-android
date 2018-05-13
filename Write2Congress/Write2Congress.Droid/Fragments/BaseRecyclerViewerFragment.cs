@@ -174,8 +174,8 @@ namespace Write2Congress.Droid.Fragments
         protected int RetrieveCurrentPageIfAvailable(Bundle savedInstanceState)
         {
             return savedInstanceState != null
-                ? savedInstanceState.GetInt(BundleType.CurrentPage, 0) 
-                : 0;
+                ? savedInstanceState.GetInt(BundleType.CurrentPage, 1) 
+                : 1;
         }
 
         protected void SetLoadingUiOff()

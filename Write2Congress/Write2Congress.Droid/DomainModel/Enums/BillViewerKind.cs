@@ -16,6 +16,7 @@ namespace Write2Congress.Droid.DomainModel.Enums
     {
         SponsoredBills,
         CosponsoredBills, 
-        AllBillsOfEveryone
+        LastestBillsForEveryone,
+        BillSearch
     }
 }

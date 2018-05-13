@@ -59,7 +59,7 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             var bills = new List<Bill>();
 
-            var billsServiceResults = _billSvc.GetBillsIntroduced(page, resultsPerPage);
+            var billsServiceResults = _billSvc.GetBillsBySubject(searchTerm, page, resultsPerPage);
 
             foreach (var ibill in billsServiceResults.Results)
                 bills.Add(Bill.TransformToBill(ibill));
@@ -67,7 +67,6 @@ namespace Write2Congress.Shared.BusinessLayer
             return new ApiResultWithMoreResultIndicator<Bill>(bills, billsServiceResults.IsThereMoreResults);
         }
 
-        //TODO RM Finsih filtering logic
         public List<Bill> FilterBillsByQuery(List<Bill> billsToQuery, string query)
         {
             query = query.ToLower();
@@ -81,7 +80,6 @@ namespace Write2Congress.Shared.BusinessLayer
                 || b.Titles.ShortTitle.ToLower().Contains(query)
             ).OrderBy(br => br.GetDisplayTitle()).ToList();
         }
-
 
         public static string GetBillDetailedSummary(Bill bill)
         {

@@ -3,9 +3,9 @@ namespace Write2Congress.Droid.DomainModel.Interfaces
 {
     public interface IActivityWithToolbarSearch
     {
-        FilterDataTextChangedDelegate LegislatorSearchTextChanged { get; set; }
+        FilterDataTextChangedDelegate FilterSearchTextChanged { get; set; }
 
-        void ClearLegislatorSearchTextChangedDelegate();        
+        void ClearFilterTextChangedDelegate();        
     }
 
     //Create new delegate type

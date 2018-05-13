@@ -44,8 +44,6 @@ namespace Write2Congress.Droid.Activities
 
                 filterViewJavaObj.QueryTextChange += (s, e) =>
                 {
-                    //TODO RM: Convert _legislatorSearchTextChanged in 
-                    //MainActivity into _searchTextChanged
                     _filterDataTextChanged?.Invoke(e.NewText);
                 };
 
@@ -66,12 +64,12 @@ namespace Write2Congress.Droid.Activities
             base.OnDestroy();
         }
 
-        public virtual void ClearLegislatorSearchTextChangedDelegate()
+        public virtual void ClearFilterTextChangedDelegate()
         {
             _filterDataTextChanged = null;
         }
 
-        public virtual FilterDataTextChangedDelegate LegislatorSearchTextChanged
+        public virtual FilterDataTextChangedDelegate FilterSearchTextChanged
         {
             get
             {
