@@ -55,11 +55,9 @@ namespace Write2Congress.Shared.BusinessLayer.Services
                 enacted         enacted
                 vetoed          vetoed
              */
-            //TODO RM: make congress # dynamic
-            var query = $"115/both/bills/introduced.json";
 
+            var query = $"{_congressApiSvc.GetCurrentCongressNum()}/both/bills/introduced.json";
             var apiResult = GetApiResultFromQuery<IBill, DomainModel.ApiModels.ProPublica.BillResult.Rootobject>(_congressApiSvc, query, page, resultsperPageForSvc);
-
 
             return apiResult;
         }

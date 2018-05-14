@@ -146,7 +146,14 @@ namespace Write2Congress.Droid.CustomControls
 
         protected override void Dispose(bool disposing)
         {
-            //TODO RM: look into unregistering LegislatorSearchTextChanged
+            _legislatorAdapter = null;
+            _statesAndTerrSpinner = null;
+            _fragment = null;
+
+            _stateAndTerrNames = null;
+            _statesAndTerrWithDescription = null;
+            _legislators = null;
+
             base.Dispose(disposing);
         }
 

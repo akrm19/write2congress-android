@@ -71,8 +71,6 @@ namespace Write2Congress.Shared.BusinessLayer
         {
             query = query.ToLower();
 
-            //TODO RM: make sure title.popular & title.short are always availalbe 
-            //or check for nulls
             return billsToQuery.Where(
                 b => b.Summary.ToLower().Contains(query)
                 || b.Titles.OfficialTile.ToLower().Contains(query)
