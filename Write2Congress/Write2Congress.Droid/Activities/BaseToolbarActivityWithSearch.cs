@@ -20,9 +20,11 @@ namespace Write2Congress.Droid.Activities
     public abstract class BaseToolbarActivityWithSearch : BaseToolbarActivity, IActivityWithToolbarSearch
     {
         protected FilterDataTextChangedDelegate _filterDataTextChanged;
+        protected FilterDataTextChangedDelegate _searchTextChanged;
 
-		protected abstract int MenuItemId { get; }
-		protected abstract int FilterDataItemId { get; }		
+        protected abstract int MenuItemId { get; }
+        protected virtual int FilterDataItemId => 0;
+        protected virtual int SearchItemId =>  0;
         protected override int DrawerLayoutId => throw new NotImplementedException();
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -36,22 +38,40 @@ namespace Write2Congress.Droid.Activities
         {
             MenuInflater.Inflate(MenuItemId, menu);
 
-            using (var filterMenuItem = menu.FindItem(FilterDataItemId))
-            using (var filterView = MenuItemCompat.GetActionView(filterMenuItem))
-            using (var filterViewJavaObj = filterView.JavaCast<Android.Support.V7.Widget.SearchView>())
+            if (FilterDataItemId != 0)
             {
-                filterViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
-
-                filterViewJavaObj.QueryTextChange += (s, e) =>
+                using (var filterMenuItem = menu.FindItem(FilterDataItemId))
+                using (var filterView = MenuItemCompat.GetActionView(filterMenuItem))
+                using (var filterViewJavaObj = filterView.JavaCast<Android.Support.V7.Widget.SearchView>())
                 {
-                    _filterDataTextChanged?.Invoke(e.NewText);
-                };
+                    filterViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
 
-                filterViewJavaObj.QueryTextSubmit += (s, e) =>
+                    filterViewJavaObj.QueryTextChange += (s, e) =>
+                    {
+                        _filterDataTextChanged?.Invoke(e.NewText);
+                    };
+
+                    filterViewJavaObj.QueryTextSubmit += (s, e) =>
+                    {
+                        _filterDataTextChanged?.Invoke(e.Query);
+                        e.Handled = true;
+                    };
+                }
+            }
+
+            if(SearchItemId != 0)
+            {
+                using (var fsearchMenuItem = menu.FindItem(SearchItemId))
+                using (var searchView = MenuItemCompat.GetActionView(fsearchMenuItem))
+                using (var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>())
                 {
-                    _filterDataTextChanged?.Invoke(e.Query);
-                    e.Handled = true;
-                };
+                    searchViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterSearchCriteria);
+                    searchViewJavaObj.QueryTextSubmit += (s, e) =>
+                    {
+                        _searchTextChanged?.Invoke(e.Query);
+                        e.Handled = true;
+                    };
+                }               
             }
 
             return base.OnCreateOptionsMenu(menu);
@@ -60,6 +80,7 @@ namespace Write2Congress.Droid.Activities
         protected override void OnDestroy()
         {
             _filterDataTextChanged = null;
+            _searchTextChanged = null;
 
             base.OnDestroy();
         }
@@ -67,6 +88,17 @@ namespace Write2Congress.Droid.Activities
         public virtual void ClearFilterTextChangedDelegate()
         {
             _filterDataTextChanged = null;
+        }
+
+        public void HideToolbarSearchview()
+        {
+            if (SearchItemId != 0)
+            {
+                //TODO RM: make this use an id that is not Resource.Id.viewBillsActv_toolbar 
+                using (var toolbar =  GetSupportToolbar()) //FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.viewBillsActv_toolbar))
+                using (var search = toolbar.Menu.FindItem(SearchItemId))
+                    search.CollapseActionView();
+            }
         }
 
         public virtual FilterDataTextChangedDelegate FilterSearchTextChanged
@@ -78,6 +110,18 @@ namespace Write2Congress.Droid.Activities
             set
             {
                 _filterDataTextChanged += value;
+            }
+        }
+
+        public virtual FilterDataTextChangedDelegate SearchQuerySubmitted
+        {
+            get
+            {
+                return _searchTextChanged;
+            }
+            set
+            {
+                _searchTextChanged += value;
             }
         }
     }

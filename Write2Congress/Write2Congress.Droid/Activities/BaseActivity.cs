@@ -74,12 +74,17 @@ namespace Write2Congress.Droid.Activities
 
         #region Helpers
 
+        public Toolbar GetSupportToolbar()
+        {
+            return FindViewById<Android.Support.V7.Widget.Toolbar>(_toolbarId);
+        }
+
         public void UpdateTitleBarText(string newText)
         {
             //using (var toolbar = FindViewById<Toolbar>(_toolbarId))
             //{
                 SupportActionBar.SetDisplayShowTitleEnabled(true);
-                SupportActionBar.Title = newText;
+                SupportActionBar.Title = newText;                   
             //}
         }
 

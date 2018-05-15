@@ -5,7 +5,11 @@ namespace Write2Congress.Droid.DomainModel.Interfaces
     {
         FilterDataTextChangedDelegate FilterSearchTextChanged { get; set; }
 
-        void ClearFilterTextChangedDelegate();        
+        FilterDataTextChangedDelegate SearchQuerySubmitted { get; set; }
+
+        void ClearFilterTextChangedDelegate();
+
+        void HideToolbarSearchview();
     }
 
     //Create new delegate type

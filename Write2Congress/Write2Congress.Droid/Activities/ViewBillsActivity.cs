@@ -14,6 +14,7 @@ using Android.Widget;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.DomainModel.Enums;
+using Write2Congress.Droid.DomainModel.Interfaces;
 using Write2Congress.Droid.Fragments;
 
 namespace Write2Congress.Droid.Activities
@@ -40,25 +41,26 @@ namespace Write2Congress.Droid.Activities
             SetupNavigationMenu(Resource.Id.viewLBillsActv_navigationDrawer);
 
             _viewBillsFragCtrl = SupportFragmentManager.FindFragmentByTag(TagsType.SponsoredBillsFragment) as BillViewerFragmentCtrl;
-        
-            if(_viewBillsFragCtrl == null)
+
+            if (_viewBillsFragCtrl == null)
             {
                 var serializedLegislator = AndroidHelper.GetStringFromIntent(Intent, BundleType.Legislator);
 
-                //TODO RM: Finish implementing BillViewerFragmentCtrl for AllBillsOfEveryone
-                _viewBillsFragCtrl = BillViewerFragmentCtrl.CreateInstance(BillViewerKind.AllBillsOfEveryone);
+                _viewBillsFragCtrl = BillViewerFragmentCtrl.CreateInstance(BillViewerKind.LastestBillsForEveryone);
 
                 if (_viewBillsFragCtrl.Arguments == null)
                     _viewBillsFragCtrl.Arguments = new Bundle();
 
                 _viewBillsFragCtrl.Arguments.PutString(BundleType.Legislator, serializedLegislator);
 
-                AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);                
+                AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);
             }
         }
 
         protected override int MenuItemId => Resource.Menu.menu_viewBills;
 
         protected override int SearchItemId => Resource.Id.viewBills_search;
+
+        protected override int FilterDataItemId => Resource.Id.viewBills_filter;
     }
 }
