@@ -55,6 +55,8 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
+        //TODO RM: Does this need to bw removed
+        /*
         private void ActionMenu_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
         {
             switch (e.Item.ItemId)
@@ -64,14 +66,13 @@ namespace Write2Congress.Droid.Activities
                     break;
             }
         }
+        */
+
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
             {
-                //case Resource.Id.mainMenu_writeNew:
-                //    AppHelper.StartWriteNewLetterIntent(this, BundleSenderKind.LegislatorViewer);
-                //    return true;
                 case Resource.Id.mainMenu_refresh:
                     UpdateLegislatorsWithPrompt();
                     return true;

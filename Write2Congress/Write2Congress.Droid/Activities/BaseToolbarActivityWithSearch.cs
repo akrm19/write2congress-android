@@ -94,8 +94,7 @@ namespace Write2Congress.Droid.Activities
         {
             if (SearchItemId != 0)
             {
-                //TODO RM: make this use an id that is not Resource.Id.viewBillsActv_toolbar 
-                using (var toolbar =  GetSupportToolbar()) //FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.viewBillsActv_toolbar))
+                using (var toolbar =  GetSupportToolbar())
                 using (var search = toolbar.Menu.FindItem(SearchItemId))
                     search.CollapseActionView();
             }
