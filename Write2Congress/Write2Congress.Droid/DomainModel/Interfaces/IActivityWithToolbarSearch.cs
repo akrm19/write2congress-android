@@ -7,6 +7,7 @@ namespace Write2Congress.Droid.DomainModel.Interfaces
         FilterDataTextChangedDelegate SearchQuerySubmitted { get; set; }
         ToolbarMenuItemClickedDelegate ExitSearchClicked { get; set; }
         ToolbarMenuItemClickedDelegate FilterSearchviewCollapsed { get; set; }
+        ToolbarMenuItemClickedDelegate SearchSearchviewCollapsed { get; set; }
 
         void ClearFilterTextChangedDelegate();
 

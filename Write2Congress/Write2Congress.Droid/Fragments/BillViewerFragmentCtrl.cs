@@ -86,9 +86,10 @@ namespace Write2Congress.Droid.Fragments
             if (_viewerMode == BillViewerKind.LastestBillsForEveryone)
             {
                 GetBaseActivityWithToolbarSearch().FilterSearchTextChanged += FilterBills;
+				GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed += HandleFilterMenuItemCollapsed;
+                GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed += HandleSearchMenuItemCollapsed;
                 GetBaseActivityWithToolbarSearch().SearchQuerySubmitted += FetchBillsSearchResults;
                 GetBaseActivityWithToolbarSearch().ExitSearchClicked += HandleExitSearchviewClicked;
-                GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed += HandleFilterMenuItemCollapsed;
             }
 
             SetLoadingUi();
@@ -212,6 +213,11 @@ namespace Write2Congress.Droid.Fragments
             GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.latestBills));
 
             ShowBills(_latestBills, _isThereMoreVotes);
+        }
+
+        private void HandleSearchMenuItemCollapsed()
+        {
+            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(true);
         }
 
         private void HandleFilterMenuItemCollapsed()

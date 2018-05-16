@@ -24,7 +24,7 @@ namespace Write2Congress.Droid.Activities
         protected FilterDataTextChangedDelegate _searchTextChanged;
         protected ToolbarMenuItemClickedDelegate _exitSearchClicked;
         protected ToolbarMenuItemClickedDelegate _filterSearchviewCollapsed;
-
+        protected ToolbarMenuItemClickedDelegate _searchSearchviewCollapsed;
 
         protected abstract int MenuItemId { get; }
         protected virtual int FilterDataItemId => 0;
@@ -63,15 +63,14 @@ namespace Write2Congress.Droid.Activities
                         e.Handled = true;
                     };
 
-                    //TODO RM: Consier using 'using'
                     var onCollapseListener = new OnActionExpandListener();
                     onCollapseListener.MenuItemCollaspe += (sender, e) =>
-                    {
-                        _filterSearchviewCollapsed?.Invoke();
-                        e.Handled = true;
-                    };
+                        {
+                            _filterSearchviewCollapsed?.Invoke();
+                            e.Handled = true;
+                        };
 
-                    Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
+					Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
                 }
             }
 
@@ -87,6 +86,15 @@ namespace Write2Congress.Droid.Activities
                         _searchTextChanged?.Invoke(e.Query);
                         e.Handled = true;
                     };
+
+                    var onSearchCollapsedListener = new OnActionExpandListener();
+                    onSearchCollapsedListener.MenuItemCollaspe += (sender, e) => 
+                        {
+                            _searchSearchviewCollapsed?.Invoke();
+                            e.Handled = true;
+                        };
+
+					MenuItemCompat.SetOnActionExpandListener(searchMenuItem, onSearchCollapsedListener);
                 }               
             }
 
@@ -99,6 +107,7 @@ namespace Write2Congress.Droid.Activities
             _searchTextChanged = null;
             _exitSearchClicked = null;
             _filterSearchviewCollapsed = null;
+            _searchSearchviewCollapsed = null;
 
             base.OnDestroy();
         }
@@ -182,13 +191,21 @@ namespace Write2Congress.Droid.Activities
 
         public virtual ToolbarMenuItemClickedDelegate FilterSearchviewCollapsed
         {
-            get
-            {
-                return _filterSearchviewCollapsed;
-            }
+            get => _filterSearchviewCollapsed;
+
             set
             {
                 _filterSearchviewCollapsed += value;
+            }
+        }
+
+        public virtual ToolbarMenuItemClickedDelegate SearchSearchviewCollapsed
+        {
+            get => _searchSearchviewCollapsed; 
+
+            set
+            {
+                _searchSearchviewCollapsed += value;
             }
         }
     }
