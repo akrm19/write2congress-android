@@ -12,10 +12,8 @@ using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
 using Write2Congress.Droid.Code;
+using Write2Congress.Droid.DomainModel.Delegates;
 using Write2Congress.Droid.DomainModel.Interfaces;
-
-//TODO RM: move this
-using static Write2Congress.Droid.Activities.OnActionExpandListener;
 
 namespace Write2Congress.Droid.Activities
 {
@@ -65,6 +63,7 @@ namespace Write2Congress.Droid.Activities
                         e.Handled = true;
                     };
 
+                    //TODO RM: Consier using 'using'
                     var onCollapseListener = new OnActionExpandListener();
                     onCollapseListener.MenuItemCollaspe += (sender, e) =>
                     {
@@ -191,50 +190,6 @@ namespace Write2Congress.Droid.Activities
             {
                 _filterSearchviewCollapsed += value;
             }
-        }
-    }
-
-    //Taken from https://gist.github.com/furi2/8796163
-    public class OnActionExpandListener : Java.Lang.Object, Android.Support.V4.View.MenuItemCompat.IOnActionExpandListener
-    {
-
-        public class MenuItemEventArg : EventArgs
-        {
-            public IMenuItem MenuItem { get; set; }
-            public bool Handled { get; set; }
-
-            public MenuItemEventArg()
-            {
-                Handled = false;
-            }
-        }
-        public delegate void MenuItemEventHandler(object sender, MenuItemEventArg e);
-
-        public event MenuItemEventHandler MenuItemCollaspe;
-        public event MenuItemEventHandler MenuItemActionExpand;
-
-        public bool OnMenuItemActionCollapse(IMenuItem item)
-        {
-            if (MenuItemCollaspe != null)
-            {
-                MenuItemEventArg e = new MenuItemEventArg();
-                e.MenuItem = item;
-                MenuItemCollaspe(this, e);
-                return e.Handled;
-            }
-            return true;
-        }
-
-        public bool OnMenuItemActionExpand(IMenuItem item)
-        {
-            if (MenuItemActionExpand != null)
-            {
-                MenuItemEventArg e = new MenuItemEventArg();
-                e.MenuItem = item;
-                MenuItemActionExpand(this, e);
-                return e.Handled;
-            }
-            return true;
         }
     }
 }

@@ -187,6 +187,7 @@
     <Compile Include="Activities\ViewBillsActivity.cs" />
     <Compile Include="Activities\BaseToolbarActivityWithSearch.cs" />
     <Compile Include="DomainModel\Interfaces\IActivityWithToolbarSearch.cs" />
+    <Compile Include="DomainModel\Delegates\OnActionExpandListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
