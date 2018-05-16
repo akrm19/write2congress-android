@@ -204,10 +204,6 @@ namespace Write2Congress.Droid.Fragments
 
         private void HandleExitSearchviewClicked()
         {
-            //GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(false);
-            //GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(true);
-            //GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(true);
-
             _billSearchResults = null;
             _lastSearchTerm = string.Empty;
             billSearchResultsCurrentPage = 1;

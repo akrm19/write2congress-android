@@ -73,40 +73,6 @@ namespace Write2Congress.Droid.Activities
                     };
 
                     Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
-
-                    /*
-                    var onAcrtionCloseListner = new OnActionCloseListener();
-                    onAcrtionCloseListner.MenuItemClose += () =>{
-                        SetToolbarSearchviewVisibility(true);
-                    };
-
-                    filterViewJavaObj.SetOnCloseListener(onAcrtionCloseListner);
-
-                    filterViewJavaObj.Close += (sender, e) => 
-                    {
-                        SetToolbarSearchviewVisibility(true);
-                    };
-
-                    filterView.Click += (sender, e) => 
-                    {
-                        SetToolbarSearchviewVisibility(true);
-                    };
-
-                    filterView.KeyPress += (sender, e) => 
-                    {
-                        SetToolbarSearchviewVisibility(true);
-                    };
-
-                    filterViewJavaObj.Click += (sender, e) => 
-                    {
-                        SetToolbarSearchviewVisibility(true);
-                    };
-
-                    filterViewJavaObj.KeyPress += (sender, e) => 
-                    {
-                        SetToolbarSearchviewVisibility(true);
-                    };
-                    */
                 }
             }
 
@@ -124,7 +90,6 @@ namespace Write2Congress.Droid.Activities
                     };
                 }               
             }
-
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -272,34 +237,4 @@ namespace Write2Congress.Droid.Activities
             return true;
         }
     }
-
-    /*
-    public class MyOnExpandMenuItemOrCollapseListener : Java.Lang.Object, Android.Views.IMenuItemOnActionExpandListener
-    {
-        public bool OnMenuItemActionCollapse(IMenuItem item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool OnMenuItemActionExpand(IMenuItem item)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    //public class OnActionCloseListener : Java.Lang.Object, Android.Support.V7.Widget.SearchView.IOnCloseListener // Android.Support.V4.View.MenuItemCompat.IOnActionExpandListener
-    public class OnActionCloseListener : Java.Lang.Object, Android.Support.V7.Widget.SearchView.IOnCloseListener
-    {
-        public delegate void MenuItemEventHandler();
-
-        public event MenuItemEventHandler MenuItemClose;
-
-        public bool OnClose()
-        {
-            MenuItemClose?.Invoke();
-
-            return true;
-        }
-    }
-    */
 }
