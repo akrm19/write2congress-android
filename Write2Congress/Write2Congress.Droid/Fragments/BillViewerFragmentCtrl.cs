@@ -85,8 +85,10 @@ namespace Write2Congress.Droid.Fragments
 
             if (_viewerMode == BillViewerKind.LastestBillsForEveryone)
             {
-                (GetBaseActivity() as IActivityWithToolbarSearch).FilterSearchTextChanged += FilterBills;
-                (GetBaseActivity() as IActivityWithToolbarSearch).SearchQuerySubmitted += FetchBillsSearchResults;
+                GetBaseActivityWithToolbarSearch().FilterSearchTextChanged += FilterBills;
+                GetBaseActivityWithToolbarSearch().SearchQuerySubmitted += FetchBillsSearchResults;
+                GetBaseActivityWithToolbarSearch().ExitSearchClicked += HandleExitSearchviewClicked;
+                GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed += HandleFilterMenuItemCollapsed;
             }
 
             SetLoadingUi();
@@ -184,11 +186,50 @@ namespace Write2Congress.Droid.Fragments
                         GetBaseActivity().UpdateTitleBarText(newTitle);
                     }
 
-                    (GetBaseActivity() as IActivityWithToolbarSearch).HideToolbarSearchview();
+                    SetToolbarForSearchResultReturned();
                 });
             });
 
             getBillsTask.Start();
+        }
+
+        protected void SetToolbarForSearchResultReturned()
+        {
+            //TODO RM: Use using ?
+            GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
+			GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(true);
+            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
+            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(false);
+        }
+
+        private void HandleExitSearchviewClicked()
+        {
+            //GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(false);
+            //GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(true);
+            //GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(true);
+
+            _billSearchResults = null;
+            _lastSearchTerm = string.Empty;
+            billSearchResultsCurrentPage = 1;
+
+            _viewerMode = BillViewerKind.LastestBillsForEveryone;
+            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.latestBills));
+
+            ShowBills(_latestBills, _isThereMoreVotes);
+        }
+
+        private void HandleFilterMenuItemCollapsed()
+        {
+            if(_viewerMode == BillViewerKind.LastestBillsForEveryone)
+            {
+                GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(false);
+                GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(true);
+            }
+            else if(_viewerMode == BillViewerKind.BillSearch)
+            {
+                GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
+                GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(false);
+            }
         }
 
         protected override void FetchMoreLegislatorContent(bool isNextClick)
@@ -232,7 +273,7 @@ namespace Write2Congress.Droid.Fragments
                         ShowBills(_latestBills, _isThereMoreVotes);
 
                         if(_viewerMode == BillViewerKind.LastestBillsForEveryone)
-                            GetBaseActivity().UpdateTitleBarText("Latest Bills");
+                            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.latestBills));
                     }
                 });
             });
@@ -361,6 +402,11 @@ namespace Write2Congress.Droid.Fragments
                 (recyclerAdapter as BillAdapter).UpdateBill(bills);
                 SetLoadingUiOff();
             }
+        }
+
+        private IActivityWithToolbarSearch GetBaseActivityWithToolbarSearch()
+        {
+            return (GetBaseActivity() as IActivityWithToolbarSearch);
         }
     }
 }

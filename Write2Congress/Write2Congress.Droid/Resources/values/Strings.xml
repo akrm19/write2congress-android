@@ -39,10 +39,12 @@
   <string name="emptySubjectText">Subject (optional)</string>
   <string name="emptyVotesText">No Votes</string>
   <string name="exit">Exit</string>
+  <string name="exitSearch">Exit Search</string>
   <string name="feedback">Feedback</string>
   <string name="lastAction">Last Action</string>
   <string name="lastActionDate">Last Action Date</string>
   <string name="lastSaved">Last saved</string>
+  <string name="latestBills">Latest Bills</string>
   <string name="legislators">Legislators</string>
   <string name="legislatorDataSuccessfullyUpdated">The legislator data was successfully updated</string>
   <string name="letterAutoSaved">Letter auto-saved</string>

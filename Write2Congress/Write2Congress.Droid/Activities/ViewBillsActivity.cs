@@ -57,10 +57,37 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch(item.ItemId)
+            {
+                case Resource.Id.viewBills_exitSearch:
+                    item.SetVisible(false);
+                    SetToolbarSearchviewVisibility(true);
+                    SetToolbarFilterviewVisibility(true);
+                    _exitSearchClicked?.Invoke();
+                    break;
+                case Resource.Id.viewBills_search:
+                    SetToolbarFilterviewVisibility(false);
+                    SetToolbarExitSearchviewVisibility(false);
+                    break;
+                case Resource.Id.viewBills_filter:
+                    SetToolbarSearchviewVisibility(false);
+                    SetToolbarExitSearchviewVisibility(false);
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
+
+
         protected override int MenuItemId => Resource.Menu.menu_viewBills;
 
         protected override int SearchItemId => Resource.Id.viewBills_search;
 
         protected override int FilterDataItemId => Resource.Id.viewBills_filter;
+
+        protected override int ExitSearchItemId => Resource.Id.viewBills_exitSearch;
     }
 }

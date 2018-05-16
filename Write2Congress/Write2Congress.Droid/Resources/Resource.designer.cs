@@ -3476,11 +3476,14 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c0089
 			public const int viewBillsActv_toolbar = 2131493001;
 			
-			// aapt resource value: 0x7f0c013e
-			public const int viewBills_filter = 2131493182;
-			
 			// aapt resource value: 0x7f0c013d
-			public const int viewBills_search = 2131493181;
+			public const int viewBills_exitSearch = 2131493181;
+			
+			// aapt resource value: 0x7f0c013f
+			public const int viewBills_filter = 2131493183;
+			
+			// aapt resource value: 0x7f0c013e
+			public const int viewBills_search = 2131493182;
 			
 			// aapt resource value: 0x7f0c008b
 			public const int viewLBillsActv_navigationDrawer = 2131493003;
@@ -3602,8 +3605,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c010a
 			public const int viewLettersFrag_viewSwitcher = 2131493130;
 			
-			// aapt resource value: 0x7f0c013f
-			public const int viewLettersMenu_refresh = 2131493183;
+			// aapt resource value: 0x7f0c0140
+			public const int viewLettersMenu_refresh = 2131493184;
 			
 			// aapt resource value: 0x7f0c0002
 			public const int view_offset_helper = 2131492866;
@@ -3680,17 +3683,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c010f
 			public const int writeLetterFrag_subject = 2131493135;
 			
+			// aapt resource value: 0x7f0c0144
+			public const int writeLetterMenu_copyToClipboard = 2131493188;
+			
 			// aapt resource value: 0x7f0c0143
-			public const int writeLetterMenu_copyToClipboard = 2131493187;
+			public const int writeLetterMenu_delete = 2131493187;
 			
 			// aapt resource value: 0x7f0c0142
-			public const int writeLetterMenu_delete = 2131493186;
+			public const int writeLetterMenu_save = 2131493186;
 			
 			// aapt resource value: 0x7f0c0141
-			public const int writeLetterMenu_save = 2131493185;
-			
-			// aapt resource value: 0x7f0c0140
-			public const int writeLetterMenu_send = 2131493184;
+			public const int writeLetterMenu_send = 2131493185;
 			
 			static Id()
 			{
@@ -4339,64 +4342,70 @@ namespace Write2Congress.Droid
 			public const int exit = 2131361890;
 			
 			// aapt resource value: 0x7f0a0063
-			public const int feedback = 2131361891;
+			public const int exitSearch = 2131361891;
 			
 			// aapt resource value: 0x7f0a0064
-			public const int lastAction = 2131361892;
+			public const int feedback = 2131361892;
 			
 			// aapt resource value: 0x7f0a0065
-			public const int lastActionDate = 2131361893;
+			public const int lastAction = 2131361893;
 			
 			// aapt resource value: 0x7f0a0066
-			public const int lastSaved = 2131361894;
-			
-			// aapt resource value: 0x7f0a0068
-			public const int legislatorDataSuccessfullyUpdated = 2131361896;
+			public const int lastActionDate = 2131361894;
 			
 			// aapt resource value: 0x7f0a0067
-			public const int legislators = 2131361895;
+			public const int lastSaved = 2131361895;
 			
-			// aapt resource value: 0x7f0a0069
-			public const int letterAutoSaved = 2131361897;
+			// aapt resource value: 0x7f0a0068
+			public const int latestBills = 2131361896;
 			
 			// aapt resource value: 0x7f0a006a
-			public const int letterCopied = 2131361898;
+			public const int legislatorDataSuccessfullyUpdated = 2131361898;
+			
+			// aapt resource value: 0x7f0a0069
+			public const int legislators = 2131361897;
 			
 			// aapt resource value: 0x7f0a006b
-			public const int letterCopiedToClipboard = 2131361899;
-			
-			// aapt resource value: 0x7f0a006d
-			public const int letterDeleteFailed = 2131361901;
+			public const int letterAutoSaved = 2131361899;
 			
 			// aapt resource value: 0x7f0a006c
-			public const int letterDeleted = 2131361900;
+			public const int letterCopied = 2131361900;
 			
-			// aapt resource value: 0x7f0a006e
-			public const int letterRecipient = 2131361902;
-			
-			// aapt resource value: 0x7f0a0070
-			public const int letterSaveFailed = 2131361904;
+			// aapt resource value: 0x7f0a006d
+			public const int letterCopiedToClipboard = 2131361901;
 			
 			// aapt resource value: 0x7f0a006f
-			public const int letterSaved = 2131361903;
+			public const int letterDeleteFailed = 2131361903;
 			
-			// aapt resource value: 0x7f0a0071
-			public const int loadMore = 2131361905;
+			// aapt resource value: 0x7f0a006e
+			public const int letterDeleted = 2131361902;
+			
+			// aapt resource value: 0x7f0a0070
+			public const int letterRecipient = 2131361904;
 			
 			// aapt resource value: 0x7f0a0072
-			public const int loading = 2131361906;
+			public const int letterSaveFailed = 2131361906;
+			
+			// aapt resource value: 0x7f0a0071
+			public const int letterSaved = 2131361905;
 			
 			// aapt resource value: 0x7f0a0073
-			public const int moreInfo = 2131361907;
+			public const int loadMore = 2131361907;
 			
 			// aapt resource value: 0x7f0a0074
-			public const int nominationInfo = 2131361908;
+			public const int loading = 2131361908;
 			
 			// aapt resource value: 0x7f0a0075
-			public const int ok = 2131361909;
+			public const int moreInfo = 2131361909;
 			
 			// aapt resource value: 0x7f0a0076
-			public const int party = 2131361910;
+			public const int nominationInfo = 2131361910;
+			
+			// aapt resource value: 0x7f0a0077
+			public const int ok = 2131361911;
+			
+			// aapt resource value: 0x7f0a0078
+			public const int party = 2131361912;
 			
 			// aapt resource value: 0x7f0a0005
 			public const int password_toggle_content_description = 2131361797;
@@ -4413,101 +4422,101 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0a0009
 			public const int path_password_strike_through = 2131361801;
 			
-			// aapt resource value: 0x7f0a0077
-			public const int phone = 2131361911;
-			
-			// aapt resource value: 0x7f0a0078
-			public const int refresh = 2131361912;
-			
 			// aapt resource value: 0x7f0a0079
-			public const int save = 2131361913;
+			public const int phone = 2131361913;
 			
 			// aapt resource value: 0x7f0a007a
-			public const int searchBills = 2131361914;
+			public const int refresh = 2131361914;
 			
 			// aapt resource value: 0x7f0a007b
-			public const int searchLegislators = 2131361915;
+			public const int save = 2131361915;
+			
+			// aapt resource value: 0x7f0a007c
+			public const int searchBills = 2131361916;
+			
+			// aapt resource value: 0x7f0a007d
+			public const int searchLegislators = 2131361917;
 			
 			// aapt resource value: 0x7f0a002e
 			public const int search_menu_title = 2131361838;
 			
-			// aapt resource value: 0x7f0a007c
-			public const int senate = 2131361916;
-			
-			// aapt resource value: 0x7f0a007d
-			public const int send = 2131361917;
-			
 			// aapt resource value: 0x7f0a007e
-			public const int sent = 2131361918;
+			public const int senate = 2131361918;
 			
 			// aapt resource value: 0x7f0a007f
-			public const int sentLetters = 2131361919;
+			public const int send = 2131361919;
 			
 			// aapt resource value: 0x7f0a0080
-			public const int settings = 2131361920;
+			public const int sent = 2131361920;
 			
 			// aapt resource value: 0x7f0a0081
-			public const int signature = 2131361921;
-			
-			// aapt resource value: 0x7f0a0083
-			public const int signatureDefaultValue = 2131361923;
+			public const int sentLetters = 2131361921;
 			
 			// aapt resource value: 0x7f0a0082
-			public const int signatureSummary = 2131361922;
+			public const int settings = 2131361922;
 			
-			// aapt resource value: 0x7f0a0084
-			public const int status = 2131361924;
+			// aapt resource value: 0x7f0a0083
+			public const int signature = 2131361923;
 			
 			// aapt resource value: 0x7f0a0085
-			public const int statusDate = 2131361925;
+			public const int signatureDefaultValue = 2131361925;
+			
+			// aapt resource value: 0x7f0a0084
+			public const int signatureSummary = 2131361924;
+			
+			// aapt resource value: 0x7f0a0086
+			public const int status = 2131361926;
+			
+			// aapt resource value: 0x7f0a0087
+			public const int statusDate = 2131361927;
 			
 			// aapt resource value: 0x7f0a002f
 			public const int status_bar_notification_info_overflow = 2131361839;
 			
-			// aapt resource value: 0x7f0a0086
-			public const int subcommitte = 2131361926;
-			
-			// aapt resource value: 0x7f0a0087
-			public const int subject = 2131361927;
-			
 			// aapt resource value: 0x7f0a0088
-			public const int summary = 2131361928;
+			public const int subcommitte = 2131361928;
 			
 			// aapt resource value: 0x7f0a0089
-			public const int termEnds = 2131361929;
+			public const int subject = 2131361929;
 			
 			// aapt resource value: 0x7f0a008a
-			public const int termStarted = 2131361930;
+			public const int summary = 2131361930;
 			
 			// aapt resource value: 0x7f0a008b
-			public const int tryAgain = 2131361931;
+			public const int termEnds = 2131361931;
 			
 			// aapt resource value: 0x7f0a008c
-			public const int unableToCopyLetter = 2131361932;
+			public const int termStarted = 2131361932;
 			
 			// aapt resource value: 0x7f0a008d
-			public const int unableToCopyLetterToClipboard = 2131361933;
+			public const int tryAgain = 2131361933;
 			
 			// aapt resource value: 0x7f0a008e
-			public const int unableToDeleteLetter = 2131361934;
+			public const int unableToCopyLetter = 2131361934;
 			
 			// aapt resource value: 0x7f0a008f
-			public const int unableToProcessAction = 2131361935;
+			public const int unableToCopyLetterToClipboard = 2131361935;
 			
 			// aapt resource value: 0x7f0a0090
-			public const int unableToRetrieveData = 2131361936;
+			public const int unableToDeleteLetter = 2131361936;
 			
 			// aapt resource value: 0x7f0a0091
-			public const int unableToUpdateLegislatorData = 2131361937;
+			public const int unableToProcessAction = 2131361937;
 			
 			// aapt resource value: 0x7f0a0092
-			public const int unknown = 2131361938;
+			public const int unableToRetrieveData = 2131361938;
 			
 			// aapt resource value: 0x7f0a0093
-			public const int updatedDraftLetters = 2131361939;
+			public const int unableToUpdateLegislatorData = 2131361939;
 			
 			// aapt resource value: 0x7f0a0094
-			public const int updatedSentLetters = 2131361940;
+			public const int unknown = 2131361940;
+			
+			// aapt resource value: 0x7f0a0095
+			public const int updatedDraftLetters = 2131361941;
+			
+			// aapt resource value: 0x7f0a0096
+			public const int updatedSentLetters = 2131361942;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int v7_preference_off = 2131361792;
@@ -4515,44 +4524,44 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0a0001
 			public const int v7_preference_on = 2131361793;
 			
-			// aapt resource value: 0x7f0a0095
-			public const int verifyUpdateOfLegislatorData = 2131361941;
-			
-			// aapt resource value: 0x7f0a0096
-			public const int verifyUpdateOfLegislatorDataLastUpdate = 2131361942;
-			
 			// aapt resource value: 0x7f0a0097
-			public const int verifyUpdateOfLegislatorDataWarning = 2131361943;
+			public const int verifyUpdateOfLegislatorData = 2131361943;
 			
 			// aapt resource value: 0x7f0a0098
-			public const int voteResult = 2131361944;
-			
-			// aapt resource value: 0x7f0a009d
-			public const int voteType = 2131361949;
+			public const int verifyUpdateOfLegislatorDataLastUpdate = 2131361944;
 			
 			// aapt resource value: 0x7f0a0099
-			public const int votes = 2131361945;
+			public const int verifyUpdateOfLegislatorDataWarning = 2131361945;
 			
 			// aapt resource value: 0x7f0a009a
-			public const int votesMissedPercent = 2131361946;
-			
-			// aapt resource value: 0x7f0a009b
-			public const int votesTotal = 2131361947;
-			
-			// aapt resource value: 0x7f0a009c
-			public const int votesWithPartyPercent = 2131361948;
-			
-			// aapt resource value: 0x7f0a009e
-			public const int website = 2131361950;
+			public const int voteResult = 2131361946;
 			
 			// aapt resource value: 0x7f0a009f
-			public const int writeLetter = 2131361951;
+			public const int voteType = 2131361951;
 			
-			// aapt resource value: 0x7f0a00a1
-			public const int writeNew = 2131361953;
+			// aapt resource value: 0x7f0a009b
+			public const int votes = 2131361947;
+			
+			// aapt resource value: 0x7f0a009c
+			public const int votesMissedPercent = 2131361948;
+			
+			// aapt resource value: 0x7f0a009d
+			public const int votesTotal = 2131361949;
+			
+			// aapt resource value: 0x7f0a009e
+			public const int votesWithPartyPercent = 2131361950;
 			
 			// aapt resource value: 0x7f0a00a0
-			public const int writeNewLetterTitle = 2131361952;
+			public const int website = 2131361952;
+			
+			// aapt resource value: 0x7f0a00a1
+			public const int writeLetter = 2131361953;
+			
+			// aapt resource value: 0x7f0a00a3
+			public const int writeNew = 2131361955;
+			
+			// aapt resource value: 0x7f0a00a2
+			public const int writeNewLetterTitle = 2131361954;
 			
 			static String()
 			{

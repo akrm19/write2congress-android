@@ -14,6 +14,9 @@ using Android.Widget;
 using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Interfaces;
 
+//TODO RM: move this
+using static Write2Congress.Droid.Activities.OnActionExpandListener;
+
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "BaseToolbarActivityWithSearch")]
@@ -21,10 +24,14 @@ namespace Write2Congress.Droid.Activities
     {
         protected FilterDataTextChangedDelegate _filterDataTextChanged;
         protected FilterDataTextChangedDelegate _searchTextChanged;
+        protected ToolbarMenuItemClickedDelegate _exitSearchClicked;
+        protected ToolbarMenuItemClickedDelegate _filterSearchviewCollapsed;
+
 
         protected abstract int MenuItemId { get; }
         protected virtual int FilterDataItemId => 0;
         protected virtual int SearchItemId =>  0;
+        protected virtual int ExitSearchItemId => 0;
         protected override int DrawerLayoutId => throw new NotImplementedException();
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -49,6 +56,7 @@ namespace Write2Congress.Droid.Activities
                     filterViewJavaObj.QueryTextChange += (s, e) =>
                     {
                         _filterDataTextChanged?.Invoke(e.NewText);
+                        e.Handled = true;
                     };
 
                     filterViewJavaObj.QueryTextSubmit += (s, e) =>
@@ -56,13 +64,56 @@ namespace Write2Congress.Droid.Activities
                         _filterDataTextChanged?.Invoke(e.Query);
                         e.Handled = true;
                     };
+
+                    var onCollapseListener = new OnActionExpandListener();
+                    onCollapseListener.MenuItemCollaspe += (sender, e) =>
+                    {
+                        _filterSearchviewCollapsed?.Invoke();
+                        e.Handled = true;
+                    };
+
+                    Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
+
+                    /*
+                    var onAcrtionCloseListner = new OnActionCloseListener();
+                    onAcrtionCloseListner.MenuItemClose += () =>{
+                        SetToolbarSearchviewVisibility(true);
+                    };
+
+                    filterViewJavaObj.SetOnCloseListener(onAcrtionCloseListner);
+
+                    filterViewJavaObj.Close += (sender, e) => 
+                    {
+                        SetToolbarSearchviewVisibility(true);
+                    };
+
+                    filterView.Click += (sender, e) => 
+                    {
+                        SetToolbarSearchviewVisibility(true);
+                    };
+
+                    filterView.KeyPress += (sender, e) => 
+                    {
+                        SetToolbarSearchviewVisibility(true);
+                    };
+
+                    filterViewJavaObj.Click += (sender, e) => 
+                    {
+                        SetToolbarSearchviewVisibility(true);
+                    };
+
+                    filterViewJavaObj.KeyPress += (sender, e) => 
+                    {
+                        SetToolbarSearchviewVisibility(true);
+                    };
+                    */
                 }
             }
 
             if(SearchItemId != 0)
             {
-                using (var fsearchMenuItem = menu.FindItem(SearchItemId))
-                using (var searchView = MenuItemCompat.GetActionView(fsearchMenuItem))
+                using (var searchMenuItem = menu.FindItem(SearchItemId))
+                using (var searchView = MenuItemCompat.GetActionView(searchMenuItem))
                 using (var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>())
                 {
                     searchViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterSearchCriteria);
@@ -74,6 +125,7 @@ namespace Write2Congress.Droid.Activities
                 }               
             }
 
+
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -81,6 +133,8 @@ namespace Write2Congress.Droid.Activities
         {
             _filterDataTextChanged = null;
             _searchTextChanged = null;
+            _exitSearchClicked = null;
+            _filterSearchviewCollapsed = null;
 
             base.OnDestroy();
         }
@@ -90,13 +144,38 @@ namespace Write2Congress.Droid.Activities
             _filterDataTextChanged = null;
         }
 
-        public void HideToolbarSearchview()
+        public void CollapseToolbarSearchview()
         {
             if (SearchItemId != 0)
             {
-                using (var toolbar =  GetSupportToolbar())
-                using (var search = toolbar.Menu.FindItem(SearchItemId))
-                    search.CollapseActionView();
+                using (var toolbar = GetSupportToolbar())
+                using (var menuItem = toolbar.Menu.FindItem(SearchItemId))
+                    menuItem.CollapseActionView();
+            }            
+        }
+
+        public void SetToolbarExitSearchviewVisibility(bool setAsVisible)
+        {
+            SetMenuItemsVisibility(ExitSearchItemId, setAsVisible);
+        }
+
+		public void SetToolbarSearchviewVisibility(bool setAsVisible)
+		{
+			SetMenuItemsVisibility(SearchItemId, setAsVisible);
+		}
+
+        public void SetToolbarFilterviewVisibility(bool setAsVisible)
+        {
+            SetMenuItemsVisibility(FilterDataItemId, setAsVisible);
+        }
+
+        protected void SetMenuItemsVisibility(int menuItemId, bool setAsVisible)
+        {
+            if (menuItemId != 0)
+            {
+                using (var toolbar = GetSupportToolbar())
+                using (var menuItem = toolbar.Menu.FindItem(menuItemId))
+                    menuItem.SetVisible(setAsVisible);
             }
         }
 
@@ -123,5 +202,104 @@ namespace Write2Congress.Droid.Activities
                 _searchTextChanged += value;
             }
         }
+
+        public virtual ToolbarMenuItemClickedDelegate ExitSearchClicked
+        {
+            get
+            {
+                return _exitSearchClicked;
+            }
+            set
+            {
+                _exitSearchClicked += value;
+            }
+        }
+
+
+        public virtual ToolbarMenuItemClickedDelegate FilterSearchviewCollapsed
+        {
+            get
+            {
+                return _filterSearchviewCollapsed;
+            }
+            set
+            {
+                _filterSearchviewCollapsed += value;
+            }
+        }
     }
+
+    //Taken from https://gist.github.com/furi2/8796163
+    public class OnActionExpandListener : Java.Lang.Object, Android.Support.V4.View.MenuItemCompat.IOnActionExpandListener
+    {
+
+        public class MenuItemEventArg : EventArgs
+        {
+            public IMenuItem MenuItem { get; set; }
+            public bool Handled { get; set; }
+
+            public MenuItemEventArg()
+            {
+                Handled = false;
+            }
+        }
+        public delegate void MenuItemEventHandler(object sender, MenuItemEventArg e);
+
+        public event MenuItemEventHandler MenuItemCollaspe;
+        public event MenuItemEventHandler MenuItemActionExpand;
+
+        public bool OnMenuItemActionCollapse(IMenuItem item)
+        {
+            if (MenuItemCollaspe != null)
+            {
+                MenuItemEventArg e = new MenuItemEventArg();
+                e.MenuItem = item;
+                MenuItemCollaspe(this, e);
+                return e.Handled;
+            }
+            return true;
+        }
+
+        public bool OnMenuItemActionExpand(IMenuItem item)
+        {
+            if (MenuItemActionExpand != null)
+            {
+                MenuItemEventArg e = new MenuItemEventArg();
+                e.MenuItem = item;
+                MenuItemActionExpand(this, e);
+                return e.Handled;
+            }
+            return true;
+        }
+    }
+
+    /*
+    public class MyOnExpandMenuItemOrCollapseListener : Java.Lang.Object, Android.Views.IMenuItemOnActionExpandListener
+    {
+        public bool OnMenuItemActionCollapse(IMenuItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnMenuItemActionExpand(IMenuItem item)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    //public class OnActionCloseListener : Java.Lang.Object, Android.Support.V7.Widget.SearchView.IOnCloseListener // Android.Support.V4.View.MenuItemCompat.IOnActionExpandListener
+    public class OnActionCloseListener : Java.Lang.Object, Android.Support.V7.Widget.SearchView.IOnCloseListener
+    {
+        public delegate void MenuItemEventHandler();
+
+        public event MenuItemEventHandler MenuItemClose;
+
+        public bool OnClose()
+        {
+            MenuItemClose?.Invoke();
+
+            return true;
+        }
+    }
+    */
 }
