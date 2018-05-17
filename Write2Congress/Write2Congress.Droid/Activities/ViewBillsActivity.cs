@@ -40,7 +40,7 @@ namespace Write2Congress.Droid.Activities
             SetupToolbar(Resource.Id.viewBillsActv_toolbar);
             SetupNavigationMenu(Resource.Id.viewLBillsActv_navigationDrawer);
 
-            _viewBillsFragCtrl = SupportFragmentManager.FindFragmentByTag(TagsType.SponsoredBillsFragment) as BillViewerFragmentCtrl;
+            _viewBillsFragCtrl = SupportFragmentManager.FindFragmentByTag(TagsType.ViewBillsFragment) as BillViewerFragmentCtrl;
 
             if (_viewBillsFragCtrl == null)
             {
@@ -79,8 +79,6 @@ namespace Write2Congress.Droid.Activities
 
             return base.OnOptionsItemSelected(item);
         }
-
-
 
         protected override int MenuItemId => Resource.Menu.menu_viewBills;
 
