@@ -22,8 +22,6 @@ namespace Write2Congress.Droid.Activities
     [Activity(Label = "ViewBillsActivity")]
     public class ViewBillsActivity : BaseToolbarActivityWithSearch
     {
-        private BillViewerFragmentCtrl _viewBillsFragCtrl;
-
         protected override int DrawerLayoutId
         {
             get
@@ -40,7 +38,7 @@ namespace Write2Congress.Droid.Activities
             SetupToolbar(Resource.Id.viewBillsActv_toolbar);
             SetupNavigationMenu(Resource.Id.viewLBillsActv_navigationDrawer);
 
-            _viewBillsFragCtrl = SupportFragmentManager.FindFragmentByTag(TagsType.ViewBillsFragment) as BillViewerFragmentCtrl;
+            var _viewBillsFragCtrl = SupportFragmentManager.FindFragmentByTag(TagsType.ViewBillsFragment) as BillViewerFragmentCtrl;
 
             if (_viewBillsFragCtrl == null)
             {

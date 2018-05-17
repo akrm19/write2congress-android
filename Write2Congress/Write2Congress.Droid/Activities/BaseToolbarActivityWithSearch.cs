@@ -114,7 +114,11 @@ namespace Write2Congress.Droid.Activities
 
         public virtual void ClearFilterTextChangedDelegate()
         {
-            _filterDataTextChanged = null;
+            _exitSearchClicked = null;
+            _searchTextChanged = null;
+			_filterDataTextChanged = null;
+            _filterSearchviewCollapsed = null;
+            _searchSearchviewCollapsed = null;
         }
 
         public void CollapseToolbarSearchview()
