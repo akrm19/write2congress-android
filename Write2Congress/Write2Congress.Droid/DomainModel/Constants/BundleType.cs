@@ -21,10 +21,10 @@ namespace Write2Congress.Droid.DomainModel.Constants
         public const string Committees = "Committees";
         public const string SponsoredBills = "SponsoredBills";
         public const string SponsoredBillsCurrentPage = "SponsoredBillsCurrentPage";
-        public const string SponsoredBillsIsThereMoreContent = "SponsoredBillsIsThereMoreContent";
         public const string CosponsoredBills = "CosponsoredBills";
         public const string CosponsoredBillsCurrentPage = "CosponsoredBillsCurrentPage";
-        public const string CosponsoredBillsIsThereMoreContent = "CosponsoredBillsIsThereMoreContent";
+        public const string BillsIsThereMoreContent = "BillsIsThereMoreContent";
+        public const string BillSearchResultsCurrentPage = "BillSearchResultsCurrentPage";
         public const string Bills = "Bills";
         public const string BillViewerFragmentType = "BillViewerFragmentType";
         public const string Votes = "Votes";

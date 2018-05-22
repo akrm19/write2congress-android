@@ -30,7 +30,7 @@ namespace Write2Congress.Droid.Fragments
         private List<Bill> _latestBills;
         private Legislator _legislator;
         private BillViewerKind _viewerMode;
-        private int billSearchResultsCurrentPage;
+        private int billSearchResultsCurrentPage = -1;
         private string _lastSearchTerm;
 
         public BillViewerFragmentCtrl() { }
@@ -66,6 +66,12 @@ namespace Write2Congress.Droid.Fragments
 
             _billManager = new BillManager(MyLogger);
             _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
+
+            if (Arguments.ContainsKey(BundleType.BillsIsThereMoreContent))
+                _isThereMoreVotes = Arguments.GetBoolean(BundleType.BillsIsThereMoreContent);
+
+            if (Arguments.ContainsKey(BundleType.BillSearchResultsCurrentPage))
+                billSearchResultsCurrentPage = Arguments.GetInt(BundleType.BillSearchResultsCurrentPage);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -75,7 +81,7 @@ namespace Write2Congress.Droid.Fragments
             if (savedInstanceState != null && savedInstanceState.ContainsKey(BundleType.BillViewerFragmentType))
                 _viewerMode = (BillViewerKind)savedInstanceState.GetInt(BundleType.BillViewerFragmentType);
 
-            if(_legislator == null)
+            if(_legislator == null && (_viewerMode != BillViewerKind.BillSearch && _viewerMode != BillViewerKind.LastestBillsForEveryone))
 				_legislator = RetrieveLegislatorIfAvailable(savedInstanceState);
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
@@ -84,13 +90,7 @@ namespace Write2Congress.Droid.Fragments
             recycler.SetAdapter(recyclerAdapter);
 
             if (_viewerMode == BillViewerKind.LastestBillsForEveryone)
-            {
-                GetBaseActivityWithToolbarSearch().FilterSearchTextChanged += FilterBills;
-				GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed += HandleFilterMenuItemCollapsed;
-                GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed += HandleSearchMenuItemCollapsed;
-                GetBaseActivityWithToolbarSearch().SearchQuerySubmitted += FetchBillsSearchResults;
-                GetBaseActivityWithToolbarSearch().ExitSearchClicked += HandleExitSearchviewClicked;
-            }
+                HookupToolbarEvents();
 
             SetLoadingUi();
 
@@ -106,6 +106,24 @@ namespace Write2Congress.Droid.Fragments
                 FetchMoreLegislatorContent(false);
 
             return fragment;
+        }
+
+        private void HookupToolbarEvents()
+        {
+            GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed += HandleFilterMenuItemCollapsed;
+            GetBaseActivityWithToolbarSearch().FilterSearchTextChanged += FilterBills;
+            GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed += HandleSearchMenuItemCollapsed;
+            GetBaseActivityWithToolbarSearch().SearchQuerySubmitted += FetchBillsSearchResults;
+            GetBaseActivityWithToolbarSearch().ExitSearchClicked += HandleExitSearchviewClicked;
+        }
+
+        private void DisconnectToolbarEvents()
+        {
+            GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed -= HandleFilterMenuItemCollapsed;
+            GetBaseActivityWithToolbarSearch().FilterSearchTextChanged -= FilterBills;
+            GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed -= HandleSearchMenuItemCollapsed;
+            GetBaseActivityWithToolbarSearch().SearchQuerySubmitted -= FetchBillsSearchResults;
+            GetBaseActivityWithToolbarSearch().ExitSearchClicked -= HandleExitSearchviewClicked;
         }
 
         public void FilterBills(string filter)
@@ -137,24 +155,11 @@ namespace Write2Congress.Droid.Fragments
                 _billSearchResults = null;          
             }
 
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                return;
+
             base.FetchMoreLegislatorContent(isLoadMoreClick);
-            var getBillsTask = new Task<Tuple<List<Bill>, bool, int, string>>((prms) =>
-            {
-                var passedParams = (prms as Tuple<string, BillManager, int, int>);
-
-                var searchTermEntered = passedParams.Item1;
-                var bm = new BillManager(new Logger(Class.SimpleName));
-                var localCurrentPage = isLoadMoreClick
-                    ? passedParams.Item3
-                    : 1;
-                var mode = (BillViewerKind)((int)passedParams.Item4);
-
-                var results = bm.GetBillsBySubject(searchTermEntered, localCurrentPage);
-
-                var isThereMoreVotes = results.IsThereMoreResults;
-
-                return new Tuple<List<Bill>, bool, int, string>(results.Results, isThereMoreVotes, localCurrentPage, searchTermEntered);
-            }, new Tuple<string, BillManager, int, int>(searchTerm, _billManager, billSearchResultsCurrentPage, (int)_viewerMode));
+            var getBillsTask = GetBillsSearchTask(searchTerm, isLoadMoreClick);
 
             getBillsTask.ContinueWith((antecedent) =>
             {
@@ -196,7 +201,6 @@ namespace Write2Congress.Droid.Fragments
 
         protected void SetToolbarForSearchResultReturned()
         {
-            //TODO RM: Use using ?
             GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
 			GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(true);
             GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
@@ -327,6 +331,29 @@ namespace Write2Congress.Droid.Fragments
             return getBillsTask;
         }
 
+        private Task<Tuple<List<Bill>, bool, int, string>> GetBillsSearchTask(string searchTerm, bool isLoadMoreClick)
+        {
+            var getBillsTask = new Task<Tuple<List<Bill>, bool, int, string>>((prms) =>
+            {
+                var passedParams = (prms as Tuple<string, BillManager, int, int>);
+
+                var searchTermEntered = passedParams.Item1;
+                var bm = new BillManager(new Logger(Class.SimpleName));
+                var localCurrentPage = isLoadMoreClick
+                    ? passedParams.Item3
+                    : 1;
+                var mode = (BillViewerKind)((int)passedParams.Item4);
+
+                var results = bm.GetBillsBySubject(searchTermEntered, localCurrentPage);
+
+                var isThereMoreVotes = results.IsThereMoreResults;
+
+                return new Tuple<List<Bill>, bool, int, string>(results.Results, isThereMoreVotes, localCurrentPage, searchTermEntered);
+            }, new Tuple<string, BillManager, int, int>(searchTerm, _billManager, billSearchResultsCurrentPage, (int)_viewerMode));
+
+            return getBillsTask;
+        }
+
 
         public override void OnSaveInstanceState(Bundle outState)
         {
@@ -339,10 +366,10 @@ namespace Write2Congress.Droid.Fragments
             }
 
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
-            
-            outState.PutBoolean(_viewerMode == BillViewerKind.SponsoredBills 
-                ? BundleType.SponsoredBillsIsThereMoreContent
-                : BundleType.CosponsoredBillsIsThereMoreContent, _isThereMoreVotes);
+            outState.PutBoolean(BundleType.BillsIsThereMoreContent, _isThereMoreVotes);
+
+            if (billSearchResultsCurrentPage != -1)
+                outState.PutInt(BundleType.BillSearchResultsCurrentPage, billSearchResultsCurrentPage);
         }
 
         public override void OnResume()
@@ -359,13 +386,16 @@ namespace Write2Congress.Droid.Fragments
 
         protected override void CleanUp()
         {
-            base.CleanUp();
-
+            if(GetBaseActivityWithToolbarSearch() != null)
+                DisconnectToolbarEvents();
+            
             _billManager = null;
             _billsToDisplay = null;
             _legislator = null;
             _latestBills = null;
             _billSearchResults = null;
+
+			base.CleanUp();
         }
 
         protected override string EmptyText()
