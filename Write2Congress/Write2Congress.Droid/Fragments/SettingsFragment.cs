@@ -18,25 +18,10 @@ namespace Write2Congress.Droid.Fragments
     public class SettingsFragment : PreferenceFragmentCompat
     {
         public SettingsFragment() { }
-        //public override void OnCreate(Bundle savedInstanceState)
-        //{
-        //    base.OnCreate(savedInstanceState);
-        //
-        //    //Add preferences from XML resource
-        //    AddPreferencesFromResource(Resource.Xml.preferences);
-        //}
 
         public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
         {
             AddPreferencesFromResource(Resource.Xml.preferences);
         }
-
-        //public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        //{
-        //    // Use this to return your custom view for this Fragment
-        //    // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-        //
-        //    return base.OnCreateView(inflater, container, savedInstanceState);
-        //}
     }
 }
