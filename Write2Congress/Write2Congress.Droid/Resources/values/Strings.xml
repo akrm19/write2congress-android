@@ -14,6 +14,7 @@
   <string name="cannotSendLetterWithoutRecipient">Cannot send letter without a recipient</string>
   <string name="congress">Congress</string>
   <string name="confirmRefresh">Confirm Refresh</string>
+  <string name="contributeToTheAtTheUnitedStatesProject">Contribute to theunitedstates project</string>
   <string name="copyText">Copy Text</string>
   <string name="copyTextFail">Error: Unable to copy letter\'s text</string>
   <string name="copyTextSuccess">Copied letter\'s text</string>
@@ -25,6 +26,9 @@
   <string name="delete">Delete</string>
   <string name="dismiss">Dismiss</string>
   <string name="donate">Donate</string>
+  <string name="donateText">If you enjoyed using this app or find it useful, please consider donating to the developer, yours truly techhops. Write2Congress could not be possible without the ProPublica\’s Congress API and the unitedstates project. Please also consider donating or contribution to the great organizations.</string>
+  <string name="donateToProPublica">Donate to ProPublica</string>
+  <string name="donateToTheDev">Donate to the Developer TechHops</string>
   <string name="drafts">Drafts</string>
   <string name="enterSearchCriteria">Enter Search Criteria</string>
   <string name="enterFilterCriteria">Enter Filter Criteria</string>

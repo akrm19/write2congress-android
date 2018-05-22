@@ -15,14 +15,15 @@ namespace Write2Congress.Droid.DomainModel.Constants
     public class TagsType
     {
 		public const string DraftsFragment = "DraftsFragment";
+		public const string DonateFragment = "DoanteFragment";
         public const string MainParentFragment = "MainParentFragment";
         public const string SentFragment = "SentFragment";
         internal const string SettingsFragment = "SettingsFragment";
         internal const string SponsoredBillsFragment = "SponsoredBillsFragment";
-		internal const string ViewBillsFragment = "ViewBilldFrag";
+        internal const string ViewBillsFragment = "ViewBilldFrag";
         internal const string ViewLegislatorsFragment = "ViewLegislatorsFragment";
-		public const string ViewLettersFragment = "ViewLettersFragment";
+        public const string ViewLettersFragment = "ViewLettersFragment";
         internal const string VoteViewerFragment = "VoteViewerFragment";
-		public const string WriteLetterFragment = "WriteLetterFragment";
+        public const string WriteLetterFragment = "WriteLetterFragment";
     }
 }

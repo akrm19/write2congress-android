@@ -139,7 +139,11 @@ namespace Write2Congress.Droid.Activities
 
         public void DonatePressed()
         {
+            if (GetType() == typeof(DonateActivity))
+                return;
 
+            var intent = new Intent(this, typeof(DonateActivity));
+            StartActivity(intent);
         }
 
         public void SettingsPressed()

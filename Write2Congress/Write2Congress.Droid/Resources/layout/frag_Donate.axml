@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/donateFrag_scrollview"
+    android:fillViewport="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/donateFrag_parent">
+        <TextView
+            android:text="@string/donateText"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/donateFrag_donateText" />
+        <Button
+            android:text="@string/donateToTheDev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            android:textColor="@android:color/background_light"
+            android:background="?android:attr/colorPrimary"
+            android:id="@+id/donateFrag_donateToDev" />
+        <Button
+            android:text="@string/donateToProPublica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            android:textColor="@android:color/background_light"
+            android:background="?android:attr/colorPrimary"
+            android:id="@+id/donateFrag_donateToProPublic" />
+        <Button
+            android:text="@string/contributeToTheAtTheUnitedStatesProject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+            android:textColor="@android:color/background_light"
+            android:background="?android:attr/colorPrimary"
+            android:id="@+id/donateFrag_contributeToUsIoProject" />
+    </LinearLayout>
+</ScrollView>

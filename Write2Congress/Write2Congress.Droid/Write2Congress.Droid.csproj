@@ -188,6 +188,8 @@
     <Compile Include="Activities\BaseToolbarActivityWithSearch.cs" />
     <Compile Include="DomainModel\Interfaces\IActivityWithToolbarSearch.cs" />
     <Compile Include="DomainModel\Delegates\OnActionExpandListener.cs" />
+    <Compile Include="Activities\DonateActivity.cs" />
+    <Compile Include="Fragments\DonateFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -267,6 +269,8 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_filter_list_white_48dp.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_filter_list_white_48dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_filter_list_white_48dp.png" />
+    <AndroidResource Include="Resources\layout\actv_Donate.axml" />
+    <AndroidResource Include="Resources\layout\frag_Donate.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
