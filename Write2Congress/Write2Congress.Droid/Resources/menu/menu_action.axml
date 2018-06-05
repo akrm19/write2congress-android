@@ -22,10 +22,16 @@
           android:title="@string/legislators"
           android:actionViewClass="android.support.v7.widget.SearchView"/>
         
-      <item android:id="@+id/actionMenu_bills"
+      <item android:id="@+id/actionMenu_latestBills"
           android:icon="@drawable/ic_insert_drive_file_white_48dp"
           android:showAsAction="always"
-          android:title="@string/bills"
+          android:title="@string/latestBills"
+          android:actionViewClass="android.support.v7.widget.SearchView"/>
+
+      <item android:id="@+id/actionMenu_searchBills"
+          android:icon="@drawable/ic_insert_drive_file_white_48dp"
+          android:showAsAction="always"
+          android:title="@string/searchBills"
           android:actionViewClass="android.support.v7.widget.SearchView"/>
   </group>
   <item android:title="Options">

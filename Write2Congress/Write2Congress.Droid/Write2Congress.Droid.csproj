@@ -184,12 +184,14 @@
     <Compile Include="Fragments\WriteLetterFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Activities\ViewBillsActivity.cs" />
+    <Compile Include="Activities\ViewBillsBaseActivity.cs" />
     <Compile Include="Activities\BaseToolbarActivityWithSearch.cs" />
     <Compile Include="DomainModel\Interfaces\IActivityWithToolbarSearch.cs" />
     <Compile Include="DomainModel\Delegates\OnActionExpandListener.cs" />
     <Compile Include="Activities\DonateActivity.cs" />
     <Compile Include="Fragments\DonateFragment.cs" />
+    <Compile Include="Activities\ViewLastestBillsActivity.cs" />
+    <Compile Include="Activities\SearchBillsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

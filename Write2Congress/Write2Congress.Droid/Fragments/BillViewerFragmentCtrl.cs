@@ -392,8 +392,8 @@ namespace Write2Congress.Droid.Fragments
             _billManager = null;
             _billsToDisplay = null;
             _legislator = null;
-            _latestBills = null;
-            _billSearchResults = null;
+            //_latestBills = null;
+            //_billSearchResults = null;
 
 			base.CleanUp();
         }

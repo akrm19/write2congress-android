@@ -2723,29 +2723,32 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c0121
 			public const int action0 = 2131493153;
 			
-			// aapt resource value: 0x7f0c0141
-			public const int actionMenu_bills = 2131493185;
-			
-			// aapt resource value: 0x7f0c0144
-			public const int actionMenu_donate = 2131493188;
+			// aapt resource value: 0x7f0c0145
+			public const int actionMenu_donate = 2131493189;
 			
 			// aapt resource value: 0x7f0c013e
 			public const int actionMenu_drafts = 2131493182;
 			
-			// aapt resource value: 0x7f0c0145
-			public const int actionMenu_exit = 2131493189;
+			// aapt resource value: 0x7f0c0146
+			public const int actionMenu_exit = 2131493190;
 			
-			// aapt resource value: 0x7f0c0143
-			public const int actionMenu_feedback = 2131493187;
+			// aapt resource value: 0x7f0c0144
+			public const int actionMenu_feedback = 2131493188;
+			
+			// aapt resource value: 0x7f0c0141
+			public const int actionMenu_latestBills = 2131493185;
 			
 			// aapt resource value: 0x7f0c0140
 			public const int actionMenu_search = 2131493184;
 			
+			// aapt resource value: 0x7f0c0142
+			public const int actionMenu_searchBills = 2131493186;
+			
 			// aapt resource value: 0x7f0c013f
 			public const int actionMenu_sent = 2131493183;
 			
-			// aapt resource value: 0x7f0c0142
-			public const int actionMenu_settings = 2131493186;
+			// aapt resource value: 0x7f0c0143
+			public const int actionMenu_settings = 2131493187;
 			
 			// aapt resource value: 0x7f0c013d
 			public const int actionMenu_writeNew = 2131493181;
@@ -3230,11 +3233,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c00f9
 			public const int mainFrag_parent = 2131493113;
 			
-			// aapt resource value: 0x7f0c0147
-			public const int mainMenu_refresh = 2131493191;
+			// aapt resource value: 0x7f0c0148
+			public const int mainMenu_refresh = 2131493192;
 			
-			// aapt resource value: 0x7f0c0146
-			public const int mainMenu_search = 2131493190;
+			// aapt resource value: 0x7f0c0147
+			public const int mainMenu_search = 2131493191;
 			
 			// aapt resource value: 0x7f0c013c
 			public const int masked = 2131493180;
@@ -3509,14 +3512,14 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c008e
 			public const int viewBillsActv_toolbar = 2131493006;
 			
-			// aapt resource value: 0x7f0c0148
-			public const int viewBills_exitSearch = 2131493192;
+			// aapt resource value: 0x7f0c0149
+			public const int viewBills_exitSearch = 2131493193;
+			
+			// aapt resource value: 0x7f0c014b
+			public const int viewBills_filter = 2131493195;
 			
 			// aapt resource value: 0x7f0c014a
-			public const int viewBills_filter = 2131493194;
-			
-			// aapt resource value: 0x7f0c0149
-			public const int viewBills_search = 2131493193;
+			public const int viewBills_search = 2131493194;
 			
 			// aapt resource value: 0x7f0c0090
 			public const int viewLBillsActv_navigationDrawer = 2131493008;
@@ -3638,8 +3641,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c0115
 			public const int viewLettersFrag_viewSwitcher = 2131493141;
 			
-			// aapt resource value: 0x7f0c014b
-			public const int viewLettersMenu_refresh = 2131493195;
+			// aapt resource value: 0x7f0c014c
+			public const int viewLettersMenu_refresh = 2131493196;
 			
 			// aapt resource value: 0x7f0c0002
 			public const int view_offset_helper = 2131492866;
@@ -3716,17 +3719,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c011a
 			public const int writeLetterFrag_subject = 2131493146;
 			
+			// aapt resource value: 0x7f0c0150
+			public const int writeLetterMenu_copyToClipboard = 2131493200;
+			
 			// aapt resource value: 0x7f0c014f
-			public const int writeLetterMenu_copyToClipboard = 2131493199;
+			public const int writeLetterMenu_delete = 2131493199;
 			
 			// aapt resource value: 0x7f0c014e
-			public const int writeLetterMenu_delete = 2131493198;
+			public const int writeLetterMenu_save = 2131493198;
 			
 			// aapt resource value: 0x7f0c014d
-			public const int writeLetterMenu_save = 2131493197;
-			
-			// aapt resource value: 0x7f0c014c
-			public const int writeLetterMenu_send = 2131493196;
+			public const int writeLetterMenu_send = 2131493197;
 			
 			static Id()
 			{

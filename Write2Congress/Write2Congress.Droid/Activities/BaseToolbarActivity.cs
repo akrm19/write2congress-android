@@ -67,8 +67,11 @@ namespace Write2Congress.Droid.Activities
                 case Resource.Id.actionMenu_exit:
                     ExitButtonPressed();
                     break;
-                case Resource.Id.actionMenu_bills:
+                case Resource.Id.actionMenu_searchBills:
                     OpenBillsSearch();
+                    break;
+                case Resource.Id.actionMenu_latestBills:
+                    OpenLatestBills();
                     break;
                 default:
                     break;
@@ -77,12 +80,21 @@ namespace Write2Congress.Droid.Activities
             CurrentDrawerLayout.CloseDrawers();
         }
 
-        private void OpenBillsSearch()
+        private void OpenLatestBills()
         {
-            if (GetType() == typeof(ViewBillsActivity))
+            if (GetType() == typeof(ViewLastestBillsActivity))
                 return;
 
-            var intent = new Intent(this, typeof(ViewBillsActivity));
+            var intent = new Intent(this, typeof(ViewLastestBillsActivity));
+            StartActivity(intent);
+        }
+
+        private void OpenBillsSearch()
+        {
+            if (GetType() == typeof(SearchBillsActivity))
+                return;
+
+            var intent = new Intent(this, typeof(SearchBillsActivity));
             StartActivity(intent);
         }
 

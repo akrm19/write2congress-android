@@ -20,8 +20,10 @@ using Write2Congress.Droid.Fragments;
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "ViewBillsActivity")]
-    public class ViewBillsActivity : BaseToolbarActivityWithSearch
+    public class ViewBillsBaseActivity : BaseToolbarActivityWithSearch
     {
+        protected virtual BillViewerKind GetBillViewerKind { get; }
+
         protected override int DrawerLayoutId
         {
             get
@@ -42,14 +44,14 @@ namespace Write2Congress.Droid.Activities
 
             if (_viewBillsFragCtrl == null)
             {
-                var serializedLegislator = AndroidHelper.GetStringFromIntent(Intent, BundleType.Legislator);
+                //var serializedLegislator = AndroidHelper.GetStringFromIntent(Intent, BundleType.Legislator);
 
-                _viewBillsFragCtrl = BillViewerFragmentCtrl.CreateInstance(BillViewerKind.LastestBillsForEveryone);
+                _viewBillsFragCtrl = BillViewerFragmentCtrl.CreateInstance(GetBillViewerKind);
 
                 if (_viewBillsFragCtrl.Arguments == null)
                     _viewBillsFragCtrl.Arguments = new Bundle();
 
-                _viewBillsFragCtrl.Arguments.PutString(BundleType.Legislator, serializedLegislator);
+                //_viewBillsFragCtrl.Arguments.PutString(BundleType.Legislator, serializedLegislator);
 
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);
             }

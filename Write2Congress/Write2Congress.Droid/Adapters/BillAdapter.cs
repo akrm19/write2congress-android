@@ -50,7 +50,7 @@ namespace Write2Congress.Droid.Adapters
 
         public void UpdateBill(List<Bill> bills)
         {
-            _bills = bills;
+            _bills = bills.ToList();
             NotifyDataSetChanged();
         }
 
@@ -69,7 +69,7 @@ namespace Write2Congress.Droid.Adapters
             var link = bill.Urls.Count > 0
                 ? bill.Urls[0]
                 : string.Empty;
-
+            
             AppHelper.ShowDetailsDialog(_fragment, title, billSummary, link);
         }
 
