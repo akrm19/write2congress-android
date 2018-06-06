@@ -44,15 +44,7 @@ namespace Write2Congress.Droid.Activities
 
             if (_viewBillsFragCtrl == null)
             {
-                //var serializedLegislator = AndroidHelper.GetStringFromIntent(Intent, BundleType.Legislator);
-
                 _viewBillsFragCtrl = BillViewerFragmentCtrl.CreateInstance(GetBillViewerKind);
-
-                if (_viewBillsFragCtrl.Arguments == null)
-                    _viewBillsFragCtrl.Arguments = new Bundle();
-
-                //_viewBillsFragCtrl.Arguments.PutString(BundleType.Legislator, serializedLegislator);
-
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);
             }
         }

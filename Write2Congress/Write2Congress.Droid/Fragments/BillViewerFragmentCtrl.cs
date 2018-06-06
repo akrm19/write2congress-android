@@ -155,8 +155,7 @@ namespace Write2Congress.Droid.Fragments
             if (!isLoadMoreClick)
             {
                 currentPage = 1;
-                _billsToDisplay = null;
-                //_billSearchResults = null;          
+                _billsToDisplay = null;         
             }
 
             if (string.IsNullOrWhiteSpace(searchTerm))
@@ -187,10 +186,6 @@ namespace Write2Congress.Droid.Fragments
                             _billsToDisplay = antecedent.Result.Item1;
                         else
                             _billsToDisplay.AddRange(antecedent.Result.Item1);
-                        //if (_billSearchResults == null || !_billSearchResults.Any())
-                        //    _billSearchResults = antecedent.Result.Item1;
-                        //else
-                            //_billSearchResults.AddRange(antecedent.Result.Item1);
 
 
                         SetLoadMoreButtonTextAsLoading(false);
@@ -235,16 +230,8 @@ namespace Write2Congress.Droid.Fragments
 
         private void HandleFilterMenuItemCollapsed()
         {
-            if(_viewerMode == BillViewerKind.LastestBillsForEveryone)
-            {
-                //GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(false);
-                //GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(true);
-            }
-            else if(_viewerMode == BillViewerKind.BillSearch)
-            {
-                GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
-                GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(false);
-            }
+            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
+            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(false);
         }
 
         protected override void FetchMoreLegislatorContent(bool isNextClick)
@@ -283,10 +270,6 @@ namespace Write2Congress.Droid.Fragments
                             _billsToDisplay = antecedent.Result.Item1;
                         else
                             _billsToDisplay.AddRange(antecedent.Result.Item1);
-                        //if (_latestBills == null || !_latestBills.Any())
-                        //    _latestBills = antecedent.Result.Item1;
-                        //else
-                            //_latestBills.AddRange(antecedent.Result.Item1);
 
                         SetLoadMoreButtonTextAsLoading(false);
                         ShowRecyclerButtons(_isThereMoreVotes);
@@ -378,8 +361,6 @@ namespace Write2Congress.Droid.Fragments
                 var serializedBills = _billsToDisplay.SerializeToJson();
                 outState.PutString(BundleType.Bills, serializedBills);
             }
-            //TODO RM: Save other two bill lists?
-
 
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
             outState.PutBoolean(BundleType.BillsIsThereMoreContent, _isThereMoreVotes);
@@ -410,8 +391,6 @@ namespace Write2Congress.Droid.Fragments
             _billManager = null;
             _billsToDisplay = null;
             _legislator = null;
-            //_latestBills = null;
-            //_billSearchResults = null;
 
 			base.CleanUp();
         }
