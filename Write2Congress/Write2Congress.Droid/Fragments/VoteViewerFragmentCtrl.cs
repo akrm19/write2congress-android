@@ -59,7 +59,7 @@ namespace Write2Congress.Droid.Fragments
             recyclerAdapter = new VoteAdapter(this);
             recycler.SetAdapter(recyclerAdapter);
 
-			SetLoadingUi();
+			SetLoadingTextInEmptyView();
 
             if (_votes != null && _votes.Count() >= 0)
                 SetVotes(_votes, _isThereMoreVotes);
@@ -144,7 +144,7 @@ namespace Write2Congress.Droid.Fragments
             if (errorOccurred)
                 HandleErrorRetrievingData();
             else if (_votes == null)
-                SetLoadingUi();
+                SetLoadingTextInEmptyView();
             else
                 ShowVotes(_votes, _isThereMoreVotes);
         }

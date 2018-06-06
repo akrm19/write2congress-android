@@ -57,7 +57,7 @@ namespace Write2Congress.Droid.Fragments
             recyclerAdapter = new CommitteeAdapter(this);
             recycler.SetAdapter(recyclerAdapter);
 
-            SetLoadingUi();
+            SetLoadingTextInEmptyView();
 
             //We load all committees, so no need for more buttons
             recyclerButtonsParent.Visibility = ViewStates.Gone;
@@ -144,7 +144,7 @@ namespace Write2Congress.Droid.Fragments
             if (errorOccurred)
                 HandleErrorRetrievingData();
             else if (_committees == null)
-                SetLoadingUi();
+                SetLoadingTextInEmptyView();
             else
                 ShowCommittees(_committees);
         }

@@ -26,11 +26,8 @@ namespace Write2Congress.Droid.Fragments
         private BillManager _billManager;
         private bool _isThereMoreVotes = true;
         private List<Bill> _billsToDisplay;
-        private List<Bill> _billSearchResults;
-        private List<Bill> _latestBills;
         private Legislator _legislator;
         private BillViewerKind _viewerMode;
-        private int billSearchResultsCurrentPage = -1;
         private string _lastSearchTerm;
 
         public BillViewerFragmentCtrl() { }
@@ -64,14 +61,11 @@ namespace Write2Congress.Droid.Fragments
             if(!string.IsNullOrWhiteSpace(serialziedLegislator))
 			    _legislator = new Legislator().DeserializeFromJson(serialziedLegislator);
 
-            _billManager = new BillManager(MyLogger);
-            _viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
-
             if (Arguments.ContainsKey(BundleType.BillsIsThereMoreContent))
                 _isThereMoreVotes = Arguments.GetBoolean(BundleType.BillsIsThereMoreContent);
-
-            if (Arguments.ContainsKey(BundleType.BillSearchResultsCurrentPage))
-                billSearchResultsCurrentPage = Arguments.GetInt(BundleType.BillSearchResultsCurrentPage);
+			
+			_billManager = new BillManager(MyLogger);
+			_viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -90,9 +84,14 @@ namespace Write2Congress.Droid.Fragments
             recycler.SetAdapter(recyclerAdapter);
 
             if (_viewerMode == BillViewerKind.LastestBillsForEveryone)
-                HookupToolbarEvents();
+                HookupToolbarEventsForBillsFiltering();
+            else if (_viewerMode == BillViewerKind.BillSearch)
+            {
+                HookupToolbarEventsForBillsFiltering();
+                HookupToolbarEventsForBillSearch();
+            }
 
-            SetLoadingUi();
+            SetLoadingTextInEmptyView();
 
             if (_billsToDisplay != null && _billsToDisplay.Count >= 0)
                 SetBills(_billsToDisplay, _isThereMoreVotes);
@@ -102,16 +101,20 @@ namespace Write2Congress.Droid.Fragments
                 _billsToDisplay = new List<Bill>().DeserializeFromJson(serializedBills);
                 SetBills(_billsToDisplay, _isThereMoreVotes);
             }
-            else
+            else if(_viewerMode != BillViewerKind.BillSearch || !string.IsNullOrWhiteSpace(_lastSearchTerm))
                 FetchMoreLegislatorContent(false);
 
             return fragment;
         }
 
-        private void HookupToolbarEvents()
+        private void HookupToolbarEventsForBillsFiltering()
         {
             GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed += HandleFilterMenuItemCollapsed;
             GetBaseActivityWithToolbarSearch().FilterSearchTextChanged += FilterBills;
+        }
+
+        private void HookupToolbarEventsForBillSearch()
+        {
             GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed += HandleSearchMenuItemCollapsed;
             GetBaseActivityWithToolbarSearch().SearchQuerySubmitted += FetchBillsSearchResults;
             GetBaseActivityWithToolbarSearch().ExitSearchClicked += HandleExitSearchviewClicked;
@@ -151,8 +154,9 @@ namespace Write2Congress.Droid.Fragments
 
             if (!isLoadMoreClick)
             {
-				billSearchResultsCurrentPage = 1;
-                _billSearchResults = null;          
+                currentPage = 1;
+                _billsToDisplay = null;
+                //_billSearchResults = null;          
             }
 
             if (string.IsNullOrWhiteSpace(searchTerm))
@@ -176,17 +180,22 @@ namespace Write2Congress.Droid.Fragments
                     {
                         HandleSuccessfullDataRetrieval();
 
-                        billSearchResultsCurrentPage = antecedent.Result.Item3 + 1;
+                        currentPage = antecedent.Result.Item3 + 1;
                         _isThereMoreVotes = antecedent.Result.Item2;
 
-                        if (_billSearchResults == null || !_billSearchResults.Any())
-                            _billSearchResults = antecedent.Result.Item1;
+                        if (_billsToDisplay == null || !_billsToDisplay.Any())
+                            _billsToDisplay = antecedent.Result.Item1;
                         else
-                            _billSearchResults.AddRange(antecedent.Result.Item1);
+                            _billsToDisplay.AddRange(antecedent.Result.Item1);
+                        //if (_billSearchResults == null || !_billSearchResults.Any())
+                        //    _billSearchResults = antecedent.Result.Item1;
+                        //else
+                            //_billSearchResults.AddRange(antecedent.Result.Item1);
+
 
                         SetLoadMoreButtonTextAsLoading(false);
                         ShowRecyclerButtons(_isThereMoreVotes);
-                        ShowBills(_billSearchResults, _isThereMoreVotes);
+                        ShowBills(_billsToDisplay, _isThereMoreVotes);
 
                         var newTitle = $"'{antecedent.Result.Item4}' Bills";
                         GetBaseActivity().UpdateTitleBarText(newTitle);
@@ -209,14 +218,14 @@ namespace Write2Congress.Droid.Fragments
 
         private void HandleExitSearchviewClicked()
         {
-            _billSearchResults = null;
+            _billsToDisplay = null;
             _lastSearchTerm = string.Empty;
-            billSearchResultsCurrentPage = 1;
+            currentPage = 1;
 
-            _viewerMode = BillViewerKind.LastestBillsForEveryone;
-            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.latestBills));
 
-            ShowBills(_latestBills, _isThereMoreVotes);
+            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.searchBills));
+
+            ShowBills(_billsToDisplay, _isThereMoreVotes);
         }
 
         private void HandleSearchMenuItemCollapsed()
@@ -228,8 +237,8 @@ namespace Write2Congress.Droid.Fragments
         {
             if(_viewerMode == BillViewerKind.LastestBillsForEveryone)
             {
-                GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(false);
-                GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(true);
+                //GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(false);
+                //GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(true);
             }
             else if(_viewerMode == BillViewerKind.BillSearch)
             {
@@ -269,14 +278,19 @@ namespace Write2Congress.Droid.Fragments
                         currentPage = antecedent.Result.Item3 + 1;
                         _isThereMoreVotes = antecedent.Result.Item2;
 
-                        if (_latestBills == null || !_latestBills.Any())
-                            _latestBills = antecedent.Result.Item1;
+
+                        if (_billsToDisplay == null || !_billsToDisplay.Any())
+                            _billsToDisplay = antecedent.Result.Item1;
                         else
-                            _latestBills.AddRange(antecedent.Result.Item1);
+                            _billsToDisplay.AddRange(antecedent.Result.Item1);
+                        //if (_latestBills == null || !_latestBills.Any())
+                        //    _latestBills = antecedent.Result.Item1;
+                        //else
+                            //_latestBills.AddRange(antecedent.Result.Item1);
 
                         SetLoadMoreButtonTextAsLoading(false);
                         ShowRecyclerButtons(_isThereMoreVotes);
-                        ShowBills(_latestBills, _isThereMoreVotes);
+                        ShowBills(_billsToDisplay, _isThereMoreVotes);
 
                         if(_viewerMode == BillViewerKind.LastestBillsForEveryone)
                             GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.latestBills));
@@ -349,7 +363,7 @@ namespace Write2Congress.Droid.Fragments
                 var isThereMoreVotes = results.IsThereMoreResults;
 
                 return new Tuple<List<Bill>, bool, int, string>(results.Results, isThereMoreVotes, localCurrentPage, searchTermEntered);
-            }, new Tuple<string, BillManager, int, int>(searchTerm, _billManager, billSearchResultsCurrentPage, (int)_viewerMode));
+            }, new Tuple<string, BillManager, int, int>(searchTerm, _billManager, currentPage, (int)_viewerMode));
 
             return getBillsTask;
         }
@@ -364,12 +378,14 @@ namespace Write2Congress.Droid.Fragments
                 var serializedBills = _billsToDisplay.SerializeToJson();
                 outState.PutString(BundleType.Bills, serializedBills);
             }
+            //TODO RM: Save other two bill lists?
+
 
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
             outState.PutBoolean(BundleType.BillsIsThereMoreContent, _isThereMoreVotes);
 
-            if (billSearchResultsCurrentPage != -1)
-                outState.PutInt(BundleType.BillSearchResultsCurrentPage, billSearchResultsCurrentPage);
+            //if (billSearchResultsCurrentPage != -1)
+            //    outState.PutInt(BundleType.BillSearchResultsCurrentPage, billSearchResultsCurrentPage);
         }
 
         public override void OnResume()
@@ -378,8 +394,10 @@ namespace Write2Congress.Droid.Fragments
 
             if (errorOccurred)
                 HandleErrorRetrievingData();
+            else if (_viewerMode == BillViewerKind.BillSearch && string.IsNullOrWhiteSpace(_lastSearchTerm))
+                ShowEmptyview(GetString(Resource.String.enterSearchCriteria));
             else if (_billsToDisplay == null)
-                SetLoadingUi();
+                SetLoadingTextInEmptyView();
             else
                 ShowBills(_billsToDisplay, _isThereMoreVotes);
         }

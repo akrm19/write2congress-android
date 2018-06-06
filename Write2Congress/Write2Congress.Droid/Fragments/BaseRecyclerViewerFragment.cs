@@ -184,10 +184,9 @@ namespace Write2Congress.Droid.Fragments
             ShowEmptyviewIfNecessary();
         }
 
-        protected void SetLoadingUi()
+        protected void SetLoadingTextInEmptyView()
         {
-            emptyText.Text = AndroidHelper.GetString(Resource.String.loading);
-            ShowEmptyview();
+            ShowEmptyview(AndroidHelper.GetString(Resource.String.loading));
         }
 
         protected void ShowEmptyview(string textToShow = null)

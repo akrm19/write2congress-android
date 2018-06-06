@@ -50,7 +50,10 @@ namespace Write2Congress.Droid.Adapters
 
         public void UpdateBill(List<Bill> bills)
         {
-            _bills = bills.ToList();
+            _bills = bills == null
+                ? new List<Bill>()
+                : bills.ToList();
+            
             NotifyDataSetChanged();
         }
 
