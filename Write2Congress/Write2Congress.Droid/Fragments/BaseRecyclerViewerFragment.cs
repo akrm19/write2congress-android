@@ -15,6 +15,7 @@ using Write2Congress.Droid.Code;
 using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Shared.BusinessLayer;
+using Android.Support.Design.Widget;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -24,8 +25,8 @@ namespace Write2Congress.Droid.Fragments
         protected RecyclerView.Adapter recyclerAdapter;
         protected ViewSwitcher viewSwitcher;
         protected TextView header, emptyText;
-        protected LinearLayout recyclerButtonsParent;
-        protected Button loadMoreButton;
+        //protected LinearLayout recyclerButtonsParent;
+        protected FloatingActionButton loadMoreButton;
 
         protected int currentPage = 1;
         protected bool IsBeingShown = false;
@@ -45,7 +46,7 @@ namespace Write2Congress.Droid.Fragments
             header = null;
             emptyText = null;
             baseFragment = null;
-            recyclerButtonsParent = null;
+            //recyclerButtonsParent = null;
 
             if(loadMoreButton != null)
                 loadMoreButton.Click -= NextButon_Click;
@@ -59,7 +60,9 @@ namespace Write2Congress.Droid.Fragments
             errorOccurred = true;
 
             if (loadMoreButton != null)
-                loadMoreButton.Text = AndroidHelper.GetString(Resource.String.tryAgain);
+                loadMoreButton.Enabled = false;
+            //    loadMoreButton.SetBackgroundColor(Android.Graphics.Color.Aqua);
+                //loadMoreButton.Text = AndroidHelper.GetString(Resource.String.tryAgain);
 
             if (emptyText != null)
                 emptyText.Text = AndroidHelper.GetString(Resource.String.unableToRetrieveData);
@@ -106,9 +109,11 @@ namespace Write2Congress.Droid.Fragments
             recycler = fragment.FindViewById<RecyclerView>(Resource.Id.baseViewer_recycler);
             recycler.SetLayoutManager(layoutManager);
 
-            recyclerButtonsParent = fragment.FindViewById<LinearLayout>(Resource.Id.baseViewer_recyclerButtonsParent);
+            //recyclerButtonsParent = fragment.FindViewById<LinearLayout>(Resource.Id.baseViewer_recyclerButtonsParent);
+            //recyclerButtonsParent.Alpha = .0F;
 
-            loadMoreButton = fragment.FindViewById<Button>(Resource.Id.baseViewer_recyclerNextButton);
+            loadMoreButton = fragment.FindViewById<FloatingActionButton>(Resource.Id.baseViewer_recyclerNextButton);
+            //loadMoreButton.Alpha = 0.5F;
             loadMoreButton.Click += NextButon_Click;
 
             return fragment;
@@ -217,10 +222,11 @@ namespace Write2Congress.Droid.Fragments
 
         protected void ShowRecyclerButtons(bool showButtons)
         {
+            /*
             recyclerButtonsParent.Visibility =  showButtons
                 ? ViewStates.Visible
                 : ViewStates.Gone;
-
+            */
             loadMoreButton.Visibility = showButtons
                 ? ViewStates.Visible
                 : ViewStates.Gone;
@@ -231,10 +237,11 @@ namespace Write2Congress.Droid.Fragments
             if (loadMoreButton == null)
                 return;
 
+            /*
             loadMoreButton.Text = AndroidHelper.GetString( setAsLoading
                 ? Resource.String.loading
                 : Resource.String.loadMore);
-
+            */
             loadMoreButton.Enabled = !setAsLoading;
         }
 

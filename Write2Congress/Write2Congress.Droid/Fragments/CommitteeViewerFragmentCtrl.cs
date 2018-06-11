@@ -60,7 +60,7 @@ namespace Write2Congress.Droid.Fragments
             SetLoadingTextInEmptyView();
 
             //We load all committees, so no need for more buttons
-            recyclerButtonsParent.Visibility = ViewStates.Gone;
+            //recyclerButtonsParent.Visibility = ViewStates.Gone;
             loadMoreButton.Visibility = ViewStates.Gone;
 
             if (_committees != null && _committees.Count() >= 0)

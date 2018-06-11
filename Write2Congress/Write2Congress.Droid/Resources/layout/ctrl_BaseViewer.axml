@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:id="@+id/baseViewer">
     <TextView
         android:layout_width="match_parent"
@@ -10,15 +10,15 @@
         android:layout_marginLeft="10dp"
         android:id="@+id/baseViewer_header" />
     <ViewSwitcher
+        android:layout_below="@id/baseViewer_header"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:id="@+id/baseViewer_viewSwitcher"
         android:inAnimation="@android:anim/slide_in_left"
         android:outAnimation="@android:anim/slide_out_right">
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:id="@+id/baseViewer_recycler" />
         <TextView
             android:layout_width="match_parent"
@@ -26,39 +26,19 @@
             android:gravity="center"
             android:id="@+id/baseViewer_emptyText" />
     </ViewSwitcher>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_action_keyboard_arrow_down_white"
+        android:id="@+id/baseViewer_recyclerNextButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
-        android:id="@+id/baseViewer_recyclerButtonsParent">
-        <Button
-            android:text="Load More"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/baseViewer_recyclerNextButton"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableRight="@drawable/ic_action_keyboard_arrow_down" />
-    </LinearLayout>
-<!-- Working code
-    <Button
-        android:text="Load More"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/baseViewer_recyclerNextButton"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableRight="@drawable/ic_action_keyboard_arrow_down" />
-
-    -->
-<!--
-    <Button
-        android:text="Load More"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/baseViewer_recyclerNextButton3"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableRight="@drawable/ic_action_keyboard_arrow_down"/>
-    -->
-</LinearLayout>
+        android:id="@+id/baseViewer_recyclerButtonsParent" />
+</RelativeLayout>
