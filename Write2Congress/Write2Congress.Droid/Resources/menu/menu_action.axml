@@ -29,7 +29,7 @@
           android:actionViewClass="android.support.v7.widget.SearchView"/>
 
       <item android:id="@+id/actionMenu_searchBills"
-          android:icon="@drawable/ic_insert_drive_file_white_48dp"
+          android:icon="@drawable/ic_search_white_48dp"
           android:showAsAction="always"
           android:title="@string/searchBills"
           android:actionViewClass="android.support.v7.widget.SearchView"/>

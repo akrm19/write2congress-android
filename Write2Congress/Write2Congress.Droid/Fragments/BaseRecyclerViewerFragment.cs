@@ -25,7 +25,6 @@ namespace Write2Congress.Droid.Fragments
         protected RecyclerView.Adapter recyclerAdapter;
         protected ViewSwitcher viewSwitcher;
         protected TextView header, emptyText;
-        //protected LinearLayout recyclerButtonsParent;
         protected FloatingActionButton loadMoreButton;
 
         protected int currentPage = 1;
@@ -46,7 +45,6 @@ namespace Write2Congress.Droid.Fragments
             header = null;
             emptyText = null;
             baseFragment = null;
-            //recyclerButtonsParent = null;
 
             if(loadMoreButton != null)
                 loadMoreButton.Click -= NextButon_Click;
@@ -60,19 +58,29 @@ namespace Write2Congress.Droid.Fragments
             errorOccurred = true;
 
             if (loadMoreButton != null)
-                loadMoreButton.Enabled = false;
-            //    loadMoreButton.SetBackgroundColor(Android.Graphics.Color.Aqua);
-                //loadMoreButton.Text = AndroidHelper.GetString(Resource.String.tryAgain);
+                loadMoreButton.Enabled = true;
 
             if (emptyText != null)
                 emptyText.Text = AndroidHelper.GetString(Resource.String.unableToRetrieveData);
+
+            ShowToast(AndroidHelper.GetString(Resource.String.dataRetrievedError), ToastLength.Long);
         }
+
 
         protected virtual void HandleSuccessfullDataRetrieval()
         {
-            errorOccurred = false;
+			errorOccurred = false;
 
-            //ShowToast(GetSuccessfullDataRetrievalMessage(), ToastLength.Short);
+            if (loadMoreButton != null)
+                loadMoreButton.Enabled = true;
+			
+            ShowToast(GetSuccessfullDataRetrievalMessage(), ToastLength.Long);
+        }
+
+        protected virtual void HandleOnDataRetrievalStarted()
+        {
+            if (loadMoreButton != null)
+                loadMoreButton.Enabled = false;
         }
 
         public override void OnResume()
@@ -109,11 +117,7 @@ namespace Write2Congress.Droid.Fragments
             recycler = fragment.FindViewById<RecyclerView>(Resource.Id.baseViewer_recycler);
             recycler.SetLayoutManager(layoutManager);
 
-            //recyclerButtonsParent = fragment.FindViewById<LinearLayout>(Resource.Id.baseViewer_recyclerButtonsParent);
-            //recyclerButtonsParent.Alpha = .0F;
-
             loadMoreButton = fragment.FindViewById<FloatingActionButton>(Resource.Id.baseViewer_recyclerNextButton);
-            //loadMoreButton.Alpha = 0.5F;
             loadMoreButton.Click += NextButon_Click;
 
             return fragment;
@@ -126,8 +130,12 @@ namespace Write2Congress.Droid.Fragments
 
         protected virtual void FetchMoreLegislatorContent(bool isNextClick)
         {
+
             if (isNextClick)
+            {
                 SetLoadMoreButtonTextAsLoading(true);
+				HandleOnDataRetrievalStarted();
+            }
         }
 
         public void SetOnClickListener(Action<bool> listener)
@@ -222,11 +230,6 @@ namespace Write2Congress.Droid.Fragments
 
         protected void ShowRecyclerButtons(bool showButtons)
         {
-            /*
-            recyclerButtonsParent.Visibility =  showButtons
-                ? ViewStates.Visible
-                : ViewStates.Gone;
-            */
             loadMoreButton.Visibility = showButtons
                 ? ViewStates.Visible
                 : ViewStates.Gone;

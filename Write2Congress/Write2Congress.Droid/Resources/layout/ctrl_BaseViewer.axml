@@ -26,15 +26,18 @@
             android:gravity="center"
             android:id="@+id/baseViewer_emptyText" />
     </ViewSwitcher>
-    <android.support.design.widget.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_action_keyboard_arrow_down_white"
         android:id="@+id/baseViewer_recyclerNextButton"
+        android:elevation="6dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/primary_blue"
+        android:src="@drawable/ic_action_keyboard_arrow_down_white"
+        app:borderWidth="0dp" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
