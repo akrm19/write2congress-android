@@ -276,6 +276,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_keyboard_arrow_down_white.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_action_keyboard_arrow_down_white.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_action_keyboard_arrow_down_white.png" />
+    <AndroidResource Include="Resources\menu\menu_searchBills.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">

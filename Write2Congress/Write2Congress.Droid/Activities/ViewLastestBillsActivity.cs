@@ -32,9 +32,10 @@ namespace Write2Congress.Droid.Activities
             // Create your application here
         }
 
+        /*
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            var baseResults = base.OnCreateOptionsMenu(menu);
+            base.OnCreateOptionsMenu(menu);
 
             using (var searchBills = menu.FindItem(SearchItemId))
             {
@@ -42,7 +43,19 @@ namespace Write2Congress.Droid.Activities
                 searchBills.SetVisible(false);
             }
 
-            return baseResults;
+            using(var exitSearch = menu.FindItem(ExitSearchItemId))
+            {
+                exitSearch.SetEnabled(false);
+                exitSearch.SetVisible(false);
+            }
+
+            //SetupFilterMenuItem(menu);
+            return true;
         }
+        */
+
+        protected override int MenuItemId => Resource.Menu.menu_viewBills;
+
+        protected override int FilterDataItemId => Resource.Id.viewLatestBillsMenu_filter;
     }
 }

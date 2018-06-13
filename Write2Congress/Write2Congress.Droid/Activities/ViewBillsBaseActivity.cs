@@ -20,7 +20,7 @@ using Write2Congress.Droid.Fragments;
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "ViewBillsActivity")]
-    public class ViewBillsBaseActivity : BaseToolbarActivityWithSearch
+    public abstract class ViewBillsBaseActivity : BaseToolbarActivityWithSearch
     {
         protected virtual BillViewerKind GetBillViewerKind { get; }
 
@@ -48,36 +48,5 @@ namespace Write2Congress.Droid.Activities
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);
             }
         }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch(item.ItemId)
-            {
-                case Resource.Id.viewBills_exitSearch:
-                    item.SetVisible(false);
-                    SetToolbarSearchviewVisibility(true);
-                    SetToolbarFilterviewVisibility(true);
-                    _exitSearchClicked?.Invoke();
-                    break;
-                case Resource.Id.viewBills_search:
-                    SetToolbarFilterviewVisibility(false);
-                    SetToolbarExitSearchviewVisibility(false);
-                    break;
-                case Resource.Id.viewBills_filter:
-                    SetToolbarSearchviewVisibility(false);
-                    SetToolbarExitSearchviewVisibility(false);
-                    break;
-            }
-
-            return base.OnOptionsItemSelected(item);
-        }
-
-        protected override int MenuItemId => Resource.Menu.menu_viewBills;
-
-        protected override int SearchItemId => Resource.Id.viewBills_search;
-
-        protected override int FilterDataItemId => Resource.Id.viewBills_filter;
-
-        protected override int ExitSearchItemId => Resource.Id.viewBills_exitSearch;
     }
 }

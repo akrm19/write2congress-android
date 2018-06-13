@@ -3326,6 +3326,15 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c002a
 			public const int scrollable = 2131492906;
 			
+			// aapt resource value: 0x7f0c0149
+			public const int searchBillsMenu_exitSearch = 2131493193;
+			
+			// aapt resource value: 0x7f0c014b
+			public const int searchBillsMenu_filter = 2131493195;
+			
+			// aapt resource value: 0x7f0c014a
+			public const int searchBillsMenu_search = 2131493194;
+			
 			// aapt resource value: 0x7f0c0072
 			public const int search_badge = 2131492978;
 			
@@ -3515,17 +3524,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c008e
 			public const int viewBillsActv_toolbar = 2131493006;
 			
-			// aapt resource value: 0x7f0c0149
-			public const int viewBills_exitSearch = 2131493193;
-			
-			// aapt resource value: 0x7f0c014b
-			public const int viewBills_filter = 2131493195;
-			
-			// aapt resource value: 0x7f0c014a
-			public const int viewBills_search = 2131493194;
-			
 			// aapt resource value: 0x7f0c0090
 			public const int viewLBillsActv_navigationDrawer = 2131493008;
+			
+			// aapt resource value: 0x7f0c014c
+			public const int viewLatestBillsMenu_filter = 2131493196;
 			
 			// aapt resource value: 0x7f0c0092
 			public const int viewLegislatorActv_fragAndToolbarParent = 2131493010;
@@ -3644,8 +3647,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c0115
 			public const int viewLettersFrag_viewSwitcher = 2131493141;
 			
-			// aapt resource value: 0x7f0c014c
-			public const int viewLettersMenu_refresh = 2131493196;
+			// aapt resource value: 0x7f0c014d
+			public const int viewLettersMenu_refresh = 2131493197;
 			
 			// aapt resource value: 0x7f0c0002
 			public const int view_offset_helper = 2131492866;
@@ -3722,17 +3725,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0c011a
 			public const int writeLetterFrag_subject = 2131493146;
 			
+			// aapt resource value: 0x7f0c0151
+			public const int writeLetterMenu_copyToClipboard = 2131493201;
+			
 			// aapt resource value: 0x7f0c0150
-			public const int writeLetterMenu_copyToClipboard = 2131493200;
+			public const int writeLetterMenu_delete = 2131493200;
 			
 			// aapt resource value: 0x7f0c014f
-			public const int writeLetterMenu_delete = 2131493199;
+			public const int writeLetterMenu_save = 2131493199;
 			
 			// aapt resource value: 0x7f0c014e
-			public const int writeLetterMenu_save = 2131493198;
-			
-			// aapt resource value: 0x7f0c014d
-			public const int writeLetterMenu_send = 2131493197;
+			public const int writeLetterMenu_send = 2131493198;
 			
 			static Id()
 			{
@@ -4095,13 +4098,16 @@ namespace Write2Congress.Droid
 			public const int menu_main = 2131623937;
 			
 			// aapt resource value: 0x7f0e0002
-			public const int menu_viewBills = 2131623938;
+			public const int menu_searchBills = 2131623938;
 			
 			// aapt resource value: 0x7f0e0003
-			public const int menu_viewLetters = 2131623939;
+			public const int menu_viewBills = 2131623939;
 			
 			// aapt resource value: 0x7f0e0004
-			public const int menu_writeLetter = 2131623940;
+			public const int menu_viewLetters = 2131623940;
+			
+			// aapt resource value: 0x7f0e0005
+			public const int menu_writeLetter = 2131623941;
 			
 			static Menu()
 			{

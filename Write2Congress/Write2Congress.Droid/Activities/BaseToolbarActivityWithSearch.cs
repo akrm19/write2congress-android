@@ -43,60 +43,8 @@ namespace Write2Congress.Droid.Activities
         {
             MenuInflater.Inflate(MenuItemId, menu);
 
-            if (FilterDataItemId != 0)
-            {
-                using (var filterMenuItem = menu.FindItem(FilterDataItemId))
-                using (var filterView = MenuItemCompat.GetActionView(filterMenuItem))
-                using (var filterViewJavaObj = filterView.JavaCast<Android.Support.V7.Widget.SearchView>())
-                {
-                    filterViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
-
-                    filterViewJavaObj.QueryTextChange += (s, e) =>
-                    {
-                        _filterDataTextChanged?.Invoke(e.NewText);
-                        e.Handled = true;
-                    };
-
-                    filterViewJavaObj.QueryTextSubmit += (s, e) =>
-                    {
-                        _filterDataTextChanged?.Invoke(e.Query);
-                        e.Handled = true;
-                    };
-
-                    var onCollapseListener = new OnActionExpandListener();
-                    onCollapseListener.MenuItemCollaspe += (sender, e) =>
-                        {
-                            _filterSearchviewCollapsed?.Invoke();
-                            e.Handled = true;
-                        };
-
-					Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
-                }
-            }
-
-            if(SearchItemId != 0)
-            {
-                using (var searchMenuItem = menu.FindItem(SearchItemId))
-                using (var searchView = MenuItemCompat.GetActionView(searchMenuItem))
-                using (var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>())
-                {
-                    searchViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterSearchCriteria);
-                    searchViewJavaObj.QueryTextSubmit += (s, e) =>
-                    {
-                        _searchTextChanged?.Invoke(e.Query);
-                        e.Handled = true;
-                    };
-
-                    var onSearchCollapsedListener = new OnActionExpandListener();
-                    onSearchCollapsedListener.MenuItemCollaspe += (sender, e) => 
-                        {
-                            _searchSearchviewCollapsed?.Invoke();
-                            e.Handled = true;
-                        };
-
-					MenuItemCompat.SetOnActionExpandListener(searchMenuItem, onSearchCollapsedListener);
-                }               
-            }
+            SetupFilterMenuItem(menu);
+            SetupSearchMenuItem(menu);
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -129,6 +77,67 @@ namespace Write2Congress.Droid.Activities
                 using (var menuItem = toolbar.Menu.FindItem(SearchItemId))
                     menuItem.CollapseActionView();
             }            
+        }
+
+        protected void SetupFilterMenuItem(IMenu menu)
+        {
+            if (FilterDataItemId != 0)
+            {
+                using (var filterMenuItem = menu.FindItem(FilterDataItemId))
+                using (var filterView = MenuItemCompat.GetActionView(filterMenuItem))
+                using (var filterViewJavaObj = filterView.JavaCast<Android.Support.V7.Widget.SearchView>())
+                {
+                    filterViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
+
+                    filterViewJavaObj.QueryTextChange += (s, e) =>
+                    {
+                        _filterDataTextChanged?.Invoke(e.NewText);
+                        e.Handled = true;
+                    };
+
+                    filterViewJavaObj.QueryTextSubmit += (s, e) =>
+                    {
+                        _filterDataTextChanged?.Invoke(e.Query);
+                        e.Handled = true;
+                    };
+
+                    var onCollapseListener = new OnActionExpandListener();
+                    onCollapseListener.MenuItemCollaspe += (sender, e) =>
+                    {
+                        _filterSearchviewCollapsed?.Invoke();
+                        e.Handled = true;
+                    };
+
+                    Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
+                }
+            }
+        }
+
+        protected void SetupSearchMenuItem(IMenu menu)
+        {
+            if (SearchItemId != 0)
+            {
+                using (var searchMenuItem = menu.FindItem(SearchItemId))
+                using (var searchView = MenuItemCompat.GetActionView(searchMenuItem))
+                using (var searchViewJavaObj = searchView.JavaCast<Android.Support.V7.Widget.SearchView>())
+                {
+                    searchViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterSearchCriteria);
+                    searchViewJavaObj.QueryTextSubmit += (s, e) =>
+                    {
+                        _searchTextChanged?.Invoke(e.Query);
+                        e.Handled = true;
+                    };
+
+                    var onSearchCollapsedListener = new OnActionExpandListener();
+                    onSearchCollapsedListener.MenuItemCollaspe += (sender, e) =>
+                        {
+                            _searchSearchviewCollapsed?.Invoke();
+                            e.Handled = true;
+                        };
+
+                    MenuItemCompat.SetOnActionExpandListener(searchMenuItem, onSearchCollapsedListener);
+                }
+            }
         }
 
         public void SetToolbarExitSearchviewVisibility(bool setAsVisible)

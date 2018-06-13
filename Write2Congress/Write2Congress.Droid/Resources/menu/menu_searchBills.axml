@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/searchBillsMenu_exitSearch"
+        android:title="@string/exitSearch"
+        android:icon="@drawable/ic_do_not_disturb_alt_white_48dp"
+        android:visible="false"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/searchBillsMenu_search"
+        android:title="@string/searchBills"
+        android:icon="@drawable/ic_search_white_48dp"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
+    <item
+        android:id="@+id/searchBillsMenu_filter"
+        android:title="@string/searchBills"
+        android:icon="@drawable/ic_filter_list_white_48dp"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
+</menu>

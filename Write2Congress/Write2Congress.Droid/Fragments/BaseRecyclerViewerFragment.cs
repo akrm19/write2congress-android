@@ -74,7 +74,9 @@ namespace Write2Congress.Droid.Fragments
             if (loadMoreButton != null)
                 loadMoreButton.Enabled = true;
 			
-            ShowToast(GetSuccessfullDataRetrievalMessage(), ToastLength.Long);
+            //Do not show toast the first time we retrieve data
+            if(currentPage > 1)
+                ShowToast(GetSuccessfullDataRetrievalMessage(), ToastLength.Long);
         }
 
         protected virtual void HandleOnDataRetrievalStarted()
@@ -130,7 +132,6 @@ namespace Write2Congress.Droid.Fragments
 
         protected virtual void FetchMoreLegislatorContent(bool isNextClick)
         {
-
             if (isNextClick)
             {
                 SetLoadMoreButtonTextAsLoading(true);
