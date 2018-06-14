@@ -34,6 +34,8 @@ namespace Write2Congress.Droid.Activities
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            var result = base.OnOptionsItemSelected(item);
+
             switch (item.ItemId)
             {
                 case Resource.Id.searchBillsMenu_exitSearch:
@@ -52,7 +54,7 @@ namespace Write2Congress.Droid.Activities
                     break;
             }
 
-            return base.OnOptionsItemSelected(item);
+            return result;
         }
 
         protected override int MenuItemId => Resource.Menu.menu_searchBills;

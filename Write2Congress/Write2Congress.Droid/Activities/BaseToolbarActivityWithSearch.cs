@@ -88,7 +88,6 @@ namespace Write2Congress.Droid.Activities
                 using (var filterViewJavaObj = filterView.JavaCast<Android.Support.V7.Widget.SearchView>())
                 {
                     filterViewJavaObj.QueryHint = AndroidHelper.GetString(Resource.String.enterFilterCriteria);
-
                     filterViewJavaObj.QueryTextChange += (s, e) =>
                     {
                         _filterDataTextChanged?.Invoke(e.NewText);

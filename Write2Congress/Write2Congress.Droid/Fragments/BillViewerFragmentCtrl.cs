@@ -353,9 +353,7 @@ namespace Write2Congress.Droid.Fragments
 
                 var searchTermEntered = passedParams.Item1;
                 var bm = new BillManager(new Logger(Class.SimpleName));
-                var localCurrentPage = isLoadMoreClick
-                    ? passedParams.Item3
-                    : 1;
+                var localCurrentPage = passedParams.Item3;
                 var mode = (BillViewerKind)((int)passedParams.Item4);
 
                 var results = bm.GetBillsBySubject(searchTermEntered, localCurrentPage);
