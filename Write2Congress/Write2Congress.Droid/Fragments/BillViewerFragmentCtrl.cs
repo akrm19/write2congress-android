@@ -142,24 +142,26 @@ namespace Write2Congress.Droid.Fragments
             }
         }
 
+        //used on search click 
         protected void FetchBillsSearchResults(string searchTerm)
         {
-            FetchBillsSearchResults(searchTerm, false);
+			currentPage = 1;
+			_billsToDisplay = null;       
+			_lastSearchTerm = searchTerm;
+
+			//TODO RM: SHOW EMPTY EVIEW THEN RETURN
+			if (string.IsNullOrWhiteSpace(searchTerm))
+				return;
+            
+            //FetchBillsSearchResults(searchTerm, false);
+            FetchMoreLegislatorContent(false);
         }
 
+        /*
         protected void FetchBillsSearchResults(string searchTerm, bool isLoadMoreClick)
         {
-            _lastSearchTerm = searchTerm;
-            _viewerMode = BillViewerKind.BillSearch;
+            //_viewerMode = BillViewerKind.BillSearch;
 
-            if (!isLoadMoreClick)
-            {
-                currentPage = 1;
-                _billsToDisplay = null;         
-            }
-
-            if (string.IsNullOrWhiteSpace(searchTerm))
-                return;
 
             base.FetchMoreLegislatorContent(isLoadMoreClick);
             var getBillsTask = GetBillsSearchTask(searchTerm, isLoadMoreClick);
@@ -202,6 +204,7 @@ namespace Write2Congress.Droid.Fragments
 
             getBillsTask.Start();
         }
+        */
 
         protected void SetToolbarForSearchResultReturned()
         {
@@ -238,15 +241,8 @@ namespace Write2Congress.Droid.Fragments
         {
             base.FetchMoreLegislatorContent(isNextClick);
 
-            if(_viewerMode == BillViewerKind.BillSearch){
-                FetchBillsSearchResults(_lastSearchTerm, true);
-                return;
-            }
+            var getBillsTask = GetBillsContentTaskForViewerMode(_viewerMode, isNextClick);
 
-            var getBillsTask = (_viewerMode == BillViewerKind.LastestBillsForEveryone)
-                ? GetAllBillsTasks()
-                : GetLegislatorsBillsTask();
-            
             getBillsTask.ContinueWith((antecedent) =>
             {
                 if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
@@ -277,16 +273,37 @@ namespace Write2Congress.Droid.Fragments
 
                         if(_viewerMode == BillViewerKind.LastestBillsForEveryone)
                             GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.latestBills));
+                        else if(_viewerMode == BillViewerKind.BillSearch)
+                            GetBaseActivity().UpdateTitleBarText($"'{antecedent.Result.Item4}' Bills");
                     }
+
+                    if (_viewerMode == BillViewerKind.BillSearch)
+                        SetToolbarForSearchResultReturned();
                 });
             });
 
             getBillsTask.Start();
         }
 
-        private Task<Tuple<List<Bill>, bool, int>> GetLegislatorsBillsTask()
+        private Task<Tuple<List<Bill>, bool, int, string>> GetBillsContentTaskForViewerMode(BillViewerKind viewerKind, bool isLoadMoreContentClick)
         {
-            var getBillsTask = new Task<Tuple<List<Bill>, bool, int>>((prms) =>
+            switch (viewerKind)
+            {
+				case BillViewerKind.BillSearch:
+					return GetBillsSearchTask(_lastSearchTerm, false);
+                case BillViewerKind.LastestBillsForEveryone:
+                    return GetAllBillsTasks();
+                case BillViewerKind.SponsoredBills:
+                case BillViewerKind.CosponsoredBills:
+                    return GetLegislatorsBillsTask();
+                default:
+                    return null;
+            }
+        }
+
+        private Task<Tuple<List<Bill>, bool, int, string>> GetLegislatorsBillsTask()
+        {
+            var getBillsTask = new Task<Tuple<List<Bill>, bool, int, string>>((prms) =>
             {
                 var passedParams = (prms as Tuple<string, BillManager, int, int>);
 
@@ -301,15 +318,15 @@ namespace Write2Congress.Droid.Fragments
 
                 var isThereMoreVotes = results.IsThereMoreResults;
 
-                return new Tuple<List<Bill>, bool, int>(results.Results, isThereMoreVotes, localCurrentPage);
+                return new Tuple<List<Bill>, bool, int, string>(results.Results, isThereMoreVotes, localCurrentPage, string.Empty);
             }, new Tuple<string, BillManager, int, int>(_legislator.IdBioguide, _billManager, currentPage, (int)_viewerMode));
 
             return getBillsTask;
         }
 
-        private Task<Tuple<List<Bill>, bool, int>> GetAllBillsTasks()
+        private Task<Tuple<List<Bill>, bool, int, string>> GetAllBillsTasks()
         {
-            var getBillsTask = new Task<Tuple<List<Bill>, bool, int>>((prms) =>
+            var getBillsTask = new Task<Tuple<List<Bill>, bool, int, string>>((prms) =>
             {
                 var passedParams = (prms as Tuple<string, BillManager, int, int>);
 
@@ -322,7 +339,7 @@ namespace Write2Congress.Droid.Fragments
 
                 var isThereMoreVotes = results.IsThereMoreResults;
 
-                return new Tuple<List<Bill>, bool, int>(results.Results, isThereMoreVotes, localCurrentPage);
+                return new Tuple<List<Bill>, bool, int, string>(results.Results, isThereMoreVotes, localCurrentPage, string.Empty);
             }, new Tuple<string, BillManager, int, int>("search term goes here", _billManager, currentPage, (int)_viewerMode));
 
             return getBillsTask;
@@ -364,9 +381,6 @@ namespace Write2Congress.Droid.Fragments
 
             outState.PutInt(BundleType.BillViewerFragmentType, (int)_viewerMode);
             outState.PutBoolean(BundleType.BillsIsThereMoreContent, _isThereMoreVotes);
-
-            //if (billSearchResultsCurrentPage != -1)
-            //    outState.PutInt(BundleType.BillSearchResultsCurrentPage, billSearchResultsCurrentPage);
         }
 
         public override void OnResume()
