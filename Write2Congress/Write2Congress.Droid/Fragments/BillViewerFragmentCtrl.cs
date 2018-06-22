@@ -32,6 +32,11 @@ namespace Write2Congress.Droid.Fragments
 
         public BillViewerFragmentCtrl() { }
 
+        public static BillViewerFragmentCtrl CreateInstance(BillViewerKind viewerMode)
+		{
+			return CreateInstance(null, viewerMode);
+		}
+
         public static BillViewerFragmentCtrl CreateInstance(Legislator legislator, BillViewerKind viewerMode)
         {
             var newFragment = new BillViewerFragmentCtrl();
@@ -45,11 +50,6 @@ namespace Write2Congress.Droid.Fragments
 
 			newFragment.Arguments = args;
             return newFragment;
-        }
-
-        public static BillViewerFragmentCtrl CreateInstance(BillViewerKind viewerMode)
-        {
-            return CreateInstance(null, viewerMode);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -264,7 +264,6 @@ namespace Write2Congress.Droid.Fragments
 
                         currentPage = antecedent.Result.Item3 + 1;
                         _isThereMoreVotes = antecedent.Result.Item2;
-
 
                         if (_billsToDisplay == null || !_billsToDisplay.Any())
                             _billsToDisplay = antecedent.Result.Item1;
