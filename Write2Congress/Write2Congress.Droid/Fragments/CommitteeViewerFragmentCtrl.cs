@@ -54,8 +54,9 @@ namespace Write2Congress.Droid.Fragments
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
-            recyclerAdapter = new CommitteeAdapter(this);
-            recycler.SetAdapter(recyclerAdapter);
+            //recyclerAdapter = new CommitteeAdapter(this);
+            //recycler.SetAdapter(recyclerAdapter);
+            recycler.SetAdapter(new CommitteeAdapter(this));
 
             SetLoadingTextInEmptyView();
 
@@ -177,10 +178,11 @@ namespace Write2Congress.Droid.Fragments
         {
             _committees = committees;
 
-            if (IsBeingShown && recyclerAdapter != null)
+            //if (IsBeingShown && recyclerAdapter != null)
+            if (IsBeingShown && recycler.GetAdapter() != null)
             {
-                (recyclerAdapter as CommitteeAdapter).UpdateCommittee(_committees);
-
+                //(recyclerAdapter as CommitteeAdapter).UpdateCommittee(_committees);
+                (recycler.GetAdapter() as CommitteeAdapter).UpdateCommittee(_committees);
                 SetLoadingUiOff();
             }
         }

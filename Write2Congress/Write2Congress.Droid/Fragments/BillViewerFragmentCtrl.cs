@@ -80,8 +80,11 @@ namespace Write2Congress.Droid.Fragments
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
-            recyclerAdapter = new BillAdapter(this);
-            recycler.SetAdapter(recyclerAdapter);
+            //recyclerAdapter = new BillAdapter(this);
+            //recycler.SetAdapter(recyclerAdapter);
+            recycler.SetAdapter(new BillAdapter(this));
+
+            //recycler.GetAdapter();
 
             if (_viewerMode == BillViewerKind.LastestBillsForEveryone)
                 HookupToolbarEventsForBillsFiltering();
@@ -134,7 +137,8 @@ namespace Write2Congress.Droid.Fragments
             try
             {
                 var filteredBills = _billManager.FilterBillsByQuery(_billsToDisplay, filter);
-                (recyclerAdapter as BillAdapter).UpdateBill(filteredBills);
+                //(recyclerAdapter as BillAdapter).UpdateBill(filteredBills);
+                (recycler.GetAdapter() as BillAdapter).UpdateBill(filteredBills);
             }
             catch(Exception e)
             {
@@ -440,7 +444,8 @@ namespace Write2Congress.Droid.Fragments
                 SetLoadMoreButtonTextAsLoading(false);
                 ShowRecyclerButtons(_isThereMoreVotes);
 
-                (recyclerAdapter as BillAdapter).UpdateBill(bills);
+                //(recyclerAdapter as BillAdapter).UpdateBill(bills);
+                (recycler.GetAdapter() as BillAdapter).UpdateBill(bills);
                 SetLoadingUiOff();
             }
         }

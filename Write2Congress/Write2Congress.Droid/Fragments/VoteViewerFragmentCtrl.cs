@@ -56,8 +56,9 @@ namespace Write2Congress.Droid.Fragments
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
             
-            recyclerAdapter = new VoteAdapter(this);
-            recycler.SetAdapter(recyclerAdapter);
+            //recyclerAdapter = new VoteAdapter(this);
+            //recycler.SetAdapter(recyclerAdapter);
+            recycler.SetAdapter(new VoteAdapter(this));
 
 			SetLoadingTextInEmptyView();
 
@@ -178,12 +179,14 @@ namespace Write2Congress.Droid.Fragments
         {
             SetVotes(votes, isThereMoreVotes);
 
-            if (IsBeingShown || recyclerAdapter !=  null)
+            //if (IsBeingShown || recyclerAdapter !=  null)
+            if (IsBeingShown || recycler.GetAdapter() != null)
             {
                 SetLoadMoreButtonTextAsLoading(false);
                 ShowRecyclerButtons(_isThereMoreVotes);
 
-                (recyclerAdapter as VoteAdapter).UpdateVotes(_votes);
+                //(recyclerAdapter as VoteAdapter).UpdateVotes(_votes);
+                (recycler.GetAdapter() as VoteAdapter).UpdateVotes(_votes);
                 SetLoadingUiOff();
             }
         }

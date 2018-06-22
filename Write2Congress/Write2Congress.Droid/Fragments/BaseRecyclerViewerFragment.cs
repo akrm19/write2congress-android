@@ -22,7 +22,7 @@ namespace Write2Congress.Droid.Fragments
     public abstract class BaseRecyclerViewerFragment : BaseFragment
     {
         protected RecyclerView recycler;
-        protected RecyclerView.Adapter recyclerAdapter;
+        //protected RecyclerView.Adapter recyclerAdapter;
         protected ViewSwitcher viewSwitcher;
         protected TextView header, emptyText;
         protected FloatingActionButton loadMoreButton;
@@ -40,7 +40,7 @@ namespace Write2Congress.Droid.Fragments
         protected virtual void CleanUp()
         {
             recycler = null;
-            recyclerAdapter = null;
+            //recyclerAdapter = null;
             viewSwitcher = null;
             header = null;
             emptyText = null;
@@ -217,12 +217,14 @@ namespace Write2Congress.Droid.Fragments
 
         protected void ShowEmptyviewIfNecessary()
         {
-            if (recyclerAdapter.ItemCount == 0 && viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
+            //if (recyclerAdapter.ItemCount == 0 && viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
+            if(recycler.GetAdapter().ItemCount == 0 && viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
             {
                 viewSwitcher.ShowNext();
                 //ShowRecyclerButtons(false);
             }
-            else if (recyclerAdapter.ItemCount > 0 && viewSwitcher.CurrentView.Id != Resource.Id.baseViewer_recycler)
+            //else if (recyclerAdapter.ItemCount > 0 && viewSwitcher.CurrentView.Id != Resource.Id.baseViewer_recycler)
+            else if (recycler.GetAdapter().ItemCount > 0 && viewSwitcher.CurrentView.Id != Resource.Id.baseViewer_recycler)
             {
                 viewSwitcher.ShowNext();
                 //ShowRecyclerButtons(true);
