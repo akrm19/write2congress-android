@@ -33,8 +33,6 @@ namespace Write2Congress.Droid.Fragments
         protected bool errorOccurred = false;
         public Action<bool> LoadMoreClick;
 
-        protected BaseFragment baseFragment;
-
         public BaseRecyclerViewerFragment() { }
 
         protected virtual void CleanUp()
@@ -44,7 +42,6 @@ namespace Write2Congress.Droid.Fragments
             viewSwitcher = null;
             header = null;
             emptyText = null;
-            baseFragment = null;
 
             if(loadMoreButton != null)
                 loadMoreButton.Click -= NextButon_Click;
