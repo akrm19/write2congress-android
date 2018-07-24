@@ -62,12 +62,14 @@ namespace Write2Congress.Droid.Fragments
 
         private void LaunchViewWebsiteIntent(string url)
         {
-            var intent = new Intent(Intent.ActionView);
-            var uri = Android.Net.Uri.Parse(url);
+            using (var intent = new Intent(Intent.ActionView))
+            {
+                var uri = Android.Net.Uri.Parse(url);
 
-            intent.SetData(uri);
+                intent.SetData(uri);
 
-            StartActivity(intent);
+                StartActivity(intent);
+            }
         }
     }
 }
