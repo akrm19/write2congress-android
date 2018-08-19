@@ -16,5 +16,6 @@ namespace Write2Congress.Droid.DomainModel.Constants
     {
         public const string Signature = "preferences_signature";
         public const string LegislatorsLastUpdate = "LegislatorsLastUpdate";
+        public const string FavoriteLegislatorsLastUpdate = "LegislatorsLastUpdate";
     }
 }

@@ -73,11 +73,23 @@ namespace Write2Congress.Droid.Activities
                 case Resource.Id.actionMenu_latestBills:
                     OpenLatestBills();
                     break;
+                case Resource.Id.actionMenu_favoriteLegislators:
+                    OpenFavLegislators();
+                    break;
                 default:
                     break;
             }
 
             CurrentDrawerLayout.CloseDrawers();
+        }
+
+        private void OpenFavLegislators()
+        {
+            if (GetType() == typeof(FavoriteLegislatorsActivity))
+                return;
+
+            var intent = new Intent(this, typeof(FavoriteLegislatorsActivity));
+            StartActivity(intent);
         }
 
         private void OpenLatestBills()

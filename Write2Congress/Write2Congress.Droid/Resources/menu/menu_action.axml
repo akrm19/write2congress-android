@@ -21,6 +21,12 @@
           android:showAsAction="always"
           android:title="@string/legislators"
           android:actionViewClass="android.support.v7.widget.SearchView"/>
+
+     <item android:id="@+id/actionMenu_favoriteLegislators"
+          android:icon="@drawable/ic_person_white_48dp"
+          android:showAsAction="always"
+          android:title="@string/favorites"
+          android:actionViewClass="android.support.v7.widget.SearchView"/>
         
       <item android:id="@+id/actionMenu_latestBills"
           android:icon="@drawable/ic_insert_drive_file_white_48dp"

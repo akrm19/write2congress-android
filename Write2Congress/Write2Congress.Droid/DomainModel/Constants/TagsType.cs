@@ -16,6 +16,7 @@ namespace Write2Congress.Droid.DomainModel.Constants
     {
 		public const string DraftsFragment = "DraftsFragment";
 		public const string DonateFragment = "DoanteFragment";
+        public const string FavorityLegislatorsFragment = "FavorityLegislatorsFragment";
         public const string MainParentFragment = "MainParentFragment";
         public const string SentFragment = "SentFragment";
         internal const string SettingsFragment = "SettingsFragment";

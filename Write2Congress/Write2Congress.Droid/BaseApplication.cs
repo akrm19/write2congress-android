@@ -23,12 +23,27 @@ namespace Write2Congress.Droid
         private IMyLogger _logger;
         private static BaseApplication _instance;
         private List<Legislator> _allLegislators;
+        private List<Legislator> _favoriteLegislators;
 
         public LetterManager LetterManager;
         public CommitteeManager CommitteeManager;
         public VoteManager VoteMngr;
         public BillManager BillMngr; 
         protected LegislatorManager LegislatorManager;
+
+        public List<Legislator> FavoriteLegislators 
+        { 
+            get => _favoriteLegislators ?? new List<Legislator>(); 
+
+            set
+            {
+                if (value == null)
+                    return;
+
+                AppHelper.SaveFavoriteLegistorsToFileStorage(value);
+				_favoriteLegislators = value; 
+            }
+        }
 
         public BaseApplication(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
@@ -49,16 +64,18 @@ namespace Write2Congress.Droid
             LetterManager = new LetterManager(new LetterFileProvider(), _logger);
 
             //CommitteeManager = new CommitteeManager(_logger);
+			LegislatorManager = new LegislatorManager(_logger);
             VoteMngr = new VoteManager(_logger);
             BillMngr = new BillManager(_logger);
-            LegislatorManager = new LegislatorManager(_logger);
+
+            _favoriteLegislators = AppHelper.GetFavoriteLegislatorsFromFileStorage();
             _allLegislators = AppHelper.GetCachedLegislatorsFromFileStorage();
 
             if (_allLegislators.Count == 0 || _forceRetrieveAllLegislators)
             {
                 _allLegislators = LegislatorManager.GetAllLegislators();
 
-                AppHelper.SaveLegistorsToFileStorage(_allLegislators);
+                AppHelper.SaveCachedLegistorsToFileStorage(_allLegislators);
             }
         }
 
@@ -67,7 +84,7 @@ namespace Write2Congress.Droid
             try
             {
                 _allLegislators = LegislatorManager.GetAllLegislators();
-                AppHelper.SaveLegistorsToFileStorage(_allLegislators);
+                AppHelper.SaveCachedLegistorsToFileStorage(_allLegislators);
 
                 return true;
             }
