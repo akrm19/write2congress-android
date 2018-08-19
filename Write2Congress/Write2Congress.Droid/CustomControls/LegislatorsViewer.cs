@@ -141,7 +141,8 @@ namespace Write2Congress.Droid.CustomControls
         {
             var par = _fragment.Activity as IActivityWithToolbarSearch;
 
-            par.FilterSearchTextChanged += FilterLegislatorsByFirstMiddleOrLastName;
+            if(par != null)
+                par.FilterSearchTextChanged += FilterLegislatorsByFirstMiddleOrLastName;
         }
 
         protected override void Dispose(bool disposing)
