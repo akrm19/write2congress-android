@@ -245,7 +245,7 @@ namespace Write2Congress.Droid.Fragments
         {
             base.FetchMoreLegislatorContent(isNextClick);
 
-            var getBillsTask = GetBillsContentTaskForViewerMode(_viewerMode, isNextClick);
+            var getBillsTask = GetBillsContentTaskForViewerMode(_viewerMode);
 
             getBillsTask.ContinueWith((antecedent) =>
             {
@@ -348,14 +348,14 @@ namespace Write2Congress.Droid.Fragments
             return getBillsTask;
         }
 
-        private Task<Tuple<List<Bill>, bool, int, string>> GetBillsSearchTask(string searchTerm, bool isLoadMoreClick)
+        private Task<Tuple<List<Bill>, bool, int, string>> GetBillsSearchTask(string searchTerm)
         {
             var getBillsTask = new Task<Tuple<List<Bill>, bool, int, string>>((prms) =>
             {
                 var passedParams = (prms as Tuple<string, BillManager, int, int>);
 
                 var searchTermEntered = passedParams.Item1;
-                var bm = new BillManager(new Logger(Class.SimpleName));
+                var bm = passedParams.Item2;//new BillManager(new Logger(Class.SimpleName));
                 var localCurrentPage = passedParams.Item3;
                 var mode = (BillViewerKind)((int)passedParams.Item4);
 
