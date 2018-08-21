@@ -82,7 +82,7 @@ namespace Write2Congress.Droid.CustomControls
             SetStateSpinner(stateOrterritory);
         }
 
-        public void SetupCtrl(BaseFragment fragment, List<Legislator> legislators)
+        public void SetupCtrl(BaseFragment fragment, List<Legislator> legislators, bool showStateSpinner = true)
         {
             _fragment = fragment;
             _legislators = legislators;
@@ -97,16 +97,21 @@ namespace Write2Congress.Droid.CustomControls
             _legislatorAdapter.WriteLetterToLegislatorClick += WriteNewLetterItemClicked;
             _legislatorAdapter.LegislatorClick += LegislatorClicked;
             recyclerView.SetAdapter(_legislatorAdapter);
-            
 
-            //Setup States spinner
-            _statesAndTerrSpinner = FindViewById<Spinner>(Resource.Id.legislatorsViewer_statesSpinner);
-            _statesAndTerrWithDescription = Util.GetAllStatesAndTerrWithDescriptions();
-            _stateAndTerrNames = _statesAndTerrWithDescription.Select(s => s.Item2).ToList(); 
+			//Setup States spinner
+			_statesAndTerrSpinner = FindViewById<Spinner>(Resource.Id.legislatorsViewer_statesSpinner);
 
-            var statesAdapter = new ArrayAdapter<string>(_fragment.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateAndTerrNames);
-            _statesAndTerrSpinner.Adapter = statesAdapter;
-            _statesAndTerrSpinner.ItemSelected += _states_ItemSelected;
+            if (showStateSpinner)
+            {
+                _statesAndTerrWithDescription = Util.GetAllStatesAndTerrWithDescriptions();
+                _stateAndTerrNames = _statesAndTerrWithDescription.Select(s => s.Item2).ToList();
+
+                var statesAdapter = new ArrayAdapter<string>(_fragment.Context, Android.Resource.Layout.SimpleSpinnerDropDownItem, _stateAndTerrNames);
+                _statesAndTerrSpinner.Adapter = statesAdapter;
+                _statesAndTerrSpinner.ItemSelected += _states_ItemSelected;
+            }
+            else
+                _statesAndTerrSpinner.Visibility = ViewStates.Gone;
 
             HookupToActivitySearchTextChangedDelegate();
         }

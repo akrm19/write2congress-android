@@ -40,7 +40,7 @@ namespace Write2Congress.Droid.Fragments
 
             //Setup legislatorsViewer
             _legislatorsViewer = fragment.FindViewById<LegislatorsViewer>(Resource.Id.favortieLegislatorsFrag_legislatorsViewer);
-            _legislatorsViewer.SetupCtrl(this, AppHelper.GetFavoriteLegislators());
+            _legislatorsViewer.SetupCtrl(this, AppHelper.GetFavoriteLegislators(), false);
 
             return fragment;
         }
