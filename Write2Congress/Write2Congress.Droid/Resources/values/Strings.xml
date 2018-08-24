@@ -64,6 +64,7 @@
   <string name="loadMore">Load More</string>
   <string name="loading">Loading...</string>
   <string name="moreInfo">More Info</string>
+  <string name="noFavoriteLegislators">No favorite legislators to show</string>
   <string name="nominationInfo">Nomination Info</string>
   <string name="ok">OK</string>
   <string name="party">Party</string>
@@ -93,6 +94,7 @@
   <string name="unableToDeleteLetter">Unable to delete letter</string>
   <string name="unableToProcessAction">Unable to process action</string>
   <string name="unableToRetrieveData">Error Encountered: Unable to retrieve data</string>
+  <string name="unableToRetrieveFavLegislators">Error encountered. Unable to retrieve saved legislators. Please try again.</string>
   <string name="unableToUpdateLegislatorData">Error Encountered: Unable to update legislator data</string>
   <string name="unknown">Unknown</string>
   <string name="updatedDraftLetters">Updated Draft Letters</string>

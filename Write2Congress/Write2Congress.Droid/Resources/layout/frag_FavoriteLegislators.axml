@@ -4,8 +4,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/favortieLegislatorsFrag_parent">
-    <write2congress.droid.customcontrols.LegislatorsViewer
-        android:id="@+id/favortieLegislatorsFrag_legislatorsViewer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <ViewSwitcher
+        android:layout_below="@id/baseViewer_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/favortieLegislatorsFrag_viewSwitcher"
+        android:inAnimation="@android:anim/slide_in_left"
+        android:outAnimation="@android:anim/slide_out_right">
+        <write2congress.droid.customcontrols.LegislatorsViewer
+            android:id="@+id/favortieLegislatorsFrag_legislatorsViewer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/favortieLegislatorsFrag_emptyText" />
+    </ViewSwitcher>
 </LinearLayout>
