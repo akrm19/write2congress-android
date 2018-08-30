@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
 using Write2Congress.Droid.Code;
@@ -17,11 +18,19 @@ using Write2Congress.Droid.Fragments;
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "FavoriteBillsActivity")]
-    public class FavoriteLegislatorsActivity : BaseToolbarActivity
+    public class FavoriteLegislatorsActivity : BaseToolbarActivityWithButtons
     {
         private FavoriteLegislatorsFragment _favLegislatorsFragment;
 
         protected override int DrawerLayoutId => Resource.Id.favoriteLegislatorsActv_parent;
+
+        protected override int MenuItemId
+        {
+            get
+            {
+                return Resource.Menu.menu_favorite;
+            }
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,6 +49,24 @@ namespace Write2Congress.Droid.Activities
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _favLegislatorsFragment, Resource.Id.favoriteLegislatorsActv_fragmentContainer, TagsType.FavorityLegislatorsFragment);
             }
                 
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.favoriteMenu_edit:
+                    EditFavoriteLegislators();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
+
+
+        private void EditFavoriteLegislators()
+        {
+            //TODO add edit action
         }
     }
 }

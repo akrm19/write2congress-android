@@ -18,7 +18,7 @@ using Write2Congress.Droid.DomainModel.Interfaces;
 namespace Write2Congress.Droid.Activities
 {
     [Activity(Label = "BaseToolbarActivityWithSearch")]
-    public abstract class BaseToolbarActivityWithSearch : BaseToolbarActivity, IActivityWithToolbarSearch
+    public abstract class BaseToolbarActivityWithSearch : BaseToolbarActivityWithButtons, IActivityWithToolbarSearch
     {
         protected FilterDataTextChangedDelegate _filterDataTextChanged;
         protected FilterDataTextChangedDelegate _searchTextChanged;
@@ -26,11 +26,9 @@ namespace Write2Congress.Droid.Activities
         protected ToolbarMenuItemClickedDelegate _filterSearchviewCollapsed;
         protected ToolbarMenuItemClickedDelegate _searchSearchviewCollapsed;
 
-        protected abstract int MenuItemId { get; }
         protected virtual int FilterDataItemId => 0;
         protected virtual int SearchItemId =>  0;
         protected virtual int ExitSearchItemId => 0;
-        protected override int DrawerLayoutId => throw new NotImplementedException();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,7 +44,7 @@ namespace Write2Congress.Droid.Activities
             SetupFilterMenuItem(menu);
             SetupSearchMenuItem(menu);
 
-            return base.OnCreateOptionsMenu(menu);
+            return true;
         }
 
         protected override void OnDestroy()
@@ -79,7 +77,7 @@ namespace Write2Congress.Droid.Activities
             }            
         }
 
-        protected void SetupFilterMenuItem(IMenu menu)
+        protected  virtual void SetupFilterMenuItem(IMenu menu)
         {
             if (FilterDataItemId != 0)
             {
@@ -112,7 +110,7 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
-        protected void SetupSearchMenuItem(IMenu menu)
+        protected virtual void SetupSearchMenuItem(IMenu menu)
         {
             if (SearchItemId != 0)
             {
@@ -152,16 +150,6 @@ namespace Write2Congress.Droid.Activities
         public void SetToolbarFilterviewVisibility(bool setAsVisible)
         {
             SetMenuItemsVisibility(FilterDataItemId, setAsVisible);
-        }
-
-        protected void SetMenuItemsVisibility(int menuItemId, bool setAsVisible)
-        {
-            if (menuItemId != 0)
-            {
-                using (var toolbar = GetSupportToolbar())
-                using (var menuItem = toolbar.Menu.FindItem(menuItemId))
-                    menuItem.SetVisible(setAsVisible);
-            }
         }
 
         public virtual FilterDataTextChangedDelegate FilterSearchTextChanged
