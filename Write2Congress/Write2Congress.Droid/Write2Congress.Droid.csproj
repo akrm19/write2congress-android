@@ -287,6 +287,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_star_rate_blue_48dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_star_rate_blue_48dp.png" />
     <AndroidResource Include="Resources\menu\menu_favorite.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_star_rate_border_48dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_wrench_blue_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_wrench_blue_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_wrench_blue_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_wrench_blue_48dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
