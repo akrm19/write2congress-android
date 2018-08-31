@@ -22,7 +22,6 @@ namespace Write2Congress.Droid.Fragments
     public abstract class BaseRecyclerViewerFragment : BaseFragment
     {
         protected RecyclerView recycler;
-        //protected RecyclerView.Adapter recyclerAdapter;
         protected ViewSwitcher viewSwitcher;
         protected TextView header, emptyText;
         protected FloatingActionButton loadMoreButton;
