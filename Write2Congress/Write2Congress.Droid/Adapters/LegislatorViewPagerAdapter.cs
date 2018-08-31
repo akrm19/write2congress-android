@@ -23,44 +23,44 @@ namespace Write2Congress.Droid.Adapters
     {
         private Legislator _legislator;
 
-        private List<Vote> _votes;
-        private List<Bill> _billsSponsored;
-        private List<Bill> _billsCosponsored;
-        private List<Committee> _committees;
+        //private List<Vote> _votes;
+        //private List<Bill> _billsSponsored;
+        //private List<Bill> _billsCosponsored;
+        //private List<Committee> _committees;
         //public List<BaseRecyclerViewerFragment> viewers = new List<BaseRecyclerViewerFragment>();
 
-        BaseRecyclerViewerFragment _voteFrag;
-        BaseRecyclerViewerFragment _sponsoredBillFrag;
-        BaseRecyclerViewerFragment _cosponsoredBillFrag;
-        BaseRecyclerViewerFragment _committeesFrag;
+        //BaseRecyclerViewerFragment _voteFrag;
+        //BaseRecyclerViewerFragment _sponsoredBillFrag;
+        //BaseRecyclerViewerFragment _cosponsoredBillFrag;
+        //BaseRecyclerViewerFragment _committeesFrag;
 
         List<BaseRecyclerViewerFragment> _frags = new List<BaseRecyclerViewerFragment>(System.Enum.GetNames(typeof(ViewPagerList)).Length);
 
         public LegislatorViewPagerAdapter(Android.Support.V4.App.FragmentManager fm) : base(fm) { }
 
-        public List<Vote> Votes
-        {
-            get { return _votes; }
-            set { _votes = value; }
-        }
+        //public List<Vote> Votes
+        //{
+        //    get { return _votes; }
+        //    set { _votes = value; }
+        //}
 
-        public List<Bill> BillsSponsored
-        {
-            get { return _billsSponsored; }
-            set { _billsSponsored = value; }
-        }
+        //public List<Bill> BillsSponsored
+        //{
+        //    get { return _billsSponsored; }
+        //    set { _billsSponsored = value; }
+        //}
 
-        public List<Bill> BillsCosponsored
-        {
-            get { return _billsCosponsored; }
-            set { _billsCosponsored = value; }
-        }
+        //public List<Bill> BillsCosponsored
+        //{
+        //    get { return _billsCosponsored; }
+        //    set { _billsCosponsored = value; }
+        //}
 
-        public List<Committee> Committees
-        {
-            get { return _committees; }
-            set { _committees = value; }
-        }
+        //public List<Committee> Committees
+        //{
+        //    get { return _committees; }
+        //    set { _committees = value; }
+        //}
 
         public LegislatorViewPagerAdapter(Android.Support.V4.App.FragmentManager fm, Legislator legislator)
             : base(fm)
@@ -104,22 +104,22 @@ namespace Write2Congress.Droid.Adapters
             return GetItem((ViewPagerList)position);
         }
 
-        public Fragment GetExitsingItem(ViewPagerList viewpagerType)
-        {
-            switch (viewpagerType)
-            {
-                case ViewPagerList.LegislatorVotes:
-                    return _voteFrag;
-                case ViewPagerList.LegislatorBillsSponsored:
-                    return _sponsoredBillFrag;
-                case ViewPagerList.LegislatorBillsCosponsored:
-                    return _cosponsoredBillFrag;
-                case ViewPagerList.LegislatorCommittees:
-                    return _committeesFrag;
-                default:
-                    return null;
-            }
-        }
+        //public Fragment GetExitsingItem(ViewPagerList viewpagerType)
+        //{
+        //    switch (viewpagerType)
+        //    {
+        //        case ViewPagerList.LegislatorVotes:
+        //            return _voteFrag;
+        //        case ViewPagerList.LegislatorBillsSponsored:
+        //            return _sponsoredBillFrag;
+        //        case ViewPagerList.LegislatorBillsCosponsored:
+        //            return _cosponsoredBillFrag;
+        //        case ViewPagerList.LegislatorCommittees:
+        //            return _committeesFrag;
+        //        default:
+        //            return null;
+        //    }
+        //}
 
         public Fragment GetItem(ViewPagerList viewpagerType)
         {
