@@ -1,72 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/viewLegislatorFrag_parent">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    
+    <!--
+    The following needs to be added to center the iamgeview, but creates an
+    error on compilation. Maybe update Xamarin and API and try again
+    android:layout_above="@id/viewLegislatorFrag_contactMethodsParent"-->
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:src="@android:drawable/ic_menu_gallery"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:id="@+id/viewLegislatorFrag_portraitAndInfoParent">
-        <ImageView
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:id="@+id/viewLegislatorFrag_portrait" />
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/viewLegislatorFrag_infoParent">
-            <TextView
-                android:text="Chamber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_chamber" />
-            <TextView
-                android:text="Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_party" />
-            <TextView
-                android:text="TermStartDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_termStartDate" />
-            <TextView
-                android:text="TermEndDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_termEndDate" />
-            <TextView
-                android:text="Birthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_birthdate" />
-            <TextView
-                android:text="VotesMissedPercentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_votesTotal" />
-            <TextView
-                android:text="VotesWithPartyPercentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_voteWithPartyPrct" />
-            <TextView
-                android:text="VotesMissedPercentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_voteMissedPrct" />
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_width="wrap_content"
+        android:minWidth="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/viewLegislatorFrag_portrait" />
+    <TextView
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Chamber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_chamber" />
+    <TextView
+        android:layout_below="@id/viewLegislatorFrag_chamber"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_party" />
+    <TextView
+        android:layout_below="@id/viewLegislatorFrag_party"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:text="TermStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_termStartDate" />
+    <TextView
+        android:layout_below="@id/viewLegislatorFrag_termStartDate"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:text="TermEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_termEndDate" />
+    <TextView
+        android:layout_below="@id/viewLegislatorFrag_termEndDate"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:text="Birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_birthdate" />
+    <TextView
+        android:layout_below="@id/viewLegislatorFrag_birthdate"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:text="VotesMissedPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_votesTotal" />
+    <TextView
+        android:layout_below="@id/viewLegislatorFrag_votesTotal"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:text="VotesWithPartyPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_voteWithPartyPrct" />
+    <TextView
+        android:layout_below="@id/viewLegislatorFrag_voteWithPartyPrct"
+        android:layout_toRightOf="@id/viewLegislatorFrag_portrait"
+        android:layout_marginLeft="10dp"
+        android:text="VotesMissedPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewLegislatorFrag_voteMissedPrct" />
     <HorizontalScrollView
+        android:layout_below="@id/viewLegislatorFrag_voteMissedPrct"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/viewLegislatorFrag_contactMethodsParent">
@@ -118,6 +139,9 @@
         </LinearLayout>
     </HorizontalScrollView>
     <ScrollView
+        android:layout_below="@id/viewLegislatorFrag_contactMethodsParent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:id="@+id/viewLegislatorFrag_scrollview"
@@ -140,4 +164,4 @@
             </android.support.v4.view.ViewPager>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>
