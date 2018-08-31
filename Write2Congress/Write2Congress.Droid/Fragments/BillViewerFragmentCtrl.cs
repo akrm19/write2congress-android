@@ -104,7 +104,10 @@ namespace Write2Congress.Droid.Fragments
                 _billsToDisplay = new List<Bill>().DeserializeFromJson(serializedBills);
                 SetBills(_billsToDisplay, _isThereMoreVotes);
             }
-            else if(_viewerMode != BillViewerKind.BillSearch || !string.IsNullOrWhiteSpace(_lastSearchTerm))
+            // Removing '|| !string.IsNullOrWhiteSpace(_lastSearchTerm))' for now
+            // since it will fetch legislator content when searchview is not empty and the 
+            // use does something like switch orientation
+            else if (_viewerMode != BillViewerKind.BillSearch)// || !string.IsNullOrWhiteSpace(_lastSearchTerm))
                 FetchMoreLegislatorContent(false);
 
             return fragment;
@@ -374,6 +377,10 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnSaveInstanceState(outState);
 
+			/* 
+             * TODO RM: This change seems to prevent the crash, but there is still
+             * issues with slowness
+             * */
             if (_billsToDisplay != null)
             {
                 var serializedBills = _billsToDisplay.SerializeToJson();
