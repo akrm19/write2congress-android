@@ -291,7 +291,7 @@ namespace Write2Congress.Droid.Fragments
             getBillsTask.Start();
         }
 
-        private Task<Tuple<List<Bill>, bool, int, string>> GetBillsContentTaskForViewerMode(BillViewerKind viewerKind, bool isLoadMoreContentClick)
+        private Task<Tuple<List<Bill>, bool, int, string>> GetBillsContentTaskForViewerMode(BillViewerKind viewerKind)
         {
             switch (viewerKind)
             {
