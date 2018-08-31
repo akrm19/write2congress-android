@@ -295,8 +295,12 @@ namespace Write2Congress.Droid.Fragments
         {
             switch (viewerKind)
             {
+                //TODO RM: Fix the performance bug. It is caued by the 
+                //data we get back from search. Not sure why, but maybe
+                //it is the changes in the items
+
 				case BillViewerKind.BillSearch:
-					return GetBillsSearchTask(_lastSearchTerm, false);
+                    return GetBillsSearchTask(_lastSearchTerm);
                 case BillViewerKind.LastestBillsForEveryone:
                     return GetAllBillsTasks();
                 case BillViewerKind.SponsoredBills:
