@@ -49,7 +49,7 @@ namespace Write2Congress.Droid.Fragments
 
             //Setup legislatorsViewer
             _legislatorsViewer = fragment.FindViewById<LegislatorsViewer>(Resource.Id.favortieLegislatorsFrag_legislatorsViewer);
-            _legislatorsViewer.SetupCtrl(this, new List<Shared.DomainModel.Legislator>(), false);
+            _legislatorsViewer.SetupCtrl(this, new List<Legislator>(), false);
 
             return fragment;
         }
@@ -91,10 +91,11 @@ namespace Write2Congress.Droid.Fragments
                 HandleErrorRetrievingData();
             }
 
+            _legislatorsViewer.UpdateLegislators(favoriteLegislators);
             ShowEmptyviewIfNecessary(favoriteLegislators);
         }
 
-        protected void ShowEmptyviewIfNecessary(List<Shared.DomainModel.Legislator> legislators)
+        protected void ShowEmptyviewIfNecessary(List<Legislator> legislators)
         {
             if (legislators.Count > 0)
                 _legislatorsViewer.SetupCtrl(this, legislators, false);

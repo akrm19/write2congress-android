@@ -192,6 +192,35 @@ namespace Write2Congress.Droid.Code
         #endregion
 
         #region Legislators File Caching
+        public static void AddLegislatorToFavoriteList(Legislator legislator)
+        {
+            var favLegislators = GetFavoriteLegislators();
+
+            if(favLegislators.Any(l => l.IdBioguide.Equals(legislator.IdBioguide, StringComparison.OrdinalIgnoreCase)))
+                favLegislators.RemoveAll(l => l.IdBioguide.Equals(legislator.IdBioguide));
+
+            favLegislators.Add(legislator);
+
+            GetBaseApp().FavoriteLegislators = favLegislators;
+        }
+
+        public static void RemoveLegislatorFromFavoriteList(Legislator legislator)
+        {
+            var favLegislators = GetFavoriteLegislators();
+            favLegislators.RemoveAll(l => l.IdBioguide.Equals(legislator.IdBioguide));
+
+            GetBaseApp().FavoriteLegislators = favLegislators;
+        }
+
+        public static bool IsLegislatorInFavorites(Legislator legislator)
+        {
+            return GetFavoriteLegislators().Any(l => l.IdBioguide.Equals(legislator.IdBioguide, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private static BaseApplication GetBaseApp()
+        {
+            return (BaseApplication)Application.Context.ApplicationContext;
+        }
 
         public static List<Legislator> GetFavoriteLegislators()
         {

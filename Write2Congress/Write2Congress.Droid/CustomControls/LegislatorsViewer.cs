@@ -202,7 +202,7 @@ namespace Write2Congress.Droid.CustomControls
 
                 _fragment.Activity.RunOnUiThread(() =>
                 {
-                  _legislatorAdapter.UpdateLegislators(_legislators.FilterByState(stateAndTerrWithDesc.Item1));
+                    UpdateLegislators(_legislators.FilterByState(stateAndTerrWithDesc.Item1));
                 });
             }
             catch (Exception ex)
@@ -210,5 +210,11 @@ namespace Write2Congress.Droid.CustomControls
                 Logger.Error($"Cannot select legislators for selected State ({selectedStateText}). Error: {ex.Message}");
             }
         }
+
+        public void UpdateLegislators(List<Legislator> legislators)
+        {
+            _legislatorAdapter?.UpdateLegislators(legislators);
+        }
+
     }
 }
