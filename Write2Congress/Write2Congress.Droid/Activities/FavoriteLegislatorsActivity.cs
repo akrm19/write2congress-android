@@ -24,13 +24,7 @@ namespace Write2Congress.Droid.Activities
 
         protected override int DrawerLayoutId => Resource.Id.favoriteLegislatorsActv_parent;
 
-        protected override int MenuItemId
-        {
-            get
-            {
-                return Resource.Menu.menu_favorite;
-            }
-        }
+        protected override int MenuItemId => Resource.Menu.menu_favorite;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

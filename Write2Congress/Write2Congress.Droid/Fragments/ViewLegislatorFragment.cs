@@ -145,6 +145,11 @@ namespace Write2Congress.Droid.Fragments
             base.OnSaveInstanceState(outState);
         }
 
+        public Legislator GetLegislator()
+        {
+            return _legislator;
+        }
+
         private void PopulateBasicInfo(View fragment, Legislator legislator)
         {
             _portrait = fragment.FindViewById<ImageView>(Resource.Id.viewLegislatorFrag_portrait);

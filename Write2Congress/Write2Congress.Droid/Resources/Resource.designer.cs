@@ -3668,6 +3668,12 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0118
 			public const int viewLegislatorFrag_youtube = 2131427608;
 			
+			// aapt resource value: 0x7f0b0159
+			public const int viewLegislator_menu_favButtonOff = 2131427673;
+			
+			// aapt resource value: 0x7f0b015a
+			public const int viewLegislator_menu_favButtonOn = 2131427674;
+			
 			// aapt resource value: 0x7f0b009c
 			public const int viewLettersActv_fragAndToolbarParent = 2131427484;
 			
@@ -3695,8 +3701,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b011f
 			public const int viewLettersFrag_viewSwitcher = 2131427615;
 			
-			// aapt resource value: 0x7f0b0159
-			public const int viewLettersMenu_refresh = 2131427673;
+			// aapt resource value: 0x7f0b015b
+			public const int viewLettersMenu_refresh = 2131427675;
 			
 			// aapt resource value: 0x7f0b000e
 			public const int view_offset_helper = 2131427342;
@@ -3773,17 +3779,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0124
 			public const int writeLetterFrag_subject = 2131427620;
 			
+			// aapt resource value: 0x7f0b015f
+			public const int writeLetterMenu_copyToClipboard = 2131427679;
+			
+			// aapt resource value: 0x7f0b015e
+			public const int writeLetterMenu_delete = 2131427678;
+			
 			// aapt resource value: 0x7f0b015d
-			public const int writeLetterMenu_copyToClipboard = 2131427677;
+			public const int writeLetterMenu_save = 2131427677;
 			
 			// aapt resource value: 0x7f0b015c
-			public const int writeLetterMenu_delete = 2131427676;
-			
-			// aapt resource value: 0x7f0b015b
-			public const int writeLetterMenu_save = 2131427675;
-			
-			// aapt resource value: 0x7f0b015a
-			public const int writeLetterMenu_send = 2131427674;
+			public const int writeLetterMenu_send = 2131427676;
 			
 			static Id()
 			{
@@ -4161,10 +4167,16 @@ namespace Write2Congress.Droid
 			public const int menu_viewBills = 2131623940;
 			
 			// aapt resource value: 0x7f0e0005
-			public const int menu_viewLetters = 2131623941;
+			public const int menu_viewLegislator_favButtonOff = 2131623941;
 			
 			// aapt resource value: 0x7f0e0006
-			public const int menu_writeLetter = 2131623942;
+			public const int menu_viewLegislator_favButtonOn = 2131623942;
+			
+			// aapt resource value: 0x7f0e0007
+			public const int menu_viewLetters = 2131623943;
+			
+			// aapt resource value: 0x7f0e0008
+			public const int menu_writeLetter = 2131623944;
 			
 			static Menu()
 			{

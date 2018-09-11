@@ -281,6 +281,8 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_star_border_yellow_48dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_star_yellow_48dp.png" />
     <None Include="packages.config" />
+    <AndroidResource Include="Resources\menu\menu_viewLegislator_favButtonOff.axml" />
+    <AndroidResource Include="Resources\menu\menu_viewLegislator_favButtonOn.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">

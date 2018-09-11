@@ -17,17 +17,14 @@ using Write2Congress.Droid.Code;
 namespace Write2Congress.Droid.Activities
 {
     [Activity]
-    public class ViewLegislatorActivity : BaseToolbarActivity
+    public class ViewLegislatorActivity : BaseToolbarActivityWithButtons
     {
+        private int _currentMenuId = Resource.Menu.menu_viewLegislator_favButtonOff;
         private ViewLegislatorFragment _viewLegislatorFragment;
 
-        protected override int DrawerLayoutId
-        {
-            get
-            {
-                return Resource.Id.viewLegislatorActv_parent;
-            }
-        }
+        protected override int DrawerLayoutId => Resource.Id.viewLegislatorActv_parent;
+
+        protected override int MenuItemId => _currentMenuId;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -55,6 +52,39 @@ namespace Write2Congress.Droid.Activities
 
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewLegislatorFragment, Resource.Id.viewLegislatorActv_fragmentContainer, TagsType.ViewLegislatorsFragment);
             }
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            if (AppHelper.IsLegislatorInFavorites(_viewLegislatorFragment.GetLegislator()))
+            {
+                _currentMenuId = Resource.Menu.menu_viewLegislator_favButtonOn;
+            }
+            else
+                _currentMenuId = Resource.Menu.menu_viewLegislator_favButtonOff; 
+
+            ReloadMenu();
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch(item.ItemId)
+            {
+                case Resource.Id.viewLegislator_menu_favButtonOff:
+                    AppHelper.AddLegislatorToFavoriteList(_viewLegislatorFragment.GetLegislator());
+                    _currentMenuId = Resource.Menu.menu_viewLegislator_favButtonOn;
+                    break;
+                case Resource.Id.viewLegislator_menu_favButtonOn:
+                    AppHelper.RemoveLegislatorFromFavoriteList(_viewLegislatorFragment.GetLegislator());
+                    _currentMenuId = Resource.Menu.menu_viewLegislator_favButtonOff;
+                    break;
+            }
+
+            //ReloadMenu();
+            SupportInvalidateOptionsMenu();
+            return true;
         }
     }
 }
