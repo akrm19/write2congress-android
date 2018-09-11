@@ -36,7 +36,6 @@ namespace Write2Congress.Droid.Fragments
         private LegislatorManager _legistorManager;
         private TypedValue _selectableItemBackground;
         private ImageView _portrait;
-        private ImageButton _favoriteStar;
         Android.Graphics.Bitmap portraitAsBitmap;
 
 		//TODO RM: (Note):
@@ -120,17 +119,10 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnResume();
 
-            if(portraitAsBitmap == null)
+            if (portraitAsBitmap == null)
                 SetPortrait(_legislator);
-            else if(_portrait != null)
+            else if (_portrait != null)
                 _portrait.SetImageBitmap(portraitAsBitmap);
-
-            if (AppHelper.IsLegislatorInFavorites(_legislator))
-            {
-                _favoriteStar.SetImageResource(Resource.Drawable.ic_star_yellow_48dp);
-            }
-            else
-                _favoriteStar.SetImageResource(Resource.Drawable.ic_star_border_yellow_48dp);
         }
 
         private void PopulateViewPager(View fragmentView, Legislator legislator, Bundle savedInstanceState)
@@ -154,10 +146,6 @@ namespace Write2Congress.Droid.Fragments
         {
             _portrait = fragment.FindViewById<ImageView>(Resource.Id.viewLegislatorFrag_portrait);
             AppHelper.SetLegislatorPortrait(legislator, _portrait);
-
-            _favoriteStar = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_favoriteStatus);
-            _favoriteStar.Click += _favoriteStar_Click;
-
 
             using (var chamber = fragment.FindViewById<TextView>(Resource.Id.viewLegislatorFrag_chamber))
                 chamber.Text = $"{AndroidHelper.GetString(Resource.String.chamber)}: {legislator.Chamber} ({legislator.State.ToString()})";
@@ -196,21 +184,6 @@ namespace Write2Congress.Droid.Fragments
                            Resource.String.votesMissedPercent,
                            legislator.MissedVotesPercent.ToString());
         }
-
-        void _favoriteStar_Click(object sender, EventArgs e)
-        {
-            if (AppHelper.IsLegislatorInFavorites(_legislator))
-            {
-                AppHelper.RemoveLegislatorFromFavoriteList(_legislator);
-                _favoriteStar.SetImageResource(Resource.Drawable.ic_star_border_yellow_48dp);
-            }
-            else
-            {
-                AppHelper.AddLegislatorToFavoriteList(_legislator);
-                _favoriteStar.SetImageResource(Resource.Drawable.ic_star_yellow_48dp);
-            }
-        }
-
 
         private void UpdateTextview(View fragment, int textviewResId, int labelTextId, string text)
         {

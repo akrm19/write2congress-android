@@ -58,21 +58,12 @@
         android:layout_toLeftOf="@id/viewLegislatorFrag_textParent"
         android:layout_alignBottom="@id/viewLegislatorFrag_textParent"
         android:id="@+id/viewLegislatorFrag_portraitParent">
-            <!--android:paddingHorizontal="5dp"-->
         <ImageView
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_centerInParent="true"
             android:id="@+id/viewLegislatorFrag_portrait" />
-        <ImageButton
-            android:src="@drawable/ic_star_border_yellow_48dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignBottom="@id/viewLegislatorFrag_portrait"
-            android:layout_alignRight="@id/viewLegislatorFrag_portrait"
-            android:background="@null"
-            android:id="@+id/viewLegislatorFrag_favoriteStatus" />
     </RelativeLayout>
     <HorizontalScrollView
         android:layout_below="@id/viewLegislatorFrag_textParent"

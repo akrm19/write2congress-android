@@ -15,15 +15,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/viewLegislatorFrag_portrait"
             android:layout_centerInParent="true" />
-            <!--android:maxWidth="60dp"-->
-        <ImageButton
-            android:src="@drawable/ic_star_border_yellow_48dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/viewLegislatorFrag_portrait"
-            android:layout_alignRight="@id/viewLegislatorFrag_portrait"
-            android:background="@null"
-            android:id="@+id/viewLegislatorFrag_favoriteStatus" />
     </RelativeLayout>
     <TextView
         android:text="Chamber"
