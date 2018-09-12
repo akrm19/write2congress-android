@@ -130,7 +130,7 @@ namespace Write2Congress.Droid.Fragments
         {
             if (isNextClick)
             {
-                SetLoadMoreButtonEnabledState(true);
+                SetLoadMoreButtonInDisabledState(true);
 				HandleOnDataRetrievalStarted();
             }
         }
@@ -233,7 +233,7 @@ namespace Write2Congress.Droid.Fragments
                 : ViewStates.Gone;
         }
 
-        public void SetLoadMoreButtonEnabledState(bool setAsLoading)
+        public void SetLoadMoreButtonInDisabledState(bool setAsLoading)
         {
             if (loadMoreButton == null)
                 return;

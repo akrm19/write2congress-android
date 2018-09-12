@@ -114,7 +114,7 @@ namespace Write2Congress.Droid.Fragments
                         else
                             _votes.AddRange(antecedent.Result.Item1);
 
-                        SetLoadMoreButtonEnabledState(false);
+                        SetLoadMoreButtonInDisabledState(false);
                         SetLoadMoreButtonVisibility(_isThereMoreVotes);
 
                         ShowVotes(_votes, _isThereMoreVotes);
@@ -182,7 +182,7 @@ namespace Write2Congress.Droid.Fragments
             //if (IsBeingShown || recyclerAdapter !=  null)
             if (IsBeingShown || recycler.GetAdapter() != null)
             {
-                SetLoadMoreButtonEnabledState(false);
+                SetLoadMoreButtonInDisabledState(false);
                 SetLoadMoreButtonVisibility(_isThereMoreVotes);
 
                 //(recyclerAdapter as VoteAdapter).UpdateVotes(_votes);

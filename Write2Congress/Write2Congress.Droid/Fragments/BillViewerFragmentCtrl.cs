@@ -275,7 +275,7 @@ namespace Write2Congress.Droid.Fragments
                         else
                             _billsToDisplay.AddRange(antecedent.Result.Item1);
 
-                        SetLoadMoreButtonEnabledState(false);
+                        SetLoadMoreButtonInDisabledState(false);
                         SetLoadMoreButtonVisibility(_isThereMoreVotes);
 
                         ShowBills(_billsToDisplay, _isThereMoreVotes);
@@ -454,7 +454,7 @@ namespace Write2Congress.Droid.Fragments
 
             if (IsBeingShown)
             {
-                SetLoadMoreButtonEnabledState(false);
+                SetLoadMoreButtonInDisabledState(false);
                 SetLoadMoreButtonVisibility(_isThereMoreVotes);
 
                 (recycler.GetAdapter() as BillAdapter).UpdateBill(bills);
