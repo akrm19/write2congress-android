@@ -162,6 +162,9 @@ namespace Write2Congress.Droid.Fragments
             if(!string.IsNullOrEmpty(searchTerm))
             {
                 // TODO RM: Look into disabling the search button
+                GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
+                GetBaseActivity().UpdateTitleBarText(GetString(Resource.String.searching));
+                ShowEmptyview(GetString(Resource.String.searching));
             FetchMoreLegislatorContent(false);
         }
         }
