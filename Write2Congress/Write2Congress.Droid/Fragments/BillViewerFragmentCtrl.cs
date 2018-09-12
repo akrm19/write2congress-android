@@ -151,16 +151,19 @@ namespace Write2Congress.Droid.Fragments
         //used on search click 
         protected void FetchBillsSearchResults(string searchTerm)
         {
+            if (string.IsNullOrWhiteSpace(searchTerm) && string.IsNullOrWhiteSpace(_lastSearchTerm))
+                return;
+                
 			currentPage = 1;
 			_billsToDisplay = null;       
 			_lastSearchTerm = searchTerm;
 
-			//TODO RM: SHOW EMPTY EVIEW THEN RETURN
-			if (string.IsNullOrWhiteSpace(searchTerm))
-				return;
             
-            //FetchBillsSearchResults(searchTerm, false);
+            if(!string.IsNullOrEmpty(searchTerm))
+            {
+                // TODO RM: Look into disabling the search button
             FetchMoreLegislatorContent(false);
+        }
         }
 
         /*
