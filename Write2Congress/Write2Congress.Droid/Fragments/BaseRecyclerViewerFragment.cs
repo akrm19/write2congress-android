@@ -36,7 +36,8 @@ namespace Write2Congress.Droid.Fragments
 
         protected virtual void CleanUp()
         {
-            recycler = null;
+            recycler?.GetAdapter()?.Dispose();
+            recycler?.Dispose();// = null;
             //recyclerAdapter = null;
             viewSwitcher = null;
             header = null;
