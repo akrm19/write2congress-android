@@ -91,7 +91,9 @@ namespace Write2Congress.Droid.Fragments
                 HookupToolbarEventsForBillSearch();
             }
 
-            SetLoadingTextInEmptyView();
+            ShowEmptyview(GetString(_viewerMode == BillViewerKind.BillSearch
+                                    ? Resource.String.enterSearchCriteria
+                                    : Resource.String.loading));
 
             if (_billsToDisplay != null && _billsToDisplay.Count >= 0)
                 SetBills(_billsToDisplay, _isThereMoreVotes);
@@ -101,6 +103,7 @@ namespace Write2Congress.Droid.Fragments
                 _billsToDisplay = new List<Bill>().DeserializeFromJson(serializedBills);
                 SetBills(_billsToDisplay, _isThereMoreVotes);
             }
+
             // Removing '|| !string.IsNullOrWhiteSpace(_lastSearchTerm))' for now
             // since it will fetch legislator content when searchview is not empty and the 
             // use does something like switch orientation
@@ -209,23 +212,23 @@ namespace Write2Congress.Droid.Fragments
         }
         */
 
-        protected void SetToolbarForSearchResultReturned()
+        protected void SetToolbarForSearchResultReturned(bool areThereLegislators)
         {
             GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
-			GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(true);
-            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
-            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(false);
+			GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(areThereLegislators);
+            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(areThereLegislators);
+            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(!areThereLegislators);
         }
 
         private void HandleExitSearchviewClicked()
         {
-            _billsToDisplay = null;
             _lastSearchTerm = string.Empty;
             currentPage = 1;
 
 
             GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.searchBills));
 
+            _billsToDisplay = null;
             ShowBills(_billsToDisplay, _isThereMoreVotes);
         }
 
@@ -280,7 +283,7 @@ namespace Write2Congress.Droid.Fragments
                     }
 
                     if (_viewerMode == BillViewerKind.BillSearch)
-                        SetToolbarForSearchResultReturned();
+                        SetToolbarForSearchResultReturned(_billsToDisplay != null && _billsToDisplay.Count > 0);
                 });
             });
 
