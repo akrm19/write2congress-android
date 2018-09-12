@@ -275,8 +275,9 @@ namespace Write2Congress.Droid.Fragments
                         else
                             _billsToDisplay.AddRange(antecedent.Result.Item1);
 
-                        SetLoadMoreButtonTextAsLoading(false);
-                        ShowRecyclerButtons(_isThereMoreVotes);
+                        SetLoadMoreButtonEnabledState(false);
+                        SetLoadMoreButtonVisibility(_isThereMoreVotes);
+
                         ShowBills(_billsToDisplay, _isThereMoreVotes);
 
                         if(_viewerMode == BillViewerKind.LastestBillsForEveryone)
