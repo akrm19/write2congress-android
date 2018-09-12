@@ -453,8 +453,8 @@ namespace Write2Congress.Droid.Fragments
 
             if (IsBeingShown)
             {
-                SetLoadMoreButtonTextAsLoading(false);
-                ShowRecyclerButtons(_isThereMoreVotes);
+                SetLoadMoreButtonEnabledState(false);
+                SetLoadMoreButtonVisibility(_isThereMoreVotes);
 
                 (recycler.GetAdapter() as BillAdapter).UpdateBill(bills);
                 SetLoadingUiOff();

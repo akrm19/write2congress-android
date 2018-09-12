@@ -130,7 +130,7 @@ namespace Write2Congress.Droid.Fragments
         {
             if (isNextClick)
             {
-                SetLoadMoreButtonTextAsLoading(true);
+                SetLoadMoreButtonEnabledState(true);
 				HandleOnDataRetrievalStarted();
             }
         }
@@ -207,8 +207,7 @@ namespace Write2Congress.Droid.Fragments
             if (viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
                 viewSwitcher.ShowNext();
 
-            ShowRecyclerButtons(false);
-            //SetLoadMoreButtonAsLoading(true);
+            SetLoadMoreButtonVisibility(false);
         }
 
         protected void ShowEmptyviewIfNecessary()
@@ -227,14 +226,14 @@ namespace Write2Congress.Droid.Fragments
             }
         }
 
-        protected void ShowRecyclerButtons(bool showButtons)
+        protected void SetLoadMoreButtonVisibility(bool showButtons)
         {
             loadMoreButton.Visibility = showButtons
                 ? ViewStates.Visible
                 : ViewStates.Gone;
         }
 
-        public void SetLoadMoreButtonTextAsLoading(bool setAsLoading)
+        public void SetLoadMoreButtonEnabledState(bool setAsLoading)
         {
             if (loadMoreButton == null)
                 return;
