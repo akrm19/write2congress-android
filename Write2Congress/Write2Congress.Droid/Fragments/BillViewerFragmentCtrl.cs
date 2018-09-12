@@ -225,19 +225,19 @@ namespace Write2Congress.Droid.Fragments
 
         private void HandleExitSearchviewClicked()
         {
+            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.searchBills));
+            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(false);
+
             _lastSearchTerm = string.Empty;
             currentPage = 1;
-
-
-            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.searchBills));
-
             _billsToDisplay = null;
+
             ShowBills(_billsToDisplay, _isThereMoreVotes);
         }
 
         private void HandleSearchMenuItemCollapsed()
         {
-            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(true);
+            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(AreThereBillsToShow());
         }
 
         private void HandleFilterMenuItemCollapsed()
@@ -287,7 +287,7 @@ namespace Write2Congress.Droid.Fragments
                     }
 
                     if (_viewerMode == BillViewerKind.BillSearch)
-                        SetToolbarForSearchResultReturned(_billsToDisplay != null && _billsToDisplay.Count > 0);
+                        SetToolbarForSearchResultReturned(AreThereBillsToShow());
                 });
             });
 
@@ -465,6 +465,11 @@ namespace Write2Congress.Droid.Fragments
         private IActivityWithToolbarSearch GetBaseActivityWithToolbarSearch()
         {
             return (GetBaseActivity() as IActivityWithToolbarSearch);
+        }
+
+        private bool AreThereBillsToShow()
+        {
+            return _billsToDisplay != null && _billsToDisplay.Count > 0;
         }
     }
 }
