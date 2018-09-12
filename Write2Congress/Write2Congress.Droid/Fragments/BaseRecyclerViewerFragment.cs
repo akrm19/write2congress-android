@@ -245,6 +245,11 @@ namespace Write2Congress.Droid.Fragments
                 : Resource.String.loadMore);
             */
             loadMoreButton.Enabled = !setAsLoading;
+
+            //TODO RM: looking into chaing icon to loading gif
+            loadMoreButton.Background.SetAlpha(setAsLoading
+                                               ? 100
+                                               : 255);
         }
 
         protected virtual string GetSuccessfullDataRetrievalMessage()
