@@ -41,10 +41,10 @@ namespace Write2Congress.Droid.Activities
             return true;
         }
 
-        protected IMenu GetMenu()
-        {
-            return GetSupportToolbar().Menu;
-        }
+        //protected IMenu GetMenu()
+        //{
+        //    return GetSupportToolbar().Menu;
+        //}
 
         public void ReloadMenu()
         {
