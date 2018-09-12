@@ -165,8 +165,8 @@ namespace Write2Congress.Droid.Fragments
                 GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
                 GetBaseActivity().UpdateTitleBarText(GetString(Resource.String.searching));
                 ShowEmptyview(GetString(Resource.String.searching));
-            FetchMoreLegislatorContent(false);
-        }
+                FetchMoreLegislatorContent(false);
+            }
         }
 
         /*
