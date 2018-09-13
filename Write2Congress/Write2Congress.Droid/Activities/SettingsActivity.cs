@@ -33,7 +33,7 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.actv_Settings);
 
-            SetupToolbar(Resource.Id.settingsActv_toolbar, AndroidHelper.GetString(Resource.String.settings));
+            SetupToolbar(Resource.Id.settingsActv_toolbar);
             SetupNavigationMenu(Resource.Id.settingsActv_navigationDrawer);
 
             if(_settingsFrag == null)

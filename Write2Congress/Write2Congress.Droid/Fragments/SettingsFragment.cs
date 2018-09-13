@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Preferences;
 using Android.Support.V7.Preferences;
+using Write2Congress.Droid.Code;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -22,6 +23,13 @@ namespace Write2Congress.Droid.Fragments
         public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
         {
             AddPreferencesFromResource(Resource.Xml.preferences);
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            (Activity as Activities.BaseActivity).UpdateTitleBarText(AndroidHelper.GetString(Resource.String.settings));
         }
     }
 }

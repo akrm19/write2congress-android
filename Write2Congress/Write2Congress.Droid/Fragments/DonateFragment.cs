@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Write2Congress.Droid.Code;
 
 namespace Write2Congress.Droid.Fragments
 {
@@ -40,6 +41,13 @@ namespace Write2Congress.Droid.Fragments
                 contributeToUsIoButton.Click += ContributeToUsIoProj_Click;
 
             return frag;
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.donate));
         }
 
         void DonateToDevButton_Click(object sender, EventArgs e)

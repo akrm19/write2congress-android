@@ -22,7 +22,7 @@ namespace Write2Congress.Droid.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.actv_Donate);
-            SetupToolbar(Resource.Id.donateActv_toolbar, AndroidHelper.GetString(Resource.String.donate));
+            SetupToolbar(Resource.Id.donateActv_toolbar);//, AndroidHelper.GetString(Resource.String.donate));
             SetupNavigationMenu(Resource.Id.donateActv_navigationDrawer);
 
             _donateFragment = SupportFragmentManager.FindFragmentByTag(TagsType.DonateFragment) as DonateFragment;
