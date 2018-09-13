@@ -13,6 +13,7 @@
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
             android:id="@+id/viewLegislatorFrag_portrait"
             android:layout_centerInParent="true" />
     </RelativeLayout>
