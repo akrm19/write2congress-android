@@ -27,7 +27,7 @@
   <string name="delete">Delete</string>
   <string name="dismiss">Dismiss</string>
   <string name="donate">Donate</string>
-  <string name="donateText">If you enjoyed using this app or find it useful, please consider donating to the developer, yours truly techhops. Write2Congress could not be possible without the ProPublica\’s Congress API and the unitedstates project. Please also consider donating or contribution to the great organizations.</string>
+  <string name="donateText">If you enjoyed using this app or find it useful, please consider donating to the developer, yours truly techhops.\n\nWrite2Congress could not be possible without the ProPublica\’s Congress API and the unitedstates project. Please also consider donating or contribution to the great organizations.</string>
   <string name="donateToProPublica">Donate to ProPublica</string>
   <string name="donateToTheDev">Donate to the Developer TechHops</string>
   <string name="drafts">Drafts</string>
