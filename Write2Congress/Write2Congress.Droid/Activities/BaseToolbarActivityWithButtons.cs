@@ -20,7 +20,7 @@ namespace Write2Congress.Droid.Activities
     [Activity(Label = "BaseToolbarActivityWithButtons")]
     public abstract class BaseToolbarActivityWithButtons : BaseToolbarActivity
     {
-        private IMenu _menu;
+        //private IMenu _menu;
 
         protected abstract int MenuItemId { get; }
         protected override int DrawerLayoutId => throw new NotImplementedException();
@@ -36,20 +36,20 @@ namespace Write2Congress.Droid.Activities
         {
             MenuInflater.Inflate(MenuItemId, menu);
 
-            _menu = menu;
+            //_menu = menu;
 
             return true;
         }
 
-        //protected IMenu GetMenu()
-        //{
-        //    return GetSupportToolbar().Menu;
-        //}
+        protected IMenu GetMenu()
+        {
+            return GetSupportToolbar().Menu;
+        }
 
         public void ReloadMenu()
         {
-            if (_menu != null)
-                OnPrepareOptionsMenu(_menu);
+            if (GetMenu() != null)
+                OnPrepareOptionsMenu(GetMenu());
         }
 
         protected void SetMenuItemsVisibility(int menuItemId, bool setAsVisible)
@@ -59,6 +59,7 @@ namespace Write2Congress.Droid.Activities
                 using (var toolbar = GetSupportToolbar())
                 using (var menuItem = toolbar.Menu.FindItem(menuItemId))
                     menuItem.SetVisible(setAsVisible);
+                    //menuItem?.SetVisible(setAsVisible);
             }
         }
     }
