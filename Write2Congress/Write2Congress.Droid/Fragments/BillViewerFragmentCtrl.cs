@@ -135,6 +135,12 @@ namespace Write2Congress.Droid.Fragments
             GetBaseActivityWithToolbarSearch().ExitSearchClicked -= HandleExitSearchviewClicked;
         }
 
+        private void HandleFilterMenuItemCollapsed()
+        {
+            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
+            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(false);
+        }
+
         public void FilterBills(string filter)
         {
             try
@@ -146,6 +152,11 @@ namespace Write2Congress.Droid.Fragments
             {
                 MyLogger.Error("An error occured filtering bills in BillViewer", e);
             }
+        }
+
+        private void HandleSearchMenuItemCollapsed()
+        {
+            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(AreThereBillsToShow());
         }
 
         //used on search click 
@@ -167,6 +178,18 @@ namespace Write2Congress.Droid.Fragments
                 ShowEmptyview(GetString(Resource.String.searching));
                 FetchMoreLegislatorContent(false);
             }
+        }
+
+        private void HandleExitSearchviewClicked()
+        {
+            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.searchBills));
+            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(false);
+
+            _lastSearchTerm = string.Empty;
+            currentPage = 1;
+            _billsToDisplay = null;
+
+            ShowBills(_billsToDisplay, _isThereMoreVotes);
         }
 
         /*
@@ -218,37 +241,6 @@ namespace Write2Congress.Droid.Fragments
         }
         */
 
-        protected void SetToolbarForSearchResultReturned(bool areThereLegislators)
-        {
-            GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
-			GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(areThereLegislators);
-            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(areThereLegislators);
-            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(!areThereLegislators);
-        }
-
-        private void HandleExitSearchviewClicked()
-        {
-            GetBaseActivity().UpdateTitleBarText(AndroidHelper.GetString(Resource.String.searchBills));
-            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(false);
-
-            _lastSearchTerm = string.Empty;
-            currentPage = 1;
-            _billsToDisplay = null;
-
-            ShowBills(_billsToDisplay, _isThereMoreVotes);
-        }
-
-        private void HandleSearchMenuItemCollapsed()
-        {
-            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(AreThereBillsToShow());
-        }
-
-        private void HandleFilterMenuItemCollapsed()
-        {
-            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(true);
-            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(false);
-        }
-
         protected override void FetchMoreLegislatorContent(bool isNextClick)
         {
             base.FetchMoreLegislatorContent(isNextClick);
@@ -295,6 +287,14 @@ namespace Write2Congress.Droid.Fragments
             });
 
             getBillsTask.Start();
+        }
+
+        protected void SetToolbarForSearchResultReturned(bool areThereLegislators)
+        {
+            GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
+            GetBaseActivityWithToolbarSearch().SetToolbarFilterviewVisibility(areThereLegislators);
+            GetBaseActivityWithToolbarSearch().SetToolbarExitSearchviewVisibility(areThereLegislators);
+            GetBaseActivityWithToolbarSearch().SetToolbarSearchviewVisibility(!areThereLegislators);
         }
 
         private Task<Tuple<List<Bill>, bool, int, string>> GetBillsContentTaskForViewerMode(BillViewerKind viewerKind)
