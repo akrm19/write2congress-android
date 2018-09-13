@@ -28,8 +28,8 @@
                 android:orientation="vertical"
                 android:paddingRight="4dp"
                 android:paddingLeft="2dp"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
                 android:id="@+id/billCtrl_basicInfoParent">
             <!-- android:maxLines="1" -->
                 <TextView
