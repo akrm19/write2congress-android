@@ -12,6 +12,7 @@ using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
 using Write2Congress.Droid.Code;
+using Write2Congress.Droid.DomainModel.Constants;
 using Write2Congress.Droid.DomainModel.Delegates;
 using Write2Congress.Droid.DomainModel.Interfaces;
 
@@ -20,9 +21,9 @@ namespace Write2Congress.Droid.Activities
     [Activity(Label = "BaseToolbarActivityWithSearch")]
     public abstract class BaseToolbarActivityWithSearch : BaseToolbarActivityWithButtons, IActivityWithToolbarSearch
     {
+        protected ToolbarMenuItemClickedDelegate _exitSearchClicked;
         protected FilterDataTextChangedDelegate _filterDataTextChanged;
         protected FilterDataTextChangedDelegate _searchTextChanged;
-        protected ToolbarMenuItemClickedDelegate _exitSearchClicked;
         protected ToolbarMenuItemClickedDelegate _filterSearchviewCollapsed;
         protected ToolbarMenuItemClickedDelegate _searchSearchviewCollapsed;
 
@@ -30,11 +31,41 @@ namespace Write2Congress.Droid.Activities
         protected virtual int SearchItemId =>  0;
         protected virtual int ExitSearchItemId => 0;
 
+        protected string CurrentSearch;
+        protected string CurrentFilter;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
+            if (savedInstanceState != null)
+            {
+                if (savedInstanceState.ContainsKey(BundleType.CurrentSearchQuery))
+                    CurrentSearch = savedInstanceState.GetString(BundleType.CurrentSearchQuery);
+
+                if (savedInstanceState.ContainsKey(BundleType.CurrentFilterQuery))
+                    CurrentFilter = savedInstanceState.GetString(BundleType.CurrentFilterQuery);
+            }
+
+            _filterDataTextChanged += (string newValue) => 
+            {
+                CurrentFilter = newValue;
+            };
+
+            _filterSearchviewCollapsed += () => 
+            {
+                CurrentFilter = string.Empty;
+            };
+
+            _searchTextChanged += (string newValue) => 
+            {
+                CurrentSearch = newValue;
+            };
+
+            _exitSearchClicked += () => 
+            {
+                CurrentSearch = string.Empty;
+            };
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -45,6 +76,16 @@ namespace Write2Congress.Droid.Activities
             SetupSearchMenuItem(menu);
 
             return true;
+        }
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            if (CurrentSearch != null)
+                outState.PutString(BundleType.CurrentSearchQuery, CurrentSearch);
+
+            if (CurrentFilter != null)
+                outState.PutString(BundleType.CurrentFilterQuery, CurrentFilter);
         }
 
         protected override void OnDestroy()
@@ -106,6 +147,20 @@ namespace Write2Congress.Droid.Activities
                     };
 
                     Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
+
+                    if (!string.IsNullOrWhiteSpace(CurrentFilter))
+                    {
+                        var previousFilter = CurrentFilter;
+
+                        //For some reason these to invoke QueryTextChanged
+                        // the secodn time it is called, the CurrentFilter is set to empty
+                        filterMenuItem.ExpandActionView();
+
+                        CurrentFilter = previousFilter;
+                        filterViewJavaObj.SetQuery(CurrentFilter, false);
+
+                        CurrentFilter = previousFilter;
+                    }
                 }
             }
         }

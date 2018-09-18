@@ -150,13 +150,13 @@ namespace Write2Congress.Droid.Fragments
                 ShowVotes(_votes, _isThereMoreVotes);
         }
 
-        protected override void CleanUp()
+        protected override void CleanUpReferencesToViewOrContext()
         {
-            base.CleanUp();
+            base.CleanUpReferencesToViewOrContext();
 
-            _votes = null;
-            _voteManager = null;
-            _legislator = null;
+            //_votes = null;
+            ///_voteManager = null;
+            //_legislator = null;
         }
 
         protected override string EmptyText()

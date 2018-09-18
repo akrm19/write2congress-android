@@ -34,7 +34,7 @@ namespace Write2Congress.Droid.Fragments
 
         public BaseRecyclerViewerFragment() { }
 
-        protected virtual void CleanUp()
+        protected virtual void CleanUpReferencesToViewOrContext()
         {
             recycler?.GetAdapter()?.Dispose();
             recycler?.Dispose();// = null;
@@ -153,7 +153,7 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnDestroyView();
 
-            CleanUp();
+            CleanUpReferencesToViewOrContext();
         }
 
         public override void OnDestroy()

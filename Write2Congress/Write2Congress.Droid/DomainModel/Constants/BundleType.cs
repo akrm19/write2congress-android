@@ -31,5 +31,7 @@ namespace Write2Congress.Droid.DomainModel.Constants
         public const string VotesCurrentPage = "VotesCurrentPage";
         public const string VotesIsThereMoreContent = "VotesIsThereMoreContent";
         public const string CurrentPage = "CurrentPage";
+        public const string CurrentSearchQuery = "CurrentSearchQuery";
+        public const string CurrentFilterQuery = "CurrentFilterQuery";
     }
 }

@@ -29,7 +29,23 @@ namespace Write2Congress.Droid.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your application here
+            if (!string.IsNullOrWhiteSpace(CurrentSearch))
+                UpdateTitleBarText($"'{CurrentSearch}' Bills");
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            var result = base.OnCreateOptionsMenu(menu);
+
+            // If we have a SearchTerm (after roration) hide
+            // search icon and show cancel search icon
+            if (!string.IsNullOrWhiteSpace(CurrentSearch))
+            {
+                menu.FindItem(SearchItemId)?.SetVisible(false);
+                menu.FindItem(ExitSearchItemId)?.SetVisible(true);
+            }
+
+            return result;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

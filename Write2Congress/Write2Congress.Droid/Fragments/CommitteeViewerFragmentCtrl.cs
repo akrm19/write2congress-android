@@ -150,13 +150,13 @@ namespace Write2Congress.Droid.Fragments
                 ShowCommittees(_committees);
         }
 
-        protected override void CleanUp()
+        protected override void CleanUpReferencesToViewOrContext()
         {
-            base.CleanUp();
+            base.CleanUpReferencesToViewOrContext();
 
-            _committees = null;
-            _legislatorManager = null;
-            _legislator = null;
+            //_committees = null;
+            //_legislatorManager = null;
+            //_legislator = null;
         }
 
         protected override string EmptyText()

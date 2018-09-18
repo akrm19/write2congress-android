@@ -69,6 +69,19 @@ namespace Write2Congress.Droid.Fragments
 			_viewerMode = (BillViewerKind)Arguments.GetInt(BundleType.BillViewerFragmentType);
         }
 
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+
+            if (_viewerMode == BillViewerKind.LastestBillsForEveryone)
+                HookupToolbarEventsForBillsFiltering();
+            else if (_viewerMode == BillViewerKind.BillSearch)
+            {
+                HookupToolbarEventsForBillsFiltering();
+                HookupToolbarEventsForBillSearch();
+            }
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
 			currentPage = RetrieveCurrentPageIfAvailable(savedInstanceState);
@@ -82,14 +95,6 @@ namespace Write2Congress.Droid.Fragments
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
             recycler.SetAdapter(new BillAdapter(this));
-
-            if (_viewerMode == BillViewerKind.LastestBillsForEveryone)
-                HookupToolbarEventsForBillsFiltering();
-            else if (_viewerMode == BillViewerKind.BillSearch)
-            {
-                HookupToolbarEventsForBillsFiltering();
-                HookupToolbarEventsForBillSearch();
-            }
 
             ShowEmptyview(GetString(_viewerMode == BillViewerKind.BillSearch
                                     ? Resource.String.enterSearchCriteria
@@ -415,16 +420,16 @@ namespace Write2Congress.Droid.Fragments
                 ShowBills(_billsToDisplay, _isThereMoreVotes);
         }
 
-        protected override void CleanUp()
+        protected override void CleanUpReferencesToViewOrContext()
         {
             if(GetBaseActivityWithToolbarSearch() != null)
                 DisconnectToolbarEvents();
             
-            _billManager = null;
-            _billsToDisplay = null;
-            _legislator = null;
+            //_billManager = null;
+            //_billsToDisplay = null;
+            //_legislator = null;
 
-			base.CleanUp();
+			base.CleanUpReferencesToViewOrContext();
         }
 
         protected override string EmptyText()
