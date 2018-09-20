@@ -47,25 +47,31 @@ namespace Write2Congress.Droid.Activities
                     CurrentFilter = savedInstanceState.GetString(BundleType.CurrentFilterQuery);
             }
 
-            _filterDataTextChanged += (string newValue) => 
+            if (FilterDataItemId != 0)
             {
-                CurrentFilter = newValue;
-            };
+                _filterDataTextChanged += (string newValue) =>
+                {
+                    CurrentFilter = newValue;
+                };
 
-            _filterSearchviewCollapsed += () => 
-            {
-                CurrentFilter = string.Empty;
-            };
+                _filterSearchviewCollapsed += () =>
+                {
+                    CurrentFilter = string.Empty;
+                };
+            }
 
-            _searchTextChanged += (string newValue) => 
+            if (SearchItemId != 0)
             {
-                CurrentSearch = newValue;
-            };
+                _searchTextChanged += (string newValue) =>
+                {
+                    CurrentSearch = newValue;
+                };
 
-            _exitSearchClicked += () => 
-            {
-                CurrentSearch = string.Empty;
-            };
+                _exitSearchClicked += () =>
+                {
+                    CurrentSearch = string.Empty;
+                };
+            }
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

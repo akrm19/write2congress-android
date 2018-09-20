@@ -64,10 +64,10 @@ namespace Write2Congress.Droid.Activities
                     SetToolbarFilterviewVisibility(false);
                     SetToolbarExitSearchviewVisibility(false);
                     break;
-                case Resource.Id.searchBillsMenu_filter:
-                    SetToolbarSearchviewVisibility(false);
-                    SetToolbarExitSearchviewVisibility(false);
-                    break;
+                //case Resource.Id.searchBillsMenu_filter:
+                    //SetToolbarSearchviewVisibility(false);
+                    //SetToolbarExitSearchviewVisibility(false);
+                    //break;
             }
 
             return result;
@@ -77,7 +77,7 @@ namespace Write2Congress.Droid.Activities
 
         protected override int SearchItemId => Resource.Id.searchBillsMenu_search;
 
-        protected override int FilterDataItemId => Resource.Id.searchBillsMenu_filter;
+        protected override int FilterDataItemId => 0;//Resource.Id.searchBillsMenu_filter;
 
         protected override int ExitSearchItemId => Resource.Id.searchBillsMenu_exitSearch;
     }
