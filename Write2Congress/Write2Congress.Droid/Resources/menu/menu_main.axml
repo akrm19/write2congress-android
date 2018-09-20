@@ -8,7 +8,7 @@ mlns:app="http://schemas.android.com/apk/lib/write2congress.droid"
     <item
         android:id="@+id/mainMenu_search"
         android:title="@string/searchLegislators"
-        android:icon="@drawable/ic_search_white_48dp"
+        android:icon="@drawable/ic_filter_list_white_48dp"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 

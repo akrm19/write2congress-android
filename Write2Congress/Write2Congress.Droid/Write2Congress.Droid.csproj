@@ -283,6 +283,16 @@
     <None Include="packages.config" />
     <AndroidResource Include="Resources\menu\menu_viewLegislator_favButtonOff.axml" />
     <AndroidResource Include="Resources\menu\menu_viewLegislator_favButtonOn.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_star_outline_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_star_outline_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_star_outline_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_star_outline_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_star_outline_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_star_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_star_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_star_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_star_white_48dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_star_white_48dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
