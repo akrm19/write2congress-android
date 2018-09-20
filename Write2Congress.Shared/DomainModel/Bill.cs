@@ -212,13 +212,30 @@ namespace Write2Congress.Shared.DomainModel
         /// </summary>
         public string SponsorId { get; set; }
 
+        private string _summary;
         /// <summary>
         /// An official summary written and assigned at some point after introduction by 
         /// the Library of Congress. These summaries are generally more accessible than 
         /// the text of the bill, but can still be technical. The LOC does not write 
         /// summaries for all bills, and when they do can assign and revise them at any time.
         /// </summary>
-        public string Summary { get; set; }
+        public string Summary 
+        { 
+            get
+            {
+                return _summary;
+            }
+            set
+            {
+                // Limit the size of the Summary. As there are cases 
+                // were it can be super long (one was over 460,000 words)
+                // and this can cause problems in the app when the RecyclerView
+                // has the summary (even if the summary in there is ellipsed).
+                _summary = value.Length < 5000
+                                ? value
+                                : value.Substring(0, 5000) + "...";
+            } 
+        }
 
         /// <summary>
         /// The official summary, but capped to 1,000 characters (and an ellipse). 
