@@ -3083,9 +3083,6 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0084
 			public const int favoriteLegislatorsActv_toolbar = 2131427460;
 			
-			// aapt resource value: 0x7f0b0151
-			public const int favoriteMenu_edit = 2131427665;
-			
 			// aapt resource value: 0x7f0b0101
 			public const int favortieLegislatorsFrag_emptyText = 2131427585;
 			
@@ -3287,11 +3284,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0102
 			public const int mainFrag_parent = 2131427586;
 			
-			// aapt resource value: 0x7f0b0153
-			public const int mainMenu_refresh = 2131427667;
-			
 			// aapt resource value: 0x7f0b0152
-			public const int mainMenu_search = 2131427666;
+			public const int mainMenu_refresh = 2131427666;
+			
+			// aapt resource value: 0x7f0b0151
+			public const int mainMenu_search = 2131427665;
 			
 			// aapt resource value: 0x7f0b0145
 			public const int masked = 2131427653;
@@ -3377,11 +3374,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b004a
 			public const int scrollable = 2131427402;
 			
-			// aapt resource value: 0x7f0b0154
-			public const int searchBillsMenu_exitSearch = 2131427668;
+			// aapt resource value: 0x7f0b0153
+			public const int searchBillsMenu_exitSearch = 2131427667;
 			
-			// aapt resource value: 0x7f0b0155
-			public const int searchBillsMenu_search = 2131427669;
+			// aapt resource value: 0x7f0b0154
+			public const int searchBillsMenu_search = 2131427668;
 			
 			// aapt resource value: 0x7f0b0072
 			public const int search_badge = 2131427442;
@@ -3575,8 +3572,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0095
 			public const int viewLBillsActv_navigationDrawer = 2131427477;
 			
-			// aapt resource value: 0x7f0b0156
-			public const int viewLatestBillsMenu_filter = 2131427670;
+			// aapt resource value: 0x7f0b0155
+			public const int viewLatestBillsMenu_filter = 2131427669;
 			
 			// aapt resource value: 0x7f0b0097
 			public const int viewLegislatorActv_fragAndToolbarParent = 2131427479;
@@ -3668,11 +3665,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0117
 			public const int viewLegislatorFrag_youtube = 2131427607;
 			
-			// aapt resource value: 0x7f0b0157
-			public const int viewLegislator_menu_favButtonOff = 2131427671;
+			// aapt resource value: 0x7f0b0156
+			public const int viewLegislator_menu_favButtonOff = 2131427670;
 			
-			// aapt resource value: 0x7f0b0158
-			public const int viewLegislator_menu_favButtonOn = 2131427672;
+			// aapt resource value: 0x7f0b0157
+			public const int viewLegislator_menu_favButtonOn = 2131427671;
 			
 			// aapt resource value: 0x7f0b009c
 			public const int viewLettersActv_fragAndToolbarParent = 2131427484;
@@ -3701,8 +3698,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b011e
 			public const int viewLettersFrag_viewSwitcher = 2131427614;
 			
-			// aapt resource value: 0x7f0b0159
-			public const int viewLettersMenu_refresh = 2131427673;
+			// aapt resource value: 0x7f0b0158
+			public const int viewLettersMenu_refresh = 2131427672;
 			
 			// aapt resource value: 0x7f0b000e
 			public const int view_offset_helper = 2131427342;
@@ -3779,17 +3776,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0b0123
 			public const int writeLetterFrag_subject = 2131427619;
 			
-			// aapt resource value: 0x7f0b015d
-			public const int writeLetterMenu_copyToClipboard = 2131427677;
-			
 			// aapt resource value: 0x7f0b015c
-			public const int writeLetterMenu_delete = 2131427676;
+			public const int writeLetterMenu_copyToClipboard = 2131427676;
 			
 			// aapt resource value: 0x7f0b015b
-			public const int writeLetterMenu_save = 2131427675;
+			public const int writeLetterMenu_delete = 2131427675;
 			
 			// aapt resource value: 0x7f0b015a
-			public const int writeLetterMenu_send = 2131427674;
+			public const int writeLetterMenu_save = 2131427674;
+			
+			// aapt resource value: 0x7f0b0159
+			public const int writeLetterMenu_send = 2131427673;
 			
 			static Id()
 			{

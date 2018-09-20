@@ -311,22 +311,22 @@ namespace Write2Congress.Shared.BusinessLayer
                     IdBioguide = l.id ?? string.Empty, 
 
 
-                    //TODO RM: These do not exist in new ProPublica source
+                    // RM: These do not exist in new ProPublica source
                     Gender = Gender.NA,
                     TermStartDate = DateTime.MinValue,
                     TermEndDate = DateTime.MinValue,
                     Email = new ContactMethod(ContactType.NotSet, string.Empty),
 
                              
-                    //TODO Verify adn add checking for these values
+                    // Verify adn add checking for these values
                     TotalVotes = l.total_votes ?? 0,
                     MissedVotesPercent = l.missed_votes_pct ?? 0,
                     VotesWithPartyPercent = l.votes_with_party_pct ?? 0,
                     Senority = l.seniority ?? string.Empty
                 };
                 
-                //TODO RM: Newlsy added, verify this works
-                //TODO FIX: type will be root since it is serialized as such.
+                // RM: Newlsy added, verify this works
+                // FIX: type will be root since it is serialized as such.
                 var typeOfMember = l.GetType();
                 if (typeOfMember == typeof(SenateMember))
                     legislator.Chamber = LegislativeBody.Senate;
@@ -653,13 +653,13 @@ namespace Write2Congress.Shared.BusinessLayer
 				Gender = Gender.NA,
 
 
-                //TODO RM: These do not exist in new ProPublica source
+                // RM: These do not exist in new ProPublica source
                 TermStartDate = DateTime.MinValue,
                 TermEndDate = DateTime.MinValue,
                 Email = new ContactMethod(ContactType.NotSet, string.Empty),
 
 
-                //TODO Verify adn add checking for these values
+                // Verify adn add checking for these values
                 TotalVotes = l.total_votes ?? 0,
                 MissedVotesPercent = l.missed_votes_pct ?? 0,
                 VotesWithPartyPercent = l.votes_with_party_pct ?? 0,

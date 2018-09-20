@@ -49,18 +49,12 @@ namespace Write2Congress.Droid.Activities
         {
             switch (item.ItemId)
             {
-                case Resource.Id.favoriteMenu_edit:
-                    EditFavoriteLegislators();
-                    return true;
+                //case Resource.Id.favoriteMenu_edit:
+                    ////EditFavoriteLegislators();
+                    //return true;
                 default:
                     return base.OnOptionsItemSelected(item);
             }
-        }
-
-
-        private void EditFavoriteLegislators()
-        {
-            //TODO add edit action
         }
     }
 }
