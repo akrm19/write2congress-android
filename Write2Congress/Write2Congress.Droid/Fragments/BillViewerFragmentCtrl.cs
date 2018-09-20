@@ -77,7 +77,7 @@ namespace Write2Congress.Droid.Fragments
                 HookupToolbarEventsForBillsFiltering();
             else if (_viewerMode == BillViewerKind.BillSearch)
             {
-                HookupToolbarEventsForBillsFiltering();
+                //HookupToolbarEventsForBillsFiltering();
                 HookupToolbarEventsForBillSearch();
             }
         }
@@ -133,11 +133,20 @@ namespace Write2Congress.Droid.Fragments
 
         private void DisconnectToolbarEvents()
         {
-            GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed -= HandleFilterMenuItemCollapsed;
-            GetBaseActivityWithToolbarSearch().FilterSearchTextChanged -= FilterBills;
-            GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed -= HandleSearchMenuItemCollapsed;
-            GetBaseActivityWithToolbarSearch().SearchQuerySubmitted -= FetchBillsSearchResults;
-            GetBaseActivityWithToolbarSearch().ExitSearchClicked -= HandleExitSearchviewClicked;
+            if(GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed != null)
+                GetBaseActivityWithToolbarSearch().FilterSearchviewCollapsed -= HandleFilterMenuItemCollapsed;
+
+            if(GetBaseActivityWithToolbarSearch().FilterSearchTextChanged != null)
+                GetBaseActivityWithToolbarSearch().FilterSearchTextChanged -= FilterBills;
+
+            if(GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed != null)
+                GetBaseActivityWithToolbarSearch().SearchSearchviewCollapsed -= HandleSearchMenuItemCollapsed;
+
+            if(GetBaseActivityWithToolbarSearch().SearchQuerySubmitted != null)
+                GetBaseActivityWithToolbarSearch().SearchQuerySubmitted -= FetchBillsSearchResults;
+
+            if(GetBaseActivityWithToolbarSearch().ExitSearchClicked != null)
+                GetBaseActivityWithToolbarSearch().ExitSearchClicked -= HandleExitSearchviewClicked;
         }
 
         private void HandleFilterMenuItemCollapsed()
@@ -311,7 +320,8 @@ namespace Write2Congress.Droid.Fragments
                 //it is the changes in the items
 
 				case BillViewerKind.BillSearch:
-                    return GetBillsSearchTask(_lastSearchTerm);
+                    //return GetBillsSearchTask(_lastSearchTerm);
+                    return GetAllBillsTasks();
                 case BillViewerKind.LastestBillsForEveryone:
                     return GetAllBillsTasks();
                 case BillViewerKind.SponsoredBills:
