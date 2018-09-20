@@ -229,7 +229,7 @@ namespace Write2Congress.Droid.Code
 
         public static List<Legislator> GetFavoriteLegislatorsFromFileStorage()
         {
-            return GetContentFromFileStorage<Legislator>(_favoriteLegislatorsFileName);
+            return GetContentFromFileStorage<Legislator>(_favoriteLegislatorsFileName).OrderBy(c => c.LastName).ToList();
         }
 
         private static List<T> GetContentFromFileStorage<T>(string filename)
