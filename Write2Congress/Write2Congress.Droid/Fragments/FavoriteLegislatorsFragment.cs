@@ -53,6 +53,14 @@ namespace Write2Congress.Droid.Fragments
 
             return fragment;
         }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            (Activity as Activities.BaseActivity).UpdateTitleBarText(AndroidHelper.GetString(Resource.String.favorites));
+        }
+
         /// <summary>
         /// Fragments in the FragmentPagerAdapter are only detached 
         /// and never removed from the FragmentManager (unless the 

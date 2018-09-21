@@ -53,6 +53,13 @@ namespace Write2Congress.Droid.Fragments
             return mainFragment;
         }
 
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            (Activity as Activities.BaseActivity).UpdateTitleBarText(AndroidHelper.GetString(Resource.String.legislators));
+        }
+
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
