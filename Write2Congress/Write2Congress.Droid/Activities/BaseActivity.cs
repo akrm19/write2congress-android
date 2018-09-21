@@ -56,7 +56,7 @@ namespace Write2Congress.Droid.Activities
                 //Unlike other attributes the toolbar title needs to be 
                 //set first, otherwise app will default to activity tile
                 SetSupportActionBar(toolbar);
-
+                SupportActionBar.SetDisplayShowTitleEnabled(false);
                 // This does not seem to work when called here, only when called OnStart
                 //if (string.IsNullOrWhiteSpace(title))
                 //    SupportActionBar.SetDisplayShowTitleEnabled(false);
