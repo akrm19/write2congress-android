@@ -47,7 +47,7 @@ namespace Write2Congress.Droid.Activities
             MyLogger = new Logger(Class.SimpleName);
         }
 
-        public void SetupToolbar(int toolbarResourceId, string title = "")
+        public void SetupToolbar(int toolbarResourceId)
         {
             _toolbarId = toolbarResourceId;
 
@@ -57,10 +57,11 @@ namespace Write2Congress.Droid.Activities
                 //set first, otherwise app will default to activity tile
                 SetSupportActionBar(toolbar);
 
-                if (string.IsNullOrWhiteSpace(title))
-                    SupportActionBar.SetDisplayShowTitleEnabled(false);
-                else
-                    toolbar.Title = title;
+                // This does not seem to work when called here, only when called OnStart
+                //if (string.IsNullOrWhiteSpace(title))
+                //    SupportActionBar.SetDisplayShowTitleEnabled(false);
+                //else
+                //toolbar.Title = title;
 
                 SupportActionBar.Elevation = 10f;
                 SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_action_menu);
