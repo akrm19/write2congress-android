@@ -82,8 +82,7 @@ namespace Write2Congress.Droid.Fragments
 
             try
             {
-                favoriteLegislators = AppHelper.GetFavoriteLegislators();
-                //favoriteLegislators = AppHelper.GetCachedLegislators();
+                favoriteLegislators = AppHelper.GetFavoriteLegislators().OrderBy(l => l.LastName).ToList();
             }
             catch(Exception e)
             {
