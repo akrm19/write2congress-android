@@ -18,7 +18,7 @@ using Write2Congress.Droid.DomainModel.Interfaces;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "BaseToolbarActivityWithSearch")]
+    [Activity]
     public abstract class BaseToolbarActivityWithSearch : BaseToolbarActivityWithButtons, IActivityWithToolbarSearch
     {
         protected ToolbarMenuItemClickedDelegate _exitSearchClicked;

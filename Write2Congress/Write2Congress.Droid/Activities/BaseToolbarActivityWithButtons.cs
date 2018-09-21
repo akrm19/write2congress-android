@@ -17,7 +17,7 @@ using Write2Congress.Droid.DomainModel.Interfaces;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "BaseToolbarActivityWithButtons")]
+    [Activity]
     public abstract class BaseToolbarActivityWithButtons : BaseToolbarActivity
     {
         //private IMenu _menu;

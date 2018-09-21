@@ -14,7 +14,7 @@ using Write2Congress.Droid.DomainModel.Enums;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "SearchBillsActivity")]
+    [Activity]
     public class SearchBillsActivity : ViewBillsBaseActivity
     {
         protected override BillViewerKind GetBillViewerKind

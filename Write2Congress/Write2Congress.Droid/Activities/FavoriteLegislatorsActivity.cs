@@ -17,7 +17,7 @@ using Write2Congress.Droid.Fragments;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "FavoriteBillsActivity")]
+    [Activity]
     public class FavoriteLegislatorsActivity : BaseToolbarActivityWithButtons
     {
         private FavoriteLegislatorsFragment _favLegislatorsFragment;

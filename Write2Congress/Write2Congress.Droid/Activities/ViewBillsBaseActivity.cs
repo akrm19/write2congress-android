@@ -19,7 +19,7 @@ using Write2Congress.Droid.Fragments;
 
 namespace Write2Congress.Droid.Activities
 {
-    [Activity(Label = "ViewBillsActivity")]
+    [Activity]
     public abstract class ViewBillsBaseActivity : BaseToolbarActivityWithSearch
     {
         protected virtual BillViewerKind GetBillViewerKind { get; }
