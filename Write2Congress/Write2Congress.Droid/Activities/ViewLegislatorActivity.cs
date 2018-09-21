@@ -74,10 +74,12 @@ namespace Write2Congress.Droid.Activities
             {
                 case Resource.Id.viewLegislator_menu_favButtonOff:
                     AppHelper.AddLegislatorToFavoriteList(_viewLegislatorFragment.GetLegislator());
+                    ShowToast(AndroidHelper.GetString(Resource.String.legislatorAddedToFavorites));
                     _currentMenuId = Resource.Menu.menu_viewLegislator_favButtonOn;
                     break;
                 case Resource.Id.viewLegislator_menu_favButtonOn:
                     AppHelper.RemoveLegislatorFromFavoriteList(_viewLegislatorFragment.GetLegislator());
+                    ShowToast(AndroidHelper.GetString(Resource.String.legislatorRemovedFromFavorites));
                     _currentMenuId = Resource.Menu.menu_viewLegislator_favButtonOff;
                     break;
             }
