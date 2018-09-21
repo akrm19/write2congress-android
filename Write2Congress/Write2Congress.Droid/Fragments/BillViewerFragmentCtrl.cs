@@ -186,7 +186,6 @@ namespace Write2Congress.Droid.Fragments
             
             if(!string.IsNullOrEmpty(searchTerm))
             {
-                // TODO RM: Look into disabling the search button
                 GetBaseActivityWithToolbarSearch().CollapseToolbarSearchview();
                 GetBaseActivity().UpdateTitleBarText(GetString(Resource.String.searching));
                 ShowEmptyview(GetString(Resource.String.searching));
@@ -397,10 +396,6 @@ namespace Write2Congress.Droid.Fragments
         {
             base.OnSaveInstanceState(outState);
 
-			/* 
-             * TODO RM: This change seems to prevent the crash, but there is still
-             * issues with slowness
-             * */
             if (_billsToDisplay != null)
             {
                 var serializedBills = _billsToDisplay.SerializeToJson();
