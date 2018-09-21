@@ -48,10 +48,14 @@
   <string name="exitSearch">Exit Search</string>
   <string name="favorites">Favorites</string>
   <string name="feedback">Feedback</string>
+  <string name="feedbackText">Have any suggestions or problems with bugs? We want to hear from you!\n\nSimply shake your phone at any time when using the app and the feedback prompt will appear.\n\nYou can also click on the button below.\n\n</string>
+  <string name="feedbackButtonText">Give Feedback</string>
   <string name="lastAction">Last Action</string>
   <string name="lastActionDate">Last Action Date</string>
   <string name="lastSaved">Last saved</string>
   <string name="latestBills">Latest Bills</string>
+  <string name="legislatorAddedToFavorites">Legislator added to favorites</string>
+  <string name="legislatorRemovedFromFavorites">Legislator removed from favorites</string>
   <string name="legislators">Legislators</string>
   <string name="legislatorDataSuccessfullyUpdated">The legislator data was successfully updated</string>
   <string name="letterAutoSaved">Letter auto-saved</string>

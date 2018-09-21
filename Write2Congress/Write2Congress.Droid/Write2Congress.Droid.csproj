@@ -227,6 +227,7 @@
     <Compile Include="Activities\FavoriteLegislatorsActivity.cs" />
     <Compile Include="Fragments\FavoriteLegislatorsFragment.cs" />
     <Compile Include="Activities\BaseToolbarActivityWithButtons.cs" />
+    <Compile Include="Activities\FeedbackActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -346,6 +347,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_star_white_48dp.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_star_white_48dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_star_white_48dp.png" />
+    <AndroidResource Include="Resources\layout\actv_Feedback.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">

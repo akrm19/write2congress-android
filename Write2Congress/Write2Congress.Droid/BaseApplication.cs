@@ -16,6 +16,7 @@ using Write2Congress.Shared.DomainModel.Interface;
 
 using Com.Instabug.Library;
 using Com.Instabug.Library.Invocation;
+using Com.Instabug.Bug;
 
 namespace Write2Congress.Droid
 {
@@ -69,8 +70,17 @@ namespace Write2Congress.Droid
                         .SetInvocationEvents(
                             //InstabugInvocationEvent.FloatingButton, 
                             InstabugInvocationEvent.Shake)
-                        .SetPromptOptionsEnabled(false, true, true)
+                        //.SetPromptOptionsEnabled(false, true, true)
                         .Build();
+
+            BugReporting.SetPromptOptionsEnabled(PromptOption.Feedback, PromptOption.Bug);
+
+            //TODO RM: Change this to live when we go live!
+            Instabug.SetWelcomeMessageState(Com.Instabug.Library.UI.Onboarding.WelcomeMessage.State.Beta);
+
+            Instabug.PrimaryColor = AndroidHelper.GetCurrentSdkVer() < BuildVersionCodes.M
+                ? Resources.GetColor(Resource.Color.primary_blue)
+                : GetColor(Resource.Color.primary_blue);
 
             LetterManager = new LetterManager(new LetterFileProvider(), _logger);
 

@@ -33,6 +33,11 @@ namespace Write2Congress.Droid.Code
 
         #region General Android Helpers
 
+        public static Android.OS.BuildVersionCodes GetCurrentSdkVer()
+        {
+            return Android.OS.Build.VERSION.SdkInt;
+        }
+
         public static void AddFragment(FragmentManager fragmentManager, Fragment fragment, int containerId, string tag)
         {
             var transaction = fragmentManager.BeginTransaction();

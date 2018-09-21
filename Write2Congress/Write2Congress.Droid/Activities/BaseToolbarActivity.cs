@@ -60,6 +60,7 @@ namespace Write2Congress.Droid.Activities
                     SettingsPressed();
                     break;
                 case Resource.Id.actionMenu_feedback:
+                    FeedbackPressed();
                     break;
                 case Resource.Id.actionMenu_donate:
                     DonatePressed();
@@ -81,6 +82,15 @@ namespace Write2Congress.Droid.Activities
             }
 
             CurrentDrawerLayout.CloseDrawers();
+        }
+
+        private void FeedbackPressed()
+        {
+            if (GetType() == typeof(FeedbackActivity))
+                return;
+
+            var intent = new Intent(this, typeof(FeedbackActivity));
+            StartActivity(intent);
         }
 
         private void OpenFavLegislators()
