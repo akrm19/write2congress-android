@@ -99,6 +99,11 @@ namespace Write2Congress.Droid.Activities
         {
             return Application as BaseApplication;
         }
+
+        public void ShowToast(string message, ToastLength lenght = ToastLength.Short)
+        {
+            Toast.MakeText(ApplicationContext, message, lenght).Show();
+        }
         #endregion
     }
 }

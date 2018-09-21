@@ -99,11 +99,6 @@ namespace Write2Congress.Droid.Activities
             ShowToast(message);
         }
 
-        private void ShowToast(string message, ToastLength lenght = ToastLength.Short)
-        {
-            Toast.MakeText(ApplicationContext, message, lenght).Show();
-        }
-
         private bool LegislatorsUpdatedInLast30Days()
         {
             var lastUpdate = AppHelper.GetLastLegislatorUpdate();
