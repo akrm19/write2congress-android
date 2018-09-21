@@ -2,10 +2,10 @@
   "supports": {},
   "dependencies": {
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-    "NETStandard.Library": "1.6.0",
-    "newtonsoft.json": "9.0.1",
+    "NETStandard.Library": "2.0.3",
+    "newtonsoft.json": "11.0.2",
     "System.Collections": "4.3.0",
-    "System.ComponentModel.Annotations": "4.3.0",
+    "System.ComponentModel.Annotations": "4.5.0",
     "System.ComponentModel.Primitives": "4.3.0"
   },
   "frameworks": {

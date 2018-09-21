@@ -14,6 +14,9 @@ using Write2Congress.Droid.Code;
 using Write2Congress.Shared.BusinessLayer;
 using Write2Congress.Shared.DomainModel.Interface;
 
+using Com.Instabug.Library;
+using Com.Instabug.Library.Invocation;
+
 namespace Write2Congress.Droid
 {
     [Activity(Label = "BaseApplication")]
@@ -60,6 +63,14 @@ namespace Write2Congress.Droid
         {
             base.OnCreate();
             _logger = new Logger("BaseApplication");
+
+            //InstaBug init
+            new Instabug.Builder(this, "43f736535911298944ea7b86b88e6644")
+                        .SetInvocationEvents(
+                            //InstabugInvocationEvent.FloatingButton, 
+                            InstabugInvocationEvent.Shake)
+                        .SetPromptOptionsEnabled(false, true, true)
+                        .Build();
 
             LetterManager = new LetterManager(new LetterFileProvider(), _logger);
 
