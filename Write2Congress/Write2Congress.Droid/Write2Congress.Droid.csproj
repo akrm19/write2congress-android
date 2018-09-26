@@ -348,6 +348,11 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_star_white_48dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_star_white_48dp.png" />
     <AndroidResource Include="Resources\layout\actv_Feedback.axml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher_blue_v2.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher_blue_v2.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher_blue_v2.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher_blue_v2.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_blue_v2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
