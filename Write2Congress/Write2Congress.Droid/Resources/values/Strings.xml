@@ -4,6 +4,8 @@
   <string name="age">Age</string>
   <string name="address">Address</string>
   <string name="app_name">Write2Congress.Droid</string>
+  <string name="banner_ad_unit_id">ca-app-pub-2083619170491780/2892650944</string>
+  <string name="banner_ad_unit_id_TEST">ca-app-pub-3940256099942544/6300978111</string>
   <string name="bills">Bills</string>
   <string name="billsCosponsored">Bills Co-Sponsored</string>
   <string name="billInfo">Bill Info</string>

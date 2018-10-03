@@ -52,6 +52,10 @@ namespace Write2Congress.Droid.Activities
 
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewLegislatorFragment, Resource.Id.viewLegislatorActv_fragmentContainer, TagsType.ViewLegislatorsFragment);
             }
+
+            var adView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.viewLegislatorActv_adView);
+            var adRequest = new Android.Gms.Ads.AdRequest.Builder().Build();
+            adView.LoadAd(adRequest);
         }
 
         protected override void OnResume()

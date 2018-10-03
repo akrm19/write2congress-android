@@ -46,6 +46,9 @@ namespace Write2Congress.Droid.Activities
             SetupToolbar(Resource.Id.mainActv_toolbar);
             SetupNavigationMenu(Resource.Id.mainActv_navigationDrawer);
 
+            var id = "ca-app-pub-2083619170491780~6859816114";
+            Android.Gms.Ads.MobileAds.Initialize(ApplicationContext, id);
+
             _mainFragment = SupportFragmentManager.FindFragmentByTag(TagsType.MainParentFragment) as MainFragment;
 
             if(_mainFragment == null)
@@ -53,6 +56,10 @@ namespace Write2Congress.Droid.Activities
                 _mainFragment = new MainFragment();
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _mainFragment, Resource.Id.mainActv_fragmentContainer, TagsType.MainParentFragment);
             }
+
+            var adView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.adView2);
+            var adRequest = new Android.Gms.Ads.AdRequest.Builder().Build();
+            adView.LoadAd(adRequest);
         }
 
         //TODO RM: Does this need to bw removed

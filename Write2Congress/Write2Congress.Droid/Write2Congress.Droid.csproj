@@ -168,6 +168,9 @@
     <Reference Include="System.Threading.Tasks.Extensions">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Ads.Lite">
+      <HintPath>..\..\packages\Xamarin.GooglePlayServices.Ads.Lite.60.1142.1\lib\MonoAndroid80\Xamarin.GooglePlayServices.Ads.Lite.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
@@ -1024,4 +1027,5 @@
   <Import Project="..\..\packages\Xamarin.GooglePlayServices.Base.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Base.targets" Condition="Exists('..\..\packages\Xamarin.GooglePlayServices.Base.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Base.targets')" />
   <Import Project="..\..\packages\Xamarin.GooglePlayServices.Location.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Location.targets" Condition="Exists('..\..\packages\Xamarin.GooglePlayServices.Location.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Location.targets')" />
   <Import Project="..\..\packages\Xamarin.GooglePlayServices.Maps.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Maps.targets" Condition="Exists('..\..\packages\Xamarin.GooglePlayServices.Maps.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Maps.targets')" />
+  <Import Project="..\..\packages\Xamarin.GooglePlayServices.Ads.Lite.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Ads.Lite.targets" Condition="Exists('..\..\packages\Xamarin.GooglePlayServices.Ads.Lite.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Ads.Lite.targets')" />
 </Project>

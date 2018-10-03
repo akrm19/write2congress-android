@@ -41,6 +41,10 @@ namespace Write2Congress.Droid.Activities
                 _settingsFrag = new SettingsFragment();
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _settingsFrag, Resource.Id.settingsActv_fragmentContainer, TagsType.SettingsFragment);
             }
+
+            var adView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.settingsActv_adView);
+            var adRequest = new Android.Gms.Ads.AdRequest.Builder().Build();
+            adView.LoadAd(adRequest);
         }
     }
 }
