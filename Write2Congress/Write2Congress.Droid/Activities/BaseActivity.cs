@@ -57,11 +57,6 @@ namespace Write2Congress.Droid.Activities
                 //set first, otherwise app will default to activity tile
                 SetSupportActionBar(toolbar);
                 SupportActionBar.SetDisplayShowTitleEnabled(false);
-                // This does not seem to work when called here, only when called OnStart
-                //if (string.IsNullOrWhiteSpace(title))
-                //    SupportActionBar.SetDisplayShowTitleEnabled(false);
-                //else
-                //toolbar.Title = title;
 
                 SupportActionBar.Elevation = 10f;
                 SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_action_menu);
@@ -82,11 +77,8 @@ namespace Write2Congress.Droid.Activities
 
         public void UpdateTitleBarText(string newText)
         {
-            //using (var toolbar = FindViewById<Toolbar>(_toolbarId))
-            //{
-                SupportActionBar.SetDisplayShowTitleEnabled(true);
-                SupportActionBar.Title = newText;                   
-            //}
+            SupportActionBar.SetDisplayShowTitleEnabled(true);
+            SupportActionBar.Title = newText;                   
         }
 
         protected void ReplaceFragmentByTag(BaseActivity activity, BaseFragment newFragment, int containerId, string tag)

@@ -64,10 +64,6 @@ namespace Write2Congress.Droid.Activities
                     SetToolbarFilterviewVisibility(false);
                     SetToolbarExitSearchviewVisibility(false);
                     break;
-                //case Resource.Id.searchBillsMenu_filter:
-                    //SetToolbarSearchviewVisibility(false);
-                    //SetToolbarExitSearchviewVisibility(false);
-                    //break;
             }
 
             return result;

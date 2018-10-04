@@ -62,20 +62,6 @@ namespace Write2Congress.Droid.Activities
             adView.LoadAd(adRequest);
         }
 
-        //TODO RM: Does this need to bw removed
-        /*
-        private void ActionMenu_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
-        {
-            switch (e.Item.ItemId)
-            {
-                case Resource.Id.actionMenu_search:
-                    Toast.MakeText(ApplicationContext, "search", ToastLength.Short).Show();
-                    break;
-            }
-        }
-        */
-
-
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -111,8 +97,7 @@ namespace Write2Congress.Droid.Activities
             var lastUpdate = AppHelper.GetLastLegislatorUpdate();
 
             return lastUpdate == DateTime.MinValue
-                ? true
-                : lastUpdate.CompareTo(DateTime.Now.AddDays(-30)) >= 0;
+                || lastUpdate.CompareTo(DateTime.Now.AddDays(-30)) >= 0;
         }
 
         private void VerifyUserWantsToUpdateLegislators()
