@@ -48,7 +48,7 @@ namespace Write2Congress.Droid.CustomControls
 
         private void Initialize()
         {
-            Logger = new Logger(Class.SimpleName);
+            Logger = new Logger("LegislatorsViewer");//Class.SimpleName);
 
             using (var layoutInflater = Context.GetSystemService(Context.LayoutInflaterService) as LayoutInflater)
                 layoutInflater.Inflate(Resource.Layout.ctrl_LegislatorsViewer, this, true);

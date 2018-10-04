@@ -52,7 +52,7 @@ namespace Write2Congress.Droid.Fragments
 
         void DonateToDevButton_Click(object sender, EventArgs e)
         {
-            var url = @"http://www.techhops.com";
+            var url = @"http://www.techhops.com/donate";
             LaunchViewWebsiteIntent(url);
         }
 

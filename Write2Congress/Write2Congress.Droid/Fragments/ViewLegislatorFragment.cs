@@ -50,6 +50,7 @@ namespace Write2Congress.Droid.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            //RetainInstance = true;
 
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
 
