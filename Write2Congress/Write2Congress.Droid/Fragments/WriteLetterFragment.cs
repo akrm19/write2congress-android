@@ -84,7 +84,7 @@ namespace Write2Congress.Droid.Fragments
 
         private string GetSignaturePreference()
         {
-            return AppHelper.GetDefaultPreferenceString(SharedPreference.Signature, "");
+            return "";//AppHelper.GetDefaultPreferenceString(SharedPreference.Signature, "");
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)

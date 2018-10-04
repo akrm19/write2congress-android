@@ -86,6 +86,8 @@
   <string name="sent">Sent</string>
   <string name="sentLetters">Send Letters</string>
   <string name="settings">Settings</string>
+  <string name="settingsShakeForFeedback">Shake for Feedback</string>
+  <string name="settingsShareForFeedbackDescription">Enable feature that brings up the feedback screen after shaking your phone (takes effect after app restart).</string>
   <string name="signature">Signature</string>
   <string name="signatureSummary">The signature used when writting letters to legislators.</string>
   <string name="signatureDefaultValue">Sincerely,</string>

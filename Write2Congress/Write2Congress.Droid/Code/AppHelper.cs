@@ -338,6 +338,19 @@ namespace Write2Congress.Droid.Code
             return prefereces;
         }
 
+        public static bool GetDefaultPreferenceBoolean(string preferenceKey, bool defaultValue)
+        {
+            return GetDefaultSharedPreferences().GetBoolean(preferenceKey, defaultValue);
+        }
+
+        public static bool SetDefaultPreferenceBoolean(string preferenceKey, bool value)
+        {
+            return GetDefaultSharedPreferences()
+                .Edit()
+                .PutBoolean(preferenceKey, value)
+                .Commit();
+        }
+
         public static string GetDefaultPreferenceString(string preferenceKey, string defaultValue = "")
         {
             return GetDefaultSharedPreferences().GetString(preferenceKey, defaultValue);

@@ -17,6 +17,7 @@ using Write2Congress.Shared.DomainModel.Interface;
 using Com.Instabug.Library;
 using Com.Instabug.Library.Invocation;
 using Com.Instabug.Bug;
+using Write2Congress.Droid.DomainModel.Constants;
 
 namespace Write2Congress.Droid
 {
@@ -24,6 +25,7 @@ namespace Write2Congress.Droid
     public class BaseApplication : Application
     {
         private bool _forceRetrieveAllLegislators = false;
+        private string _instaBugNumber = "43f736535911298944ea7b86b88e6644";
         private IMyLogger _logger;
         private static BaseApplication _instance;
         private List<Legislator> _allLegislators;
@@ -66,10 +68,15 @@ namespace Write2Congress.Droid
             _logger = new Logger("BaseApplication");
 
             //InstaBug init
-            new Instabug.Builder(this, "43f736535911298944ea7b86b88e6644")
-                        .SetInvocationEvents(
-                            //InstabugInvocationEvent.FloatingButton, 
-                            InstabugInvocationEvent.Shake)
+
+            var enableShakeForFeedback = AppHelper.GetDefaultPreferenceBoolean(SharedPreference.EnableShareForFeedback, true);
+
+
+            new Instabug.Builder(this, _instaBugNumber)
+                        .SetInvocationEvents(enableShakeForFeedback
+                            ? InstabugInvocationEvent.Shake
+                            : InstabugInvocationEvent.None)
+                        // ,InstabugInvocationEvent.FloatingButton 
                         //.SetPromptOptionsEnabled(false, true, true)
                         .Build();
 

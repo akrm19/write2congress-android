@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <CheckBoxPreference
+      android:key="preferences_enableShakeForFeedback"
+      android:title="@string/settingsShakeForFeedback"
+      android:summary="@string/settingsShareForFeedbackDescription"
+      android:defaultValue="true" />
+  <!--
     <EditTextPreference 
         android:title="@string/signature"
         android:key="preferences_signature"
         android:summary="@string/signatureSummary"
         android:defaultValue="@string/signatureDefaultValue" />
-  <!--
-  <CheckBoxPreference
-      android:key="preferences_sync"
-      android:title="@string/pref_sync"
-      android:summary="@string/pref_sync_summ"
-      android:defaultValue="true" />
   <ListPreference
       android:dependency="pref_sync"
       android:key="pref_syncConnectionType"

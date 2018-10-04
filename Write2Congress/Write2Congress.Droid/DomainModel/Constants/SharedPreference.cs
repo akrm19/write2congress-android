@@ -14,6 +14,7 @@ namespace Write2Congress.Droid.DomainModel.Constants
 {
     public static class SharedPreference
     {
+        public const string EnableShareForFeedback = "preferences_enableShakeForFeedback";
         public const string Signature = "preferences_signature";
         public const string LegislatorsLastUpdate = "LegislatorsLastUpdate";
         public const string FavoriteLegislatorsLastUpdate = "LegislatorsLastUpdate";
