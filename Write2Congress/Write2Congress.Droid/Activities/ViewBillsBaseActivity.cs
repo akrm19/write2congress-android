@@ -47,6 +47,10 @@ namespace Write2Congress.Droid.Activities
                 _viewBillsFragCtrl = BillViewerFragmentCtrl.CreateInstance(GetBillViewerKind);
                 AndroidHelper.AddSupportFragment(SupportFragmentManager, _viewBillsFragCtrl, Resource.Id.viewBillsActv_fragmentContainer, TagsType.ViewBillsFragment);
             }
+
+            var adView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.viewBillsActv_adView2);
+            var adRequest = new Android.Gms.Ads.AdRequest.Builder().Build();
+            adView.LoadAd(adRequest);
         }
     }
 }
