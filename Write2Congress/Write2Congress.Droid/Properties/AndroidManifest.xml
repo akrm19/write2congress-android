@@ -9,17 +9,15 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/MyAppTheme" android:icon="@mipmap/ic_launcher_blue_v2">
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" android:windowSoftInputMode="adjustPan" />
-        <!--
+	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/MyAppTheme" android:icon="@mipmap/ic_launcher_blue_v2" android:label="Write2Congress">
+		<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" android:windowSoftInputMode="adjustPan" />
+		<!--
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:windowSoftInputMode="adjustPan" />
         -->
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-    </application>
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+	</application>
 	<!--
   <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal">
   <application android:name="afhcan.mobile.androidapp.BaseApplication" android:label="AFHCAN" android:icon="@drawable/ic_launcher" android:theme="@style/tConsultAppTheme" android:enabled="true" android:largeHeap="true"></application>
