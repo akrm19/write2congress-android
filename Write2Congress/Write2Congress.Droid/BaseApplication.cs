@@ -86,7 +86,9 @@ namespace Write2Congress.Droid
             Instabug.SetWelcomeMessageState(Com.Instabug.Library.UI.Onboarding.WelcomeMessage.State.Beta);
 
             Instabug.PrimaryColor = AndroidHelper.GetCurrentSdkVer() < BuildVersionCodes.M
+#pragma warning disable CS0618 // Type or member is obsolete
                 ? Resources.GetColor(Resource.Color.primary_blue)
+#pragma warning restore CS0618 // Type or member is obsolete
                 : GetColor(Resource.Color.primary_blue);
 
             LetterManager = new LetterManager(new LetterFileProvider(), _logger);

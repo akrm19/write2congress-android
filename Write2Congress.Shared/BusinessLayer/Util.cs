@@ -17,7 +17,8 @@ namespace Write2Congress.Shared.BusinessLayer
 {
     public class Util
     {
-        private IMyLogger _logger;
+        private static IMyLogger _logger;
+
         public Util(IMyLogger logger)
         {
             _logger = logger;
@@ -125,9 +126,10 @@ namespace Write2Congress.Shared.BusinessLayer
             {
                 Directory.CreateDirectory(dirPath);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                //_logger.Error($"Error creating directory: {dirPath}. {ex.Message}", ex);
+                
+                //.Error($"Error creating directory: {dirPath}. {ex.Message}", ex);
             }
         }
 

@@ -10,7 +10,7 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 {
     public class CommitteeSvc : SunlightApi
     {
-        private static string _committeesForLegislatorsUri = "committees?member_ids={0}&fields=name,committee_id,chamber,url,office,subcommittee,phone&per_page=all";
+        //private static string _committeesForLegislatorsUri = "committees?member_ids={0}&fields=name,committee_id,chamber,url,office,subcommittee,phone&per_page=all";
 
         /*
         public CommitteeSvc(IMyLogger logger)
