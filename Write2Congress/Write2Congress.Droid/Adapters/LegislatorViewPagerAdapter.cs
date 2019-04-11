@@ -185,7 +185,6 @@ namespace Write2Congress.Droid.Adapters
             }
             
             return new Java.Lang.String(title);
-            //return new Java.Lang.String(viewers[position].ViewerTitle());
         }
     }
 }

@@ -152,7 +152,7 @@ namespace Write2Congress.Droid.Activities
                         e.Handled = true;
                     };
 
-                    Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
+                    MenuItemCompat.SetOnActionExpandListener(filterMenuItem, onCollapseListener);
 
                     if (!string.IsNullOrWhiteSpace(CurrentFilter))
                     {

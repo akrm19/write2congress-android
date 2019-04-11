@@ -48,12 +48,20 @@ namespace Write2Congress.Droid.Code
 
         public static Address GetCurrentAddress(LocationManager locationManager = null)
         {
-            if (locationManager == null)
-                locationManager = GetLocationManager();
-
-            var currentLocation = GetCurrentLocation(locationManager);
-
-            return GetAddressFromLocation(currentLocation);
+            try
+            {
+                if (locationManager == null)
+                    locationManager = GetLocationManager();
+                
+                var currentLocation = GetCurrentLocation(locationManager);
+                
+                return GetAddressFromLocation(currentLocation);
+            }
+            catch(Exception e)
+            {
+                _logger.Error("ERROR: Could not retrieve locaiton. Unable to get address", e);
+                return null;
+            }
         }
 
         public static LocationManager GetLocationManager()
