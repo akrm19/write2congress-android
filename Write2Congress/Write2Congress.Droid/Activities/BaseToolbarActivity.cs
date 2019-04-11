@@ -77,17 +77,6 @@ namespace Write2Congress.Droid.Activities
                 case Resource.Id.actionMenu_favoriteLegislators:
                     OpenFavLegislators();
                     break;
-                /* Removed for now, since the write to legislator is disabled.
-                case Resource.Id.actionMenu_drafts:
-                    OpenDrafts();
-                    break;
-                case Resource.Id.actionMenu_sent:
-                    OpenSent();
-                    break;
-                case Resource.Id.actionMenu_writeNew:
-                    OpenWriteNewLetter();
-                    break;
-                    */
                 default:
                     break;
             }

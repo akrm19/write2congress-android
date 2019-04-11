@@ -204,18 +204,10 @@ namespace Write2Congress.Droid.Fragments
 
         protected void ShowEmptyviewIfNecessary()
         {
-            //if (recyclerAdapter.ItemCount == 0 && viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
             if(recycler.GetAdapter().ItemCount == 0 && viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
-            {
                 viewSwitcher.ShowNext();
-                //ShowRecyclerButtons(false);
-            }
-            //else if (recyclerAdapter.ItemCount > 0 && viewSwitcher.CurrentView.Id != Resource.Id.baseViewer_recycler)
             else if (recycler.GetAdapter().ItemCount > 0 && viewSwitcher.CurrentView.Id != Resource.Id.baseViewer_recycler)
-            {
                 viewSwitcher.ShowNext();
-                //ShowRecyclerButtons(true);
-            }
         }
 
         protected void SetLoadMoreButtonVisibility(bool showButtons)
@@ -229,12 +221,7 @@ namespace Write2Congress.Droid.Fragments
         {
             if (loadMoreButton == null)
                 return;
-
-            /*
-            loadMoreButton.Text = AndroidHelper.GetString( setAsLoading
-                ? Resource.String.loading
-                : Resource.String.loadMore);
-            */
+                
             loadMoreButton.Enabled = !setAsLoading;
 
             //TODO RM: looking into chaing icon to loading gif

@@ -11,15 +11,6 @@ mlns:app="http://schemas.android.com/apk/lib/write2congress.droid"
         android:icon="@drawable/ic_filter_list_white_48dp"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
-
-    <!-- Hide the write new letter form legislators view
-    <item
-        android:id="@+id/mainMenu_writeNew"
-        android:title="@string/writeNew"
-        android:icon="@drawable/ic_create_white_48dp"
-        app:showAsAction="always"/>
-    -->
-    
     <item
       android:id="@+id/mainMenu_refresh"
       android:title="@string/refresh"

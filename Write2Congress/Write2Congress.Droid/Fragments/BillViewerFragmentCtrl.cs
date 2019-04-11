@@ -205,55 +205,6 @@ namespace Write2Congress.Droid.Fragments
             ShowBills(_billsToDisplay, _isThereMoreVotes);
         }
 
-        /*
-        protected void FetchBillsSearchResults(string searchTerm, bool isLoadMoreClick)
-        {
-            //_viewerMode = BillViewerKind.BillSearch;
-
-
-            base.FetchMoreLegislatorContent(isLoadMoreClick);
-            var getBillsTask = GetBillsSearchTask(searchTerm, isLoadMoreClick);
-
-            getBillsTask.ContinueWith((antecedent) =>
-            {
-                if (Activity == null || Activity.IsDestroyed || Activity.IsFinishing)
-                    return;
-
-                Activity.RunOnUiThread(() =>
-                {
-                    if (antecedent.IsFaulted || antecedent.IsCanceled)
-                    {
-                        HandleErrorRetrievingData();
-                    }
-                    else
-                    {
-                        HandleSuccessfullDataRetrieval();
-
-                        currentPage = antecedent.Result.Item3 + 1;
-                        _isThereMoreVotes = antecedent.Result.Item2;
-
-                        if (_billsToDisplay == null || !_billsToDisplay.Any())
-                            _billsToDisplay = antecedent.Result.Item1;
-                        else
-                            _billsToDisplay.AddRange(antecedent.Result.Item1);
-
-
-                        SetLoadMoreButtonTextAsLoading(false);
-                        ShowRecyclerButtons(_isThereMoreVotes);
-                        ShowBills(_billsToDisplay, _isThereMoreVotes);
-
-                        var newTitle = $"'{antecedent.Result.Item4}' Bills";
-                        GetBaseActivity().UpdateTitleBarText(newTitle);
-                    }
-
-                    SetToolbarForSearchResultReturned();
-                });
-            });
-
-            getBillsTask.Start();
-        }
-        */
-
         protected override void FetchMoreLegislatorContent(bool isNextClick)
         {
             base.FetchMoreLegislatorContent(isNextClick);
@@ -424,10 +375,6 @@ namespace Write2Congress.Droid.Fragments
         {
             if(GetBaseActivityWithToolbarSearch() != null)
                 DisconnectToolbarEvents();
-            
-            //_billManager = null;
-            //_billsToDisplay = null;
-            //_legislator = null;
 
 			base.CleanUpReferencesToViewOrContext();
         }

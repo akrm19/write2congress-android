@@ -44,7 +44,6 @@ namespace Write2Congress.Droid.Fragments
                 case Android.Resource.Id.Home:
                     (Activity as BaseToolbarActivity).CurrentDrawerLayout.OpenDrawer(Android.Support.V4.View.GravityCompat.Start);
                     break;
-                    //return true;
             }
 
             return base.OnOptionsItemSelected(item);    
