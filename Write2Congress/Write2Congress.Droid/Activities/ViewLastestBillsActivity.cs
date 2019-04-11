@@ -33,6 +33,7 @@ namespace Write2Congress.Droid.Activities
         }
 
         protected override int MenuItemId => Resource.Menu.menu_viewBills;
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_latestBills;
 
         protected override int FilterDataItemId => Resource.Id.viewLatestBillsMenu_filter;
     }

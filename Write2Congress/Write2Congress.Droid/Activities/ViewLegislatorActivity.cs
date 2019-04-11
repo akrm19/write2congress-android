@@ -23,6 +23,7 @@ namespace Write2Congress.Droid.Activities
         private ViewLegislatorFragment _viewLegislatorFragment;
 
         protected override int DrawerLayoutId => Resource.Id.viewLegislatorActv_parent;
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_search;
 
         protected override int MenuItemId => _currentMenuId;
 

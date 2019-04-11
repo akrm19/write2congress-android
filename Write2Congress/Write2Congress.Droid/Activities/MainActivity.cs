@@ -38,6 +38,8 @@ namespace Write2Congress.Droid.Activities
             }
         }
 
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_search;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);

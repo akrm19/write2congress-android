@@ -23,6 +23,7 @@ namespace Write2Congress.Droid.Activities
         private FavoriteLegislatorsFragment _favLegislatorsFragment;
 
         protected override int DrawerLayoutId => Resource.Id.favoriteLegislatorsActv_parent;
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_favoriteLegislators;
 
         protected override int MenuItemId => Resource.Menu.menu_favorite;
 

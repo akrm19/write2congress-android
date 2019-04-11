@@ -32,6 +32,7 @@ namespace Write2Congress.Droid.Activities
                 return Resource.Id.writeLetterActv_parent;
             }
         }
+        protected override int DrawerMenuItemId => throw new NotImplementedException();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

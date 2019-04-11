@@ -16,6 +16,7 @@ namespace Write2Congress.Droid.Activities
         }
 
         protected override int DrawerLayoutId => Resource.Id.donateActv_parent;
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_donate;
 
         protected override void OnCreate(Android.OS.Bundle savedInstanceState)
         {

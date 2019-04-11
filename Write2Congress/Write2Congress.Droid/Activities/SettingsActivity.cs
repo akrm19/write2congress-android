@@ -27,6 +27,7 @@ namespace Write2Congress.Droid.Activities
                 return Resource.Id.settingsActv_parent;
             }
         }
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_settings;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

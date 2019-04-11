@@ -69,7 +69,10 @@ namespace Write2Congress.Droid.Activities
             return result;
         }
 
+        //Id to locate the Menu axml file used for top bar
         protected override int MenuItemId => Resource.Menu.menu_searchBills;
+
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_searchBills;
 
         protected override int SearchItemId => Resource.Id.searchBillsMenu_search;
 

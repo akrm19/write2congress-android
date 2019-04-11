@@ -26,6 +26,7 @@ namespace Write2Congress.Droid.Activities
     {
         protected Logger MyLogger;
         protected abstract int DrawerLayoutId { get; }
+        protected abstract int DrawerMenuItemId { get; }
         private DrawerLayout _currentDrawerLayout;
         private int _toolbarId;
 

@@ -24,6 +24,7 @@ namespace Write2Congress.Droid.Activities
         }
 
         protected override int DrawerLayoutId => Resource.Id.feedbackActv_parent;
+        protected override int DrawerMenuItemId => Resource.Id.actionMenu_feedback;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

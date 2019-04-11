@@ -25,6 +25,7 @@ namespace Write2Congress.Droid.Activities
     [Activity]
     public abstract class BaseToolbarActivity : BaseActivity
     {
+        private IMenuItem previousMenuItem = null;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -32,13 +33,21 @@ namespace Write2Congress.Droid.Activities
 
         protected void SetupNavigationMenu(int navigationViewid)
         {
+
             using (var navigationView = FindViewById<NavigationView>(navigationViewid))
+            {
+                if (previousMenuItem != null)
+                    previousMenuItem.SetChecked(false);
+
+                previousMenuItem = navigationView.Menu.FindItem(DrawerMenuItemId);
+                previousMenuItem.SetChecked(true);
                 navigationView.NavigationItemSelected += NavigationItemSelected;
+            }
         }
 
         protected void NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
-            e.MenuItem.SetChecked(true);
+            //e.MenuItem.SetChecked(true);
             e.Handled = true;
 
             switch (e.MenuItem.ItemId)
