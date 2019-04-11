@@ -18,18 +18,16 @@ using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Adapters
 {
-    public class VoteAdapter : RecyclerView.Adapter
+    public class VoteAdapter : BaseRecyclerAdapter
     {
         private string voteResult, voteType, date, billInfo, nominationInfo;
 
         private BaseFragment _fragment;
-        private Logger _logger;
         private List<Vote> _votes = new List<Vote>();
 
         public VoteAdapter(BaseFragment fragment)
         {
             _fragment = fragment;
-            _logger = new Logger(Class.SimpleName);
 
             voteResult = AndroidHelper.GetString(Resource.String.voteResult);
             voteType = AndroidHelper.GetString(Resource.String.voteType);
@@ -77,6 +75,8 @@ namespace Write2Congress.Droid.Adapters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
+            base.OnBindViewHolder(holder, position);
+
             var vote = _votes[position] ?? null;
             if (vote == null)
             {

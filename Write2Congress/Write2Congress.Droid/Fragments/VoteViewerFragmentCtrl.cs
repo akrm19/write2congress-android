@@ -55,10 +55,10 @@ namespace Write2Congress.Droid.Fragments
             currentPage = RetrieveCurrentPageIfAvailable(savedInstanceState);
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
-            
-            //recyclerAdapter = new VoteAdapter(this);
-            //recycler.SetAdapter(recyclerAdapter);
-            recycler.SetAdapter(new VoteAdapter(this));
+
+            var adapter = new VoteAdapter(this);
+            adapter.OnEndOfListReached += Adapter_OnEndOfListReached;
+            recycler.SetAdapter(adapter);
 
 			SetLoadingTextInEmptyView();
 
@@ -74,6 +74,12 @@ namespace Write2Congress.Droid.Fragments
                 FetchMoreLegislatorContent(false);
 
             return fragment;
+        }
+
+        void Adapter_OnEndOfListReached(object sender, EventArgs e)
+        {
+            if(_isThereMoreVotes)
+                SetLoadMoreButtonVisibility(true);
         }
 
         protected override void FetchMoreLegislatorContent(bool isNextClick)
@@ -114,9 +120,6 @@ namespace Write2Congress.Droid.Fragments
                         else
                             _votes.AddRange(antecedent.Result.Item1);
 
-                        SetLoadMoreButtonInDisabledState(false);
-                        SetLoadMoreButtonVisibility(_isThereMoreVotes);
-
                         ShowVotes(_votes, _isThereMoreVotes);
                     }
                 });
@@ -153,10 +156,6 @@ namespace Write2Congress.Droid.Fragments
         protected override void CleanUpReferencesToViewOrContext()
         {
             base.CleanUpReferencesToViewOrContext();
-
-            //_votes = null;
-            ///_voteManager = null;
-            //_legislator = null;
         }
 
         protected override string EmptyText()
@@ -179,13 +178,10 @@ namespace Write2Congress.Droid.Fragments
         {
             SetVotes(votes, isThereMoreVotes);
 
-            //if (IsBeingShown || recyclerAdapter !=  null)
             if (IsBeingShown || recycler.GetAdapter() != null)
             {
                 SetLoadMoreButtonInDisabledState(false);
-                SetLoadMoreButtonVisibility(_isThereMoreVotes);
 
-                //(recyclerAdapter as VoteAdapter).UpdateVotes(_votes);
                 (recycler.GetAdapter() as VoteAdapter).UpdateVotes(_votes);
                 SetLoadingUiOff();
             }

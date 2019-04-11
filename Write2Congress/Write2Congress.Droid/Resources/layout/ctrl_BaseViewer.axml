@@ -37,6 +37,7 @@
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/primary_blue"
         android:src="@drawable/ic_action_keyboard_arrow_down_white"
+        android:visibility="invisible"                                             
         app:borderWidth="0dp" />
     <LinearLayout
         android:orientation="horizontal"

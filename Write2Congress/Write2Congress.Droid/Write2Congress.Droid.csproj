@@ -222,6 +222,7 @@
     <Compile Include="Fragments\FavoriteLegislatorsFragment.cs" />
     <Compile Include="Activities\BaseToolbarActivityWithButtons.cs" />
     <Compile Include="Activities\FeedbackActivity.cs" />
+    <Compile Include="Adapters\BaseRecyclerAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

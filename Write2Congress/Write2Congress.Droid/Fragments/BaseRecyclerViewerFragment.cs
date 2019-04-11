@@ -37,8 +37,7 @@ namespace Write2Congress.Droid.Fragments
         protected virtual void CleanUpReferencesToViewOrContext()
         {
             recycler?.GetAdapter()?.Dispose();
-            recycler?.Dispose();// = null;
-            //recyclerAdapter = null;
+            recycler?.Dispose();
             viewSwitcher = null;
             header = null;
             emptyText = null;
@@ -68,8 +67,8 @@ namespace Write2Congress.Droid.Fragments
         {
 			errorOccurred = false;
 
-            if (loadMoreButton != null)
-                loadMoreButton.Enabled = true;
+            SetLoadMoreButtonInDisabledState(false);
+            SetLoadMoreButtonVisibility(false);
 			
             //Do not show toast the first time we retrieve data
             if(currentPage > 1)
@@ -198,8 +197,6 @@ namespace Write2Congress.Droid.Fragments
 
             if (viewSwitcher.NextView.Id == Resource.Id.baseViewer_emptyText)
                 viewSwitcher.ShowNext();
-
-            SetLoadMoreButtonVisibility(false);
         }
 
         protected void ShowEmptyviewIfNecessary()
