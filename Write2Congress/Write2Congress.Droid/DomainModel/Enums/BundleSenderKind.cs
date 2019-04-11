@@ -14,7 +14,6 @@ namespace Write2Congress.Droid.DomainModel.Enums
 {
     public enum BundleSenderKind
     {
-        LegislatorViewer,
-        ViewLettersAdapter
+        LegislatorViewer
     }
 }

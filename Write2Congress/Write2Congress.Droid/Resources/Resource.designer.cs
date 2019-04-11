@@ -4349,32 +4349,32 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e004b
 			public const int SYM = 2131624011;
 			
+			// aapt resource value: 0x7f0e025e
+			public const int action0 = 2131624542;
+			
+			// aapt resource value: 0x7f0e0284
+			public const int actionMenu_donate = 2131624580;
+			
+			// aapt resource value: 0x7f0e0285
+			public const int actionMenu_exit = 2131624581;
+			
+			// aapt resource value: 0x7f0e027f
+			public const int actionMenu_favoriteLegislators = 2131624575;
+			
+			// aapt resource value: 0x7f0e0283
+			public const int actionMenu_feedback = 2131624579;
+			
 			// aapt resource value: 0x7f0e0280
-			public const int action0 = 2131624576;
+			public const int actionMenu_latestBills = 2131624576;
 			
-			// aapt resource value: 0x7f0e02a6
-			public const int actionMenu_donate = 2131624614;
+			// aapt resource value: 0x7f0e027e
+			public const int actionMenu_search = 2131624574;
 			
-			// aapt resource value: 0x7f0e02a7
-			public const int actionMenu_exit = 2131624615;
+			// aapt resource value: 0x7f0e0281
+			public const int actionMenu_searchBills = 2131624577;
 			
-			// aapt resource value: 0x7f0e02a1
-			public const int actionMenu_favoriteLegislators = 2131624609;
-			
-			// aapt resource value: 0x7f0e02a5
-			public const int actionMenu_feedback = 2131624613;
-			
-			// aapt resource value: 0x7f0e02a2
-			public const int actionMenu_latestBills = 2131624610;
-			
-			// aapt resource value: 0x7f0e02a0
-			public const int actionMenu_search = 2131624608;
-			
-			// aapt resource value: 0x7f0e02a3
-			public const int actionMenu_searchBills = 2131624611;
-			
-			// aapt resource value: 0x7f0e02a4
-			public const int actionMenu_settings = 2131624612;
+			// aapt resource value: 0x7f0e0282
+			public const int actionMenu_settings = 2131624578;
 			
 			// aapt resource value: 0x7f0e00b3
 			public const int action_bar = 2131624115;
@@ -4397,17 +4397,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0091
 			public const int action_bar_title = 2131624081;
 			
-			// aapt resource value: 0x7f0e027d
-			public const int action_container = 2131624573;
+			// aapt resource value: 0x7f0e025b
+			public const int action_container = 2131624539;
 			
 			// aapt resource value: 0x7f0e00b4
 			public const int action_context_bar = 2131624116;
 			
-			// aapt resource value: 0x7f0e0284
-			public const int action_divider = 2131624580;
+			// aapt resource value: 0x7f0e0262
+			public const int action_divider = 2131624546;
 			
-			// aapt resource value: 0x7f0e027e
-			public const int action_image = 2131624574;
+			// aapt resource value: 0x7f0e025c
+			public const int action_image = 2131624540;
 			
 			// aapt resource value: 0x7f0e0003
 			public const int action_menu_divider = 2131623939;
@@ -4424,11 +4424,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0093
 			public const int action_mode_close_button = 2131624083;
 			
-			// aapt resource value: 0x7f0e027f
-			public const int action_text = 2131624575;
+			// aapt resource value: 0x7f0e025d
+			public const int action_text = 2131624541;
 			
-			// aapt resource value: 0x7f0e028d
-			public const int actions = 2131624589;
+			// aapt resource value: 0x7f0e026b
+			public const int actions = 2131624555;
 			
 			// aapt resource value: 0x7f0e0094
 			public const int activity_chooser_view_content = 2131624084;
@@ -4439,8 +4439,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e003b
 			public const int add = 2131623995;
 			
-			// aapt resource value: 0x7f0e01d9
-			public const int addCommentLayoutContainer = 2131624409;
+			// aapt resource value: 0x7f0e01b7
+			public const int addCommentLayoutContainer = 2131624375;
 			
 			// aapt resource value: 0x7f0e002b
 			public const int adjust_height = 2131623979;
@@ -4457,11 +4457,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e004c
 			public const int always = 2131624012;
 			
-			// aapt resource value: 0x7f0e0190
-			public const int annotationLayout = 2131624336;
+			// aapt resource value: 0x7f0e016e
+			public const int annotationLayout = 2131624302;
 			
-			// aapt resource value: 0x7f0e017e
-			public const int arrow_handler = 2131624318;
+			// aapt resource value: 0x7f0e015c
+			public const int arrow_handler = 2131624284;
 			
 			// aapt resource value: 0x7f0e0069
 			public const int async = 2131624041;
@@ -4478,68 +4478,68 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0074
 			public const int back = 2131624052;
 			
-			// aapt resource value: 0x7f0e00f4
-			public const int baseViewer = 2131624180;
+			// aapt resource value: 0x7f0e00ea
+			public const int baseViewer = 2131624170;
 			
-			// aapt resource value: 0x7f0e00f8
-			public const int baseViewer_emptyText = 2131624184;
+			// aapt resource value: 0x7f0e00ee
+			public const int baseViewer_emptyText = 2131624174;
 			
-			// aapt resource value: 0x7f0e00f5
-			public const int baseViewer_header = 2131624181;
+			// aapt resource value: 0x7f0e00eb
+			public const int baseViewer_header = 2131624171;
 			
-			// aapt resource value: 0x7f0e00f7
-			public const int baseViewer_recycler = 2131624183;
+			// aapt resource value: 0x7f0e00ed
+			public const int baseViewer_recycler = 2131624173;
 			
-			// aapt resource value: 0x7f0e00fa
-			public const int baseViewer_recyclerButtonsParent = 2131624186;
+			// aapt resource value: 0x7f0e00f0
+			public const int baseViewer_recyclerButtonsParent = 2131624176;
 			
-			// aapt resource value: 0x7f0e00f9
-			public const int baseViewer_recyclerNextButton = 2131624185;
+			// aapt resource value: 0x7f0e00ef
+			public const int baseViewer_recyclerNextButton = 2131624175;
 			
-			// aapt resource value: 0x7f0e00f6
-			public const int baseViewer_viewSwitcher = 2131624182;
+			// aapt resource value: 0x7f0e00ec
+			public const int baseViewer_viewSwitcher = 2131624172;
 			
 			// aapt resource value: 0x7f0e0043
 			public const int beginning = 2131624003;
 			
-			// aapt resource value: 0x7f0e00ff
-			public const int billCtrl_basicInfoParent = 2131624191;
+			// aapt resource value: 0x7f0e00f5
+			public const int billCtrl_basicInfoParent = 2131624181;
+			
+			// aapt resource value: 0x7f0e00f2
+			public const int billCtrl_cardview = 2131624178;
+			
+			// aapt resource value: 0x7f0e00f9
+			public const int billCtrl_cosponsors = 2131624185;
+			
+			// aapt resource value: 0x7f0e00f7
+			public const int billCtrl_dateIntroduced = 2131624183;
+			
+			// aapt resource value: 0x7f0e00f4
+			public const int billCtrl_image = 2131624180;
 			
 			// aapt resource value: 0x7f0e00fc
-			public const int billCtrl_cardview = 2131624188;
-			
-			// aapt resource value: 0x7f0e0103
-			public const int billCtrl_cosponsors = 2131624195;
-			
-			// aapt resource value: 0x7f0e0101
-			public const int billCtrl_dateIntroduced = 2131624193;
-			
-			// aapt resource value: 0x7f0e00fe
-			public const int billCtrl_image = 2131624190;
-			
-			// aapt resource value: 0x7f0e0106
-			public const int billCtrl_lastActionDate = 2131624198;
-			
-			// aapt resource value: 0x7f0e0105
-			public const int billCtrl_lastActionText = 2131624197;
-			
-			// aapt resource value: 0x7f0e00fd
-			public const int billCtrl_layout = 2131624189;
-			
-			// aapt resource value: 0x7f0e0100
-			public const int billCtrl_name = 2131624192;
+			public const int billCtrl_lastActionDate = 2131624188;
 			
 			// aapt resource value: 0x7f0e00fb
-			public const int billCtrl_parent = 2131624187;
+			public const int billCtrl_lastActionText = 2131624187;
 			
-			// aapt resource value: 0x7f0e0102
-			public const int billCtrl_status = 2131624194;
+			// aapt resource value: 0x7f0e00f3
+			public const int billCtrl_layout = 2131624179;
 			
-			// aapt resource value: 0x7f0e0104
-			public const int billCtrl_statusDate = 2131624196;
+			// aapt resource value: 0x7f0e00f6
+			public const int billCtrl_name = 2131624182;
 			
-			// aapt resource value: 0x7f0e0107
-			public const int billCtrl_summary = 2131624199;
+			// aapt resource value: 0x7f0e00f1
+			public const int billCtrl_parent = 2131624177;
+			
+			// aapt resource value: 0x7f0e00f8
+			public const int billCtrl_status = 2131624184;
+			
+			// aapt resource value: 0x7f0e00fa
+			public const int billCtrl_statusDate = 2131624186;
+			
+			// aapt resource value: 0x7f0e00fd
+			public const int billCtrl_summary = 2131624189;
 			
 			// aapt resource value: 0x7f0e006a
 			public const int blocking = 2131624042;
@@ -4559,17 +4559,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0076
 			public const int brush = 2131624054;
 			
-			// aapt resource value: 0x7f0e0230
-			public const int brush_indicator = 2131624496;
+			// aapt resource value: 0x7f0e020e
+			public const int brush_indicator = 2131624462;
 			
-			// aapt resource value: 0x7f0e0226
-			public const int btnNo = 2131624486;
+			// aapt resource value: 0x7f0e0204
+			public const int btnNo = 2131624452;
 			
-			// aapt resource value: 0x7f0e0212
-			public const int btnSortActions = 2131624466;
+			// aapt resource value: 0x7f0e01f0
+			public const int btnSortActions = 2131624432;
 			
-			// aapt resource value: 0x7f0e0227
-			public const int btnYes = 2131624487;
+			// aapt resource value: 0x7f0e0205
+			public const int btnYes = 2131624453;
 			
 			// aapt resource value: 0x7f0e0077
 			public const int bug = 2131624055;
@@ -4580,8 +4580,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0078
 			public const int cancel = 2131624056;
 			
-			// aapt resource value: 0x7f0e0281
-			public const int cancel_action = 2131624577;
+			// aapt resource value: 0x7f0e025f
+			public const int cancel_action = 2131624543;
 			
 			// aapt resource value: 0x7f0e0079
 			public const int capture_screenshot = 2131624057;
@@ -4598,14 +4598,14 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e005a
 			public const int center_vertical = 2131624026;
 			
-			// aapt resource value: 0x7f0e01f0
-			public const int changed_to_txt = 2131624432;
+			// aapt resource value: 0x7f0e01ce
+			public const int changed_to_txt = 2131624398;
 			
 			// aapt resource value: 0x7f0e00aa
 			public const int checkbox = 2131624106;
 			
-			// aapt resource value: 0x7f0e0289
-			public const int chronometer = 2131624585;
+			// aapt resource value: 0x7f0e0267
+			public const int chronometer = 2131624551;
 			
 			// aapt resource value: 0x7f0e0061
 			public const int clip_horizontal = 2131624033;
@@ -4619,41 +4619,41 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e004d
 			public const int collapseActionView = 2131624013;
 			
-			// aapt resource value: 0x7f0e010c
-			public const int committeeCtrl_basicInfoParent = 2131624204;
+			// aapt resource value: 0x7f0e0102
+			public const int committeeCtrl_basicInfoParent = 2131624194;
 			
-			// aapt resource value: 0x7f0e0109
-			public const int committeeCtrl_cardview = 2131624201;
+			// aapt resource value: 0x7f0e00ff
+			public const int committeeCtrl_cardview = 2131624191;
 			
-			// aapt resource value: 0x7f0e010b
-			public const int committeeCtrl_image = 2131624203;
+			// aapt resource value: 0x7f0e0101
+			public const int committeeCtrl_image = 2131624193;
 			
-			// aapt resource value: 0x7f0e010a
-			public const int committeeCtrl_layout = 2131624202;
+			// aapt resource value: 0x7f0e0100
+			public const int committeeCtrl_layout = 2131624192;
 			
-			// aapt resource value: 0x7f0e010d
-			public const int committeeCtrl_name = 2131624205;
+			// aapt resource value: 0x7f0e0103
+			public const int committeeCtrl_name = 2131624195;
 			
-			// aapt resource value: 0x7f0e0108
-			public const int committeeCtrl_parent = 2131624200;
+			// aapt resource value: 0x7f0e00fe
+			public const int committeeCtrl_parent = 2131624190;
 			
-			// aapt resource value: 0x7f0e010e
-			public const int committeeCtrl_phone = 2131624206;
+			// aapt resource value: 0x7f0e0104
+			public const int committeeCtrl_phone = 2131624196;
 			
-			// aapt resource value: 0x7f0e010f
-			public const int committeeCtrl_webpage = 2131624207;
+			// aapt resource value: 0x7f0e0105
+			public const int committeeCtrl_webpage = 2131624197;
 			
-			// aapt resource value: 0x7f0e013d
-			public const int container = 2131624253;
+			// aapt resource value: 0x7f0e0126
+			public const int container = 2131624230;
 			
 			// aapt resource value: 0x7f0e009d
 			public const int contentPanel = 2131624093;
 			
-			// aapt resource value: 0x7f0e0234
-			public const int conversation_list_item_container = 2131624500;
+			// aapt resource value: 0x7f0e0212
+			public const int conversation_list_item_container = 2131624466;
 			
-			// aapt resource value: 0x7f0e013e
-			public const int coordinator = 2131624254;
+			// aapt resource value: 0x7f0e0127
+			public const int coordinator = 2131624231;
 			
 			// aapt resource value: 0x7f0e00a4
 			public const int custom = 2131624100;
@@ -4670,32 +4670,32 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0097
 			public const int default_activity_button = 2131624087;
 			
-			// aapt resource value: 0x7f0e01ff
-			public const int description_underline = 2131624447;
+			// aapt resource value: 0x7f0e01dd
+			public const int description_underline = 2131624413;
 			
-			// aapt resource value: 0x7f0e0140
-			public const int design_bottom_sheet = 2131624256;
+			// aapt resource value: 0x7f0e0129
+			public const int design_bottom_sheet = 2131624233;
 			
-			// aapt resource value: 0x7f0e0147
-			public const int design_menu_item_action_area = 2131624263;
+			// aapt resource value: 0x7f0e0130
+			public const int design_menu_item_action_area = 2131624240;
 			
-			// aapt resource value: 0x7f0e0146
-			public const int design_menu_item_action_area_stub = 2131624262;
+			// aapt resource value: 0x7f0e012f
+			public const int design_menu_item_action_area_stub = 2131624239;
 			
-			// aapt resource value: 0x7f0e0145
-			public const int design_menu_item_text = 2131624261;
+			// aapt resource value: 0x7f0e012e
+			public const int design_menu_item_text = 2131624238;
 			
-			// aapt resource value: 0x7f0e0144
-			public const int design_navigation_view = 2131624260;
+			// aapt resource value: 0x7f0e012d
+			public const int design_navigation_view = 2131624237;
 			
 			// aapt resource value: 0x7f0e0035
 			public const int disableHome = 2131623989;
 			
-			// aapt resource value: 0x7f0e025c
-			public const int dismissButton = 2131624540;
+			// aapt resource value: 0x7f0e023a
+			public const int dismissButton = 2131624506;
 			
-			// aapt resource value: 0x7f0e01a9
-			public const int divider = 2131624361;
+			// aapt resource value: 0x7f0e0187
+			public const int divider = 2131624327;
 			
 			// aapt resource value: 0x7f0e00c3
 			public const int donateActv_fragAndToolbarParent = 2131624131;
@@ -4712,23 +4712,23 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00c4
 			public const int donateActv_toolbar = 2131624132;
 			
-			// aapt resource value: 0x7f0e014e
-			public const int donateFrag_contributeToUsIoProject = 2131624270;
+			// aapt resource value: 0x7f0e0137
+			public const int donateFrag_contributeToUsIoProject = 2131624247;
 			
-			// aapt resource value: 0x7f0e014b
-			public const int donateFrag_donateText = 2131624267;
+			// aapt resource value: 0x7f0e0134
+			public const int donateFrag_donateText = 2131624244;
 			
-			// aapt resource value: 0x7f0e014c
-			public const int donateFrag_donateToDev = 2131624268;
+			// aapt resource value: 0x7f0e0135
+			public const int donateFrag_donateToDev = 2131624245;
 			
-			// aapt resource value: 0x7f0e014d
-			public const int donateFrag_donateToProPublic = 2131624269;
+			// aapt resource value: 0x7f0e0136
+			public const int donateFrag_donateToProPublic = 2131624246;
 			
-			// aapt resource value: 0x7f0e014a
-			public const int donateFrag_parent = 2131624266;
+			// aapt resource value: 0x7f0e0133
+			public const int donateFrag_parent = 2131624243;
 			
-			// aapt resource value: 0x7f0e0149
-			public const int donateFrag_scrollview = 2131624265;
+			// aapt resource value: 0x7f0e0132
+			public const int donateFrag_scrollview = 2131624242;
 			
 			// aapt resource value: 0x7f0e006d
 			public const int doubleRipple = 2131624045;
@@ -4736,17 +4736,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00b5
 			public const int edit_query = 2131624117;
 			
-			// aapt resource value: 0x7f0e0203
-			public const int email_text_input_layout = 2131624451;
+			// aapt resource value: 0x7f0e01e1
+			public const int email_text_input_layout = 2131624417;
 			
-			// aapt resource value: 0x7f0e0205
-			public const int email_underline = 2131624453;
+			// aapt resource value: 0x7f0e01e3
+			public const int email_underline = 2131624419;
 			
 			// aapt resource value: 0x7f0e0044
 			public const int end = 2131624004;
 			
-			// aapt resource value: 0x7f0e028f
-			public const int end_padder = 2131624591;
+			// aapt resource value: 0x7f0e026d
+			public const int end_padder = 2131624557;
 			
 			// aapt resource value: 0x7f0e0053
 			public const int enterAlways = 2131624019;
@@ -4757,8 +4757,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e007c
 			public const int erase = 2131624060;
 			
-			// aapt resource value: 0x7f0e01e2
-			public const int error_state_stub = 2131624418;
+			// aapt resource value: 0x7f0e01c0
+			public const int error_state_stub = 2131624384;
 			
 			// aapt resource value: 0x7f0e0055
 			public const int exitUntilCollapsed = 2131624021;
@@ -4784,68 +4784,68 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00c9
 			public const int favoriteLegislatorsActv_toolbar = 2131624137;
 			
-			// aapt resource value: 0x7f0e0152
-			public const int favortieLegislatorsFrag_emptyText = 2131624274;
+			// aapt resource value: 0x7f0e013b
+			public const int favortieLegislatorsFrag_emptyText = 2131624251;
 			
-			// aapt resource value: 0x7f0e0151
-			public const int favortieLegislatorsFrag_legislatorsViewer = 2131624273;
+			// aapt resource value: 0x7f0e013a
+			public const int favortieLegislatorsFrag_legislatorsViewer = 2131624250;
 			
-			// aapt resource value: 0x7f0e014f
-			public const int favortieLegislatorsFrag_parent = 2131624271;
+			// aapt resource value: 0x7f0e0138
+			public const int favortieLegislatorsFrag_parent = 2131624248;
 			
-			// aapt resource value: 0x7f0e0150
-			public const int favortieLegislatorsFrag_viewSwitcher = 2131624272;
+			// aapt resource value: 0x7f0e0139
+			public const int favortieLegislatorsFrag_viewSwitcher = 2131624249;
 			
-			// aapt resource value: 0x7f0e0214
-			public const int feature_request_add_feature_thanks_msg = 2131624468;
+			// aapt resource value: 0x7f0e01f2
+			public const int feature_request_add_feature_thanks_msg = 2131624434;
 			
-			// aapt resource value: 0x7f0e01b9
-			public const int feature_request_add_layout = 2131624377;
+			// aapt resource value: 0x7f0e0197
+			public const int feature_request_add_layout = 2131624343;
 			
-			// aapt resource value: 0x7f0e01bc
-			public const int feature_request_comment_edittext_layout = 2131624380;
+			// aapt resource value: 0x7f0e019a
+			public const int feature_request_comment_edittext_layout = 2131624346;
 			
-			// aapt resource value: 0x7f0e01bb
-			public const int feature_request_comment_text_input_layout = 2131624379;
+			// aapt resource value: 0x7f0e0199
+			public const int feature_request_comment_text_input_layout = 2131624345;
 			
-			// aapt resource value: 0x7f0e01c4
-			public const int feature_request_email_disclaimer = 2131624388;
+			// aapt resource value: 0x7f0e01a2
+			public const int feature_request_email_disclaimer = 2131624354;
 			
-			// aapt resource value: 0x7f0e01c6
-			public const int feature_request_email_disclaimer_layout = 2131624390;
+			// aapt resource value: 0x7f0e01a4
+			public const int feature_request_email_disclaimer_layout = 2131624356;
+			
+			// aapt resource value: 0x7f0e01a0
+			public const int feature_request_email_edittext_layout = 2131624352;
+			
+			// aapt resource value: 0x7f0e019f
+			public const int feature_request_email_text_input_layout = 2131624351;
+			
+			// aapt resource value: 0x7f0e019d
+			public const int feature_request_name_edittext_layout = 2131624349;
+			
+			// aapt resource value: 0x7f0e0198
+			public const int feature_request_name_email_layout = 2131624344;
+			
+			// aapt resource value: 0x7f0e019c
+			public const int feature_request_name_text_input_layout = 2131624348;
+			
+			// aapt resource value: 0x7f0e01a3
+			public const int feature_requests_add_comment_email_error = 2131624355;
+			
+			// aapt resource value: 0x7f0e019b
+			public const int feature_requests_comment_text_underline = 2131624347;
+			
+			// aapt resource value: 0x7f0e01a1
+			public const int feature_requests_email_text_underline = 2131624353;
+			
+			// aapt resource value: 0x7f0e019e
+			public const int feature_requests_name_text_underline = 2131624350;
 			
 			// aapt resource value: 0x7f0e01c2
-			public const int feature_request_email_edittext_layout = 2131624386;
+			public const int features_request_list = 2131624386;
 			
-			// aapt resource value: 0x7f0e01c1
-			public const int feature_request_email_text_input_layout = 2131624385;
-			
-			// aapt resource value: 0x7f0e01bf
-			public const int feature_request_name_edittext_layout = 2131624383;
-			
-			// aapt resource value: 0x7f0e01ba
-			public const int feature_request_name_email_layout = 2131624378;
-			
-			// aapt resource value: 0x7f0e01be
-			public const int feature_request_name_text_input_layout = 2131624382;
-			
-			// aapt resource value: 0x7f0e01c5
-			public const int feature_requests_add_comment_email_error = 2131624389;
-			
-			// aapt resource value: 0x7f0e01bd
-			public const int feature_requests_comment_text_underline = 2131624381;
-			
-			// aapt resource value: 0x7f0e01c3
-			public const int feature_requests_email_text_underline = 2131624387;
-			
-			// aapt resource value: 0x7f0e01c0
-			public const int feature_requests_name_text_underline = 2131624384;
-			
-			// aapt resource value: 0x7f0e01e4
-			public const int features_request_list = 2131624420;
-			
-			// aapt resource value: 0x7f0e01ef
-			public const int features_request_status_change_txt_layout = 2131624431;
+			// aapt resource value: 0x7f0e01cd
+			public const int features_request_status_change_txt_layout = 2131624397;
 			
 			// aapt resource value: 0x7f0e007d
 			public const int feedback = 2131624061;
@@ -4898,188 +4898,188 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0070
 			public const int horizontal = 2131624048;
 			
-			// aapt resource value: 0x7f0e0118
-			public const int horizontal_scroll = 2131624216;
+			// aapt resource value: 0x7f0e010e
+			public const int horizontal_scroll = 2131624206;
 			
 			// aapt resource value: 0x7f0e0026
 			public const int hybrid = 2131623974;
 			
-			// aapt resource value: 0x7f0e017d
-			public const int ib_bottomsheet_arrow_layout = 2131624317;
+			// aapt resource value: 0x7f0e015b
+			public const int ib_bottomsheet_arrow_layout = 2131624283;
 			
-			// aapt resource value: 0x7f0e01cd
-			public const int ib_btn_fr_vote = 2131624397;
+			// aapt resource value: 0x7f0e01ab
+			public const int ib_btn_fr_vote = 2131624363;
 			
-			// aapt resource value: 0x7f0e0187
-			public const int ib_bug_attachment_collapsed_photo_library_icon = 2131624327;
+			// aapt resource value: 0x7f0e0165
+			public const int ib_bug_attachment_collapsed_photo_library_icon = 2131624293;
 			
-			// aapt resource value: 0x7f0e0186
-			public const int ib_bug_attachment_collapsed_screenshot_icon = 2131624326;
+			// aapt resource value: 0x7f0e0164
+			public const int ib_bug_attachment_collapsed_screenshot_icon = 2131624292;
 			
-			// aapt resource value: 0x7f0e0185
-			public const int ib_bug_attachment_collapsed_video_icon = 2131624325;
+			// aapt resource value: 0x7f0e0163
+			public const int ib_bug_attachment_collapsed_video_icon = 2131624291;
+			
+			// aapt resource value: 0x7f0e016a
+			public const int ib_bug_screenshot_separator = 2131624298;
+			
+			// aapt resource value: 0x7f0e017e
+			public const int ib_bug_scroll_view = 2131624318;
+			
+			// aapt resource value: 0x7f0e0166
+			public const int ib_bug_videorecording_separator = 2131624294;
+			
+			// aapt resource value: 0x7f0e01a5
+			public const int ib_completed_features = 2131624357;
+			
+			// aapt resource value: 0x7f0e0190
+			public const int ib_core_img_onboarding = 2131624336;
+			
+			// aapt resource value: 0x7f0e018f
+			public const int ib_core_lyt_onboarding_pager_fragment = 2131624335;
+			
+			// aapt resource value: 0x7f0e018b
+			public const int ib_core_onboarding_container = 2131624331;
+			
+			// aapt resource value: 0x7f0e018e
+			public const int ib_core_onboarding_done = 2131624334;
 			
 			// aapt resource value: 0x7f0e018c
-			public const int ib_bug_screenshot_separator = 2131624332;
+			public const int ib_core_onboarding_viewpager = 2131624332;
 			
-			// aapt resource value: 0x7f0e01a0
-			public const int ib_bug_scroll_view = 2131624352;
+			// aapt resource value: 0x7f0e018d
+			public const int ib_core_onboarding_viewpager_indicator = 2131624333;
+			
+			// aapt resource value: 0x7f0e0192
+			public const int ib_core_tv_subtitle = 2131624338;
+			
+			// aapt resource value: 0x7f0e0191
+			public const int ib_core_tv_title = 2131624337;
 			
 			// aapt resource value: 0x7f0e0188
-			public const int ib_bug_videorecording_separator = 2131624328;
+			public const int ib_dialog_container = 2131624328;
 			
-			// aapt resource value: 0x7f0e01c7
-			public const int ib_completed_features = 2131624391;
+			// aapt resource value: 0x7f0e01bb
+			public const int ib_empty_state_action = 2131624379;
 			
-			// aapt resource value: 0x7f0e01b2
-			public const int ib_core_img_onboarding = 2131624370;
+			// aapt resource value: 0x7f0e01b9
+			public const int ib_empty_state_icon = 2131624377;
 			
-			// aapt resource value: 0x7f0e01b1
-			public const int ib_core_lyt_onboarding_pager_fragment = 2131624369;
+			// aapt resource value: 0x7f0e01bf
+			public const int ib_empty_state_stub = 2131624383;
 			
-			// aapt resource value: 0x7f0e01ad
-			public const int ib_core_onboarding_container = 2131624365;
-			
-			// aapt resource value: 0x7f0e01b0
-			public const int ib_core_onboarding_done = 2131624368;
-			
-			// aapt resource value: 0x7f0e01ae
-			public const int ib_core_onboarding_viewpager = 2131624366;
-			
-			// aapt resource value: 0x7f0e01af
-			public const int ib_core_onboarding_viewpager_indicator = 2131624367;
-			
-			// aapt resource value: 0x7f0e01b4
-			public const int ib_core_tv_subtitle = 2131624372;
-			
-			// aapt resource value: 0x7f0e01b3
-			public const int ib_core_tv_title = 2131624371;
-			
-			// aapt resource value: 0x7f0e01aa
-			public const int ib_dialog_container = 2131624362;
-			
-			// aapt resource value: 0x7f0e01dd
-			public const int ib_empty_state_action = 2131624413;
-			
-			// aapt resource value: 0x7f0e01db
-			public const int ib_empty_state_icon = 2131624411;
-			
-			// aapt resource value: 0x7f0e01e1
-			public const int ib_empty_state_stub = 2131624417;
-			
-			// aapt resource value: 0x7f0e01dc
-			public const int ib_empty_state_text = 2131624412;
-			
-			// aapt resource value: 0x7f0e0215
-			public const int ib_feature_request_toolbar_vote_action_layout = 2131624469;
+			// aapt resource value: 0x7f0e01ba
+			public const int ib_empty_state_text = 2131624378;
 			
 			// aapt resource value: 0x7f0e01f3
-			public const int ib_features_request_comment_count = 2131624435;
+			public const int ib_feature_request_toolbar_vote_action_layout = 2131624435;
 			
-			// aapt resource value: 0x7f0e01e9
-			public const int ib_features_request_list = 2131624425;
+			// aapt resource value: 0x7f0e01d1
+			public const int ib_features_request_comment_count = 2131624401;
+			
+			// aapt resource value: 0x7f0e01c7
+			public const int ib_features_request_list = 2131624391;
+			
+			// aapt resource value: 0x7f0e01d3
+			public const int ib_fr_details_no_comments_icon = 2131624403;
+			
+			// aapt resource value: 0x7f0e01d2
+			public const int ib_fr_details_no_comments_layout = 2131624402;
+			
+			// aapt resource value: 0x7f0e01d4
+			public const int ib_fr_details_no_comments_tv = 2131624404;
+			
+			// aapt resource value: 0x7f0e01a8
+			public const int ib_fr_details_title = 2131624360;
+			
+			// aapt resource value: 0x7f0e01ff
+			public const int ib_fr_search_cancel = 2131624447;
+			
+			// aapt resource value: 0x7f0e01fd
+			public const int ib_fr_search_delete = 2131624445;
+			
+			// aapt resource value: 0x7f0e01fb
+			public const int ib_fr_search_field = 2131624443;
+			
+			// aapt resource value: 0x7f0e01fa
+			public const int ib_fr_search_layout = 2131624442;
+			
+			// aapt resource value: 0x7f0e01fe
+			public const int ib_fr_search_progressbar = 2131624446;
+			
+			// aapt resource value: 0x7f0e01fc
+			public const int ib_fr_search_text = 2131624444;
+			
+			// aapt resource value: 0x7f0e01f7
+			public const int ib_fr_toolbar_main = 2131624439;
+			
+			// aapt resource value: 0x7f0e01a9
+			public const int ib_fr_tv_feature_details_desc = 2131624361;
+			
+			// aapt resource value: 0x7f0e0200
+			public const int ib_fragment_container = 2131624448;
+			
+			// aapt resource value: 0x7f0e01ea
+			public const int ib_loadmore_progressbar = 2131624426;
+			
+			// aapt resource value: 0x7f0e01ec
+			public const int ib_ptr_header_progressbar = 2131624428;
+			
+			// aapt resource value: 0x7f0e024f
+			public const int ib_ratingbar = 2131624527;
+			
+			// aapt resource value: 0x7f0e0184
+			public const int ib_success_layout = 2131624324;
+			
+			// aapt resource value: 0x7f0e01f9
+			public const int ib_toolbar_action_btns_layout = 2131624441;
 			
 			// aapt resource value: 0x7f0e01f5
-			public const int ib_fr_details_no_comments_icon = 2131624437;
+			public const int ib_toolbar_vote_count = 2131624437;
 			
 			// aapt resource value: 0x7f0e01f4
-			public const int ib_fr_details_no_comments_layout = 2131624436;
+			public const int ib_toolbar_vote_icon = 2131624436;
 			
-			// aapt resource value: 0x7f0e01f6
-			public const int ib_fr_details_no_comments_tv = 2131624438;
+			// aapt resource value: 0x7f0e01ad
+			public const int ib_txt_feature_request_date = 2131624365;
 			
-			// aapt resource value: 0x7f0e01ca
-			public const int ib_fr_details_title = 2131624394;
+			// aapt resource value: 0x7f0e01ac
+			public const int ib_txt_feature_request_owner = 2131624364;
 			
-			// aapt resource value: 0x7f0e0221
-			public const int ib_fr_search_cancel = 2131624481;
+			// aapt resource value: 0x7f0e0256
+			public const int ib_welcome_survey_take_survey = 2131624534;
 			
-			// aapt resource value: 0x7f0e021f
-			public const int ib_fr_search_delete = 2131624479;
+			// aapt resource value: 0x7f0e0255
+			public const int ib_welcome_survey_text = 2131624533;
 			
-			// aapt resource value: 0x7f0e021d
-			public const int ib_fr_search_field = 2131624477;
-			
-			// aapt resource value: 0x7f0e021c
-			public const int ib_fr_search_layout = 2131624476;
-			
-			// aapt resource value: 0x7f0e0220
-			public const int ib_fr_search_progressbar = 2131624480;
-			
-			// aapt resource value: 0x7f0e021e
-			public const int ib_fr_search_text = 2131624478;
-			
-			// aapt resource value: 0x7f0e0219
-			public const int ib_fr_toolbar_main = 2131624473;
-			
-			// aapt resource value: 0x7f0e01cb
-			public const int ib_fr_tv_feature_details_desc = 2131624395;
-			
-			// aapt resource value: 0x7f0e0222
-			public const int ib_fragment_container = 2131624482;
-			
-			// aapt resource value: 0x7f0e020c
-			public const int ib_loadmore_progressbar = 2131624460;
-			
-			// aapt resource value: 0x7f0e020e
-			public const int ib_ptr_header_progressbar = 2131624462;
-			
-			// aapt resource value: 0x7f0e0271
-			public const int ib_ratingbar = 2131624561;
-			
-			// aapt resource value: 0x7f0e01a6
-			public const int ib_success_layout = 2131624358;
-			
-			// aapt resource value: 0x7f0e021b
-			public const int ib_toolbar_action_btns_layout = 2131624475;
-			
-			// aapt resource value: 0x7f0e0217
-			public const int ib_toolbar_vote_count = 2131624471;
-			
-			// aapt resource value: 0x7f0e0216
-			public const int ib_toolbar_vote_icon = 2131624470;
-			
-			// aapt resource value: 0x7f0e01cf
-			public const int ib_txt_feature_request_date = 2131624399;
-			
-			// aapt resource value: 0x7f0e01ce
-			public const int ib_txt_feature_request_owner = 2131624398;
-			
-			// aapt resource value: 0x7f0e0278
-			public const int ib_welcome_survey_take_survey = 2131624568;
-			
-			// aapt resource value: 0x7f0e0277
-			public const int ib_welcome_survey_text = 2131624567;
-			
-			// aapt resource value: 0x7f0e0276
-			public const int ib_welcome_survey_title = 2131624566;
+			// aapt resource value: 0x7f0e0254
+			public const int ib_welcome_survey_title = 2131624532;
 			
 			// aapt resource value: 0x7f0e0099
 			public const int icon = 2131624089;
 			
-			// aapt resource value: 0x7f0e0232
-			public const int icon_blur = 2131624498;
+			// aapt resource value: 0x7f0e0210
+			public const int icon_blur = 2131624464;
 			
-			// aapt resource value: 0x7f0e022f
-			public const int icon_brush = 2131624495;
+			// aapt resource value: 0x7f0e020d
+			public const int icon_brush = 2131624461;
 			
-			// aapt resource value: 0x7f0e022e
-			public const int icon_brush_layout = 2131624494;
+			// aapt resource value: 0x7f0e020c
+			public const int icon_brush_layout = 2131624460;
 			
-			// aapt resource value: 0x7f0e0290
-			public const int icon_frame = 2131624592;
+			// aapt resource value: 0x7f0e026e
+			public const int icon_frame = 2131624558;
 			
-			// aapt resource value: 0x7f0e028e
-			public const int icon_group = 2131624590;
+			// aapt resource value: 0x7f0e026c
+			public const int icon_group = 2131624556;
 			
-			// aapt resource value: 0x7f0e0231
-			public const int icon_magnify = 2131624497;
+			// aapt resource value: 0x7f0e020f
+			public const int icon_magnify = 2131624463;
 			
 			// aapt resource value: 0x7f0e002d
 			public const int icon_only = 2131623981;
 			
-			// aapt resource value: 0x7f0e0233
-			public const int icon_undo = 2131624499;
+			// aapt resource value: 0x7f0e0211
+			public const int icon_undo = 2131624465;
 			
 			// aapt resource value: 0x7f0e004e
 			public const int ifRoom = 2131624014;
@@ -5087,224 +5087,224 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0096
 			public const int image = 2131624086;
 			
-			// aapt resource value: 0x7f0e017a
-			public const int image_instabug_logo = 2131624314;
+			// aapt resource value: 0x7f0e0158
+			public const int image_instabug_logo = 2131624280;
 			
-			// aapt resource value: 0x7f0e0275
-			public const int imgLayout = 2131624565;
+			// aapt resource value: 0x7f0e0253
+			public const int imgLayout = 2131624531;
 			
-			// aapt resource value: 0x7f0e0213
-			public const int imgSortActions = 2131624467;
+			// aapt resource value: 0x7f0e01f1
+			public const int imgSortActions = 2131624433;
 			
-			// aapt resource value: 0x7f0e01de
-			public const int img_error_state = 2131624414;
+			// aapt resource value: 0x7f0e01bc
+			public const int img_error_state = 2131624380;
 			
-			// aapt resource value: 0x7f0e028a
-			public const int info = 2131624586;
+			// aapt resource value: 0x7f0e0268
+			public const int info = 2131624552;
 			
-			// aapt resource value: 0x7f0e01fe
-			public const int input_description = 2131624446;
+			// aapt resource value: 0x7f0e01dc
+			public const int input_description = 2131624412;
 			
-			// aapt resource value: 0x7f0e0204
-			public const int input_email = 2131624452;
+			// aapt resource value: 0x7f0e01e2
+			public const int input_email = 2131624418;
 			
-			// aapt resource value: 0x7f0e01f8
-			public const int input_layout_container = 2131624440;
+			// aapt resource value: 0x7f0e01d6
+			public const int input_layout_container = 2131624406;
 			
-			// aapt resource value: 0x7f0e01fd
-			public const int input_layout_description = 2131624445;
+			// aapt resource value: 0x7f0e01db
+			public const int input_layout_description = 2131624411;
 			
-			// aapt resource value: 0x7f0e01fc
-			public const int input_layout_description_container = 2131624444;
+			// aapt resource value: 0x7f0e01da
+			public const int input_layout_description_container = 2131624410;
 			
-			// aapt resource value: 0x7f0e01f9
-			public const int input_layout_title = 2131624441;
+			// aapt resource value: 0x7f0e01d7
+			public const int input_layout_title = 2131624407;
 			
-			// aapt resource value: 0x7f0e0201
-			public const int input_name = 2131624449;
+			// aapt resource value: 0x7f0e01df
+			public const int input_name = 2131624415;
 			
-			// aapt resource value: 0x7f0e01fa
-			public const int input_title = 2131624442;
+			// aapt resource value: 0x7f0e01d8
+			public const int input_title = 2131624408;
 			
 			// aapt resource value: 0x7f0e007f
 			public const int instabug = 2131624063;
 			
-			// aapt resource value: 0x7f0e0182
-			public const int instabug_add_attachment = 2131624322;
+			// aapt resource value: 0x7f0e0160
+			public const int instabug_add_attachment = 2131624288;
 			
-			// aapt resource value: 0x7f0e0183
-			public const int instabug_add_attachment_icon = 2131624323;
+			// aapt resource value: 0x7f0e0161
+			public const int instabug_add_attachment_icon = 2131624289;
 			
-			// aapt resource value: 0x7f0e0184
-			public const int instabug_add_attachment_label = 2131624324;
+			// aapt resource value: 0x7f0e0162
+			public const int instabug_add_attachment_label = 2131624290;
 			
-			// aapt resource value: 0x7f0e022c
-			public const int instabug_annotation_actions_container = 2131624492;
+			// aapt resource value: 0x7f0e020a
+			public const int instabug_annotation_actions_container = 2131624458;
 			
-			// aapt resource value: 0x7f0e022a
-			public const int instabug_annotation_image = 2131624490;
+			// aapt resource value: 0x7f0e0208
+			public const int instabug_annotation_image = 2131624456;
+			
+			// aapt resource value: 0x7f0e0207
+			public const int instabug_annotation_image_border = 2131624455;
+			
+			// aapt resource value: 0x7f0e0206
+			public const int instabug_annotation_image_container = 2131624454;
+			
+			// aapt resource value: 0x7f0e016b
+			public const int instabug_attach_gallery_image = 2131624299;
+			
+			// aapt resource value: 0x7f0e016c
+			public const int instabug_attach_gallery_image_icon = 2131624300;
+			
+			// aapt resource value: 0x7f0e016d
+			public const int instabug_attach_gallery_image_label = 2131624301;
 			
 			// aapt resource value: 0x7f0e0229
-			public const int instabug_annotation_image_border = 2131624489;
+			public const int instabug_attach_gallery_image_text = 2131624489;
+			
+			// aapt resource value: 0x7f0e0167
+			public const int instabug_attach_screenshot = 2131624295;
+			
+			// aapt resource value: 0x7f0e0168
+			public const int instabug_attach_screenshot_icon = 2131624296;
+			
+			// aapt resource value: 0x7f0e0169
+			public const int instabug_attach_screenshot_label = 2131624297;
+			
+			// aapt resource value: 0x7f0e0227
+			public const int instabug_attach_screenshot_text = 2131624487;
+			
+			// aapt resource value: 0x7f0e015d
+			public const int instabug_attach_video = 2131624285;
+			
+			// aapt resource value: 0x7f0e015e
+			public const int instabug_attach_video_icon = 2131624286;
+			
+			// aapt resource value: 0x7f0e015f
+			public const int instabug_attach_video_label = 2131624287;
 			
 			// aapt resource value: 0x7f0e0228
-			public const int instabug_annotation_image_container = 2131624488;
+			public const int instabug_attach_video_text = 2131624488;
 			
-			// aapt resource value: 0x7f0e018d
-			public const int instabug_attach_gallery_image = 2131624333;
+			// aapt resource value: 0x7f0e0173
+			public const int instabug_attachemnt_thumb_background = 2131624307;
 			
-			// aapt resource value: 0x7f0e018e
-			public const int instabug_attach_gallery_image_icon = 2131624334;
+			// aapt resource value: 0x7f0e015a
+			public const int instabug_attachment_bottom_sheet = 2131624282;
 			
-			// aapt resource value: 0x7f0e018f
-			public const int instabug_attach_gallery_image_label = 2131624335;
+			// aapt resource value: 0x7f0e0172
+			public const int instabug_attachment_img_item = 2131624306;
 			
-			// aapt resource value: 0x7f0e024b
-			public const int instabug_attach_gallery_image_text = 2131624523;
+			// aapt resource value: 0x7f0e017a
+			public const int instabug_attachment_progress_bar = 2131624314;
 			
-			// aapt resource value: 0x7f0e0189
-			public const int instabug_attach_screenshot = 2131624329;
+			// aapt resource value: 0x7f0e0177
+			public const int instabug_attachment_video_item = 2131624311;
 			
-			// aapt resource value: 0x7f0e018a
-			public const int instabug_attach_screenshot_icon = 2131624330;
+			// aapt resource value: 0x7f0e0226
+			public const int instabug_attachments_actions_bottom_sheet = 2131624486;
 			
-			// aapt resource value: 0x7f0e018b
-			public const int instabug_attach_screenshot_label = 2131624331;
-			
-			// aapt resource value: 0x7f0e0249
-			public const int instabug_attach_screenshot_text = 2131624521;
-			
-			// aapt resource value: 0x7f0e017f
-			public const int instabug_attach_video = 2131624319;
-			
-			// aapt resource value: 0x7f0e0180
-			public const int instabug_attach_video_icon = 2131624320;
-			
-			// aapt resource value: 0x7f0e0181
-			public const int instabug_attach_video_label = 2131624321;
+			// aapt resource value: 0x7f0e0225
+			public const int instabug_attachments_bottom_sheet_dim_view = 2131624485;
 			
 			// aapt resource value: 0x7f0e024a
-			public const int instabug_attach_video_text = 2131624522;
-			
-			// aapt resource value: 0x7f0e0195
-			public const int instabug_attachemnt_thumb_background = 2131624341;
-			
-			// aapt resource value: 0x7f0e017c
-			public const int instabug_attachment_bottom_sheet = 2131624316;
-			
-			// aapt resource value: 0x7f0e0194
-			public const int instabug_attachment_img_item = 2131624340;
-			
-			// aapt resource value: 0x7f0e019c
-			public const int instabug_attachment_progress_bar = 2131624348;
-			
-			// aapt resource value: 0x7f0e0199
-			public const int instabug_attachment_video_item = 2131624345;
-			
-			// aapt resource value: 0x7f0e0248
-			public const int instabug_attachments_actions_bottom_sheet = 2131624520;
-			
-			// aapt resource value: 0x7f0e0247
-			public const int instabug_attachments_bottom_sheet_dim_view = 2131624519;
-			
-			// aapt resource value: 0x7f0e026c
-			public const int instabug_audio_attachment = 2131624556;
-			
-			// aapt resource value: 0x7f0e0270
-			public const int instabug_audio_attachment_progress_bar = 2131624560;
-			
-			// aapt resource value: 0x7f0e0262
-			public const int instabug_bk_record_audio = 2131624546;
+			public const int instabug_audio_attachment = 2131624522;
 			
 			// aapt resource value: 0x7f0e024e
-			public const int instabug_btn_attach = 2131624526;
+			public const int instabug_audio_attachment_progress_bar = 2131624526;
 			
-			// aapt resource value: 0x7f0e0197
-			public const int instabug_btn_image_edit_attachment = 2131624343;
+			// aapt resource value: 0x7f0e0240
+			public const int instabug_bk_record_audio = 2131624512;
 			
-			// aapt resource value: 0x7f0e0252
-			public const int instabug_btn_new_chat = 2131624530;
+			// aapt resource value: 0x7f0e022c
+			public const int instabug_btn_attach = 2131624492;
 			
-			// aapt resource value: 0x7f0e026e
-			public const int instabug_btn_play_audio = 2131624558;
+			// aapt resource value: 0x7f0e0175
+			public const int instabug_btn_image_edit_attachment = 2131624309;
 			
-			// aapt resource value: 0x7f0e026b
-			public const int instabug_btn_play_video = 2131624555;
+			// aapt resource value: 0x7f0e0230
+			public const int instabug_btn_new_chat = 2131624496;
 			
-			// aapt resource value: 0x7f0e0261
-			public const int instabug_btn_record_audio = 2131624545;
+			// aapt resource value: 0x7f0e024c
+			public const int instabug_btn_play_audio = 2131624524;
 			
-			// aapt resource value: 0x7f0e0198
-			public const int instabug_btn_remove_attachment = 2131624344;
+			// aapt resource value: 0x7f0e0249
+			public const int instabug_btn_play_video = 2131624521;
 			
-			// aapt resource value: 0x7f0e0250
-			public const int instabug_btn_send = 2131624528;
+			// aapt resource value: 0x7f0e023f
+			public const int instabug_btn_record_audio = 2131624511;
 			
-			// aapt resource value: 0x7f0e0245
-			public const int instabug_btn_submit = 2131624517;
+			// aapt resource value: 0x7f0e0176
+			public const int instabug_btn_remove_attachment = 2131624310;
 			
-			// aapt resource value: 0x7f0e021a
-			public const int instabug_btn_toolbar_left = 2131624474;
+			// aapt resource value: 0x7f0e022e
+			public const int instabug_btn_send = 2131624494;
 			
-			// aapt resource value: 0x7f0e0264
-			public const int instabug_btn_toolbar_right = 2131624548;
+			// aapt resource value: 0x7f0e0223
+			public const int instabug_btn_submit = 2131624483;
 			
-			// aapt resource value: 0x7f0e019b
-			public const int instabug_btn_video_play_attachment = 2131624347;
+			// aapt resource value: 0x7f0e01f8
+			public const int instabug_btn_toolbar_left = 2131624440;
 			
-			// aapt resource value: 0x7f0e029d
-			public const int instabug_bugreporting_annotaion_done = 2131624605;
+			// aapt resource value: 0x7f0e0242
+			public const int instabug_btn_toolbar_right = 2131624514;
 			
-			// aapt resource value: 0x7f0e029e
-			public const int instabug_bugreporting_next = 2131624606;
+			// aapt resource value: 0x7f0e0179
+			public const int instabug_btn_video_play_attachment = 2131624313;
 			
-			// aapt resource value: 0x7f0e029f
-			public const int instabug_bugreporting_send = 2131624607;
+			// aapt resource value: 0x7f0e027b
+			public const int instabug_bugreporting_annotaion_done = 2131624571;
 			
-			// aapt resource value: 0x7f0e022b
-			public const int instabug_color_picker = 2131624491;
+			// aapt resource value: 0x7f0e027c
+			public const int instabug_bugreporting_next = 2131624572;
 			
-			// aapt resource value: 0x7f0e0218
-			public const int instabug_content = 2131624472;
+			// aapt resource value: 0x7f0e027d
+			public const int instabug_bugreporting_send = 2131624573;
 			
-			// aapt resource value: 0x7f0e0236
-			public const int instabug_conversation_item = 2131624502;
+			// aapt resource value: 0x7f0e0209
+			public const int instabug_color_picker = 2131624457;
+			
+			// aapt resource value: 0x7f0e01f6
+			public const int instabug_content = 2131624438;
+			
+			// aapt resource value: 0x7f0e0214
+			public const int instabug_conversation_item = 2131624468;
 			
 			// aapt resource value: 0x7f0e001d
 			public const int instabug_decor_view = 2131623965;
 			
-			// aapt resource value: 0x7f0e0242
-			public const int instabug_dialog_survey_container = 2131624514;
+			// aapt resource value: 0x7f0e0220
+			public const int instabug_dialog_survey_container = 2131624480;
 			
-			// aapt resource value: 0x7f0e0255
-			public const int instabug_disclaimer_details = 2131624533;
+			// aapt resource value: 0x7f0e0233
+			public const int instabug_disclaimer_details = 2131624499;
 			
-			// aapt resource value: 0x7f0e0254
-			public const int instabug_disclaimer_list = 2131624532;
+			// aapt resource value: 0x7f0e0232
+			public const int instabug_disclaimer_list = 2131624498;
 			
-			// aapt resource value: 0x7f0e0246
-			public const int instabug_edit_text_answer = 2131624518;
+			// aapt resource value: 0x7f0e0224
+			public const int instabug_edit_text_answer = 2131624484;
 			
-			// aapt resource value: 0x7f0e01a1
-			public const int instabug_edit_text_email = 2131624353;
+			// aapt resource value: 0x7f0e017f
+			public const int instabug_edit_text_email = 2131624319;
 			
-			// aapt resource value: 0x7f0e01a2
-			public const int instabug_edit_text_message = 2131624354;
+			// aapt resource value: 0x7f0e0180
+			public const int instabug_edit_text_message = 2131624320;
 			
-			// aapt resource value: 0x7f0e024f
-			public const int instabug_edit_text_new_message = 2131624527;
+			// aapt resource value: 0x7f0e022d
+			public const int instabug_edit_text_new_message = 2131624493;
 			
-			// aapt resource value: 0x7f0e0191
-			public const int instabug_edittext = 2131624337;
+			// aapt resource value: 0x7f0e016f
+			public const int instabug_edittext = 2131624303;
 			
-			// aapt resource value: 0x7f0e0193
-			public const int instabug_edittext_error = 2131624339;
+			// aapt resource value: 0x7f0e0171
+			public const int instabug_edittext_error = 2131624305;
 			
-			// aapt resource value: 0x7f0e0192
-			public const int instabug_edittext_separator = 2131624338;
+			// aapt resource value: 0x7f0e0170
+			public const int instabug_edittext_separator = 2131624304;
 			
-			// aapt resource value: 0x7f0e019e
-			public const int instabug_extra_field = 2131624350;
+			// aapt resource value: 0x7f0e017c
+			public const int instabug_extra_field = 2131624316;
 			
 			// aapt resource value: 0x7f0e001e
 			public const int instabug_extra_screenshot_button = 2131623966;
@@ -5315,59 +5315,59 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0020
 			public const int instabug_fab_label = 2131623968;
 			
-			// aapt resource value: 0x7f0e01d8
-			public const int instabug_feature_details_comments_list = 2131624408;
+			// aapt resource value: 0x7f0e01b6
+			public const int instabug_feature_details_comments_list = 2131624374;
 			
-			// aapt resource value: 0x7f0e01ee
-			public const int instabug_feature_feature_details_comment = 2131624430;
+			// aapt resource value: 0x7f0e01cc
+			public const int instabug_feature_feature_details_comment = 2131624396;
 			
-			// aapt resource value: 0x7f0e01ea
-			public const int instabug_feature_request_admin_comment_layout = 2131624426;
+			// aapt resource value: 0x7f0e01c8
+			public const int instabug_feature_request_admin_comment_layout = 2131624392;
 			
-			// aapt resource value: 0x7f0e01f1
-			public const int instabug_feature_request_new_status = 2131624433;
+			// aapt resource value: 0x7f0e01cf
+			public const int instabug_feature_request_new_status = 2131624399;
 			
-			// aapt resource value: 0x7f0e01f2
-			public const int instabug_feature_request_new_status_date = 2131624434;
+			// aapt resource value: 0x7f0e01d0
+			public const int instabug_feature_request_new_status_date = 2131624400;
 			
-			// aapt resource value: 0x7f0e01eb
-			public const int instabug_feature_requests_comment_avatar = 2131624427;
+			// aapt resource value: 0x7f0e01c9
+			public const int instabug_feature_requests_comment_avatar = 2131624393;
 			
-			// aapt resource value: 0x7f0e01ed
-			public const int instabug_feature_requests_comment_date = 2131624429;
+			// aapt resource value: 0x7f0e01cb
+			public const int instabug_feature_requests_comment_date = 2131624395;
 			
-			// aapt resource value: 0x7f0e01ec
-			public const int instabug_feature_requests_comment_username = 2131624428;
+			// aapt resource value: 0x7f0e01ca
+			public const int instabug_feature_requests_comment_username = 2131624394;
 			
 			// aapt resource value: 0x7f0e0021
 			public const int instabug_floating_button = 2131623969;
 			
-			// aapt resource value: 0x7f0e0178
-			public const int instabug_fragment_container = 2131624312;
+			// aapt resource value: 0x7f0e0156
+			public const int instabug_fragment_container = 2131624278;
 			
-			// aapt resource value: 0x7f0e019d
-			public const int instabug_fragment_title = 2131624349;
+			// aapt resource value: 0x7f0e017b
+			public const int instabug_fragment_title = 2131624315;
+			
+			// aapt resource value: 0x7f0e021f
+			public const int instabug_ic_survey_close = 2131624479;
+			
+			// aapt resource value: 0x7f0e0174
+			public const int instabug_img_attachment = 2131624308;
+			
+			// aapt resource value: 0x7f0e024b
+			public const int instabug_img_audio_attachment = 2131624523;
+			
+			// aapt resource value: 0x7f0e0244
+			public const int instabug_img_message_sender = 2131624516;
 			
 			// aapt resource value: 0x7f0e0241
-			public const int instabug_ic_survey_close = 2131624513;
+			public const int instabug_img_record_audio = 2131624513;
 			
-			// aapt resource value: 0x7f0e0196
-			public const int instabug_img_attachment = 2131624342;
+			// aapt resource value: 0x7f0e0185
+			public const int instabug_img_thanks = 2131624325;
 			
-			// aapt resource value: 0x7f0e026d
-			public const int instabug_img_audio_attachment = 2131624557;
-			
-			// aapt resource value: 0x7f0e0266
-			public const int instabug_img_message_sender = 2131624550;
-			
-			// aapt resource value: 0x7f0e0263
-			public const int instabug_img_record_audio = 2131624547;
-			
-			// aapt resource value: 0x7f0e01a7
-			public const int instabug_img_thanks = 2131624359;
-			
-			// aapt resource value: 0x7f0e019a
-			public const int instabug_img_video_attachment = 2131624346;
+			// aapt resource value: 0x7f0e0178
+			public const int instabug_img_video_attachment = 2131624312;
 			
 			// aapt resource value: 0x7f0e0022
 			public const int instabug_in_app_notification = 2131623970;
@@ -5375,140 +5375,140 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0023
 			public const int instabug_intro_dialog = 2131623971;
 			
-			// aapt resource value: 0x7f0e0251
-			public const int instabug_lst_chats = 2131624529;
+			// aapt resource value: 0x7f0e022f
+			public const int instabug_lst_chats = 2131624495;
 			
-			// aapt resource value: 0x7f0e024c
-			public const int instabug_lst_messages = 2131624524;
+			// aapt resource value: 0x7f0e022a
+			public const int instabug_lst_messages = 2131624490;
 			
-			// aapt resource value: 0x7f0e01a4
-			public const int instabug_lyt_attachments_list = 2131624356;
+			// aapt resource value: 0x7f0e0182
+			public const int instabug_lyt_attachments_list = 2131624322;
 			
-			// aapt resource value: 0x7f0e01ab
-			public const int instabug_main_prompt_container = 2131624363;
+			// aapt resource value: 0x7f0e0189
+			public const int instabug_main_prompt_container = 2131624329;
 			
-			// aapt resource value: 0x7f0e0268
-			public const int instabug_message_actions_container = 2131624552;
+			// aapt resource value: 0x7f0e0246
+			public const int instabug_message_actions_container = 2131624518;
 			
-			// aapt resource value: 0x7f0e0235
-			public const int instabug_message_sender_avatar = 2131624501;
+			// aapt resource value: 0x7f0e0213
+			public const int instabug_message_sender_avatar = 2131624467;
+			
+			// aapt resource value: 0x7f0e022b
+			public const int instabug_new_message_container = 2131624491;
+			
+			// aapt resource value: 0x7f0e0196
+			public const int instabug_notification_count = 2131624342;
+			
+			// aapt resource value: 0x7f0e0236
+			public const int instabug_notification_layout = 2131624502;
+			
+			// aapt resource value: 0x7f0e01e6
+			public const int instabug_pbi_container = 2131624422;
+			
+			// aapt resource value: 0x7f0e0157
+			public const int instabug_pbi_footer = 2131624279;
+			
+			// aapt resource value: 0x7f0e0193
+			public const int instabug_prompt_option_container = 2131624339;
+			
+			// aapt resource value: 0x7f0e0194
+			public const int instabug_prompt_option_icon = 2131624340;
+			
+			// aapt resource value: 0x7f0e0195
+			public const int instabug_prompt_option_title = 2131624341;
+			
+			// aapt resource value: 0x7f0e018a
+			public const int instabug_prompt_options_list_view = 2131624330;
+			
+			// aapt resource value: 0x7f0e023c
+			public const int instabug_recording_audio_dialog_container = 2131624508;
+			
+			// aapt resource value: 0x7f0e0183
+			public const int instabug_success_dialog_container = 2131624323;
+			
+			// aapt resource value: 0x7f0e0219
+			public const int instabug_survey_dialog_container = 2131624473;
+			
+			// aapt resource value: 0x7f0e021c
+			public const int instabug_survey_mcq_grid_view = 2131624476;
+			
+			// aapt resource value: 0x7f0e021e
+			public const int instabug_survey_nps_layout = 2131624478;
+			
+			// aapt resource value: 0x7f0e0222
+			public const int instabug_survey_pager = 2131624482;
+			
+			// aapt resource value: 0x7f0e0181
+			public const int instabug_text_view_disclaimer = 2131624321;
+			
+			// aapt resource value: 0x7f0e021b
+			public const int instabug_text_view_question = 2131624475;
+			
+			// aapt resource value: 0x7f0e0231
+			public const int instabug_toolbar = 2131624497;
 			
 			// aapt resource value: 0x7f0e024d
-			public const int instabug_new_message_container = 2131624525;
+			public const int instabug_txt_attachment_length = 2131624525;
 			
-			// aapt resource value: 0x7f0e01b8
-			public const int instabug_notification_count = 2131624376;
+			// aapt resource value: 0x7f0e01b3
+			public const int instabug_txt_feature_request_comment_count = 2131624371;
 			
-			// aapt resource value: 0x7f0e0258
-			public const int instabug_notification_layout = 2131624536;
+			// aapt resource value: 0x7f0e01b2
+			public const int instabug_txt_feature_request_comment_icon = 2131624370;
 			
-			// aapt resource value: 0x7f0e0208
-			public const int instabug_pbi_container = 2131624456;
+			// aapt resource value: 0x7f0e01a6
+			public const int instabug_txt_feature_request_completed = 2131624358;
 			
-			// aapt resource value: 0x7f0e0179
-			public const int instabug_pbi_footer = 2131624313;
+			// aapt resource value: 0x7f0e01a7
+			public const int instabug_txt_feature_request_completed_goto_arrow = 2131624359;
 			
-			// aapt resource value: 0x7f0e01b5
-			public const int instabug_prompt_option_container = 2131624373;
+			// aapt resource value: 0x7f0e01b4
+			public const int instabug_txt_feature_request_date = 2131624372;
 			
-			// aapt resource value: 0x7f0e01b6
-			public const int instabug_prompt_option_icon = 2131624374;
+			// aapt resource value: 0x7f0e01aa
+			public const int instabug_txt_feature_request_status = 2131624362;
 			
-			// aapt resource value: 0x7f0e01b7
-			public const int instabug_prompt_option_title = 2131624375;
+			// aapt resource value: 0x7f0e01b1
+			public const int instabug_txt_feature_request_title = 2131624369;
 			
-			// aapt resource value: 0x7f0e01ac
-			public const int instabug_prompt_options_list_view = 2131624364;
+			// aapt resource value: 0x7f0e01af
+			public const int instabug_txt_feature_request_vote_count = 2131624367;
 			
-			// aapt resource value: 0x7f0e025e
-			public const int instabug_recording_audio_dialog_container = 2131624542;
+			// aapt resource value: 0x7f0e01ae
+			public const int instabug_txt_feature_request_vote_icon = 2131624366;
 			
-			// aapt resource value: 0x7f0e01a5
-			public const int instabug_success_dialog_container = 2131624357;
+			// aapt resource value: 0x7f0e01b0
+			public const int instabug_txt_feature_request_vote_txt = 2131624368;
 			
-			// aapt resource value: 0x7f0e023b
-			public const int instabug_survey_dialog_container = 2131624507;
+			// aapt resource value: 0x7f0e0245
+			public const int instabug_txt_message_body = 2131624517;
 			
-			// aapt resource value: 0x7f0e023e
-			public const int instabug_survey_mcq_grid_view = 2131624510;
+			// aapt resource value: 0x7f0e0215
+			public const int instabug_txt_message_sender = 2131624469;
 			
-			// aapt resource value: 0x7f0e0240
-			public const int instabug_survey_nps_layout = 2131624512;
+			// aapt resource value: 0x7f0e0216
+			public const int instabug_txt_message_snippet = 2131624470;
 			
-			// aapt resource value: 0x7f0e0244
-			public const int instabug_survey_pager = 2131624516;
-			
-			// aapt resource value: 0x7f0e01a3
-			public const int instabug_text_view_disclaimer = 2131624355;
+			// aapt resource value: 0x7f0e0217
+			public const int instabug_txt_message_time = 2131624471;
 			
 			// aapt resource value: 0x7f0e023d
-			public const int instabug_text_view_question = 2131624509;
+			public const int instabug_txt_recording_title = 2131624509;
 			
-			// aapt resource value: 0x7f0e0253
-			public const int instabug_toolbar = 2131624531;
+			// aapt resource value: 0x7f0e0186
+			public const int instabug_txt_success_note = 2131624326;
 			
-			// aapt resource value: 0x7f0e026f
-			public const int instabug_txt_attachment_length = 2131624559;
+			// aapt resource value: 0x7f0e023e
+			public const int instabug_txt_timer = 2131624510;
 			
-			// aapt resource value: 0x7f0e01d5
-			public const int instabug_txt_feature_request_comment_count = 2131624405;
+			// aapt resource value: 0x7f0e0218
+			public const int instabug_unread_messages_count = 2131624472;
 			
-			// aapt resource value: 0x7f0e01d4
-			public const int instabug_txt_feature_request_comment_icon = 2131624404;
+			// aapt resource value: 0x7f0e0247
+			public const int instabug_video_attachment = 2131624519;
 			
-			// aapt resource value: 0x7f0e01c8
-			public const int instabug_txt_feature_request_completed = 2131624392;
-			
-			// aapt resource value: 0x7f0e01c9
-			public const int instabug_txt_feature_request_completed_goto_arrow = 2131624393;
-			
-			// aapt resource value: 0x7f0e01d6
-			public const int instabug_txt_feature_request_date = 2131624406;
-			
-			// aapt resource value: 0x7f0e01cc
-			public const int instabug_txt_feature_request_status = 2131624396;
-			
-			// aapt resource value: 0x7f0e01d3
-			public const int instabug_txt_feature_request_title = 2131624403;
-			
-			// aapt resource value: 0x7f0e01d1
-			public const int instabug_txt_feature_request_vote_count = 2131624401;
-			
-			// aapt resource value: 0x7f0e01d0
-			public const int instabug_txt_feature_request_vote_icon = 2131624400;
-			
-			// aapt resource value: 0x7f0e01d2
-			public const int instabug_txt_feature_request_vote_txt = 2131624402;
-			
-			// aapt resource value: 0x7f0e0267
-			public const int instabug_txt_message_body = 2131624551;
-			
-			// aapt resource value: 0x7f0e0237
-			public const int instabug_txt_message_sender = 2131624503;
-			
-			// aapt resource value: 0x7f0e0238
-			public const int instabug_txt_message_snippet = 2131624504;
-			
-			// aapt resource value: 0x7f0e0239
-			public const int instabug_txt_message_time = 2131624505;
-			
-			// aapt resource value: 0x7f0e025f
-			public const int instabug_txt_recording_title = 2131624543;
-			
-			// aapt resource value: 0x7f0e01a8
-			public const int instabug_txt_success_note = 2131624360;
-			
-			// aapt resource value: 0x7f0e0260
-			public const int instabug_txt_timer = 2131624544;
-			
-			// aapt resource value: 0x7f0e023a
-			public const int instabug_unread_messages_count = 2131624506;
-			
-			// aapt resource value: 0x7f0e0269
-			public const int instabug_video_attachment = 2131624553;
-			
-			// aapt resource value: 0x7f0e026a
-			public const int instabug_video_attachment_progress_bar = 2131624554;
+			// aapt resource value: 0x7f0e0248
+			public const int instabug_video_attachment_progress_bar = 2131624520;
 			
 			// aapt resource value: 0x7f0e0024
 			public const int instabug_video_mute_button = 2131623972;
@@ -5522,107 +5522,68 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0000
 			public const int item_touch_helper_previous_elevation = 2131623936;
 			
-			// aapt resource value: 0x7f0e013c
-			public const int largeLabel = 2131624252;
+			// aapt resource value: 0x7f0e0125
+			public const int largeLabel = 2131624229;
 			
 			// aapt resource value: 0x7f0e005c
 			public const int left = 2131624028;
 			
-			// aapt resource value: 0x7f0e011d
-			public const int legislatorCtrl_address = 2131624221;
-			
-			// aapt resource value: 0x7f0e0119
-			public const int legislatorCtrl_basicInfoContactTypesParent = 2131624217;
-			
 			// aapt resource value: 0x7f0e0112
-			public const int legislatorCtrl_basicInfoParent = 2131624210;
+			public const int legislatorCtrl_address = 2131624210;
 			
-			// aapt resource value: 0x7f0e0111
-			public const int legislatorCtrl_cardview = 2131624209;
+			// aapt resource value: 0x7f0e010f
+			public const int legislatorCtrl_basicInfoContactTypesParent = 2131624207;
 			
-			// aapt resource value: 0x7f0e0114
-			public const int legislatorCtrl_chamber = 2131624212;
+			// aapt resource value: 0x7f0e0108
+			public const int legislatorCtrl_basicInfoParent = 2131624200;
 			
-			// aapt resource value: 0x7f0e011b
-			public const int legislatorCtrl_email = 2131624219;
+			// aapt resource value: 0x7f0e0107
+			public const int legislatorCtrl_cardview = 2131624199;
 			
-			// aapt resource value: 0x7f0e011e
-			public const int legislatorCtrl_facebook = 2131624222;
-			
-			// aapt resource value: 0x7f0e0115
-			public const int legislatorCtrl_name = 2131624213;
+			// aapt resource value: 0x7f0e010a
+			public const int legislatorCtrl_chamber = 2131624202;
 			
 			// aapt resource value: 0x7f0e0110
-			public const int legislatorCtrl_parent = 2131624208;
-			
-			// aapt resource value: 0x7f0e011c
-			public const int legislatorCtrl_phone = 2131624220;
+			public const int legislatorCtrl_email = 2131624208;
 			
 			// aapt resource value: 0x7f0e0113
-			public const int legislatorCtrl_portrait = 2131624211;
+			public const int legislatorCtrl_facebook = 2131624211;
 			
-			// aapt resource value: 0x7f0e0117
-			public const int legislatorCtrl_termEndDate = 2131624215;
+			// aapt resource value: 0x7f0e010b
+			public const int legislatorCtrl_name = 2131624203;
+			
+			// aapt resource value: 0x7f0e0106
+			public const int legislatorCtrl_parent = 2131624198;
+			
+			// aapt resource value: 0x7f0e0111
+			public const int legislatorCtrl_phone = 2131624209;
+			
+			// aapt resource value: 0x7f0e0109
+			public const int legislatorCtrl_portrait = 2131624201;
+			
+			// aapt resource value: 0x7f0e010d
+			public const int legislatorCtrl_termEndDate = 2131624205;
+			
+			// aapt resource value: 0x7f0e010c
+			public const int legislatorCtrl_termStartDate = 2131624204;
+			
+			// aapt resource value: 0x7f0e0114
+			public const int legislatorCtrl_twitter = 2131624212;
 			
 			// aapt resource value: 0x7f0e0116
-			public const int legislatorCtrl_termStartDate = 2131624214;
+			public const int legislatorCtrl_webpage = 2131624214;
 			
-			// aapt resource value: 0x7f0e011f
-			public const int legislatorCtrl_twitter = 2131624223;
+			// aapt resource value: 0x7f0e0115
+			public const int legislatorCtrl_youtube = 2131624213;
 			
-			// aapt resource value: 0x7f0e0121
-			public const int legislatorCtrl_webpage = 2131624225;
+			// aapt resource value: 0x7f0e0119
+			public const int legislatorsViewer_legislatorsRecycler = 2131624217;
 			
-			// aapt resource value: 0x7f0e011a
-			public const int legislatorCtrl_writeLetter = 2131624218;
+			// aapt resource value: 0x7f0e0117
+			public const int legislatorsViewer_parent = 2131624215;
 			
-			// aapt resource value: 0x7f0e0120
-			public const int legislatorCtrl_youtube = 2131624224;
-			
-			// aapt resource value: 0x7f0e0124
-			public const int legislatorsViewer_legislatorsRecycler = 2131624228;
-			
-			// aapt resource value: 0x7f0e0122
-			public const int legislatorsViewer_parent = 2131624226;
-			
-			// aapt resource value: 0x7f0e0123
-			public const int legislatorsViewer_statesSpinner = 2131624227;
-			
-			// aapt resource value: 0x7f0e012e
-			public const int letterCtrl_actionButtonsParent = 2131624238;
-			
-			// aapt resource value: 0x7f0e0129
-			public const int letterCtrl_basicInfoParent = 2131624233;
-			
-			// aapt resource value: 0x7f0e0126
-			public const int letterCtrl_cardview = 2131624230;
-			
-			// aapt resource value: 0x7f0e012f
-			public const int letterCtrl_copy = 2131624239;
-			
-			// aapt resource value: 0x7f0e0130
-			public const int letterCtrl_delete = 2131624240;
-			
-			// aapt resource value: 0x7f0e0128
-			public const int letterCtrl_image = 2131624232;
-			
-			// aapt resource value: 0x7f0e012c
-			public const int letterCtrl_lastSavedDate = 2131624236;
-			
-			// aapt resource value: 0x7f0e0127
-			public const int letterCtrl_layout = 2131624231;
-			
-			// aapt resource value: 0x7f0e0125
-			public const int letterCtrl_parent = 2131624229;
-			
-			// aapt resource value: 0x7f0e012b
-			public const int letterCtrl_recipient = 2131624235;
-			
-			// aapt resource value: 0x7f0e012d
-			public const int letterCtrl_sentDate = 2131624237;
-			
-			// aapt resource value: 0x7f0e012a
-			public const int letterCtrl_subject = 2131624234;
+			// aapt resource value: 0x7f0e0118
+			public const int legislatorsViewer_statesSpinner = 2131624216;
 			
 			// aapt resource value: 0x7f0e0032
 			public const int light = 2131623986;
@@ -5633,11 +5594,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0018
 			public const int line3 = 2131623960;
 			
-			// aapt resource value: 0x7f0e019f
-			public const int linearLayout = 2131624351;
+			// aapt resource value: 0x7f0e017d
+			public const int linearLayout = 2131624317;
 			
-			// aapt resource value: 0x7f0e0292
-			public const int list = 2131624594;
+			// aapt resource value: 0x7f0e0270
+			public const int list = 2131624560;
 			
 			// aapt resource value: 0x7f0e0033
 			public const int listMode = 2131623987;
@@ -5645,8 +5606,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0098
 			public const int list_item = 2131624088;
 			
-			// aapt resource value: 0x7f0e0211
-			public const int lytSortActions = 2131624465;
+			// aapt resource value: 0x7f0e01ef
+			public const int lytSortActions = 2131624431;
 			
 			// aapt resource value: 0x7f0e0080
 			public const int magnify = 2131624064;
@@ -5666,32 +5627,32 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00d4
 			public const int mainActv_toolbar = 2131624148;
 			
-			// aapt resource value: 0x7f0e0154
-			public const int mainFrag_legislatorsViewer = 2131624276;
+			// aapt resource value: 0x7f0e013d
+			public const int mainFrag_legislatorsViewer = 2131624253;
 			
-			// aapt resource value: 0x7f0e0153
-			public const int mainFrag_parent = 2131624275;
+			// aapt resource value: 0x7f0e013c
+			public const int mainFrag_parent = 2131624252;
 			
-			// aapt resource value: 0x7f0e02a9
-			public const int mainMenu_refresh = 2131624617;
+			// aapt resource value: 0x7f0e0287
+			public const int mainMenu_refresh = 2131624583;
 			
-			// aapt resource value: 0x7f0e02a8
-			public const int mainMenu_search = 2131624616;
+			// aapt resource value: 0x7f0e0286
+			public const int mainMenu_search = 2131624582;
 			
-			// aapt resource value: 0x7f0e0224
-			public const int malertTitle = 2131624484;
+			// aapt resource value: 0x7f0e0202
+			public const int malertTitle = 2131624450;
 			
-			// aapt resource value: 0x7f0e029a
-			public const int masked = 2131624602;
+			// aapt resource value: 0x7f0e0278
+			public const int masked = 2131624568;
 			
-			// aapt resource value: 0x7f0e0279
-			public const int mcq_item = 2131624569;
+			// aapt resource value: 0x7f0e0257
+			public const int mcq_item = 2131624535;
 			
-			// aapt resource value: 0x7f0e0283
-			public const int media_actions = 2131624579;
+			// aapt resource value: 0x7f0e0261
+			public const int media_actions = 2131624545;
 			
-			// aapt resource value: 0x7f0e0298
-			public const int message = 2131624600;
+			// aapt resource value: 0x7f0e0276
+			public const int message = 2131624566;
 			
 			// aapt resource value: 0x7f0e0045
 			public const int middle = 2131624005;
@@ -5702,14 +5663,14 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e003c
 			public const int multiply = 2131623996;
 			
-			// aapt resource value: 0x7f0e0200
-			public const int name_text_input_layout = 2131624448;
+			// aapt resource value: 0x7f0e01de
+			public const int name_text_input_layout = 2131624414;
 			
-			// aapt resource value: 0x7f0e0202
-			public const int name_underline = 2131624450;
+			// aapt resource value: 0x7f0e01e0
+			public const int name_underline = 2131624416;
 			
-			// aapt resource value: 0x7f0e0143
-			public const int navigation_header_container = 2131624259;
+			// aapt resource value: 0x7f0e012c
+			public const int navigation_header_container = 2131624236;
 			
 			// aapt resource value: 0x7f0e004f
 			public const int never = 2131624015;
@@ -5723,17 +5684,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0028
 			public const int normal = 2131623976;
 			
-			// aapt resource value: 0x7f0e028c
-			public const int notification_background = 2131624588;
+			// aapt resource value: 0x7f0e026a
+			public const int notification_background = 2131624554;
 			
-			// aapt resource value: 0x7f0e0286
-			public const int notification_main_column = 2131624582;
+			// aapt resource value: 0x7f0e0264
+			public const int notification_main_column = 2131624548;
 			
-			// aapt resource value: 0x7f0e0285
-			public const int notification_main_column_container = 2131624581;
+			// aapt resource value: 0x7f0e0263
+			public const int notification_main_column_container = 2131624547;
 			
-			// aapt resource value: 0x7f0e01e8
-			public const int pager = 2131624424;
+			// aapt resource value: 0x7f0e01c6
+			public const int pager = 2131624390;
 			
 			// aapt resource value: 0x7f0e005f
 			public const int parallax = 2131624031;
@@ -5762,11 +5723,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0086
 			public const int plus_attach = 2131624070;
 			
-			// aapt resource value: 0x7f0e020a
-			public const int progressBar = 2131624458;
+			// aapt resource value: 0x7f0e01e8
+			public const int progressBar = 2131624424;
 			
-			// aapt resource value: 0x7f0e0209
-			public const int progressDialogLayout = 2131624457;
+			// aapt resource value: 0x7f0e01e7
+			public const int progressDialogLayout = 2131624423;
 			
 			// aapt resource value: 0x7f0e0006
 			public const int progress_circular = 2131623942;
@@ -5774,14 +5735,14 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0007
 			public const int progress_horizontal = 2131623943;
 			
-			// aapt resource value: 0x7f0e0210
-			public const int ptr_classic_header_rotate_view = 2131624464;
+			// aapt resource value: 0x7f0e01ee
+			public const int ptr_classic_header_rotate_view = 2131624430;
 			
-			// aapt resource value: 0x7f0e020d
-			public const int ptr_classic_header_rotate_view_header_text = 2131624461;
+			// aapt resource value: 0x7f0e01eb
+			public const int ptr_classic_header_rotate_view_header_text = 2131624427;
 			
-			// aapt resource value: 0x7f0e020f
-			public const int ptr_header_refreshing_title = 2131624463;
+			// aapt resource value: 0x7f0e01ed
+			public const int ptr_header_refreshing_title = 2131624429;
 			
 			// aapt resource value: 0x7f0e00ac
 			public const int radio = 2131624108;
@@ -5789,20 +5750,20 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e006e
 			public const int rectangle = 2131624046;
 			
-			// aapt resource value: 0x7f0e01f7
-			public const int relativeLayout_new_feature = 2131624439;
+			// aapt resource value: 0x7f0e01d5
+			public const int relativeLayout_new_feature = 2131624405;
 			
-			// aapt resource value: 0x7f0e025d
-			public const int replyButton = 2131624541;
+			// aapt resource value: 0x7f0e023b
+			public const int replyButton = 2131624507;
 			
 			// aapt resource value: 0x7f0e005d
 			public const int right = 2131624029;
 			
-			// aapt resource value: 0x7f0e028b
-			public const int right_icon = 2131624587;
+			// aapt resource value: 0x7f0e0269
+			public const int right_icon = 2131624553;
 			
-			// aapt resource value: 0x7f0e0287
-			public const int right_side = 2131624583;
+			// aapt resource value: 0x7f0e0265
+			public const int right_side = 2131624549;
 			
 			// aapt resource value: 0x7f0e0029
 			public const int satellite = 2131623977;
@@ -5834,11 +5795,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0068
 			public const int scrollable = 2131624040;
 			
-			// aapt resource value: 0x7f0e02aa
-			public const int searchBillsMenu_exitSearch = 2131624618;
+			// aapt resource value: 0x7f0e0288
+			public const int searchBillsMenu_exitSearch = 2131624584;
 			
-			// aapt resource value: 0x7f0e02ab
-			public const int searchBillsMenu_search = 2131624619;
+			// aapt resource value: 0x7f0e0289
+			public const int searchBillsMenu_search = 2131624585;
 			
 			// aapt resource value: 0x7f0e00b7
 			public const int search_badge = 2131624119;
@@ -5870,32 +5831,32 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00c0
 			public const int search_voice_btn = 2131624128;
 			
-			// aapt resource value: 0x7f0e0293
-			public const int seekbar = 2131624595;
+			// aapt resource value: 0x7f0e0271
+			public const int seekbar = 2131624561;
 			
-			// aapt resource value: 0x7f0e0294
-			public const int seekbar_value = 2131624596;
+			// aapt resource value: 0x7f0e0272
+			public const int seekbar_value = 2131624562;
 			
 			// aapt resource value: 0x7f0e00c1
 			public const int select_dialog_listview = 2131624129;
 			
-			// aapt resource value: 0x7f0e027a
-			public const int selector_img = 2131624570;
+			// aapt resource value: 0x7f0e0258
+			public const int selector_img = 2131624536;
 			
 			// aapt resource value: 0x7f0e0087
 			public const int send = 2131624071;
 			
-			// aapt resource value: 0x7f0e0259
-			public const int senderAvatarImageView = 2131624537;
+			// aapt resource value: 0x7f0e0237
+			public const int senderAvatarImageView = 2131624503;
 			
-			// aapt resource value: 0x7f0e025b
-			public const int senderMessageTextView = 2131624539;
+			// aapt resource value: 0x7f0e0239
+			public const int senderMessageTextView = 2131624505;
 			
-			// aapt resource value: 0x7f0e025a
-			public const int senderNameTextView = 2131624538;
+			// aapt resource value: 0x7f0e0238
+			public const int senderNameTextView = 2131624504;
 			
-			// aapt resource value: 0x7f0e01d7
-			public const int separator = 2131624407;
+			// aapt resource value: 0x7f0e01b5
+			public const int separator = 2131624373;
 			
 			// aapt resource value: 0x7f0e00dc
 			public const int settingsActv_adView = 2131624156;
@@ -5915,8 +5876,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00da
 			public const int settingsActv_toolbar = 2131624154;
 			
-			// aapt resource value: 0x7f0e022d
-			public const int shapeSuggestionsLayout = 2131624493;
+			// aapt resource value: 0x7f0e020b
+			public const int shapeSuggestionsLayout = 2131624459;
 			
 			// aapt resource value: 0x7f0e00ab
 			public const int shortcut = 2131624107;
@@ -5933,32 +5894,32 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e006f
 			public const int simpleRipple = 2131624047;
 			
-			// aapt resource value: 0x7f0e013b
-			public const int smallLabel = 2131624251;
+			// aapt resource value: 0x7f0e0124
+			public const int smallLabel = 2131624228;
 			
-			// aapt resource value: 0x7f0e0142
-			public const int snackbar_action = 2131624258;
+			// aapt resource value: 0x7f0e012b
+			public const int snackbar_action = 2131624235;
 			
-			// aapt resource value: 0x7f0e0141
-			public const int snackbar_text = 2131624257;
+			// aapt resource value: 0x7f0e012a
+			public const int snackbar_text = 2131624234;
 			
 			// aapt resource value: 0x7f0e0057
 			public const int snap = 2131624023;
 			
-			// aapt resource value: 0x7f0e029c
-			public const int sortBy_recentlyUpdated = 2131624604;
+			// aapt resource value: 0x7f0e027a
+			public const int sortBy_recentlyUpdated = 2131624570;
 			
-			// aapt resource value: 0x7f0e029b
-			public const int sortBy_topRated = 2131624603;
+			// aapt resource value: 0x7f0e0279
+			public const int sortBy_topRated = 2131624569;
 			
-			// aapt resource value: 0x7f0e01e7
-			public const int sortingActionsLayoutRoot = 2131624423;
+			// aapt resource value: 0x7f0e01c5
+			public const int sortingActionsLayoutRoot = 2131624389;
 			
 			// aapt resource value: 0x7f0e009b
 			public const int spacer = 2131624091;
 			
-			// aapt resource value: 0x7f0e0291
-			public const int spinner = 2131624593;
+			// aapt resource value: 0x7f0e026f
+			public const int spinner = 2131624559;
 			
 			// aapt resource value: 0x7f0e0008
 			public const int split_action_bar = 2131623944;
@@ -5978,8 +5939,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e005e
 			public const int start = 2131624030;
 			
-			// aapt resource value: 0x7f0e0282
-			public const int status_bar_latest_event_content = 2131624578;
+			// aapt resource value: 0x7f0e0260
+			public const int status_bar_latest_event_content = 2131624544;
 			
 			// aapt resource value: 0x7f0e0088
 			public const int stop = 2131624072;
@@ -5993,38 +5954,38 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0089
 			public const int survey = 2131624073;
 			
-			// aapt resource value: 0x7f0e0272
-			public const int survey_activity_container = 2131624562;
+			// aapt resource value: 0x7f0e0250
+			public const int survey_activity_container = 2131624528;
 			
-			// aapt resource value: 0x7f0e023f
-			public const int survey_mcq_fade = 2131624511;
+			// aapt resource value: 0x7f0e021d
+			public const int survey_mcq_fade = 2131624477;
 			
-			// aapt resource value: 0x7f0e027b
-			public const int survey_optional_answer_textview = 2131624571;
+			// aapt resource value: 0x7f0e0259
+			public const int survey_optional_answer_textview = 2131624537;
 			
-			// aapt resource value: 0x7f0e027c
-			public const int survey_partial_close_btn = 2131624572;
+			// aapt resource value: 0x7f0e025a
+			public const int survey_partial_close_btn = 2131624538;
 			
-			// aapt resource value: 0x7f0e023c
-			public const int survey_shadow = 2131624508;
+			// aapt resource value: 0x7f0e021a
+			public const int survey_shadow = 2131624474;
 			
-			// aapt resource value: 0x7f0e0243
-			public const int survey_step_progressbar = 2131624515;
+			// aapt resource value: 0x7f0e0221
+			public const int survey_step_progressbar = 2131624481;
 			
-			// aapt resource value: 0x7f0e01e3
-			public const int swipeRefreshLayout = 2131624419;
+			// aapt resource value: 0x7f0e01c1
+			public const int swipeRefreshLayout = 2131624385;
 			
-			// aapt resource value: 0x7f0e0295
-			public const int switchWidget = 2131624597;
+			// aapt resource value: 0x7f0e0273
+			public const int switchWidget = 2131624563;
 			
 			// aapt resource value: 0x7f0e0034
 			public const int tabMode = 2131623988;
 			
-			// aapt resource value: 0x7f0e01e6
-			public const int tab_layout = 2131624422;
+			// aapt resource value: 0x7f0e01c4
+			public const int tab_layout = 2131624388;
 			
-			// aapt resource value: 0x7f0e01e5
-			public const int tabsContainer = 2131624421;
+			// aapt resource value: 0x7f0e01c3
+			public const int tabsContainer = 2131624387;
 			
 			// aapt resource value: 0x7f0e0019
 			public const int tag_transition_group = 2131623961;
@@ -6047,14 +6008,14 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00a0
 			public const int textSpacerNoTitle = 2131624096;
 			
-			// aapt resource value: 0x7f0e020b
-			public const int textView = 2131624459;
+			// aapt resource value: 0x7f0e01e9
+			public const int textView = 2131624425;
 			
-			// aapt resource value: 0x7f0e0148
-			public const int text_input_password_toggle = 2131624264;
+			// aapt resource value: 0x7f0e0131
+			public const int text_input_password_toggle = 2131624241;
 			
-			// aapt resource value: 0x7f0e017b
-			public const int text_view_pb = 2131624315;
+			// aapt resource value: 0x7f0e0159
+			public const int text_view_pb = 2131624281;
 			
 			// aapt resource value: 0x7f0e0014
 			public const int textinput_counter = 2131623956;
@@ -6065,8 +6026,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e008b
 			public const int tick = 2131624075;
 			
-			// aapt resource value: 0x7f0e0288
-			public const int time = 2131624584;
+			// aapt resource value: 0x7f0e0266
+			public const int time = 2131624550;
 			
 			// aapt resource value: 0x7f0e001c
 			public const int title = 2131623964;
@@ -6077,11 +6038,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00a6
 			public const int title_template = 2131624102;
 			
-			// aapt resource value: 0x7f0e01fb
-			public const int title_underline = 2131624443;
+			// aapt resource value: 0x7f0e01d9
+			public const int title_underline = 2131624409;
 			
-			// aapt resource value: 0x7f0e0131
-			public const int toolbar = 2131624241;
+			// aapt resource value: 0x7f0e011a
+			public const int toolbar = 2131624218;
 			
 			// aapt resource value: 0x7f0e0052
 			public const int top = 2131624018;
@@ -6095,8 +6056,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0090
 			public const int topRight = 2131624080;
 			
-			// aapt resource value: 0x7f0e013f
-			public const int touch_outside = 2131624255;
+			// aapt resource value: 0x7f0e0128
+			public const int touch_outside = 2131624232;
 			
 			// aapt resource value: 0x7f0e000f
 			public const int transition_current_scene = 2131623951;
@@ -6113,44 +6074,44 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0013
 			public const int transition_transform = 2131623955;
 			
-			// aapt resource value: 0x7f0e0256
-			public const int tvKey = 2131624534;
+			// aapt resource value: 0x7f0e0234
+			public const int tvKey = 2131624500;
 			
-			// aapt resource value: 0x7f0e0225
-			public const int tvMessage = 2131624485;
+			// aapt resource value: 0x7f0e0203
+			public const int tvMessage = 2131624451;
 			
-			// aapt resource value: 0x7f0e0257
-			public const int tvValue = 2131624535;
+			// aapt resource value: 0x7f0e0235
+			public const int tvValue = 2131624501;
 			
-			// aapt resource value: 0x7f0e01da
-			public const int tv_add_comment = 2131624410;
+			// aapt resource value: 0x7f0e01b8
+			public const int tv_add_comment = 2131624376;
 			
-			// aapt resource value: 0x7f0e0206
-			public const int txtBottomHint = 2131624454;
+			// aapt resource value: 0x7f0e01e4
+			public const int txtBottomHint = 2131624420;
 			
-			// aapt resource value: 0x7f0e0207
-			public const int txtBottomHintLayout = 2131624455;
+			// aapt resource value: 0x7f0e01e5
+			public const int txtBottomHintLayout = 2131624421;
+			
+			// aapt resource value: 0x7f0e0252
+			public const int txtSubTitle = 2131624530;
+			
+			// aapt resource value: 0x7f0e01be
+			public const int txt_error_state_sub_title = 2131624382;
+			
+			// aapt resource value: 0x7f0e01bd
+			public const int txt_error_state_title = 2131624381;
+			
+			// aapt resource value: 0x7f0e0275
+			public const int txt_rate_us_question = 2131624565;
 			
 			// aapt resource value: 0x7f0e0274
-			public const int txtSubTitle = 2131624564;
+			public const int txt_rate_us_title = 2131624564;
 			
-			// aapt resource value: 0x7f0e01e0
-			public const int txt_error_state_sub_title = 2131624416;
+			// aapt resource value: 0x7f0e0251
+			public const int txt_thanks_title = 2131624529;
 			
-			// aapt resource value: 0x7f0e01df
-			public const int txt_error_state_title = 2131624415;
-			
-			// aapt resource value: 0x7f0e0297
-			public const int txt_rate_us_question = 2131624599;
-			
-			// aapt resource value: 0x7f0e0296
-			public const int txt_rate_us_title = 2131624598;
-			
-			// aapt resource value: 0x7f0e0273
-			public const int txt_thanks_title = 2131624563;
-			
-			// aapt resource value: 0x7f0e0223
-			public const int under = 2131624483;
+			// aapt resource value: 0x7f0e0201
+			public const int under = 2131624449;
 			
 			// aapt resource value: 0x7f0e008c
 			public const int undo = 2131624076;
@@ -6167,8 +6128,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0071
 			public const int vertical = 2131624049;
 			
-			// aapt resource value: 0x7f0e0265
-			public const int video_view = 2131624549;
+			// aapt resource value: 0x7f0e0243
+			public const int video_view = 2131624515;
 			
 			// aapt resource value: 0x7f0e00e2
 			public const int viewBillsActv_adView2 = 2131624162;
@@ -6188,8 +6149,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00e3
 			public const int viewLBillsActv_navigationDrawer = 2131624163;
 			
-			// aapt resource value: 0x7f0e02ac
-			public const int viewLatestBillsMenu_filter = 2131624620;
+			// aapt resource value: 0x7f0e028a
+			public const int viewLatestBillsMenu_filter = 2131624586;
 			
 			// aapt resource value: 0x7f0e00e8
 			public const int viewLegislatorActv_adView = 2131624168;
@@ -6209,149 +6170,116 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00e6
 			public const int viewLegislatorActv_toolbar = 2131624166;
 			
-			// aapt resource value: 0x7f0e0169
-			public const int viewLegislatorFrag_address = 2131624297;
+			// aapt resource value: 0x7f0e0151
+			public const int viewLegislatorFrag_address = 2131624273;
 			
-			// aapt resource value: 0x7f0e015b
-			public const int viewLegislatorFrag_birthdate = 2131624283;
+			// aapt resource value: 0x7f0e0144
+			public const int viewLegislatorFrag_birthdate = 2131624260;
 			
-			// aapt resource value: 0x7f0e0157
-			public const int viewLegislatorFrag_chamber = 2131624279;
+			// aapt resource value: 0x7f0e0140
+			public const int viewLegislatorFrag_chamber = 2131624256;
 			
-			// aapt resource value: 0x7f0e0162
-			public const int viewLegislatorFrag_contactMethodsInnerParent = 2131624290;
+			// aapt resource value: 0x7f0e014b
+			public const int viewLegislatorFrag_contactMethodsInnerParent = 2131624267;
 			
-			// aapt resource value: 0x7f0e0161
-			public const int viewLegislatorFrag_contactMethodsParent = 2131624289;
+			// aapt resource value: 0x7f0e014a
+			public const int viewLegislatorFrag_contactMethodsParent = 2131624266;
 			
-			// aapt resource value: 0x7f0e0165
-			public const int viewLegislatorFrag_email = 2131624293;
+			// aapt resource value: 0x7f0e014d
+			public const int viewLegislatorFrag_email = 2131624269;
 			
-			// aapt resource value: 0x7f0e0164
-			public const int viewLegislatorFrag_facebook = 2131624292;
+			// aapt resource value: 0x7f0e014c
+			public const int viewLegislatorFrag_facebook = 2131624268;
+			
+			// aapt resource value: 0x7f0e013e
+			public const int viewLegislatorFrag_parent = 2131624254;
+			
+			// aapt resource value: 0x7f0e0141
+			public const int viewLegislatorFrag_party = 2131624257;
+			
+			// aapt resource value: 0x7f0e014f
+			public const int viewLegislatorFrag_phone = 2131624271;
+			
+			// aapt resource value: 0x7f0e0149
+			public const int viewLegislatorFrag_portrait = 2131624265;
+			
+			// aapt resource value: 0x7f0e0148
+			public const int viewLegislatorFrag_portraitParent = 2131624264;
+			
+			// aapt resource value: 0x7f0e0153
+			public const int viewLegislatorFrag_scrollview = 2131624275;
+			
+			// aapt resource value: 0x7f0e0154
+			public const int viewLegislatorFrag_scrollviewChild = 2131624276;
+			
+			// aapt resource value: 0x7f0e0143
+			public const int viewLegislatorFrag_termEndDate = 2131624259;
+			
+			// aapt resource value: 0x7f0e0142
+			public const int viewLegislatorFrag_termStartDate = 2131624258;
+			
+			// aapt resource value: 0x7f0e013f
+			public const int viewLegislatorFrag_textParent = 2131624255;
+			
+			// aapt resource value: 0x7f0e014e
+			public const int viewLegislatorFrag_twitter = 2131624270;
 			
 			// aapt resource value: 0x7f0e0155
-			public const int viewLegislatorFrag_parent = 2131624277;
+			public const int viewLegislatorFrag_viewPager = 2131624277;
 			
-			// aapt resource value: 0x7f0e0158
-			public const int viewLegislatorFrag_party = 2131624280;
+			// aapt resource value: 0x7f0e0147
+			public const int viewLegislatorFrag_voteMissedPrct = 2131624263;
 			
-			// aapt resource value: 0x7f0e0167
-			public const int viewLegislatorFrag_phone = 2131624295;
+			// aapt resource value: 0x7f0e0146
+			public const int viewLegislatorFrag_voteWithPartyPrct = 2131624262;
 			
-			// aapt resource value: 0x7f0e0160
-			public const int viewLegislatorFrag_portrait = 2131624288;
+			// aapt resource value: 0x7f0e0145
+			public const int viewLegislatorFrag_votesTotal = 2131624261;
 			
-			// aapt resource value: 0x7f0e015f
-			public const int viewLegislatorFrag_portraitParent = 2131624287;
+			// aapt resource value: 0x7f0e0152
+			public const int viewLegislatorFrag_webpage = 2131624274;
 			
-			// aapt resource value: 0x7f0e016b
-			public const int viewLegislatorFrag_scrollview = 2131624299;
+			// aapt resource value: 0x7f0e0150
+			public const int viewLegislatorFrag_youtube = 2131624272;
 			
-			// aapt resource value: 0x7f0e016c
-			public const int viewLegislatorFrag_scrollviewChild = 2131624300;
+			// aapt resource value: 0x7f0e028b
+			public const int viewLegislator_menu_favButtonOff = 2131624587;
 			
-			// aapt resource value: 0x7f0e015a
-			public const int viewLegislatorFrag_termEndDate = 2131624282;
-			
-			// aapt resource value: 0x7f0e0159
-			public const int viewLegislatorFrag_termStartDate = 2131624281;
-			
-			// aapt resource value: 0x7f0e0156
-			public const int viewLegislatorFrag_textParent = 2131624278;
-			
-			// aapt resource value: 0x7f0e0166
-			public const int viewLegislatorFrag_twitter = 2131624294;
-			
-			// aapt resource value: 0x7f0e016d
-			public const int viewLegislatorFrag_viewPager = 2131624301;
-			
-			// aapt resource value: 0x7f0e015e
-			public const int viewLegislatorFrag_voteMissedPrct = 2131624286;
-			
-			// aapt resource value: 0x7f0e015d
-			public const int viewLegislatorFrag_voteWithPartyPrct = 2131624285;
-			
-			// aapt resource value: 0x7f0e015c
-			public const int viewLegislatorFrag_votesTotal = 2131624284;
-			
-			// aapt resource value: 0x7f0e016a
-			public const int viewLegislatorFrag_webpage = 2131624298;
-			
-			// aapt resource value: 0x7f0e0163
-			public const int viewLegislatorFrag_writeLetter = 2131624291;
-			
-			// aapt resource value: 0x7f0e0168
-			public const int viewLegislatorFrag_youtube = 2131624296;
-			
-			// aapt resource value: 0x7f0e02ad
-			public const int viewLegislator_menu_favButtonOff = 2131624621;
-			
-			// aapt resource value: 0x7f0e02ae
-			public const int viewLegislator_menu_favButtonOn = 2131624622;
-			
-			// aapt resource value: 0x7f0e00eb
-			public const int viewLettersActv_fragAndToolbarParent = 2131624171;
-			
-			// aapt resource value: 0x7f0e00ed
-			public const int viewLettersActv_fragmentContainer = 2131624173;
-			
-			// aapt resource value: 0x7f0e00ee
-			public const int viewLettersActv_navigationDrawer = 2131624174;
-			
-			// aapt resource value: 0x7f0e00ea
-			public const int viewLettersActv_parent = 2131624170;
-			
-			// aapt resource value: 0x7f0e00ec
-			public const int viewLettersActv_toolbar = 2131624172;
-			
-			// aapt resource value: 0x7f0e0171
-			public const int viewLettersFrag_emptyText = 2131624305;
-			
-			// aapt resource value: 0x7f0e0170
-			public const int viewLettersFrag_lettersRecycler = 2131624304;
-			
-			// aapt resource value: 0x7f0e016e
-			public const int viewLettersFrag_parent = 2131624302;
-			
-			// aapt resource value: 0x7f0e016f
-			public const int viewLettersFrag_viewSwitcher = 2131624303;
-			
-			// aapt resource value: 0x7f0e02af
-			public const int viewLettersMenu_refresh = 2131624623;
+			// aapt resource value: 0x7f0e028c
+			public const int viewLegislator_menu_favButtonOn = 2131624588;
 			
 			// aapt resource value: 0x7f0e0016
 			public const int view_offset_helper = 2131623958;
 			
-			// aapt resource value: 0x7f0e0299
-			public const int visible = 2131624601;
+			// aapt resource value: 0x7f0e0277
+			public const int visible = 2131624567;
 			
-			// aapt resource value: 0x7f0e0135
-			public const int voteCtrl_basicInfoParent = 2131624245;
+			// aapt resource value: 0x7f0e011e
+			public const int voteCtrl_basicInfoParent = 2131624222;
 			
-			// aapt resource value: 0x7f0e0133
-			public const int voteCtrl_cardview = 2131624243;
+			// aapt resource value: 0x7f0e011c
+			public const int voteCtrl_cardview = 2131624220;
 			
-			// aapt resource value: 0x7f0e0134
-			public const int voteCtrl_image = 2131624244;
+			// aapt resource value: 0x7f0e011d
+			public const int voteCtrl_image = 2131624221;
 			
-			// aapt resource value: 0x7f0e013a
-			public const int voteCtrl_moreInfo = 2131624250;
+			// aapt resource value: 0x7f0e0123
+			public const int voteCtrl_moreInfo = 2131624227;
 			
-			// aapt resource value: 0x7f0e0132
-			public const int voteCtrl_parent = 2131624242;
+			// aapt resource value: 0x7f0e011b
+			public const int voteCtrl_parent = 2131624219;
 			
-			// aapt resource value: 0x7f0e0136
-			public const int voteCtrl_question = 2131624246;
+			// aapt resource value: 0x7f0e011f
+			public const int voteCtrl_question = 2131624223;
 			
-			// aapt resource value: 0x7f0e0137
-			public const int voteCtrl_voteResult = 2131624247;
+			// aapt resource value: 0x7f0e0120
+			public const int voteCtrl_voteResult = 2131624224;
 			
-			// aapt resource value: 0x7f0e0138
-			public const int voteCtrl_voteType = 2131624248;
+			// aapt resource value: 0x7f0e0121
+			public const int voteCtrl_voteType = 2131624225;
 			
-			// aapt resource value: 0x7f0e0139
-			public const int voteCtrl_votedAt = 2131624249;
+			// aapt resource value: 0x7f0e0122
+			public const int voteCtrl_votedAt = 2131624226;
 			
 			// aapt resource value: 0x7f0e002f
 			public const int wide = 2131623983;
@@ -6361,51 +6289,6 @@ namespace Write2Congress.Droid
 			
 			// aapt resource value: 0x7f0e0042
 			public const int wrap_content = 2131624002;
-			
-			// aapt resource value: 0x7f0e00f0
-			public const int writeLetterActv_fragAndToolbarParent = 2131624176;
-			
-			// aapt resource value: 0x7f0e00f2
-			public const int writeLetterActv_fragmentContainer = 2131624178;
-			
-			// aapt resource value: 0x7f0e00f3
-			public const int writeLetterActv_navigationDrawer = 2131624179;
-			
-			// aapt resource value: 0x7f0e00ef
-			public const int writeLetterActv_parent = 2131624175;
-			
-			// aapt resource value: 0x7f0e00f1
-			public const int writeLetterActv_toolbar = 2131624177;
-			
-			// aapt resource value: 0x7f0e0175
-			public const int writeLetterFrag_body = 2131624309;
-			
-			// aapt resource value: 0x7f0e0177
-			public const int writeLetterFrag_lastSaved = 2131624311;
-			
-			// aapt resource value: 0x7f0e0172
-			public const int writeLetterFrag_parent = 2131624306;
-			
-			// aapt resource value: 0x7f0e0173
-			public const int writeLetterFrag_recipient = 2131624307;
-			
-			// aapt resource value: 0x7f0e0176
-			public const int writeLetterFrag_signature = 2131624310;
-			
-			// aapt resource value: 0x7f0e0174
-			public const int writeLetterFrag_subject = 2131624308;
-			
-			// aapt resource value: 0x7f0e02b3
-			public const int writeLetterMenu_copyToClipboard = 2131624627;
-			
-			// aapt resource value: 0x7f0e02b2
-			public const int writeLetterMenu_delete = 2131624626;
-			
-			// aapt resource value: 0x7f0e02b1
-			public const int writeLetterMenu_save = 2131624625;
-			
-			// aapt resource value: 0x7f0e02b0
-			public const int writeLetterMenu_send = 2131624624;
 			
 			static Id()
 			{
@@ -6569,475 +6452,460 @@ namespace Write2Congress.Droid
 			public const int actv_ViewLegislator = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int actv_ViewLetters = 2130968609;
+			public const int ctrl_BaseViewer = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int actv_WriteLetter = 2130968610;
+			public const int ctrl_Bill = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int ctrl_BaseViewer = 2130968611;
+			public const int ctrl_Committee = 2130968611;
 			
 			// aapt resource value: 0x7f040024
-			public const int ctrl_Bill = 2130968612;
+			public const int ctrl_Legislator = 2130968612;
 			
 			// aapt resource value: 0x7f040025
-			public const int ctrl_Committee = 2130968613;
+			public const int ctrl_LegislatorsViewer = 2130968613;
 			
 			// aapt resource value: 0x7f040026
-			public const int ctrl_Legislator = 2130968614;
+			public const int ctrl_Toolbar = 2130968614;
 			
 			// aapt resource value: 0x7f040027
-			public const int ctrl_LegislatorsViewer = 2130968615;
+			public const int ctrl_Vote = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int ctrl_Letter = 2130968616;
+			public const int design_bottom_navigation_item = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int ctrl_Toolbar = 2130968617;
+			public const int design_bottom_sheet_dialog = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int ctrl_Vote = 2130968618;
+			public const int design_layout_snackbar = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int design_bottom_navigation_item = 2130968619;
+			public const int design_layout_snackbar_include = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int design_bottom_sheet_dialog = 2130968620;
+			public const int design_layout_tab_icon = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int design_layout_snackbar = 2130968621;
+			public const int design_layout_tab_text = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int design_layout_snackbar_include = 2130968622;
+			public const int design_menu_item_action_area = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int design_layout_tab_icon = 2130968623;
+			public const int design_navigation_item = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int design_layout_tab_text = 2130968624;
+			public const int design_navigation_item_header = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int design_menu_item_action_area = 2130968625;
+			public const int design_navigation_item_separator = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int design_navigation_item = 2130968626;
+			public const int design_navigation_item_subheader = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int design_navigation_item_header = 2130968627;
+			public const int design_navigation_menu = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int design_navigation_item_separator = 2130968628;
+			public const int design_navigation_menu_item = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int design_navigation_item_subheader = 2130968629;
+			public const int design_text_input_password_icon = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int design_navigation_menu = 2130968630;
+			public const int frag_Donate = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int design_navigation_menu_item = 2130968631;
+			public const int frag_FavoriteLegislators = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int design_text_input_password_icon = 2130968632;
+			public const int frag_Main = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int frag_Donate = 2130968633;
+			public const int frag_ViewLegislator = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int frag_FavoriteLegislators = 2130968634;
+			public const int ib_bug_activity_bug_reporting = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int frag_Main = 2130968635;
+			public const int ib_bug_attachments_action_bar = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int frag_ViewLegislator = 2130968636;
+			public const int ib_bug_fragment_annotation = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int frag_ViewLetters = 2130968637;
+			public const int ib_bug_item_edittext = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int frag_WriteLetter = 2130968638;
+			public const int ib_bug_lyt_attachment_image = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int ib_bug_activity_bug_reporting = 2130968639;
+			public const int ib_bug_lyt_attachment_video = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int ib_bug_attachments_action_bar = 2130968640;
+			public const int ib_bug_lyt_dialog_toolbar = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int ib_bug_fragment_annotation = 2130968641;
+			public const int ib_bug_lyt_extra_field = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int ib_bug_item_edittext = 2130968642;
+			public const int ib_bug_lyt_extra_fields = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int ib_bug_lyt_attachment_image = 2130968643;
+			public const int ib_bug_lyt_feedback = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int ib_bug_lyt_attachment_video = 2130968644;
+			public const int ib_bug_lyt_thanks = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int ib_bug_lyt_dialog_toolbar = 2130968645;
+			public const int ib_bug_vertical_separator = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int ib_bug_lyt_extra_field = 2130968646;
+			public const int ib_core_lyt_dialog_fragment = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int ib_bug_lyt_extra_fields = 2130968647;
+			public const int ib_core_lyt_onboarding_activity = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int ib_bug_lyt_feedback = 2130968648;
+			public const int ib_core_lyt_onboarding_pager_fragment = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int ib_bug_lyt_thanks = 2130968649;
+			public const int ib_dialog_list_item = 2130968649;
 			
 			// aapt resource value: 0x7f04004a
-			public const int ib_bug_vertical_separator = 2130968650;
+			public const int ib_fr_add_comment_fragment = 2130968650;
 			
 			// aapt resource value: 0x7f04004b
-			public const int ib_core_lyt_dialog_fragment = 2130968651;
+			public const int ib_fr_completed_features_layout = 2130968651;
 			
 			// aapt resource value: 0x7f04004c
-			public const int ib_core_lyt_onboarding_activity = 2130968652;
+			public const int ib_fr_feature_request_details_header = 2130968652;
 			
 			// aapt resource value: 0x7f04004d
-			public const int ib_core_lyt_onboarding_pager_fragment = 2130968653;
+			public const int ib_fr_feature_request_item = 2130968653;
 			
 			// aapt resource value: 0x7f04004e
-			public const int ib_dialog_list_item = 2130968654;
+			public const int ib_fr_features_details_fragment = 2130968654;
 			
 			// aapt resource value: 0x7f04004f
-			public const int ib_fr_add_comment_fragment = 2130968655;
+			public const int ib_fr_features_list_empty_layout = 2130968655;
 			
 			// aapt resource value: 0x7f040050
-			public const int ib_fr_completed_features_layout = 2130968656;
+			public const int ib_fr_features_list_error_layout = 2130968656;
 			
 			// aapt resource value: 0x7f040051
-			public const int ib_fr_feature_request_details_header = 2130968657;
+			public const int ib_fr_features_list_fragment = 2130968657;
 			
 			// aapt resource value: 0x7f040052
-			public const int ib_fr_feature_request_item = 2130968658;
+			public const int ib_fr_features_main_fragment = 2130968658;
 			
 			// aapt resource value: 0x7f040053
-			public const int ib_fr_features_details_fragment = 2130968659;
+			public const int ib_fr_features_request_list = 2130968659;
 			
 			// aapt resource value: 0x7f040054
-			public const int ib_fr_features_list_empty_layout = 2130968660;
+			public const int ib_fr_insta_toast_include = 2130968660;
 			
 			// aapt resource value: 0x7f040055
-			public const int ib_fr_features_list_error_layout = 2130968661;
+			public const int ib_fr_insta_toast_layout = 2130968661;
 			
 			// aapt resource value: 0x7f040056
-			public const int ib_fr_features_list_fragment = 2130968662;
+			public const int ib_fr_item_admin_comment = 2130968662;
 			
 			// aapt resource value: 0x7f040057
-			public const int ib_fr_features_main_fragment = 2130968663;
+			public const int ib_fr_item_comment = 2130968663;
 			
 			// aapt resource value: 0x7f040058
-			public const int ib_fr_features_request_list = 2130968664;
+			public const int ib_fr_item_status_change = 2130968664;
 			
 			// aapt resource value: 0x7f040059
-			public const int ib_fr_insta_toast_include = 2130968665;
+			public const int ib_fr_layout_comment_count = 2130968665;
 			
 			// aapt resource value: 0x7f04005a
-			public const int ib_fr_insta_toast_layout = 2130968666;
+			public const int ib_fr_layout_no_comments = 2130968666;
 			
 			// aapt resource value: 0x7f04005b
-			public const int ib_fr_item_admin_comment = 2130968667;
+			public const int ib_fr_new_feature_fragment = 2130968667;
 			
 			// aapt resource value: 0x7f04005c
-			public const int ib_fr_item_comment = 2130968668;
+			public const int ib_fr_powered_by_instabug_layout = 2130968668;
 			
 			// aapt resource value: 0x7f04005d
-			public const int ib_fr_item_status_change = 2130968669;
+			public const int ib_fr_progress_dialog_layout = 2130968669;
 			
 			// aapt resource value: 0x7f04005e
-			public const int ib_fr_layout_comment_count = 2130968670;
+			public const int ib_fr_pull_to_refresh_footer_view = 2130968670;
 			
 			// aapt resource value: 0x7f04005f
-			public const int ib_fr_layout_no_comments = 2130968671;
+			public const int ib_fr_pull_to_refresh_header_view = 2130968671;
 			
 			// aapt resource value: 0x7f040060
-			public const int ib_fr_new_feature_fragment = 2130968672;
+			public const int ib_fr_sort_bar_layout = 2130968672;
 			
 			// aapt resource value: 0x7f040061
-			public const int ib_fr_powered_by_instabug_layout = 2130968673;
+			public const int ib_fr_thanks_dialog = 2130968673;
 			
 			// aapt resource value: 0x7f040062
-			public const int ib_fr_progress_dialog_layout = 2130968674;
+			public const int ib_fr_toolbar_action_icon_view = 2130968674;
 			
 			// aapt resource value: 0x7f040063
-			public const int ib_fr_pull_to_refresh_footer_view = 2130968675;
+			public const int ib_fr_toolbar_action_text_view = 2130968675;
 			
 			// aapt resource value: 0x7f040064
-			public const int ib_fr_pull_to_refresh_header_view = 2130968676;
+			public const int ib_fr_toolbar_action_vote_button = 2130968676;
 			
 			// aapt resource value: 0x7f040065
-			public const int ib_fr_sort_bar_layout = 2130968677;
+			public const int ib_fr_toolbar_fragment = 2130968677;
 			
 			// aapt resource value: 0x7f040066
-			public const int ib_fr_thanks_dialog = 2130968678;
+			public const int ib_fr_toolbar_layout = 2130968678;
 			
 			// aapt resource value: 0x7f040067
-			public const int ib_fr_toolbar_action_icon_view = 2130968679;
+			public const int ib_fr_toolbar_search_layout = 2130968679;
 			
 			// aapt resource value: 0x7f040068
-			public const int ib_fr_toolbar_action_text_view = 2130968680;
+			public const int ib_fr_view_separator = 2130968680;
 			
 			// aapt resource value: 0x7f040069
-			public const int ib_fr_toolbar_action_vote_button = 2130968681;
+			public const int ib_lyt_activity_dialog = 2130968681;
 			
 			// aapt resource value: 0x7f04006a
-			public const int ib_fr_toolbar_fragment = 2130968682;
+			public const int instabug_activity = 2130968682;
 			
 			// aapt resource value: 0x7f04006b
-			public const int ib_fr_toolbar_layout = 2130968683;
+			public const int instabug_alert_dialog = 2130968683;
 			
 			// aapt resource value: 0x7f04006c
-			public const int ib_fr_toolbar_search_layout = 2130968684;
+			public const int instabug_annotation_view = 2130968684;
 			
 			// aapt resource value: 0x7f04006d
-			public const int ib_fr_view_separator = 2130968685;
+			public const int instabug_conversation_list_item = 2130968685;
 			
 			// aapt resource value: 0x7f04006e
-			public const int ib_lyt_activity_dialog = 2130968686;
+			public const int instabug_dialog_mcq_survey = 2130968686;
 			
 			// aapt resource value: 0x7f04006f
-			public const int instabug_activity = 2130968687;
+			public const int instabug_dialog_nps_survey = 2130968687;
 			
 			// aapt resource value: 0x7f040070
-			public const int instabug_alert_dialog = 2130968688;
+			public const int instabug_dialog_survey = 2130968688;
 			
 			// aapt resource value: 0x7f040071
-			public const int instabug_annotation_view = 2130968689;
+			public const int instabug_dialog_text_survey = 2130968689;
 			
 			// aapt resource value: 0x7f040072
-			public const int instabug_conversation_list_item = 2130968690;
+			public const int instabug_fragment_annotation = 2130968690;
 			
 			// aapt resource value: 0x7f040073
-			public const int instabug_dialog_mcq_survey = 2130968691;
+			public const int instabug_fragment_attachments_bottom_sheet = 2130968691;
 			
 			// aapt resource value: 0x7f040074
-			public const int instabug_dialog_nps_survey = 2130968692;
+			public const int instabug_fragment_chat = 2130968692;
 			
 			// aapt resource value: 0x7f040075
-			public const int instabug_dialog_survey = 2130968693;
+			public const int instabug_fragment_chats = 2130968693;
 			
 			// aapt resource value: 0x7f040076
-			public const int instabug_dialog_text_survey = 2130968694;
+			public const int instabug_fragment_image_attachment_viewer = 2130968694;
 			
 			// aapt resource value: 0x7f040077
-			public const int instabug_fragment_annotation = 2130968695;
+			public const int instabug_fragment_toolbar = 2130968695;
 			
 			// aapt resource value: 0x7f040078
-			public const int instabug_fragment_attachments_bottom_sheet = 2130968696;
+			public const int instabug_lyt_annotation = 2130968696;
 			
 			// aapt resource value: 0x7f040079
-			public const int instabug_fragment_chat = 2130968697;
+			public const int instabug_lyt_disclaimer = 2130968697;
 			
 			// aapt resource value: 0x7f04007a
-			public const int instabug_fragment_chats = 2130968698;
+			public const int instabug_lyt_disclaimer_details = 2130968698;
 			
 			// aapt resource value: 0x7f04007b
-			public const int instabug_fragment_image_attachment_viewer = 2130968699;
+			public const int instabug_lyt_extra_field = 2130968699;
 			
 			// aapt resource value: 0x7f04007c
-			public const int instabug_fragment_toolbar = 2130968700;
+			public const int instabug_lyt_item_disclaimer = 2130968700;
 			
 			// aapt resource value: 0x7f04007d
-			public const int instabug_lyt_annotation = 2130968701;
+			public const int instabug_lyt_notification = 2130968701;
 			
 			// aapt resource value: 0x7f04007e
-			public const int instabug_lyt_disclaimer = 2130968702;
+			public const int instabug_lyt_pbi = 2130968702;
 			
 			// aapt resource value: 0x7f04007f
-			public const int instabug_lyt_disclaimer_details = 2130968703;
+			public const int instabug_lyt_record_audio = 2130968703;
 			
 			// aapt resource value: 0x7f040080
-			public const int instabug_lyt_extra_field = 2130968704;
+			public const int instabug_lyt_toolbar = 2130968704;
 			
 			// aapt resource value: 0x7f040081
-			public const int instabug_lyt_item_disclaimer = 2130968705;
+			public const int instabug_lyt_video_view = 2130968705;
 			
 			// aapt resource value: 0x7f040082
-			public const int instabug_lyt_notification = 2130968706;
+			public const int instabug_message_list_item = 2130968706;
 			
 			// aapt resource value: 0x7f040083
-			public const int instabug_lyt_pbi = 2130968707;
+			public const int instabug_message_list_item_img = 2130968707;
 			
 			// aapt resource value: 0x7f040084
-			public const int instabug_lyt_record_audio = 2130968708;
+			public const int instabug_message_list_item_img_me = 2130968708;
 			
 			// aapt resource value: 0x7f040085
-			public const int instabug_lyt_toolbar = 2130968709;
+			public const int instabug_message_list_item_me = 2130968709;
 			
 			// aapt resource value: 0x7f040086
-			public const int instabug_lyt_video_view = 2130968710;
+			public const int instabug_message_list_item_video = 2130968710;
 			
 			// aapt resource value: 0x7f040087
-			public const int instabug_message_list_item = 2130968711;
+			public const int instabug_message_list_item_video_me = 2130968711;
 			
 			// aapt resource value: 0x7f040088
-			public const int instabug_message_list_item_img = 2130968712;
+			public const int instabug_message_list_item_voice = 2130968712;
 			
 			// aapt resource value: 0x7f040089
-			public const int instabug_message_list_item_img_me = 2130968713;
+			public const int instabug_message_list_item_voice_me = 2130968713;
 			
 			// aapt resource value: 0x7f04008a
-			public const int instabug_message_list_item_me = 2130968714;
+			public const int instabug_star_rating_question = 2130968714;
 			
 			// aapt resource value: 0x7f04008b
-			public const int instabug_message_list_item_video = 2130968715;
+			public const int instabug_survey_activity = 2130968715;
 			
 			// aapt resource value: 0x7f04008c
-			public const int instabug_message_list_item_video_me = 2130968716;
+			public const int instabug_survey_fragment_thanks_dialog = 2130968716;
 			
 			// aapt resource value: 0x7f04008d
-			public const int instabug_message_list_item_voice = 2130968717;
+			public const int instabug_survey_fragment_welcome_dialog = 2130968717;
 			
 			// aapt resource value: 0x7f04008e
-			public const int instabug_message_list_item_voice_me = 2130968718;
+			public const int instabug_survey_mcq_item = 2130968718;
 			
 			// aapt resource value: 0x7f04008f
-			public const int instabug_star_rating_question = 2130968719;
+			public const int instabug_toolbar_activity = 2130968719;
 			
 			// aapt resource value: 0x7f040090
-			public const int instabug_survey_activity = 2130968720;
+			public const int item_close_survey_button = 2130968720;
 			
 			// aapt resource value: 0x7f040091
-			public const int instabug_survey_fragment_thanks_dialog = 2130968721;
+			public const int layout_shadow = 2130968721;
 			
 			// aapt resource value: 0x7f040092
-			public const int instabug_survey_fragment_welcome_dialog = 2130968722;
+			public const int notification_action = 2130968722;
 			
 			// aapt resource value: 0x7f040093
-			public const int instabug_survey_mcq_item = 2130968723;
+			public const int notification_action_tombstone = 2130968723;
 			
 			// aapt resource value: 0x7f040094
-			public const int instabug_toolbar_activity = 2130968724;
+			public const int notification_media_action = 2130968724;
 			
 			// aapt resource value: 0x7f040095
-			public const int item_close_survey_button = 2130968725;
+			public const int notification_media_cancel_action = 2130968725;
 			
 			// aapt resource value: 0x7f040096
-			public const int layout_shadow = 2130968726;
+			public const int notification_template_big_media = 2130968726;
 			
 			// aapt resource value: 0x7f040097
-			public const int notification_action = 2130968727;
+			public const int notification_template_big_media_custom = 2130968727;
 			
 			// aapt resource value: 0x7f040098
-			public const int notification_action_tombstone = 2130968728;
+			public const int notification_template_big_media_narrow = 2130968728;
 			
 			// aapt resource value: 0x7f040099
-			public const int notification_media_action = 2130968729;
+			public const int notification_template_big_media_narrow_custom = 2130968729;
 			
 			// aapt resource value: 0x7f04009a
-			public const int notification_media_cancel_action = 2130968730;
+			public const int notification_template_custom_big = 2130968730;
 			
 			// aapt resource value: 0x7f04009b
-			public const int notification_template_big_media = 2130968731;
+			public const int notification_template_icon_group = 2130968731;
 			
 			// aapt resource value: 0x7f04009c
-			public const int notification_template_big_media_custom = 2130968732;
+			public const int notification_template_lines_media = 2130968732;
 			
 			// aapt resource value: 0x7f04009d
-			public const int notification_template_big_media_narrow = 2130968733;
+			public const int notification_template_media = 2130968733;
 			
 			// aapt resource value: 0x7f04009e
-			public const int notification_template_big_media_narrow_custom = 2130968734;
+			public const int notification_template_media_custom = 2130968734;
 			
 			// aapt resource value: 0x7f04009f
-			public const int notification_template_custom_big = 2130968735;
+			public const int notification_template_part_chronometer = 2130968735;
 			
 			// aapt resource value: 0x7f0400a0
-			public const int notification_template_icon_group = 2130968736;
+			public const int notification_template_part_time = 2130968736;
 			
 			// aapt resource value: 0x7f0400a1
-			public const int notification_template_lines_media = 2130968737;
+			public const int nps_fragment = 2130968737;
 			
 			// aapt resource value: 0x7f0400a2
-			public const int notification_template_media = 2130968738;
+			public const int preference = 2130968738;
 			
 			// aapt resource value: 0x7f0400a3
-			public const int notification_template_media_custom = 2130968739;
+			public const int preference_category = 2130968739;
 			
 			// aapt resource value: 0x7f0400a4
-			public const int notification_template_part_chronometer = 2130968740;
+			public const int preference_category_material = 2130968740;
 			
 			// aapt resource value: 0x7f0400a5
-			public const int notification_template_part_time = 2130968741;
+			public const int preference_dialog_edittext = 2130968741;
 			
 			// aapt resource value: 0x7f0400a6
-			public const int nps_fragment = 2130968742;
+			public const int preference_dropdown = 2130968742;
 			
 			// aapt resource value: 0x7f0400a7
-			public const int preference = 2130968743;
+			public const int preference_dropdown_material = 2130968743;
 			
 			// aapt resource value: 0x7f0400a8
-			public const int preference_category = 2130968744;
+			public const int preference_information = 2130968744;
 			
 			// aapt resource value: 0x7f0400a9
-			public const int preference_category_material = 2130968745;
+			public const int preference_information_material = 2130968745;
 			
 			// aapt resource value: 0x7f0400aa
-			public const int preference_dialog_edittext = 2130968746;
+			public const int preference_list_fragment = 2130968746;
 			
 			// aapt resource value: 0x7f0400ab
-			public const int preference_dropdown = 2130968747;
+			public const int preference_material = 2130968747;
 			
 			// aapt resource value: 0x7f0400ac
-			public const int preference_dropdown_material = 2130968748;
+			public const int preference_recyclerview = 2130968748;
 			
 			// aapt resource value: 0x7f0400ad
-			public const int preference_information = 2130968749;
+			public const int preference_widget_checkbox = 2130968749;
 			
 			// aapt resource value: 0x7f0400ae
-			public const int preference_information_material = 2130968750;
+			public const int preference_widget_seekbar = 2130968750;
 			
 			// aapt resource value: 0x7f0400af
-			public const int preference_list_fragment = 2130968751;
+			public const int preference_widget_seekbar_material = 2130968751;
 			
 			// aapt resource value: 0x7f0400b0
-			public const int preference_material = 2130968752;
+			public const int preference_widget_switch = 2130968752;
 			
 			// aapt resource value: 0x7f0400b1
-			public const int preference_recyclerview = 2130968753;
+			public const int preference_widget_switch_compat = 2130968753;
 			
 			// aapt resource value: 0x7f0400b2
-			public const int preference_widget_checkbox = 2130968754;
+			public const int select_dialog_item_material = 2130968754;
 			
 			// aapt resource value: 0x7f0400b3
-			public const int preference_widget_seekbar = 2130968755;
+			public const int select_dialog_multichoice_material = 2130968755;
 			
 			// aapt resource value: 0x7f0400b4
-			public const int preference_widget_seekbar_material = 2130968756;
+			public const int select_dialog_singlechoice_material = 2130968756;
 			
 			// aapt resource value: 0x7f0400b5
-			public const int preference_widget_switch = 2130968757;
+			public const int support_simple_spinner_dropdown_item = 2130968757;
 			
 			// aapt resource value: 0x7f0400b6
-			public const int preference_widget_switch_compat = 2130968758;
+			public const int survey_question_textview = 2130968758;
 			
 			// aapt resource value: 0x7f0400b7
-			public const int select_dialog_item_material = 2130968759;
+			public const int survey_rate_us_fragment = 2130968759;
 			
 			// aapt resource value: 0x7f0400b8
-			public const int select_dialog_multichoice_material = 2130968760;
-			
-			// aapt resource value: 0x7f0400b9
-			public const int select_dialog_singlechoice_material = 2130968761;
-			
-			// aapt resource value: 0x7f0400ba
-			public const int support_simple_spinner_dropdown_item = 2130968762;
-			
-			// aapt resource value: 0x7f0400bb
-			public const int survey_question_textview = 2130968763;
-			
-			// aapt resource value: 0x7f0400bc
-			public const int survey_rate_us_fragment = 2130968764;
-			
-			// aapt resource value: 0x7f0400bd
-			public const int tooltip = 2130968765;
+			public const int tooltip = 2130968760;
 			
 			static Layout()
 			{
@@ -7081,12 +6949,6 @@ namespace Write2Congress.Droid
 			
 			// aapt resource value: 0x7f110009
 			public const int menu_viewLegislator_favButtonOn = 2131820553;
-			
-			// aapt resource value: 0x7f11000a
-			public const int menu_viewLetters = 2131820554;
-			
-			// aapt resource value: 0x7f11000b
-			public const int menu_writeLetter = 2131820555;
 			
 			static Menu()
 			{

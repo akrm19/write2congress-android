@@ -22,7 +22,6 @@ namespace Write2Congress.Droid.Adapters
         public TextView TermStartDate { get; private set; }
         public TextView TermEndDate { get; private set; }
 
-        public ImageButton WriteLetter { get; private set; }
         public ImageButton Email { get; private set; }
         public ImageButton Phone { get; private set; }
         public ImageButton Address { get; private set; }
@@ -32,7 +31,7 @@ namespace Write2Congress.Droid.Adapters
         public ImageButton YouTube { get; private set; }
         public ImageButton Webpage { get; private set; }
 
-        public LegislatorAdapterViewHolder(View itemView, Action<int> writeListener, Action<int, int> actionButtonListner, Action<int> legislatorClickListner) :base(itemView)
+        public LegislatorAdapterViewHolder(View itemView, Action<int, int> actionButtonListner, Action<int> legislatorClickListner) :base(itemView)
         {
             itemView.Click += (sender, e) => legislatorClickListner(base.AdapterPosition);
 
@@ -41,10 +40,6 @@ namespace Write2Congress.Droid.Adapters
             Name = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_name);
             TermStartDate = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_termStartDate);
             TermEndDate = itemView.FindViewById<TextView>(Resource.Id.legislatorCtrl_termEndDate);
-
-            WriteLetter = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_writeLetter);
-            WriteLetter.Click -= (sender, e) => writeListener(base.AdapterPosition);
-            WriteLetter.Click += (sender, e) => writeListener(base.AdapterPosition);
 
             Email = itemView.FindViewById<ImageButton>(Resource.Id.legislatorCtrl_email);
             Email.Click += (sender, e) => actionButtonListner(base.AdapterPosition, (sender as View).Id);

@@ -78,11 +78,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/viewLegislatorFrag_contactMethodsInnerParent">
             <ImageButton
-                android:src="@drawable/ic_create_blue_48dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewLegislatorFrag_writeLetter" />
-            <ImageButton
                 android:src="@drawable/facebook_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

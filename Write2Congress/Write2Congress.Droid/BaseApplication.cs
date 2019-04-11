@@ -31,7 +31,6 @@ namespace Write2Congress.Droid
         private List<Legislator> _allLegislators;
         private List<Legislator> _favoriteLegislators;
 
-        public LetterManager LetterManager;
         public CommitteeManager CommitteeManager;
         public VoteManager VoteMngr;
         public BillManager BillMngr; 
@@ -90,9 +89,7 @@ namespace Write2Congress.Droid
                 ? Resources.GetColor(Resource.Color.primary_blue)
 #pragma warning restore CS0618 // Type or member is obsolete
                 : GetColor(Resource.Color.primary_blue);
-
-            LetterManager = new LetterManager(new LetterFileProvider(), _logger);
-
+                
             //CommitteeManager = new CommitteeManager(_logger);
 			LegislatorManager = new LegislatorManager(_logger);
             VoteMngr = new VoteManager(_logger);

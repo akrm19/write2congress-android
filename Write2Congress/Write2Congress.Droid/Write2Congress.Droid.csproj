@@ -176,23 +176,17 @@
     <Compile Include="Activities\BaseToolbarActivity.cs" />
     <Compile Include="Activities\SettingsActivity.cs" />
     <Compile Include="Activities\ViewLegislatorActivity.cs" />
-    <Compile Include="Activities\ViewLettersActivity.cs" />
-    <Compile Include="Activities\WriteLetterActivity.cs" />
     <Compile Include="Adapters\BillAdapter.cs" />
     <Compile Include="Adapters\BillAdapterViewHolder.cs" />
     <Compile Include="Adapters\CommitteeAdapter.cs" />
     <Compile Include="Adapters\CommitteeAdapterViewHolder.cs" />
     <Compile Include="Adapters\LegislatorViewPagerAdapter.cs" />
-    <Compile Include="Adapters\LetterAdapter.cs" />
-    <Compile Include="Adapters\LetterAdapterViewHolder.cs" />
     <Compile Include="Adapters\VoteAdapter.cs" />
     <Compile Include="Adapters\VoteAdapterViewHolder.cs" />
-    <Compile Include="Code\LetterFileProvider.cs" />
     <Compile Include="CustomControls\BaseViewer.cs" />
     <Compile Include="CustomControls\CommitteeViewer.cs" />
     <Compile Include="DomainModel\Constants\BundleType.cs" />
     <Compile Include="DomainModel\Constants\SharedPreference.cs" />
-    <Compile Include="DomainModel\Constants\ViewLettersFragmentType.cs" />
     <Compile Include="DomainModel\Enums\BillViewerKind.cs" />
     <Compile Include="DomainModel\Enums\BundleSenderKind.cs" />
     <Compile Include="DomainModel\Enums\ViewPagerList.cs" />
@@ -207,7 +201,6 @@
     <Compile Include="DomainModel\Constants\TagsType.cs" />
     <Compile Include="Fragments\BaseFragment.cs" />
     <Compile Include="Fragments\BaseRecyclerViewerFragment.cs" />
-    <Compile Include="Fragments\BaseViewLetterFragment.cs" />
     <Compile Include="Fragments\BillViewerFragmentCtrl.cs" />
     <Compile Include="Fragments\CommitteeViewerFragmentCtrl.cs" />
     <Compile Include="Fragments\MainFragment.cs" />
@@ -215,7 +208,6 @@
     <Compile Include="Fragments\SettingsFragment.cs" />
     <Compile Include="Fragments\ViewLegislatorFragment.cs" />
     <Compile Include="Fragments\VoteViewerFragmentCtrl.cs" />
-    <Compile Include="Fragments\WriteLetterFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\ViewBillsBaseActivity.cs" />
@@ -254,27 +246,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ctrl_LegislatorsViewer.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\actv_WriteLetter.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\frag_WriteLetter.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\menu\menu_writeLetter.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ctrl_Letter.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\frag_ViewLetters.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\actv_ViewLetters.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\menu\menu_viewLetters.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\actv_Settings.axml">

@@ -406,41 +406,6 @@ namespace Write2Congress.Droid.Code
             }
         }
 
-        public static void StartWriteNewLetterIntent(BaseActivity activity, BundleSenderKind senderKind, Legislator legislator = null, bool finishActivity = false)
-        {
-            using (var intent = new Intent(activity, typeof(WriteLetterActivity)))
-            {
-                if (legislator != null)
-                    intent.PutExtra(BundleType.Legislator, legislator.SerializeToJson());
-
-                intent.PutExtra(BundleType.Sender, (int)senderKind);
-
-                activity.StartActivity(intent);
-
-                if (finishActivity)
-                    activity.Finish();
-            }
-        }
-
-        public static void StartWriteNewLetterIntent(BaseActivity activity, BundleSenderKind senderKind, Letter letter, bool finishActivity)
-        {
-            using (var intent = new Intent(activity, typeof(WriteLetterActivity)))
-            {
-                if (letter != null)
-                {
-                    var serializedLetter = letter.SerializeToJson();
-                    intent.PutExtra(BundleType.Letter, serializedLetter);
-                }
-
-                intent.PutExtra(BundleType.Sender, (int)senderKind);
-
-                activity.StartActivity(intent);
-
-                if (finishActivity)
-                    activity.Finish();
-            }
-        }
-
         public static void PerformContactMethodIntent(Fragments.BaseFragment fragment, ContactMethod contactMethod, bool useChooser)
         {
             if(fragment == null)

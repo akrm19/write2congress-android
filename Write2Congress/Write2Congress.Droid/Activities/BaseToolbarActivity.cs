@@ -120,49 +120,12 @@ namespace Write2Congress.Droid.Activities
             StartActivity(intent);
         }
 
-        private void OpenWriteNewLetter()
-        {
-            if (GetType() == typeof(WriteLetterActivity))
-                return;
-
-            var intent = new Intent(this, typeof(WriteLetterActivity));
-            StartActivity(intent);
-        }
-
         private void OpenLegislatorSearch()
         {
             if (GetType() == typeof(MainActivity))
                 return;
 
             var intent = new Intent(this, typeof(MainActivity));
-            StartActivity(intent);
-        }
-
-        protected virtual void OpenDrafts()
-        {
-            var viewLettersActivity = this as ViewLettersActivity;
-
-            if(viewLettersActivity != null 
-                && !string.IsNullOrWhiteSpace(viewLettersActivity.ViewLettersActivityType)
-                && viewLettersActivity.ViewLettersActivityType == ViewLettersFragmentType.Drafts)
-                return;
-
-            var intent = new Intent(this, typeof(ViewLettersActivity));
-            intent.PutExtra(BundleType.ViewLettersFragType, ViewLettersFragmentType.Drafts);
-            StartActivity(intent);
-        }
-
-        protected virtual void OpenSent()
-        {
-            var viewLettersActivity = this as ViewLettersActivity;
-
-            if (viewLettersActivity != null
-                && !string.IsNullOrWhiteSpace(viewLettersActivity.ViewLettersActivityType)
-                && viewLettersActivity.ViewLettersActivityType == ViewLettersFragmentType.Sent)
-                return;
-
-            var intent = new Intent(this, typeof(ViewLettersActivity));
-            intent.PutExtra(BundleType.ViewLettersFragType, ViewLettersFragmentType.Sent);
             StartActivity(intent);
         }
 

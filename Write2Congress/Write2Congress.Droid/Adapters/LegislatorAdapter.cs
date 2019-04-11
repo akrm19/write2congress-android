@@ -27,7 +27,6 @@ namespace Write2Congress.Droid.Adapters
         private TypedValue _selectableItemBackground = new TypedValue();
         private string _termStartDate, _termEndDate, _senate, _congress;
 
-        public event EventHandler<int> WriteLetterToLegislatorClick;
         public event EventHandler<int> LegislatorClick;
 
         public LegislatorAdapter(BaseFragment fragment, List<Legislator> legislators) 
@@ -69,11 +68,6 @@ namespace Write2Congress.Droid.Adapters
         private void OnLegislatorClick(int position)
         {
             LegislatorClick?.Invoke(this, position);
-        }
-
-        private void OnWriteLetterToLegislatorClick(int position)
-        {
-            WriteLetterToLegislatorClick?.Invoke(this, position);
         }
 
         private void OnActionButtonClick(int position, int buttonResourceId)
@@ -128,7 +122,7 @@ namespace Write2Congress.Droid.Adapters
         {
             var legislatorView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.ctrl_Legislator, parent, false);
 
-            return new LegislatorAdapterViewHolder(legislatorView, OnWriteLetterToLegislatorClick, OnActionButtonClick, OnLegislatorClick);
+            return new LegislatorAdapterViewHolder(legislatorView, OnActionButtonClick, OnLegislatorClick);
         }
 
         /// <summary>
@@ -151,7 +145,6 @@ namespace Write2Congress.Droid.Adapters
             viewHolder.TermEndDate.Text = AppHelper.GetLegislatorTermEndDate(legislator, _termEndDate);
 
             //Contact, social media, ect buttons
-            AppHelper.SetLegislatorContactMthdVisibility(viewHolder.WriteLetter, legislator.Email, _selectableItemBackground);
             AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Email, legislator.Email, _selectableItemBackground);
             AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Phone, legislator.OfficeNumber, _selectableItemBackground);
             AppHelper.SetLegislatorContactMthdVisibility(viewHolder.Address, legislator.OfficeAddress, _selectableItemBackground);

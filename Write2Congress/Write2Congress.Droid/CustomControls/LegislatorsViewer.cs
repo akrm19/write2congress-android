@@ -94,7 +94,6 @@ namespace Write2Congress.Droid.CustomControls
 
             //Setup Legislator Adapater
             _legislatorAdapter = new LegislatorAdapter(_fragment, _legislators);
-            _legislatorAdapter.WriteLetterToLegislatorClick += WriteNewLetterItemClicked;
             _legislatorAdapter.LegislatorClick += LegislatorClicked;
             recyclerView.SetAdapter(_legislatorAdapter);
 
@@ -127,19 +126,6 @@ namespace Write2Congress.Droid.CustomControls
             }
 
             AppHelper.StartViewLegislatorIntent(_fragment.GetBaseActivity(), legislator);
-        }
-
-        void WriteNewLetterItemClicked(object sender, int position)
-        {
-            var legislator = _legislatorAdapter.GetLegislatorAtPosition(position);
-
-            if(legislator == null)
-            {
-                Logger.Error("Unable to write to legislator. Unable to retrive legislator at positition " + position);
-                return;
-            }
-
-            AppHelper.StartWriteNewLetterIntent(_fragment.GetBaseActivity(), BundleSenderKind.LegislatorViewer, legislator);
         }
 
         private void HookupToActivitySearchTextChangedDelegate()

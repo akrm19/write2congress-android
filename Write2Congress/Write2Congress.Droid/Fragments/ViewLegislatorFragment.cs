@@ -251,7 +251,6 @@ namespace Write2Congress.Droid.Fragments
 
         private void PopulateContactMethodsButtons(View fragment, Legislator legislator)
         {
-            var WriteLetter = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_writeLetter);
             var Email = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_email);
             var Phone = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_phone);
             var Address = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_address);
@@ -262,7 +261,6 @@ namespace Write2Congress.Droid.Fragments
             var YouTube = fragment.FindViewById<ImageButton>(Resource.Id.viewLegislatorFrag_youtube);
 
             //Contact, social media, ect buttons
-            SetupLegislatorContactMthdButton(WriteLetter, legislator.Email);
             SetupLegislatorContactMthdButton(Email, legislator.Email);
             SetupLegislatorContactMthdButton(Phone, legislator.OfficeNumber);
             SetupLegislatorContactMthdButton(Address, legislator.OfficeAddress);

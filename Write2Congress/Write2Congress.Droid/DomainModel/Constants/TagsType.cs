@@ -14,7 +14,6 @@ namespace Write2Congress.Droid.DomainModel.Constants
 {
     public class TagsType
     {
-		public const string DraftsFragment = "DraftsFragment";
 		public const string DonateFragment = "DoanteFragment";
         public const string FavorityLegislatorsFragment = "FavorityLegislatorsFragment";
         public const string MainParentFragment = "MainParentFragment";
@@ -23,8 +22,6 @@ namespace Write2Congress.Droid.DomainModel.Constants
         internal const string SponsoredBillsFragment = "SponsoredBillsFragment";
         internal const string ViewBillsFragment = "ViewBilldFrag";
         internal const string ViewLegislatorsFragment = "ViewLegislatorsFragment";
-        public const string ViewLettersFragment = "ViewLettersFragment";
         internal const string VoteViewerFragment = "VoteViewerFragment";
-        public const string WriteLetterFragment = "WriteLetterFragment";
     }
 }

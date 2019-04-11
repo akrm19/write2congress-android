@@ -75,11 +75,6 @@ namespace Write2Congress.Droid.Fragments
         {
             return AppHelper.GetCachedLegislators();
         }
-
-        public LetterManager GetLetterManager()
-        {
-            return GetBaseApp().LetterManager;
-        } 
         #endregion
     }
 }
