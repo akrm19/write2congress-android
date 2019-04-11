@@ -50,7 +50,7 @@
   <string name="exitSearch">Exit Search</string>
   <string name="favorites">Favorites</string>
   <string name="feedback">Feedback</string>
-  <string name="feedbackText">Have any suggestions or problems with bugs? We want to hear from you!\n\nSimply shake your phone at any time when using the app and the feedback prompt will appear.\n\nYou can also click on the button below.\n\n</string>
+  <string name="feedbackText">Have any suggestions or problems with bugs? I want to hear from you!\n\nSimply shake your phone at any time when using the app and a feedback prompt will appear.\n\nYou can also click on the button below.\n\n</string>
   <string name="feedbackButtonText">Give Feedback</string>
   <string name="lastAction">Last Action</string>
   <string name="lastActionDate">Last Action Date</string>

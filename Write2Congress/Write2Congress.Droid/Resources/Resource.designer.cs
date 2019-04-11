@@ -6209,8 +6209,8 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e00e6
 			public const int viewLegislatorActv_toolbar = 2131624166;
 			
-			// aapt resource value: 0x7f0e0168
-			public const int viewLegislatorFrag_address = 2131624296;
+			// aapt resource value: 0x7f0e0169
+			public const int viewLegislatorFrag_address = 2131624297;
 			
 			// aapt resource value: 0x7f0e015b
 			public const int viewLegislatorFrag_birthdate = 2131624283;
@@ -6218,17 +6218,17 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0157
 			public const int viewLegislatorFrag_chamber = 2131624279;
 			
-			// aapt resource value: 0x7f0e0161
-			public const int viewLegislatorFrag_contactMethodsInnerParent = 2131624289;
+			// aapt resource value: 0x7f0e0162
+			public const int viewLegislatorFrag_contactMethodsInnerParent = 2131624290;
 			
-			// aapt resource value: 0x7f0e0160
-			public const int viewLegislatorFrag_contactMethodsParent = 2131624288;
+			// aapt resource value: 0x7f0e0161
+			public const int viewLegislatorFrag_contactMethodsParent = 2131624289;
+			
+			// aapt resource value: 0x7f0e0165
+			public const int viewLegislatorFrag_email = 2131624293;
 			
 			// aapt resource value: 0x7f0e0164
-			public const int viewLegislatorFrag_email = 2131624292;
-			
-			// aapt resource value: 0x7f0e0163
-			public const int viewLegislatorFrag_facebook = 2131624291;
+			public const int viewLegislatorFrag_facebook = 2131624292;
 			
 			// aapt resource value: 0x7f0e0155
 			public const int viewLegislatorFrag_parent = 2131624277;
@@ -6236,20 +6236,20 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0158
 			public const int viewLegislatorFrag_party = 2131624280;
 			
-			// aapt resource value: 0x7f0e0166
-			public const int viewLegislatorFrag_phone = 2131624294;
+			// aapt resource value: 0x7f0e0167
+			public const int viewLegislatorFrag_phone = 2131624295;
 			
-			// aapt resource value: 0x7f0e016d
-			public const int viewLegislatorFrag_portrait = 2131624301;
+			// aapt resource value: 0x7f0e0160
+			public const int viewLegislatorFrag_portrait = 2131624288;
 			
 			// aapt resource value: 0x7f0e015f
 			public const int viewLegislatorFrag_portraitParent = 2131624287;
 			
-			// aapt resource value: 0x7f0e016a
-			public const int viewLegislatorFrag_scrollview = 2131624298;
-			
 			// aapt resource value: 0x7f0e016b
-			public const int viewLegislatorFrag_scrollviewChild = 2131624299;
+			public const int viewLegislatorFrag_scrollview = 2131624299;
+			
+			// aapt resource value: 0x7f0e016c
+			public const int viewLegislatorFrag_scrollviewChild = 2131624300;
 			
 			// aapt resource value: 0x7f0e015a
 			public const int viewLegislatorFrag_termEndDate = 2131624282;
@@ -6260,11 +6260,11 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e0156
 			public const int viewLegislatorFrag_textParent = 2131624278;
 			
-			// aapt resource value: 0x7f0e0165
-			public const int viewLegislatorFrag_twitter = 2131624293;
+			// aapt resource value: 0x7f0e0166
+			public const int viewLegislatorFrag_twitter = 2131624294;
 			
-			// aapt resource value: 0x7f0e016c
-			public const int viewLegislatorFrag_viewPager = 2131624300;
+			// aapt resource value: 0x7f0e016d
+			public const int viewLegislatorFrag_viewPager = 2131624301;
 			
 			// aapt resource value: 0x7f0e015e
 			public const int viewLegislatorFrag_voteMissedPrct = 2131624286;
@@ -6275,14 +6275,14 @@ namespace Write2Congress.Droid
 			// aapt resource value: 0x7f0e015c
 			public const int viewLegislatorFrag_votesTotal = 2131624284;
 			
-			// aapt resource value: 0x7f0e0169
-			public const int viewLegislatorFrag_webpage = 2131624297;
+			// aapt resource value: 0x7f0e016a
+			public const int viewLegislatorFrag_webpage = 2131624298;
 			
-			// aapt resource value: 0x7f0e0162
-			public const int viewLegislatorFrag_writeLetter = 2131624290;
+			// aapt resource value: 0x7f0e0163
+			public const int viewLegislatorFrag_writeLetter = 2131624291;
 			
-			// aapt resource value: 0x7f0e0167
-			public const int viewLegislatorFrag_youtube = 2131624295;
+			// aapt resource value: 0x7f0e0168
+			public const int viewLegislatorFrag_youtube = 2131624296;
 			
 			// aapt resource value: 0x7f0e02ad
 			public const int viewLegislator_menu_favButtonOff = 2131624621;
