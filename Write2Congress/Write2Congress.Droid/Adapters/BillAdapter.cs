@@ -18,18 +18,16 @@ using Write2Congress.Shared.BusinessLayer;
 
 namespace Write2Congress.Droid.Adapters
 {
-    public class BillAdapter : RecyclerView.Adapter
+    public class BillAdapter : BaseRecyclerAdapter
     {
         private string dateIntroduced, cosponsors, status, date, summary, lastaction, lastactionDate;
 
         private BaseFragment _fragment;
-        private Logger _logger;
         private List<Bill> _bills = new List<Bill>();
 
         public BillAdapter(BaseFragment fragment)
         {
             _fragment = fragment;
-            _logger = new Logger(Class.SimpleName);
 
             dateIntroduced = AndroidHelper.GetString(Resource.String.dateIntroduced);
             cosponsors = AndroidHelper.GetString(Resource.String.cosponsorCount);
@@ -84,6 +82,8 @@ namespace Write2Congress.Droid.Adapters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
+            base.OnBindViewHolder(holder, position);
+
             var bill = _bills[position] ?? null;
             if(bill == null)
             {

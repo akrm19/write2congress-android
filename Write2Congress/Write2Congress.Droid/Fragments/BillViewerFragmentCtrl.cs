@@ -77,7 +77,6 @@ namespace Write2Congress.Droid.Fragments
                 HookupToolbarEventsForBillsFiltering();
             else if (_viewerMode == BillViewerKind.BillSearch)
             {
-                //HookupToolbarEventsForBillsFiltering();
                 HookupToolbarEventsForBillSearch();
             }
         }
@@ -94,7 +93,9 @@ namespace Write2Congress.Droid.Fragments
 
             var fragment = base.OnCreateView(inflater, container, savedInstanceState);
 
-            recycler.SetAdapter(new BillAdapter(this));
+            var adapter = new BillAdapter(this);
+            adapter.OnEndOfListReached += Adapter_OnEndOfListReached;
+            recycler.SetAdapter(adapter);
 
             ShowEmptyview(GetString(_viewerMode == BillViewerKind.BillSearch
                                     ? Resource.String.enterSearchCriteria
@@ -116,6 +117,12 @@ namespace Write2Congress.Droid.Fragments
                 FetchMoreLegislatorContent(false);
 
             return fragment;
+        }
+
+        void Adapter_OnEndOfListReached(object sender, EventArgs e)
+        {
+            if (_isThereMoreVotes)
+                SetLoadMoreButtonVisibility(true);
         }
 
         private void HookupToolbarEventsForBillsFiltering()
@@ -410,7 +417,7 @@ namespace Write2Congress.Droid.Fragments
             if (IsBeingShown)
             {
                 SetLoadMoreButtonInDisabledState(false);
-                SetLoadMoreButtonVisibility(_isThereMoreVotes);
+                //SetLoadMoreButtonVisibility(_isThereMoreVotes);
 
                 (recycler.GetAdapter() as BillAdapter).UpdateBill(bills);
                 SetLoadingUiOff();
