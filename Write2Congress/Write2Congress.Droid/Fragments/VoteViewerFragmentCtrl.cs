@@ -58,6 +58,7 @@ namespace Write2Congress.Droid.Fragments
 
             var adapter = new VoteAdapter(this);
             adapter.OnEndOfListReached += Adapter_OnEndOfListReached;
+            adapter.OnEndOfListElementRecycled += Adapter_OnEndOfListElementRecycled;
             recycler.SetAdapter(adapter);
 
 			SetLoadingTextInEmptyView();
@@ -74,6 +75,11 @@ namespace Write2Congress.Droid.Fragments
                 FetchMoreLegislatorContent(false);
 
             return fragment;
+        }
+
+        void Adapter_OnEndOfListElementRecycled(object sender, EventArgs e)
+        {
+            SetLoadMoreButtonVisibility(false);
         }
 
         void Adapter_OnEndOfListReached(object sender, EventArgs e)

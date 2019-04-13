@@ -9,7 +9,9 @@ namespace Write2Congress.Droid.Adapters
     public abstract class BaseRecyclerAdapter : RecyclerView.Adapter
     {
         protected Logger _logger;
+        protected int _currentEnfOfListViewHolderHash;
         public event EndOfListReachedEventHandler OnEndOfListReached;
+        public event EndOfListReachedEventHandler OnEndOfListElementRecycled;
 
         public BaseRecyclerAdapter()
         {
@@ -19,13 +21,27 @@ namespace Write2Congress.Droid.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             if (position == (ItemCount - 1))
+            {
                 RaiseEndOfListReached();
+                _currentEnfOfListViewHolderHash = holder.GetHashCode();
+            }
         }
 
         protected void RaiseEndOfListReached()
         {
             _logger.Info("End of list reached");
             OnEndOfListReached?.Invoke(this, null);
+        }
+
+        public override void OnViewRecycled(Java.Lang.Object holder)
+        {
+            if(holder.GetHashCode() == _currentEnfOfListViewHolderHash)
+            {
+                _logger.Info("Current last element has been recycled");
+                OnEndOfListElementRecycled?.Invoke(this, null);
+            }
+
+            base.OnViewRecycled(holder);
         }
     }
 

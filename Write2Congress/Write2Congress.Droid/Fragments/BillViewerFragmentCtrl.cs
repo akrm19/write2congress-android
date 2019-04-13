@@ -95,6 +95,7 @@ namespace Write2Congress.Droid.Fragments
 
             var adapter = new BillAdapter(this);
             adapter.OnEndOfListReached += Adapter_OnEndOfListReached;
+            adapter.OnEndOfListElementRecycled += Adapter_OnEndOfListElementRecycled;
             recycler.SetAdapter(adapter);
 
             ShowEmptyview(GetString(_viewerMode == BillViewerKind.BillSearch
@@ -117,6 +118,11 @@ namespace Write2Congress.Droid.Fragments
                 FetchMoreLegislatorContent(false);
 
             return fragment;
+        }
+
+        void Adapter_OnEndOfListElementRecycled(object sender, EventArgs e)
+        {
+            SetLoadMoreButtonVisibility(false);
         }
 
         void Adapter_OnEndOfListReached(object sender, EventArgs e)
