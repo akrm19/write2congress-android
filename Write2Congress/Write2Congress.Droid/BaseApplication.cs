@@ -82,7 +82,7 @@ namespace Write2Congress.Droid
             BugReporting.SetPromptOptionsEnabled(PromptOption.Feedback, PromptOption.Bug);
 
             //TODO RM: Change this to live when we go live!
-            Instabug.SetWelcomeMessageState(Com.Instabug.Library.UI.Onboarding.WelcomeMessage.State.Beta);
+            Instabug.SetWelcomeMessageState(Com.Instabug.Library.UI.Onboarding.WelcomeMessage.State.Live);
 
             Instabug.PrimaryColor = AndroidHelper.GetCurrentSdkVer() < BuildVersionCodes.M
 #pragma warning disable CS0618 // Type or member is obsolete
