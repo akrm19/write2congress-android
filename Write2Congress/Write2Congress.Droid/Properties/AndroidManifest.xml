@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionName="0.81" android:versionCode="4">
-	<uses-sdk android:minSdkVersion="21" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionName="0.90" android:versionCode="6" package="com.ron.write2congress">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
@@ -9,7 +9,7 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/MyAppTheme" android:icon="@mipmap/ic_launcher_blue_v2" android:label="Write2Congress">
+	<application android:name="write2congress.droid.BaseApplication" android:theme="@style/MyAppTheme" android:icon="@mipmap/ic_launcher_blue_v2" android:label="Write 2 Congress">
 		<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" android:windowSoftInputMode="adjustPan" />
 		<!--
         <activity android:name="com.google.android.gms.ads.AdActivity"
