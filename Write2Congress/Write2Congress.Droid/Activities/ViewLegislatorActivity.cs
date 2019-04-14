@@ -55,6 +55,11 @@ namespace Write2Congress.Droid.Activities
             }
 
             var adView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.viewLegislatorActv_adView);
+#if DEBUG
+            adView.AdUnitId = Resources.GetString(Resource.String.banner_ad_unit_id_TEST);
+#else
+            adView.AdUnitId = Resources.GetString(Resource.String.banner_ad_unit_id);
+#endif
             var adRequest = new Android.Gms.Ads.AdRequest.Builder().Build();
             adView.LoadAd(adRequest);
         }

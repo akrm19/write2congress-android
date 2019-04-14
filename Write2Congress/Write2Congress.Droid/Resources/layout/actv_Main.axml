@@ -25,8 +25,7 @@
             android:id="@+id/adView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id_TEST" />
+            ads:adSize="SMART_BANNER" />
     </LinearLayout>
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
