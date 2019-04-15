@@ -29,22 +29,5 @@ namespace Write2Congress.Shared.BusinessLayer.Services.APIs
         {
             httpClient.DefaultRequestHeaders.Add("X-API-Key", _congressApiKey);
         }
-
-        //TODO RM (Low Priority): Make this dynamic so it get the current congress number for the current date time
-        public string GetCurrentCongressNum()
-        {
-            var currentDate = DateTime.Now;
-
-            if (currentDate < new DateTime(2019, 01, 04))
-                return "115";
-            else if (currentDate < new DateTime(2021, 01, 04))
-                return "116";
-            else if (currentDate < new DateTime(2023, 01, 04))
-                return "117";
-            else if (currentDate < new DateTime(2025, 01, 04))
-                return "118";
-            else
-                return "119";
-        }
     }
 }

@@ -52,9 +52,11 @@ namespace Write2Congress.Shared.BusinessLayer.Services
 
         public List<ILegislator> GetAllAlegislators()
         {
+            var currentCongress = Util.GetCurrentCongressNum();
+
             //https://api.propublica.org/congress/v1/{congress}/{chamber}/members.json
-            var senateMembersUri = "115/senate/members.json";
-            var houseMembersUri = "115/house/members.json";
+            var senateMembersUri = $"{currentCongress}/senate/members.json";
+            var houseMembersUri = $"{currentCongress}/house/members.json";
 
             var houseMembers = GetLegislatorsBase2<CongressMembersResult.Rootobject>(houseMembersUri).Results;
             var senators = GetLegislatorsBase2<SenateMembersResult.Rootobject>(senateMembersUri).Results;
