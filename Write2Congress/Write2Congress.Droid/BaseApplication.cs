@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Write2Congress.Shared.DomainModel;
 using Write2Congress.Droid.Code;
 using Write2Congress.Shared.BusinessLayer;
@@ -69,28 +66,20 @@ namespace Write2Congress.Droid
             //InstaBug init
 
             var enableShakeForFeedback = AppHelper.GetDefaultPreferenceBoolean(SharedPreference.EnableShareForFeedback, true);
-
-
             new Instabug.Builder(this, _instaBugNumber)
                         .SetInvocationEvents(enableShakeForFeedback
                             ? InstabugInvocationEvent.Shake
                             : InstabugInvocationEvent.None)
-                        // ,InstabugInvocationEvent.FloatingButton 
-                        //.SetPromptOptionsEnabled(false, true, true)
                         .Build();
-
             BugReporting.SetPromptOptionsEnabled(PromptOption.Feedback, PromptOption.Bug);
-
-            //TODO RM: Change this to live when we go live!
             Instabug.SetWelcomeMessageState(Com.Instabug.Library.UI.Onboarding.WelcomeMessage.State.Live);
-
             Instabug.PrimaryColor = AndroidHelper.GetCurrentSdkVer() < BuildVersionCodes.M
 #pragma warning disable CS0618 // Type or member is obsolete
                 ? Resources.GetColor(Resource.Color.primary_blue)
 #pragma warning restore CS0618 // Type or member is obsolete
                 : GetColor(Resource.Color.primary_blue);
-                
-            //CommitteeManager = new CommitteeManager(_logger);
+
+
 			LegislatorManager = new LegislatorManager(_logger);
             VoteMngr = new VoteManager(_logger);
             BillMngr = new BillManager(_logger);
